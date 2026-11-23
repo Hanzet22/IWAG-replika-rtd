@@ -22,6 +22,19 @@ const title = lastSegment
 const isUpdate = segments[0] === "updates";
 const isVenueArticle = slug === "updates/2026-11-15-venue-reveal";
 const isTeamArticle = slug === "updates/2026-11-08-staff-applications";
+const archiveArticles: Record<string, { date: string; summary: string; details: string[] }> = {
+  "updates/2026-01-24-volunteer": { date: "24 January 2026", summary: "A recruitment notice for volunteer support across event operations.", details: ["The source announcement listed security, runner, photography, videography, registration, medical, and audio-visual teams.", "It described volunteering as an event-day support role distinct from year-round staff planning.", "The source listed age and physical task expectations; these are historical 2026 criteria, not current recruitment terms."] },
+  "updates/2026-01-28-dealers": { date: "28 January 2026", summary: "A historical call for vendors, community representatives, and creators wishing to display work at the 2026 Dealers Den.", details: ["The announcement described applications for merchandise sales, community representation, and display-only creative work.", "It outlined table dimensions, shared equipment, and limited electrical access as 2026 event arrangements.", "The announcement's application deadline and operational conditions have passed and must not be reused for a future event."] },
+  "updates/2026-01-13-panel-registration": { date: "31 January 2026", summary: "An invitation for community members to propose panels and activities for IWAG 2026.", details: ["The source grouped proposals into entertainment, social, and educational categories.", "It described sessions typically lasting 30–60 minutes and organiser review based on relevance and community appeal.", "The application deadline and pass arrangements were specific to the 2026 event and are expired."] },
+  "updates/2026-02-16-talent-show": { date: "16 February 2026", summary: "A historical invitation for solo and group performers to apply for the IWAG 2026 talent show.", details: ["The source requested a demonstration or record of the proposed act and supporting media.", "It described a maximum ten-minute performance and an all-ages content expectation.", "The submission deadline and application process have passed."] },
+  "updates/2026-03-13-conbook": { date: "13 March 2026", summary: "A historical call for community artwork submissions to the IWAG 2026 convention book.", details: ["The source requested family-friendly artwork in JPG or PNG format and specified print-oriented dimensions and resolution.", "It described a review process for print suitability and publication in event media.", "The original submission deadline and artwork terms were specific to the 2026 publication."] },
+  "updates/2026-03-14-art-show": { date: "14 March 2026", summary: "The 2026 event introduced a dedicated space for displaying and auctioning community-created artwork.", details: ["The source described display-only and auction submissions, with curation before exhibition.", "It outlined silent and live auction stages, creator pickup, and a service fee on successfully sold items.", "The original dimensions, bidding increments, fees, and event procedures are historical and are not V2 policy."] },
+  "updates/2026-06-05-furcafe": { date: "5 June 2026", summary: "A themed café experience announced as part of the IWAG 2026 programme.", details: ["The source described a reserved dining experience with limited seating and menu selection.", "It stated that reservations were required and that a submitted form alone did not guarantee a seat.", "The schedule, hotel restaurant, prices, menu, and booking process applied to the 2026 venue and are expired."] },
+  "updates/2026-07-14-conclusion": { date: "14 July 2026", summary: "A post-event retrospective covering new experiences, attendee feedback, and community media archives.", details: ["The source highlighted the 2026 Art Show and Fureats Café as new event experiences.", "It invited feedback and described attendee-submitted photo and video archives.", "The source requested consent for identifiable attendee images and asked contributors to avoid private spaces without permission."] }
+};
+const isArchiveArticle = Boolean(archiveArticles[slug]);
+const isUpdatePagination = isUpdate && ["2", "3", "4"].includes(lastSegment);
+const isLegacyUpdate = isUpdate && !isVenueArticle && !isTeamArticle && !isArchiveArticle && !isUpdatePagination;
 const isTransitGuide = slug === "location/public-transit-guide";
 const isPrivateVehicleGuide = slug === "location/private-vehicles-guide";
 const isTshirtGuide = slug === "participate/t-shirt-guide";
@@ -143,6 +156,21 @@ const context = isUpdate
       <ul><li>{lang === "id" ? "Ini bukan pengumuman bahwa posisi sedang tersedia." : "This is not an announcement that the position is currently open."}</li><li>{lang === "id" ? "Persyaratan usia, jadwal, kompensasi, kewenangan, dan proses seleksi belum dikonfirmasi di halaman ini." : "Age requirements, schedules, compensation, authority, and selection procedures are not confirmed on this page."}</li><li>{lang === "id" ? "Jangan mengirim identitas atau dokumen pribadi melalui halaman pratinjau ini." : "Do not submit identity documents or personal information through this preview page."}</li></ul>
       <p><a href={`/${lang}/join-iwag-team/roles`}>{lang === "id" ? "Kembali ke direktori peran" : "Back to role directory"}</a></p>
     </div>}
+    {isArchiveArticle && <div class="article-body">
+      <p class="update-date">{archiveArticles[slug].date} · Historical archive</p>
+      <p>{archiveArticles[slug].summary}</p>
+      <ul>{archiveArticles[slug].details.map((detail) => <li>{detail}</li>)}</ul>
+      <aside class="notice"><strong>{lang === "id" ? "Arsip historis — bukan pengumuman aktif" : "Historical archive — not an active announcement"}</strong><p>{lang === "id" ? "Seluruh tenggat, formulir, tarif, kuota, dan prosedur di artikel ini merujuk pada acara 2026 yang telah berlalu. Jangan menggunakannya sebagai instruksi pendaftaran atau ketentuan IWAG 2027." : "All deadlines, forms, prices, quotas, and procedures in this article refer to the past 2026 event. Do not use them as registration instructions or IWAG 2027 terms."}</p></aside>
+      <p><a href={`https://iwag.furries.id/en/${slug}/`} rel="external">{lang === "id" ? "Buka artikel sumber" : "Open original source article"}</a></p>
+    </div>}
+    {isUpdatePagination && <div class="article-body">
+      <p>{lang === "id" ? "Rute ini merupakan halaman paginasi dari arsip pembaruan V1. Pratinjau V2 menggabungkan pembaruan yang telah direkonstruksi ke dalam satu arsip kronologis." : "This route is a pagination page from the V1 updates archive. The V2 preview consolidates reconstructed updates into one chronological archive."}</p>
+      <p><a href={`/${lang}/updates/`}>{lang === "id" ? "Buka arsip pembaruan V2" : "Open the V2 updates archive"}</a></p>
+    </div>}
+    {isLegacyUpdate && <div class="article-body">
+      <aside class="notice"><strong>{lang === "id" ? "Arsip historis" : "Historical archive"}</strong><p>{lang === "id" ? "Rute ini berasal dari inventaris pembaruan V1. Kontennya berkaitan dengan edisi terdahulu dan tidak boleh dianggap sebagai informasi acara 2027. Ringkasan spesifik belum direkonstruksi dari sumber yang dapat diverifikasi." : "This route comes from the V1 updates inventory. Its content relates to an earlier event edition and must not be treated as 2027 event information. A route-specific summary has not yet been reconstructed from a verifiable source."}</p></aside>
+      <p><a href={`https://iwag.furries.id/en/${slug}/`} rel="external">{lang === "id" ? "Buka artikel sumber" : "Open original source article"}</a></p>
+    </div>}
     {isTshirtGuide && <div class="article-body">
       <h2>{lang === "id" ? "Tabel ukuran kaus" : "T-shirt size chart"}</h2>
       <p>{lang === "id" ? "Ukuran berikut berasal dari panduan ukuran yang tersedia pada sumber saat diperiksa. Konfirmasi kembali sebelum memilih ukuran." : "The measurements below are from the size guide available on the source when reviewed. Confirm again before selecting a size."}</p>
@@ -178,7 +206,7 @@ const context = isUpdate
       <p class="muted">{lang === "id" ? "Panggilan ini merupakan snapshot pengumuman 2026, bukan konfirmasi bahwa pendaftaran masih dibuka. Periksa kanal resmi untuk status terkini." : "This is a snapshot of the 2026 announcement, not confirmation that applications remain open. Check official channels for current status."}</p>
       <a href="https://iwag.furries.id/en/updates/2026-11-08-staff-applications" rel="external">{lang === "id" ? "Baca pengumuman sumber" : "Read the original announcement"}</a>
     </div>}
-    {!isVenueArticle && !isTeamArticle && !isTransitGuide && !isPrivateVehicleGuide && !isTshirtGuide && !isInternationalGuide && !isYchGuide && !isRoleIndex && !isRoleDetail && <aside class="notice">
+    {!isVenueArticle && !isTeamArticle && !isArchiveArticle && !isUpdatePagination && !isLegacyUpdate && !isTransitGuide && !isPrivateVehicleGuide && !isTshirtGuide && !isInternationalGuide && !isYchGuide && !isRoleIndex && !isRoleDetail && <aside class="notice">
       <h2>{lang === "id" ? "Status migrasi" : "Migration status"}</h2>
       <p>{lang === "id" ? "Rute ini dipertahankan dari inventaris arsip. Konten spesifiknya belum direkonstruksi dari sumber yang diverifikasi." : "This route is preserved from the archive inventory. Its specific content has not yet been reconstructed from a verified source."}</p>
     </aside>}
