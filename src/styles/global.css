@@ -208,7 +208,7 @@
 }
 
 @media (prefers-contrast: more) {
-  :root { --border: currentColor; }
+  :root[data-theme] { --border: currentColor; }
   .notice, .status-card, .content-card { border-width: 2px; }
   a { text-decoration-thickness: .14em; }
 }
