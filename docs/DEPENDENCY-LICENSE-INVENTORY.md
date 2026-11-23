@@ -64,3 +64,10 @@ Some platform-specific packages are optional and are not necessarily installed o
 6. Re-run the inventory when dependencies or the lockfile change.
 
 This is a technical metadata inventory, not legal advice or a declaration that all license obligations are satisfied.
+
+
+## 5. Rust build tooling
+
+- `wasm-pack` is installed in CI at version 0.15.0 and declares `MIT OR Apache-2.0`.
+- The earlier 0.13.1 pin produced a Cargo warning for yanked `spin 0.9.8`. It was replaced with 0.15.0, whose published dependency metadata is current as of May 2026.
+- Recheck the actual install log and generated lockfile whenever this tool version changes. A yanked warning is not automatically a security advisory, but it should not be silently ignored.
