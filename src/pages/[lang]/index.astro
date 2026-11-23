@@ -23,7 +23,7 @@ const copy = {
   }
 }[lang];
 ---
-<BaseLayout lang={lang} title="IWAG 2027: Fantastic Arcana" description={copy.intro}>
+<BaseLayout lang={lang} contentLang={lang === "id" ? "id" : lang === "ms-my" ? "ms-MY" : "en"} title="IWAG 2027: Fantastic Arcana" description={copy.intro}>
   <section class="home-hero" aria-labelledby="home-title">
     <div class="hero-copy">
       <p class="eyebrow">{copy.nav}</p>
