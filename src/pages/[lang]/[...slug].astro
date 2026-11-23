@@ -144,9 +144,11 @@ const backLabel = isUpdate
 ---
 <BaseLayout lang={lang} contentLang={lang === "id" ? "id" : "en"} title={title} description={intro}>
   <article class="page-content">
-    <p class="eyebrow">IWAG V2 · {context}</p>
-    <h1>{title}</h1>
-    <p class="lead">{intro}</p>
+    <header class="page-intro">
+      <p class="eyebrow">IWAG V2 · {context}</p>
+      <h1>{title}</h1>
+      <p class="lead">{intro}</p>
+    </header>
     {isTransitGuide && <div class="article-body">
       <aside class="notice"><strong>{lang === "id" ? "Panduan perlu pembaruan" : "Guide requires a current update"}</strong><p>{lang === "id" ? "Panduan transportasi lama dibuat untuk venue BSD City. Lokasi yang diumumkan untuk IWAG 2027 adalah Hotel Ciputra Jakarta, sehingga rute lama tidak boleh diikuti sebagai petunjuk perjalanan." : "The older transport guide was written for the BSD City venue. IWAG 2027 is announced for Hotel Ciputra Jakarta, so the old route instructions must not be used as current travel directions."}</p></aside>
       <h2>{lang === "id" ? "Pilihan transportasi umum" : "Public transport options"}</h2>
