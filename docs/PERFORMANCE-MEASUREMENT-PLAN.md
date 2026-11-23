@@ -86,3 +86,24 @@ Guardrails:
 - no readability, translation or content accuracy trade-off is accepted for a faster metric.
 
 Targets remain unset until representative baseline measurements and moderated task observations exist. Do not optimize for a single composite score or reward faster completion when users are failing tasks.
+
+
+## First CI output baseline (24 November 2026)
+
+At commit `06c8a9dfb4bb47a370176c48b9adf9b27db99570`, the Rust Active Compiler reported:
+
+| Output measure | Baseline |
+|---|---:|
+| Generated HTML pages | 298 |
+| Generated CSS files | 1 |
+| Generated JavaScript files | 4 |
+| Generated images | 0 |
+| Generated fonts | 5 |
+| Generated files | 318 |
+| Raw output footprint | 2,460,461 bytes |
+| Local HTML/CSS references checked | 7,111 |
+| Broken local references | 0 |
+| Required root/locale routes checked | 30 |
+| CI build duration | 4,600 ms |
+
+This is a build-runner baseline, not a browser/device benchmark. The raw footprint is not compressed transfer size. It does not measure LCP, INP, CLS, CPU, memory, battery, thermal behavior or real-user task completion. Repeat the measurements after meaningful changes and on representative Android devices.
