@@ -1,4 +1,4 @@
-name: Astro production build
+name: IWAG Active Compiler and production build
 
 on:
   push:
@@ -13,12 +13,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: astro-build-${{ github.ref }}
+  group: iwag-build-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
-    name: Build static site
+    name: Rust Active Compiler → Astro/Vite
     runs-on: ubuntu-latest
     steps:
       - name: Check out source
@@ -27,7 +27,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22.23.4"
-      - name: Install dependencies
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+      - name: Install frontend dependencies
         run: npm install --no-audit --no-fund
-      - name: Build
+      - name: Inspect compiler source manifest
+        run: npm run compiler:inspect
+      - name: Run Active Compiler production build
         run: npm run build
+      - name: Upload production build report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iwag-build-report
+          path: dist/iwag-build-report.json
+          if-no-files-found: ignore
