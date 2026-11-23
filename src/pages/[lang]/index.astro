@@ -1,74 +1,10 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import { css } from "../../../styled-system/css";
-
-import { isLocale, localeKeys } from "../../i18n/locales";
-
-const eventFactsClass = css({ display: "grid", gap: "1rem" });
+import HomePage from "../../components/HomePage.astro";
+import { localeKeys } from "../../i18n/locales";
 
 export function getStaticPaths() {
   return localeKeys.map((lang) => ({ params: { lang } }));
 }
-
-const requestedLang = Astro.params.lang;
-const lang = isLocale(requestedLang) ? requestedLang : "en";
-const copy = {
-  en: {
-    nav: "IWAG 2027 · Fantastic Arcana", title: "A weekend beyond the ordinary.", intro: "Step into a gathering built around creativity, community, and anthropomorphic art.", date: "3–4 July 2027", venue: "Hotel Ciputra Jakarta", explore: "Discover the gathering", passes: "Explore participation", dateLabel: "WHEN", venueLabel: "WHERE", venueTitle: "A new home in West Jakarta", venueText: "The 2027 gathering is announced for Hotel Ciputra Jakarta. Event spaces are planned on the sixth floor, with a direct connection to Mal Ciputra Jakarta.", venueLink: "Explore the venue", faqTitle: "Good to know", faqIntro: "A few quick answers before you plan your weekend.", faq: [["When is IWAG 2027?","The published event dates are 3–4 July 2027."],["Where will it take place?","The published venue is Hotel Ciputra Jakarta, West Jakarta."],["Are event passes available?","The participation page currently marks pass options as coming soon. Check the official source for changes."],["Can I find travel information?","Yes. See the International Travelers Guide and the location section for visitor guidance." ]], updatesTitle: "Latest from the gathering", updatesIntro: "Announcements and notes from the community.", updateVenue: "Welcome to West Jakarta", updateVenueText: "The 2027 gathering has a new home at Hotel Ciputra Jakarta.", updateTeam: "Join our Team!", updateTeamText: "A call for people interested in helping deliver the next gathering.", updateMemory: "IWAG 2026 — Memories from You and Our Team", updateMemoryText: "A look back at the previous weekend.", moreUpdates: "All updates", notice: "Independent V2 recreation. Not an official IWAG website and not endorsed by the event organisers.", source: "Reference details captured from the public source website on 23 November 2026. Recheck volatile event details before relying on them."
-  },
-  id: {
-    nav: "IWAG 2027 · Fantastic Arcana", title: "Akhir pekan di luar kebiasaan.", intro: "Masuki sebuah pertemuan yang merayakan kreativitas, komunitas, dan seni antropomorfik.", date: "3–4 Juli 2027", venue: "Hotel Ciputra Jakarta", explore: "Kenali acara", passes: "Lihat pilihan partisipasi", dateLabel: "KAPAN", venueLabel: "DI MANA", venueTitle: "Rumah baru di Jakarta Barat", venueText: "Pertemuan 2027 diumumkan berlangsung di Hotel Ciputra Jakarta. Area acara direncanakan berada di lantai enam dengan akses langsung ke Mal Ciputra Jakarta.", venueLink: "Jelajahi lokasi", faqTitle: "Informasi singkat", faqIntro: "Beberapa jawaban sebelum merencanakan akhir pekan.", faq: [["Kapan IWAG 2027 berlangsung?","Tanggal acara yang dipublikasikan adalah 3–4 Juli 2027."],["Di mana lokasinya?","Lokasi yang dipublikasikan adalah Hotel Ciputra Jakarta, Jakarta Barat."],["Apakah tiket sudah tersedia?","Halaman partisipasi saat ini menandai pilihan pass sebagai segera hadir. Periksa sumber resmi untuk perubahan."],["Apakah informasi perjalanan tersedia?","Ya. Lihat Panduan Wisatawan Internasional dan bagian lokasi untuk panduan pengunjung."]], updatesTitle: "Pembaruan terbaru", updatesIntro: "Pengumuman dan kabar dari komunitas.", updateVenue: "Selamat datang di Jakarta Barat", updateVenueText: "Pertemuan 2027 memiliki lokasi baru di Hotel Ciputra Jakarta.", updateTeam: "Bergabung dengan Tim!", updateTeamText: "Ajakan bagi yang ingin membantu menyelenggarakan pertemuan berikutnya.", updateMemory: "IWAG 2026 — Kenangan dari Anda dan Tim", updateMemoryText: "Melihat kembali akhir pekan sebelumnya.", moreUpdates: "Semua pembaruan", notice: "Rekreasi independen V2. Bukan situs resmi IWAG dan tidak didukung penyelenggara acara.", source: "Detail referensi dicatat dari situs sumber publik pada 23 November 2026. Periksa ulang informasi acara yang dapat berubah sebelum mengandalkannya."
-  },
-  "en-sg": {
-    nav: "IWAG 2027 · Fantastic Arcana", title: "A weekend beyond the ordinary.", intro: "Step into a gathering built around creativity, community, and anthropomorphic art.", date: "3–4 July 2027", venue: "Hotel Ciputra Jakarta", explore: "Discover the gathering", passes: "Explore participation", dateLabel: "WHEN", venueLabel: "WHERE", venueTitle: "A new home in West Jakarta", venueText: "The 2027 gathering is announced for Hotel Ciputra Jakarta. Event spaces are planned on the sixth floor, with a direct connection to Mal Ciputra Jakarta.", venueLink: "Explore the venue", faqTitle: "Good to know", faqIntro: "A few quick answers before you plan your weekend.", faq: [["When is IWAG 2027?","The published event dates are 3–4 July 2027."],["Where will it take place?","The published venue is Hotel Ciputra Jakarta, West Jakarta."],["Are event passes available?","The participation page currently marks pass options as coming soon. Check the official source for changes."],["Can I find travel information?","Venue and transport guidance is being prepared in the location section."]], updatesTitle: "Latest from the gathering", updatesIntro: "Announcements and notes from the community.", updateVenue: "Welcome to West Jakarta", updateVenueText: "The 2027 gathering has a new home at Hotel Ciputra Jakarta.", updateTeam: "Join our Team!", updateTeamText: "A call for people interested in helping deliver the next gathering.", updateMemory: "IWAG 2026 — Memories from You and Our Team", updateMemoryText: "A look back at the previous weekend.", moreUpdates: "All updates", notice: "Independent V2 recreation. Not an official IWAG website and not endorsed by the event organisers.", source: "Reference details captured from the public source website on 23 November 2026. Recheck volatile event details before relying on them."
-  },
-  "ms-my": {
-    nav: "IWAG 2027 · Fantastic Arcana", title: "Hujung minggu yang luar biasa.", intro: "Sertai perhimpunan yang meraikan kreativiti, komuniti dan seni antropomorfik.", date: "3–4 Julai 2027", venue: "Hotel Ciputra Jakarta", explore: "Kenali perhimpunan", passes: "Terokai penyertaan", dateLabel: "BILA", venueLabel: "DI MANA", venueTitle: "Tempat baharu di Jakarta Barat", venueText: "Perhimpunan 2027 diumumkan berlangsung di Hotel Ciputra Jakarta. Ruang acara dirancang di tingkat enam dengan sambungan terus ke Mal Ciputra Jakarta.", venueLink: "Terokai lokasi", faqTitle: "Maklumat ringkas", faqIntro: "Beberapa jawapan sebelum merancang hujung minggu anda.", faq: [["Bilakah IWAG 2027 berlangsung?","Tarikh acara yang diterbitkan ialah 3–4 Julai 2027."],["Di manakah lokasinya?","Lokasi yang diterbitkan ialah Hotel Ciputra Jakarta, Jakarta Barat."],["Adakah pas acara tersedia?","Halaman penyertaan kini menandakan pilihan pas sebagai akan datang. Semak sumber rasmi untuk perubahan."],["Bolehkah saya mendapatkan maklumat perjalanan?","Ya. Lihat Panduan Pelawat Antarabangsa dan bahagian lokasi untuk panduan pengunjung."]], updatesTitle: "Kemas kini terkini", updatesIntro: "Pengumuman dan berita daripada komuniti.", updateVenue: "Selamat datang ke Jakarta Barat", updateVenueText: "Perhimpunan 2027 mempunyai lokasi baharu di Hotel Ciputra Jakarta.", updateTeam: "Sertai Pasukan Kami!", updateTeamText: "Seruan kepada mereka yang ingin membantu menjayakan perhimpunan seterusnya.", updateMemory: "IWAG 2026 — Kenangan daripada Anda dan Pasukan", updateMemoryText: "Imbas kembali hujung minggu yang lalu.", moreUpdates: "Semua kemas kini", notice: "Rekreasi V2 bebas. Bukan laman web rasmi IWAG dan tidak disokong penganjur acara.", source: "Butiran rujukan direkodkan daripada laman sumber awam pada 23 November 2026. Semak semula maklumat acara yang boleh berubah sebelum menggunakannya."
-  }
-}[lang];
+const lang = Astro.params.lang ?? "en";
 ---
-<BaseLayout lang={lang} contentLang={lang === "id" ? "id" : lang === "ms-my" ? "ms-MY" : "en"} title="IWAG 2027: Fantastic Arcana" description={copy.intro}>
-  <section class="home-hero" aria-labelledby="home-title">
-    <div class="hero-copy">
-      <p class="eyebrow">{copy.nav}</p>
-      <h1 id="home-title">IWAG 2027: <em>Fantastic Arcana</em></h1>
-      <p class="lead">{copy.intro}</p>
-      <div class="hero-actions">
-        <a class="action-link motion-safe:transition-colors motion-safe:duration-150" href={`/${lang}/about/`}>{copy.explore}</a>
-        <a class="action-link secondary motion-safe:transition-colors motion-safe:duration-150" href={`/${lang}/participate/`}>{copy.passes}</a>
-      </div>
-    </div>
-    <div class="arcana-art" role="img" aria-label="Abstract decorative illustration representing an illuminated arcane academy">
-      <span class="arcana-orbit orbit-one"></span><span class="arcana-orbit orbit-two"></span>
-      <span class="arcana-core">✧</span><span class="arcana-caption">AETHER · LEY LINES · DISCOVERY</span>
-    </div>
-    <div class={`event-facts ${eventFactsClass}`}>
-      <div><span>{copy.dateLabel}</span><strong>{copy.date}</strong></div>
-      <div><span>{copy.venueLabel}</span><strong>{copy.venue}</strong></div>
-    </div>
-  </section>
-
-  <section class="home-section venue-section" aria-labelledby="venue-title">
-    <div class="section-heading"><p class="eyebrow">THE NEXT CHAPTER</p><h2 id="venue-title">{copy.venueTitle}</h2></div>
-    <div class="venue-panel">
-      <div class="venue-visual" aria-hidden="true"><span>JAKARTA</span><strong>06</strong><small>WEST · INDONESIA</small></div>
-      <div class="venue-copy"><p>{copy.venueText}</p><a class="text-link" href={`/${lang}/location/`}>{copy.venueLink} <span aria-hidden="true">→</span></a></div>
-    </div>
-  </section>
-
-  <section class="home-section faq-section" aria-labelledby="faq-title">
-    <div class="section-heading"><p class="eyebrow">QUICK GUIDE</p><h2 id="faq-title">{copy.faqTitle}</h2><p>{copy.faqIntro}</p></div>
-    <div class="faq-list">{copy.faq.map(([question, answer]) => <details class="faq-item"><summary>{question}</summary><p>{answer}</p></details>)}</div>
-  </section>
-
-  <section class="home-section updates-section" aria-labelledby="updates-title">
-    <div class="section-heading updates-heading"><div><p class="eyebrow">FROM THE COMMUNITY</p><h2 id="updates-title">{copy.updatesTitle}</h2><p>{copy.updatesIntro}</p></div><a class="text-link" href={`/${lang}/updates/`}>{copy.moreUpdates} <span aria-hidden="true">→</span></a></div>
-    <div class="update-grid">
-      <article class="update-card"><span class="update-date">15 NOV 2026</span><h3>{copy.updateVenue}</h3><p>{copy.updateVenueText}</p><a href={`/${lang}/updates/2026-11-15-venue-reveal/`}>{lang === "id" ? "Baca pembaruan" : "Read update"}</a></article>
-      <article class="update-card"><span class="update-date">08 NOV 2026</span><h3>{copy.updateTeam}</h3><p>{copy.updateTeamText}</p><a href={`/${lang}/updates/2026-11-08-staff-applications/`}>{lang === "id" ? "Baca pembaruan" : "Read update"}</a></article>
-      <article class="update-card"><span class="update-date">14 JUL 2026</span><h3>{copy.updateMemory}</h3><p>{copy.updateMemoryText}</p><a href={`/${lang}/updates/2026-07-14-conclusion/`}>{lang === "id" ? "Baca pembaruan" : "Read update"}</a></article>
-    </div>
-  </section>
-  <p class="source-note">{copy.source}</p>
-  <aside class="project-notice"><strong>Independent V2 project</strong><p>{copy.notice}</p></aside>
-</BaseLayout>
+<HomePage lang={lang} />
