@@ -32,7 +32,7 @@ Updated: 2026-11-23
 ## Intentionally not represented as complete
 
 - Official confirmation of every event detail, programme schedule, ticket release, and operational arrangement; current event content is a dated public-source snapshot only
-- Final Terms, Privacy Notice, and Code of Conduct — these must be fully rewritten independently and approved by the actual operator; V1 wording is not adopted
+- Terms, Privacy Notice, and Code of Conduct are independently authored working drafts; they are not approved or in force until the actual operator, data flows, and applicable legal requirements are verified
 - Organiser/controller identity and legal review
 - Final translations and editorial review for all locales
 - Full manual keyboard, screen-reader, TalkBack, zoom, and assistive-technology audit
@@ -61,7 +61,7 @@ Updated: 2026-11-23
 ## Still blocked pending real-world verification
 
 - Actual legal operator, contracting party and data controller remain unverified.
-- Final Terms, Privacy Notice and Code of Conduct remain deferred for a full independent rewrite and cannot be approved or represented as official.
+- Terms, Privacy Notice and Code of Conduct drafts are present, but cannot be approved or represented as official until the actual operator and service model are verified and qualified legal review is completed.
 - No attendee registration, ticketing, payment, account, tracking or sensitive-data collection is enabled.
 - Legal applicability and final public policy require review against the real operator/service model by qualified Indonesian counsel.
 - WCAG Level A manual and assistive-technology review is still outstanding; this documentation is not a conformance claim.
