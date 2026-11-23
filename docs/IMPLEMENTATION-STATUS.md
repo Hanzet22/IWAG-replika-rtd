@@ -162,3 +162,6 @@ The latest implementation is a working reconstruction foundation and shared home
 - [x] Rebuilt the localized event index and event-detail templates with semantic date metadata, clear event facts and responsive layouts.
 - [x] Standardized page-intro hierarchy across generic landing pages and nested article routes.
 - [x] Extended Rust Active Compiler output diagnostics with required root/locale route checks and generated asset-size accounting.
+
+- [x] Added a Rust-invoked Node validator for local HTML `href`/`src`/`poster` and CSS `url()` references in generated output.
+- [ ] Extend local-reference validation to `srcset`, fragment IDs, and a complete generated route manifest.
