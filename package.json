@@ -10,12 +10,17 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "wasm:build": "wasm-pack build rust/contrast-engine --target web --out-dir ../../public/wasm --release"
   },
   "dependencies": {
-    "astro": "^7.4.13"
+    "astro": "^7.4.13",
+    "vue": "^3.5.25"
   },
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "@astrojs/vue": "^7.1.6",
+    "@tailwindcss/vite": "^4.1.17",
+    "tailwindcss": "^4.1.17"
   }
 }
