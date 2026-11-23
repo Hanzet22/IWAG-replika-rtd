@@ -192,6 +192,22 @@ const copy = isConduct
         <li>{lang === "id" ? "Animasi dekoratif tidak berjalan otomatis dan menghormati preferensi reduced motion." : "Decorative motion does not autoplay and respects reduced-motion preferences."}</li>
         <li>{lang === "id" ? "Informasi dan navigasi utama tetap tersedia tanpa JavaScript." : "Core information and navigation remain available without JavaScript."}</li>
       </ul>
+      <h2>{lang === "id" ? "Implementasi yang tersedia pada pratinjau" : "Implemented in this preview"}</h2>
+      <ul>
+        <li>{lang === "id" ? "Tautan lewati ke konten utama, landmark semantik, dan struktur heading." : "Skip-to-content navigation, semantic landmarks, and structured headings."}</li>
+        <li>{lang === "id" ? "Indikator fokus yang terlihat dan kontrol native untuk navigasi serta FAQ." : "Visible focus indicators and native controls for navigation and FAQs."}</li>
+        <li>{lang === "id" ? "Enam pilihan tema, termasuk mode gelap dan AMOLED." : "Six theme choices, including dark and AMOLED modes."}</li>
+        <li>{lang === "id" ? "Dukungan prefers-reduced-motion, forced-colors, dan preferensi kontras lebih tinggi." : "Support for prefers-reduced-motion, forced-colors, and higher-contrast preferences."}</li>
+        <li>{lang === "id" ? "Fallback bahasa ditandai secara eksplisit ketika halaman belum diterjemahkan." : "Language fallbacks are explicitly identified when a page has not been translated."}</li>
+        <li>{lang === "id" ? "Tidak ada font CDN, pelacak pihak ketiga, atau media otomatis pada fondasi saat ini." : "No font CDN, third-party trackers, or autoplay media in the current foundation."}</li>
+      </ul>
+      <h2>{lang === "id" ? "Belum diverifikasi" : "Not yet verified"}</h2>
+      <ul>
+        <li>{lang === "id" ? "Pengujian manual menyeluruh dengan keyboard, pembaca layar desktop, dan Android TalkBack." : "Full manual testing with keyboard-only navigation, desktop screen readers, and Android TalkBack."}</li>
+        <li>{lang === "id" ? "Pengukuran kontras untuk seluruh komponen, status, tema, dan kondisi interaksi." : "Contrast measurements across all components, states, themes, and interaction conditions."}</li>
+        <li>{lang === "id" ? "Terjemahan editorial untuk seluruh halaman dan semua locale." : "Editorial translations for every page and locale."}</li>
+        <li>{lang === "id" ? "Fakta aksesibilitas fisik venue dan dukungan acara dari penyelenggara." : "Verified physical venue accessibility and event support from the organiser."}</li>
+      </ul>
       <p class="muted">{lang === "id" ? "Kanal kontak berbasis teks dan akomodasi acara akan diterbitkan setelah alamat kontak serta layanan pendukung diverifikasi." : "Text-based contact channels and event accommodations will be published after contact details and support services are verified."}</p>
     </section>}
     {isLegal && !isConduct && <aside class="notice"><h2>{lang === "id" ? "Belum disahkan" : "Not approved"}</h2><p>{copy}</p></aside>}
