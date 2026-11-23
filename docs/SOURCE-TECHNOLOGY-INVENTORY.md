@@ -13,7 +13,8 @@ The current branch tree contains 364 entries at the time of this inventory.
 | Astro files | 9 | Active application source |
 | Archived CSS files | 2 | V1 reference only; excluded from V2 source |
 | Active CSS files | 2 | `src/styles/` semantic layers and global styling |
-| JavaScript files | 5 | Active tooling/application source |
+| Archived JavaScript files | 4 | V1 reference only; excluded from V2 source |
+| Active JavaScript modules | 1 | `astro.config.mjs`; browser behavior is authored in TypeScript |
 | TypeScript files | 8 | Active application/configuration source |
 | Rust files | 2 | Active compiler + optional contrast engine |
 | Java files | 0 | No Java source was found in the audited V1/V2 tree |
