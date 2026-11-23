@@ -1,5 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { css } from "../../../styled-system/css";
+
+const eventFactsClass = css({ display: "grid", gap: "1rem" });
 import { isLocale, localeKeys } from "../../i18n/locales";
 
 export function getStaticPaths() {
@@ -38,7 +41,7 @@ const copy = {
       <span class="arcana-orbit orbit-one"></span><span class="arcana-orbit orbit-two"></span>
       <span class="arcana-core">✧</span><span class="arcana-caption">AETHER · LEY LINES · DISCOVERY</span>
     </div>
-    <div class="event-facts">
+    <div class={`event-facts ${eventFactsClass}`}>
       <div><span>{copy.dateLabel}</span><strong>{copy.date}</strong></div>
       <div><span>{copy.venueLabel}</span><strong>{copy.venue}</strong></div>
     </div>
