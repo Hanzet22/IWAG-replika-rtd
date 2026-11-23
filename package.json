@@ -8,6 +8,7 @@
     "node": ">=22.23.4"
   },
   "scripts": {
+    "prepare": "panda codegen",
     "dev": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- dev",
     "build": "cargo run --quiet --release --manifest-path compiler/iwagc/Cargo.toml -- build",
     "build:astro": "astro build",
@@ -17,13 +18,19 @@
     "wasm:build": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- wasm"
   },
   "dependencies": {
+    "@stylexjs/stylex": "0.19.2",
     "astro": "^7.4.13",
     "vue": "^3.5.45"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
     "@astrojs/vue": "^7.1.6",
+    "@pandacss/dev": "2.6.0",
+    "@pandacss/preset-base": "2.6.0",
+    "@pandacss/preset-panda": "2.6.0",
+    "@pandacss/vite": "2.6.0",
+    "@stylexjs/unplugin": "0.19.2",
     "@tailwindcss/vite": "^4.3.5",
-    "tailwindcss": "^4.3.5"
+    "tailwindcss": "^4.3.5",
+    "typescript": "^5.9.3"
   }
 }
