@@ -67,6 +67,11 @@ jobs:
           fi
       - name: Inspect compiler source manifest
         run: npm run compiler:inspect
+      - name: Build optional Rust/WASM contrast engine
+        run: |
+          rustup target add wasm32-unknown-unknown
+          cargo install wasm-pack --locked
+          npm run wasm:build
       - name: Run Active Compiler production build
         run: npm run build
       - name: Upload production build report
