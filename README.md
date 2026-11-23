@@ -13,14 +13,14 @@ The current V2 implementation includes:
 - System, Light, Black, Super Black, AMOLED Black, and Dynamic Color themes
 - System fonts; no external font CDN
 - Reduced-motion and forced-colors styling
-- Reconstructed homepage, events, venue, participation, team, resources, and travel-guide pages
+- Reconstructed homepage, localized event listings, venue, participation, team, resources, and travel-guide pages
 - Historical update archive covering the discovered 2024–2026 update routes
 - Nine staff-role overview routes, clearly marked as non-official summaries where source pages are unavailable
 - Dated event and pass information snapshots; no live ticket sales, registration, accounts, or payments
-- Separate structural routes for Terms, Privacy, and Code of Conduct
+- Independently authored Terms, Privacy, and Code of Conduct working drafts; none are approved or in force until the actual operator and legal review are confirmed
 - WCAG 2.2 Level A as the engineering target only, without claiming conformance or pursuing certification
 
-Event details are independently rewritten source snapshots, not official IWAG information or guarantees. Volatile facts must be rechecked before publication. Terms, Privacy, and Code of Conduct are not copied from V1 and are not final public policies; they require a complete independent rewrite after the actual operator, data flows, responsibilities, and applicable jurisdictions are verified. Do not treat preview copy as an approved legal policy.
+Event details are independently rewritten source snapshots, not official IWAG information or guarantees. Volatile facts must be rechecked before publication. Terms, Privacy, and Code of Conduct are independently written V2 working drafts, not copied from V1 and not final public policies. They must be reviewed and approved after the actual operator, data flows, responsibilities, and applicable jurisdictions are verified. Do not treat preview copy as an approved legal policy.
 
 ## Requirements
 
