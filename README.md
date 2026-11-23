@@ -34,7 +34,7 @@ The dedicated reconstruction plan, source inventory and compiler contract are ma
 
 - Node.js 22.23.4 or newer
 - npm
-- Rust stable toolchain and Cargo (required by the Active Compiler)
+- Rust 1.100.0 and Cargo (required by the Active Compiler)
 - Optional local WASM build: `wasm-pack` and `wasm32-unknown-unknown` (the production workflow builds the contrast module)
 
 ## Commands
