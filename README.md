@@ -41,6 +41,8 @@ npm run preview
 
 See:
 - [V1 audit](docs/V1-AUDIT.md)
+- [Original live-site reference review](docs/ORIGINAL-SITE-REFERENCE.md)
+- [Legal and regulatory compliance matrix](docs/LEGAL-COMPLIANCE-MATRIX.md)
 - [V2 requirements](docs/V2-REQUIREMENTS.md)
 - [ADR-0001: static-first Astro architecture](docs/ADR-0001-architecture.md)
 - [Implementation status](docs/IMPLEMENTATION-STATUS.md)
