@@ -236,7 +236,7 @@ main#main {
 .site-footer nav { gap: .2rem .45rem; }
 .site-footer nav a { min-height: 2.4rem; padding-inline: .5rem; font-size: .9rem; }
 .footer-note { color: var(--muted); font-size: .88rem; }
-.page-content { width: min(100%, 70rem); margin-inline: auto; }
+.page-content { width: min(100%, 70rem); margin-inline: auto; }\n.breadcrumbs { width: min(100%, 76rem); margin: 0 auto 1rem; color: var(--muted); font-size: .9rem; }\n.breadcrumbs ol { display: flex; flex-wrap: wrap; gap: .35rem .55rem; margin: 0; padding: 0; list-style: none; }\n.breadcrumbs li { display: inline-flex; align-items: center; gap: .55rem; }\n.breadcrumbs li + li::before { content: "/"; color: var(--muted); }\n.breadcrumbs a { color: var(--muted); }\n.breadcrumbs [aria-current="page"] { color: var(--text); font-weight: 750; }\n:where(h1, h2, h3, h4, [id]) { scroll-margin-top: 1.25rem; }
 .page-content > h1 { margin-block: .25rem 1rem; }
 .eyebrow {
   margin: 0 0 .8rem; color: var(--accent);
