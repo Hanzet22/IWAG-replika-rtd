@@ -11,3 +11,5 @@ export const shellStyles = stylex.create({
     textDecoration: "none"
   }
 });
+
+export const wordmarkClass = stylex.props(shellStyles.wordmark).className;
