@@ -74,3 +74,26 @@ Updated: 2026-11-23
 - [x] Preserved each selected font's original SIL Open Font License 1.1 notice and source README.
 - [x] Excluded Love Malia from the public build because its supplied notice grants personal use only; its binaries were not copied into V2 and were removed from the public font branch.
 - [x] Documented asset provenance and usage boundaries in `docs/FONT-LICENSING.md`.
+
+
+## Full-stack and policy-draft integration (2026-11-23)
+
+- [x] Kept Astro 7 + TypeScript + Vite as the only application/build pipeline.
+- [x] Added the official Vue 3 Astro renderer for isolated, visibility-hydrated UI islands.
+- [x] Added Tailwind CSS 4 through the official Vite plugin without enabling Tailwind Preflight over the existing reset/design system.
+- [x] Added CSS Houdini Properties and Values API registrations for typed visual custom properties; Paint Worklets remain optional and are not required.
+- [x] Added an opt-in graphics capability panel with an SVG baseline, user-triggered Canvas 2D rendering, WebGL2 capability probing, and WebGPU availability detection.
+- [x] Added an isolated Rust/WASM contrast utility source and an optional build script; normal Astro builds do not require Rust or generated WASM.
+- [x] Documented compatible Next.js architectural patterns and explicitly excluded the separate Next.js runtime/App Router from the single-app architecture.
+- [x] Added a 50px-minimum draft-status banner above the body of every Terms, Privacy, and Code of Conduct page.
+- [x] Added draft version/date metadata and clear non-official, unapproved, not-in-force wording in English and Indonesian.
+- [x] Existing Terms, Privacy, and Code of Conduct content is independently authored; it remains a working draft pending verification of the real operator, actual service/data flows, and qualified legal review.
+
+## Remaining real-world release blockers
+
+- [ ] Confirm legal operator, controller, service scope, event authority, and responsible policy owner.
+- [ ] Verify hosting/CDN/DNS providers, access logs, retention, international transfers, and actual cookie behavior.
+- [ ] Obtain qualified legal review and explicit approval before any policy is represented as official or in force.
+- [ ] Complete manual WCAG 2.2 Level A review with keyboard, screen readers, TalkBack, zoom/reflow, and representative disabled users.
+- [ ] Verify actual browser/device support before enabling WebGPU or other GPU features in production.
+- [ ] Verify Rust/WASM build output and license/dependency inventory before shipping generated binaries.
