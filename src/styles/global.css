@@ -466,6 +466,7 @@
  :root{--reading-line:1.75} body{line-height:var(--reading-line)}
  :root[data-text-scale="large"]{font-size:112.5%}
  :root[data-text-scale="larger"]{font-size:125%}
+ :root[data-density="spacious"]{--space-2:1rem;--space-3:1.25rem;--space-4:1.75rem;--space-5:2.5rem}
  :root[data-contrast="high"]{--border:currentColor;--muted:var(--text);--focus:#ffbf00}
  :root[data-contrast="high"] a{text-decoration-thickness:.14em}
 }
@@ -484,3 +485,12 @@
 :root[data-motion="reduce"] *,:root[data-motion="reduce"] *::before,:root[data-motion="reduce"] *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
 @media(prefers-reduced-motion:reduce){:root:not([data-motion="reduce"]) *,:root:not([data-motion="reduce"]) *::before,:root:not([data-motion="reduce"]) *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 @media(forced-colors:active){.legal-draft-banner,.policy-link,.accessibility-preferences summary{border:1px solid CanvasText}:focus-visible{outline:2px solid Highlight}}
+
+:root[data-density="spacious"] .page-content > * + * { margin-block-start: 1.75rem; }
+:root[data-density="spacious"] .home-section,
+:root[data-density="spacious"] .content-card,
+:root[data-density="spacious"] .notice { margin-block: 2rem; }
+@media (prefers-contrast: more) {
+  :root:not([data-contrast="normal"]) { --border: currentColor; --muted: var(--text); }
+  :root:not([data-contrast="normal"]) :focus-visible { outline-width: 4px; }
+}
