@@ -1,0 +1,30 @@
+---
+import { localeKeys, locales } from "../i18n/locales";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Independent IWAG V2 website re-engineering preview." />
+    <meta name="color-scheme" content="light dark" />
+    <title>IWAG V2 · Choose a language</title>
+    <style>
+      body { margin: 0; padding: 2rem; min-height: 100vh; display: grid; place-items: center; font: 1rem/1.6 system-ui,sans-serif; background: #f5f6f8; color: #171a20; }
+      main { width: min(100%, 42rem); }
+      ul { display: grid; gap: .75rem; padding: 0; list-style: none; }
+      a { display: block; padding: 1rem; border: 1px solid #737d8b; border-radius: .7rem; background: white; color: #064c9b; font-weight: 700; }
+      a:focus-visible { outline: 3px solid #8a3ffc; outline-offset: 3px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p><strong>IWAG V2 · Independent project</strong></p>
+      <h1>Choose your language</h1>
+      <p>This is an independent educational recreation, not an official IWAG website.</p>
+      <ul>
+        {localeKeys.map((locale) => <li><a href={`/${locale}/`}>{locales[locale].nativeName}</a></li>)}
+      </ul>
+    </main>
+  </body>
+</html>
