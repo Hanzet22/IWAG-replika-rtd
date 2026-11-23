@@ -39,7 +39,7 @@ const roleNames: Record<string, string> = {
   "logistics-staff": "Logistics Staff",
   "media-team": "Media Team"
 };
-const roleSlug = segments[2] === "roles" ? segments[3] : undefined;
+const roleSlug = segments[1] === "roles" ? segments[2] : undefined;
 const isRoleDetail = Boolean(roleSlug && roleNames[roleSlug]);
 const roleTitle = roleSlug ? roleNames[roleSlug] : "Team roles";
 const intro = lang === "id"
