@@ -3,12 +3,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getMessages } from "../../i18n/ui";
 import { isLocale, localeKeys } from "../../i18n/locales";
 
-const pageKeys = [
-  "about", "accessibility", "brand", "coc", "code-of-conduct", "dealers",
-  "events", "join-iwag-team", "links", "location", "participate", "policy",
-  "privacy", "terms", "tnc", "updates"
-] as const;
-
 const pageTitles: Record<string, Record<string, string>> = {
   en: {
     about: "About this project", accessibility: "Accessibility", brand: "Brand resources",
@@ -41,6 +35,11 @@ const pageTitles: Record<string, Record<string, string>> = {
 };
 
 export function getStaticPaths() {
+  const pageKeys = [
+    "about", "accessibility", "brand", "coc", "code-of-conduct", "dealers",
+    "events", "join-iwag-team", "links", "location", "participate", "policy",
+    "privacy", "terms", "tnc", "updates"
+  ] as const;
   return localeKeys.flatMap((lang) => pageKeys.map((page) => ({ params: { lang, page } })));
 }
 
