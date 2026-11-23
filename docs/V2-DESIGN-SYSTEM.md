@@ -51,7 +51,19 @@ Every theme must be evaluated for text, links, visited links, controls, focus, d
 - Do not use horizontal scrolling for ordinary text content.
 - Keep controls large enough to identify and operate; the current shared baseline uses a 44px minimum height for primary navigation and common controls. Verify the final rendered size of every interactive target.
 
-## 3. Interaction model
+## 3. V2 information architecture
+
+The primary navigation is task-oriented rather than a flat inventory of legacy pages:
+
+- **Home:** orientation and the current event snapshot.
+- **Discover:** event overview and dated event information.
+- **Plan your visit:** one starting point for venue, travel, and participation.
+- **Community:** project context, team contributions, and community resources.
+- **Updates:** dated announcements and the historical archive.
+
+Supporting pages such as accessibility, legal drafts, brand resources, and detailed guides remain reachable through contextual links and the footer. This is a V2 navigation model; it does not attempt to reproduce the V1 page menu or route hierarchy. The implementation adds `/plan-your-visit/` and `/community/` landing routes while retaining detailed routes for direct links and source traceability.
+
+## 4. Interaction model
 
 - Links navigate; buttons perform actions. Do not make non-interactive text or decorative containers behave like controls.
 - Label controls visibly and programmatically. Do not rely on placeholder text as the only label.
@@ -63,7 +75,7 @@ Every theme must be evaluated for text, links, visited links, controls, focus, d
 - Avoid time limits. If a future task genuinely needs one, explain why and provide a way to extend it where applicable.
 - Preserve user input after recoverable errors.
 
-## 4. Cognitive accessibility
+## 5. Cognitive accessibility
 
 The design should reduce unnecessary memory, attention, and decision demands:
 
@@ -81,7 +93,7 @@ The design should reduce unnecessary memory, attention, and decision demands:
 
 These are inclusive design heuristics, not claims that one layout works for every neurodivergent person. Validate with people who have varied access needs.
 
-## 5. Motion and photosensitivity safeguards
+## 6. Motion and photosensitivity safeguards
 
 - No decorative motion starts automatically.
 - No flashing or strobing effects; do not use rapid color alternation.
@@ -91,7 +103,7 @@ These are inclusive design heuristics, not claims that one layout works for ever
 - Any future essential motion needs a documented rationale, an alternative presentation, and review against the full WCAG 2.2 requirements.
 - Avoid autoplaying audio/video. If media is later added, give users immediate pause/stop controls and appropriate captions/transcripts.
 
-## 6. Color vision, contrast, and system preferences
+## 7. Color vision, contrast, and system preferences
 
 - Statuses use text labels and/or shape/icon patterns in addition to color.
 - Links remain distinguishable from surrounding text without relying on hue alone.
@@ -101,7 +113,7 @@ These are inclusive design heuristics, not claims that one layout works for ever
 - Theme selection must not override browser or OS accessibility settings unexpectedly.
 - Do not describe a palette as universally autism-friendly, ADHD-friendly, or photosensitivity-safe.
 
-## 7. Images, icons, and alternative text
+## 8. Images, icons, and alternative text
 
 - Informative images need concise alt text that communicates their purpose or relevant information.
 - Functional images describe the action or destination, not their appearance alone.
@@ -112,7 +124,7 @@ These are inclusive design heuristics, not claims that one layout works for ever
 - Icons that convey meaning need an accessible name; decorative icons are hidden from the accessibility tree.
 - Do not infer personal attributes from an image or write alt text that speculates about identity.
 
-## 8. Component contract
+## 9. Component contract
 
 Every reusable component must document:
 
@@ -128,7 +140,7 @@ Every reusable component must document:
 
 A component is not complete because it looks correct in one screenshot.
 
-## 9. Current implementation mapping
+## 10. Current implementation mapping
 
 | Area | Current implementation | Remaining work |
 |---|---|---|
@@ -136,12 +148,12 @@ A component is not complete because it looks correct in one screenshot.
 | Themes | System, Light, Black, Super Black, AMOLED Black, Dynamic | Audit every semantic state and dynamic accent combinations |
 | User controls | Text scale, contrast, motion, spacing, theme | Verify persistence, no-JS fallback, keyboard operation, and high-zoom layout |
 | Motion | Reduced-motion media query and user preference | Audit every page/component for any nonessential animation |
-| Navigation | Semantic header/footer nav and skip link | Validate route naming, current-page indication, mobile and zoom behavior |
+| Navigation | Task-oriented Home, Discover, Plan your visit, Community, and Updates navigation; semantic footer nav and skip link | Validate route naming, current-page indication, mobile and zoom behavior |
 | Graphics | SVG baseline and opt-in graphics capability lab | Keep graphics optional; test context loss and reduced-motion behavior |
 | Images | Existing content assets | Audit every image for meaningful alt, empty decorative alt, or equivalent text |
 | Components | Existing Astro/CSS components | Inventory and document component contracts before expanding patterns |
 
-## 10. Verification and evidence
+## 11. Verification and evidence
 
 - Map each applicable WCAG 2.2 Level A criterion to the routes/components and evidence that supports it.
 - Test keyboard-only navigation, visible focus, screen readers, TalkBack, browser zoom, text resizing, forced colors, and reduced motion.
@@ -150,7 +162,7 @@ A component is not complete because it looks correct in one screenshot.
 - Record issues and fixes. Automated tools are regression aids, not conformance certification.
 - Do not claim WCAG conformance until the full applicable criteria have been evaluated with sufficient evidence.
 
-## 11. Research basis and limitations
+## 12. Research basis and limitations
 
 - W3C, [WCAG 2.2](https://www.w3.org/TR/WCAG22/): normative, technology-neutral accessibility success criteria. The project's stated engineering target remains Level A; additional guidance here is design practice, not a silent change to AA.
 - W3C, [Cognitive Accessibility](https://www.w3.org/WAI/cognitive): explains how WAI standards address cognitive accessibility and where additional guidance is useful.
