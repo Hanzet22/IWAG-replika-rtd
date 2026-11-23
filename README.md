@@ -42,7 +42,7 @@ npm run preview
 npm run wasm:build
 ```
 
-`npm run build` invokes the Rust Active Compiler, which validates the V2 source boundary, orchestrates Astro/Vite, checks generated HTML and writes `dist/iwag-build-report.json`.
+`npm run build` invokes the Rust Active Compiler, which validates the V2 source boundary, orchestrates Astro/Vite, checks generated HTML and writes `.iwag-build/iwag-build-report.json`.
 
 `npm run build:astro` is a diagnostic backend escape hatch; it is not the normal production build entry point.
 
