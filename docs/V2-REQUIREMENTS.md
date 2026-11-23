@@ -285,3 +285,20 @@ A V2 release candidate is not ready until:
 - Indonesia UU 8/1999: https://peraturan.bpk.go.id/Details/45288/uu-no-8-tahun-1999
 - EU GDPR: https://eur-lex.europa.eu/eli/reg/2016/679
 - Indonesia UU 1/2026: https://peraturan.bpk.go.id/Details/337869/uu-no-1-tahun-2026
+
+## 15. Legal, regulatory, and content-integrity requirements
+
+The implementation baseline and release checklist are maintained in [docs/LEGAL-COMPLIANCE-MATRIX.md](LEGAL-COMPLIANCE-MATRIX.md). The live-site reading and page-specific migration notes are maintained in [docs/ORIGINAL-SITE-REFERENCE.md](ORIGINAL-SITE-REFERENCE.md).
+
+Non-negotiable requirements:
+- Treat Indonesian Law 27/2022 on Personal Data Protection as the binding baseline when V2 processes personal data within its scope. Identify the actual controller, lawful basis, purposes, processors, retention, rights and transfer route before collecting data.
+- Prepare for PP 33/2026, promulgated 16 July 2026 and scheduled to take effect 16 January 2027. Do not describe it as already effective before that date.
+- Assess PP 17/2025 and Permenkomdigi 9/2026 child-protection requirements where the electronic service is designed for or may be accessed by children. A physical event age rating does not itself remove website duties.
+- Assess PP 71/2019, the ITE framework, PSE registration, consumer protection and PMSE requirements against the real operator and service model. Do not assume every static page is an e-commerce platform.
+- Apply foreign laws such as GDPR only when their territorial scope is triggered. International standards and treaties must not be mislabelled as universally binding website laws.
+- Keep WCAG 2.2 Level A as the formal target only. It is a technical conformance target, not a claim of Indonesian statutory compliance; test every applicable Level A criterion.
+- No third-party tracking, analytics, advertising pixels or remote fonts by default. Any later integration needs a documented purpose, lawful basis, disclosure, vendor and retention review.
+- No event registration, ticket sales, accounts, sponsor forms or collection of sensitive/child data until the legal operator, data controller, business model and policy text are verified.
+- Do not copy V1 legal wording, event rules, assets, staff details, photographs or brand elements without a documented rights basis and content-owner review.
+- Mark all event, venue, transport, visa, ticket, pricing, sponsorship and accessibility facts with a source and review date. Revalidate volatile information before release.
+- Do not publish legal compliance or accessibility conformance claims based only on automated checks or draft documentation.
