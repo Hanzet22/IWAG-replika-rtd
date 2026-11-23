@@ -153,9 +153,12 @@ const copy = isConduct
         { date: "14 March 2026", title: "Introducing the IWAG Art Show", summary: "A gallery and auction format for community-created artwork at IWAG 2026.", href: "updates/2026-03-14-art-show" },
         { date: "13 March 2026", title: "IWAG 2026 Conbook Applications", summary: "A historical call for community artwork submissions to the convention book.", href: "updates/2026-03-13-conbook" },
         { date: "16 February 2026", title: "IWAG 2026 Talent Show Applications Open", summary: "A historical call for solo and group performance submissions.", href: "updates/2026-02-16-talent-show" },
+        { date: "7 February 2026", title: "Introducing Auveiss: IWAG 2026 Guest of Honor", summary: "The Guest of Honor announcement for the 2026 edition.", href: "updates/2026-02-07-goh-reveal" },
+        { date: "5 February 2026", title: "IWAG 2026 DJ Applications Now Open", summary: "A historical invitation for DJ mix submissions.", href: "updates/2026-02-05-dj" },
         { date: "31 January 2026", title: "IWAG 2026 Panel and Activity Applications", summary: "A historical invitation for entertainment, social, and educational sessions.", href: "updates/2026-01-13-panel-registration" },
         { date: "28 January 2026", title: "Dealers Den Applications for IWAG 2026", summary: "A historical call for vendors, community representatives, and display creators.", href: "updates/2026-01-28-dealers" },
         { date: "24 January 2026", title: "Volunteer Applications for IWAG 2026", summary: "A historical volunteer recruitment announcement for event operations.", href: "updates/2026-01-24-volunteer" },
+        { date: "5 January 2026", title: "Hotel Reservation Info for IWAG 2026", summary: "Historical accommodation information for the former BSD venue.", href: "updates/2026-01-05-hotel-information" },
         { date: "20 December 2025", title: "IWAG 2026 Event Pass Registration Starts 3 January", summary: "Historical registration schedule and raffle information for the 2026 edition.", href: "updates/2025-12-20-registration-information" },
         { date: "19 December 2025", title: "We Have Updated our Policies", summary: "A historical notice describing V1 policy revisions; not adopted as V2 policy.", href: "updates/2025-12-19-updated-policies" },
         { date: "15 November 2025", title: "IWAG 2026: Event Pass Reveal", summary: "The five-tier pass announcement for the 2026 edition.", href: "updates/2025-11-15-event-pass-reveal" },
@@ -171,12 +174,9 @@ const copy = isConduct
         { date: "6 January 2025", title: "IWAG 2025 Registration Day 1: Behind the Scenes", summary: "A technical postmortem of the first registration opening.", href: "updates/2025-01-06-crash-postmortem" },
         { date: "4 January 2025", title: "IWAG 2025 Registration Update", summary: "A revised pass release and hotel booking schedule.", href: "updates/2025-01-04-registration-update" },
         { date: "23 November 2024", title: "Five Tiers of Fun!", summary: "The first five-tier event-pass announcement for 2025.", href: "updates/2024-11-23-tier-reveal" },
-        { date: "1 November 2024", title: "Welcome to Tangerang", summary: "The 2025 venue and date reveal.", href: "updates/2024-11-01-venue-reveal" },
-        { date: "31 August 2024", title: "Return of The Wild", summary: "The community-selected theme for the 2025 edition.", href: "updates/2024-08-31-theme-reveal" },
         { date: "29 December 2024", title: "IWAG 2025 Registration Opening", summary: "A pre-registration guide to the historical pass release schedule.", href: "updates/2024-12-29-registration-opening" },
-        { date: "5 January 2026", title: "Hotel Reservation Info for IWAG 2026", summary: "Historical accommodation information for the former BSD venue.", href: "updates/2026-01-05-hotel-information" },
-        { date: "7 February 2026", title: "Introducing Auveiss: IWAG 2026 Guest of Honor", summary: "The Guest of Honor announcement for the 2026 edition.", href: "updates/2026-02-07-goh-reveal" },
-        { date: "5 February 2026", title: "IWAG 2026 DJ Applications Now Open", summary: "A historical invitation for DJ mix submissions.", href: "updates/2026-02-05-dj" }
+        { date: "1 November 2024", title: "Welcome to Tangerang", summary: "The 2025 venue and date reveal.", href: "updates/2024-11-01-venue-reveal" },
+        { date: "31 August 2024", title: "Return of The Wild", summary: "The community-selected theme for the 2025 edition.", href: "updates/2024-08-31-theme-reveal" }
       ].map((item) => <article class="update-card"><span class="update-date">{item.date}</span><h2>{item.title}</h2><p>{item.summary}</p><a href={`/${lang}/${item.href}/`}>{lang === "id" ? "Baca arsip V2" : "Read V2 archive"}</a></article>)}
     </section>}
     {isAccessibility && <section class="content-card">
