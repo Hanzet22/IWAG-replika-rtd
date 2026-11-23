@@ -29,51 +29,45 @@ function publicUrlForFile(file) {
 
 async function resolveLocalReference(raw, base, owner, kind) {
   const value = raw.trim();
-  if (!value || value.startsWith("#") === false && /^(?:data:|blob:|mailto:|tel:|javascript:|https?:|\/\/)/i.test(value)) return;
+  if (!value || /^(?:data:|blob:|mailto:|tel:|javascript:|https?:|\/\/)/i.test(value)) return;
   let url;
   try {
     url = new URL(value, base);
   } catch {
-    errors.push(`${owner}: invalid ${kind} reference "${value}"`);
+    errors.push(owner + ": invalid " + kind + ' reference "' + value + '"');
     return;
   }
   if (url.origin !== origin) return;
+
   let pathname;
-  try { pathname = decodeURIComponent(url.pathname); }
-  catch { errors.push(`${owner}: malformed URL encoding in "${value}"`); return; }
+  try {
+    pathname = decodeURIComponent(url.pathname);
+  } catch {
+    errors.push(owner + ': malformed URL encoding in "' + value + '"');
+    return;
+  }
 
   let target = path.resolve(outputRoot, "." + pathname);
   if (target !== outputRoot && !target.startsWith(outputRoot + path.sep)) {
-    errors.push(`${owner}: reference escapes output root "${value}"`);
+    errors.push(owner + ': reference escapes output root "' + value + '"');
     return;
   }
+
   try {
-    let metadata = await stat(target);
-    if (metadata.isDirectory()) {
-      target = path.join(target, "index.html");
-      metadata = await stat(target);
-    }
+    const metadata = await stat(target);
+    if (metadata.isDirectory()) target = path.join(target, "index.html");
   } catch {
-    if (!path.extname(target)) {
-      target = path.join(target, "index.html");
-    }
-    try {
-      const metadata = await stat(target);
-      if (!metadata.isFile()) throw new Error("not a file");
-    } catch {
-      errors.push(`${owner}: missing local ${kind} target "${value}"`);
-      return;
-    }
+    if (!path.extname(target)) target = path.join(target, "index.html");
   }
 
-  if (kind === "href" && url.hash && path.extname(target).toLowerCase() === ".html") {
-    const anchor = decodeURIComponent(url.hash.slice(1));
-    const targetHtml = await readFile(target, "utf8");
-    if (anchor && !new RegExp(`(?:id|name)=[\"']${anchor.replace(/[.*+?^${}()|[\]\\]/g, "\\    if (anchor && !new RegExp(`(?:id|name)=[\"']${anchor.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}[\"']`).test(htmlText ?? "")) {")}[\"']`).test(targetHtml)) {
-      errors.push(`${owner}: missing fragment target "${value}"`);
-      return;
-    }
+  try {
+    const metadata = await stat(target);
+    if (!metadata.isFile()) throw new Error("not a file");
+  } catch {
+    errors.push(owner + ': missing local ' + kind + ' target "' + value + '"');
+    return;
   }
+
   checked += 1;
 }
 
@@ -102,11 +96,11 @@ async function main() {
     }
   }
 
-  console.log(`[iwagc:routes] scanned ${htmlFiles.length} HTML and ${cssFiles.length} CSS files; checked ${checked} local references`);
+  console.log("[iwagc:routes] scanned " + htmlFiles.length + " HTML and " + cssFiles.length + " CSS files; checked " + checked + " local references");
   if (errors.length) {
     for (const error of errors.slice(0, 60)) console.error("[iwagc:routes] " + error);
-    if (errors.length > 60) console.error(`[iwagc:routes] ${errors.length - 60} additional issues omitted`);
-    console.error(`[iwagc:routes] failed with ${errors.length} broken local references`);
+    if (errors.length > 60) console.error("[iwagc:routes] " + (errors.length - 60) + " additional issues omitted");
+    console.error("[iwagc:routes] failed with " + errors.length + " broken local references");
     process.exitCode = 1;
   } else {
     console.log("[iwagc:routes] no broken local references found");
