@@ -74,16 +74,21 @@ Implemented:
 - argument-array process invocation rather than assembled shell commands;
 - build report written outside public output.
 
+Implemented:
+- exact Node minimum and pinned Rust 1.100.0 toolchain;
+- committed npm and Cargo lockfiles;
+- branch-scoped lockfile bootstrap and `npm ci` when the npm lockfile is present;
+- generated local-link/asset checks and basic HTML accessibility invariants.
+
 Still required:
-- verify the committed npm lockfile with `npm ci` on the updated branch;
-- review transitive dependency licenses and provenance;
-- local-link and asset-reference validation;
-- content/locale manifest validation;
+- full license-text and notice review for the 530-package dependency graph;
+- `srcset` and fragment-target validation;
+- complete content/locale manifest validation;
 - stable diagnostic codes and structured JSON output for all commands.
 
 ## 7. WASM policy
 
-The contrast-engine crate is optional and is not required for normal site rendering. The `wasm` command builds it only when explicitly requested. The browser-facing integration, startup cost and fallback path must be verified before it is used by a page.
+The contrast-engine crate powers the optional accessibility-page contrast calculator. The production workflow builds it through `wasm-pack`; the browser loads the module only after a user requests a calculation. The component falls back to a local JavaScript implementation if the generated module is absent or fails to initialize.
 
 WebAssembly must not gate navigation, reading, forms or essential information. A JavaScript or static fallback remains mandatory.
 
