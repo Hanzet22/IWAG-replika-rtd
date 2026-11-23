@@ -48,7 +48,7 @@ const page = Astro.params.page ?? "about";
 const lang = isLocale(langParam) ? langParam : "en";
 const t = getMessages(lang);
 const contentMessages = lang === "ms-my" ? getMessages("en") : t;
-const title = pageTitles[lang]?.[page] ?? pageTitles.en[page] ?? "Information";
+const title = lang === "ms-my" ? pageTitles.en[page] ?? "Information" : pageTitles[lang]?.[page] ?? pageTitles.en[page] ?? "Information";
 const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct"];
 const isLegal = legalPages.includes(page);
 const isAccessibility = page === "accessibility";
