@@ -63,3 +63,26 @@ Core Web Vitals guidance may be used as an external reference, but the project m
 ## Privacy
 
 Do not add analytics, session replay, fingerprinting or behavioral profiling. Prefer local lab testing and user-supplied performance traces. Any future real-user measurement requires a verified operator, privacy review, minimization and clear user notice.
+
+
+## Decision-oriented KPI model
+
+Primary outcome KPIs:
+1. **Core Web Vitals pass rate by route/device cohort:** share of representative page loads meeting the current good thresholds for LCP, INP and CLS. This is a quality signal, not the sole definition of success.
+2. **Essential task completion rate:** proportion of moderated test participants who can find event dates, venue, travel guidance and policy status without assistance. Record by task and access needs; do not infer disability from telemetry.
+3. **Task completion time:** time to complete those same information-finding tasks, interpreted alongside success and user-reported confidence.
+
+Drivers:
+- initial JS/CSS/font/image bytes;
+- number of hydrated islands and main-thread long tasks;
+- number of requests and critical-path resources;
+- memory use and optional graphics frame cadence.
+
+Guardrails:
+- no regression in keyboard or screen-reader task completion;
+- no route or essential content requires JavaScript/GPU/WASM;
+- no motion preference is overridden;
+- no privacy-invasive instrumentation is added;
+- no readability, translation or content accuracy trade-off is accepted for a faster metric.
+
+Targets remain unset until representative baseline measurements and moderated task observations exist. Do not optimize for a single composite score or reward faster completion when users are failing tasks.
