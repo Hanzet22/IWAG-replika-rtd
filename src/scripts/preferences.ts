@@ -55,9 +55,9 @@ function applyAccent(hex: string) {
   const contrast = relativeLuminance(rgb) > 0.179 ? "#000000" : "#ffffff";
   root.style.setProperty("--accent", hex);
   root.style.setProperty("--accent-contrast", contrast);
-  root.style.setProperty("--link", `hsl(${h} 72% 30%)`);
-  root.style.setProperty("--link-visited", `hsl(${(h + 58) % 360} 55% 32%)`);
-  root.style.setProperty("--focus", `hsl(${(h + 32) % 360} 68% 36%)`);
+  root.style.setProperty("--link", `hsl(${h} 72% 24%)`);
+  root.style.setProperty("--link-visited", `hsl(${(h + 58) % 360} 55% 25%)`);
+  root.style.setProperty("--focus", `hsl(${(h + 32) % 360} 68% 28%)`);
 }
 
 function applyTheme(theme: string) {
