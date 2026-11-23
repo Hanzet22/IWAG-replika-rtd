@@ -171,3 +171,9 @@ The latest implementation is a working reconstruction foundation and shared home
 
 - [x] Added basic generated-HTML invariants to the output validator: document language/title, main landmark, skip link, duplicate IDs, image alt presence, named SVGs/buttons/form controls, and no meta-refresh/legacy redirect interstitial/autoplay video.
 - [ ] Review validator findings and false-positive/false-negative boundaries; these static checks are not a WCAG conformance test.
+
+- [x] Added a user-triggered contrast calculator that prefers the Rust/WASM module and falls back to a local JavaScript implementation.
+- [x] Added production workflow steps to install the WASM target/wasm-pack and build the contrast module before Astro/Vite.
+- [x] Added Rust output-report accounting for generated WASM modules and bytes.
+- [ ] Verify the generated wasm-bindgen wrapper and module load path in the production output.
+- [ ] Measure first-use latency and memory against the JavaScript fallback on target Android devices.
