@@ -14,7 +14,7 @@ function activateGraphics() {
 
   const context = element.getContext("2d");
   if (!context) {
-    status.value = "Canvas 2D is unavailable. The SVG fallback remains available.";
+    status.value = isId ? "Canvas 2D tidak tersedia. Fallback SVG tetap digunakan." : "Canvas 2D is unavailable. The SVG fallback remains available.";
     return;
   }
 
