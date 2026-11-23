@@ -8,7 +8,7 @@ IWAG V2 is a fresh implementation. The archived V1 files are retained as a refer
 
 The current V2 implementation includes:
 - Astro static output with TypeScript
-- Locale-prefixed routes for English, Indonesian, English (Singapore), and Bahasa Melayu (Malaysia)
+- Locale-prefixed routes for English, Indonesian, English (Singapore), and Bahasa Melayu (Malaysia); the homepage has Malay copy, while other Malay routes display an explicit English-fallback notice until reviewed translations are ready
 - Semantic HTML-first layouts and progressive enhancement
 - System, Light, Black, Super Black, AMOLED Black, and Dynamic Color themes
 - System fonts; no external font CDN
