@@ -21,7 +21,7 @@ const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f5f6f8" />
+    <meta name="theme-color" content="#f0eeeb" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>{title} · IWAG V2 Independent Project</title>
     {localeKeys.map((locale) => <link rel="alternate" hreflang={locales[locale].htmlLang} href={new URL(`/${locale}${pathWithoutLocale}`, Astro.site ?? Astro.url).toString()} />)}
@@ -53,7 +53,7 @@ const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(
           <option value="dynamic">{t.dynamic}</option>
         </select>
         <label for="accent-choice" data-accent-label>{t.accent}</label>
-        <input id="accent-choice" type="color" value="#426b9b" data-accent-choice aria-label={t.accent} />
+        <input id="accent-choice" type="color" value="#726550" data-accent-choice aria-label={t.accent} />
       </div>
     </header>
     <main id="main" tabindex="-1">
@@ -61,6 +61,12 @@ const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(
     </main>
     <footer class="site-footer">
       <p>{t.footer}</p>
+      <nav aria-label={lang === "id" ? "Informasi lainnya" : "More information"}>
+        <a href={`/${lang}/events/`}>{lang === "id" ? "Acara" : "Events"}</a>
+        <a href={`/${lang}/join-iwag-team/`}>{lang === "id" ? "Tim" : "Team"}</a>
+        <a href={`/${lang}/links/`}>{lang === "id" ? "Tautan" : "Links"}</a>
+        <a href={`/${lang}/policy/`}>{lang === "id" ? "Kebijakan" : "Policies"}</a>
+      </nav>
       <nav aria-label={t.legalNavigation}>
         <a href={`/${lang}/terms/`}>{t.terms}</a>
         <a href={`/${lang}/privacy/`}>{t.privacy}</a>
