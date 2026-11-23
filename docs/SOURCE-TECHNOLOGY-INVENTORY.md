@@ -5,13 +5,13 @@
 
 ## 1. Repository snapshot
 
-The current branch tree contains 361 entries at the time of this inventory.
+The current branch tree contains 364 entries at the time of this inventory.
 
 | Category | Count | Classification |
 |---|---:|---|
 | HTML files | 120 | All moved under `archive/v1-reference/site/` |
 | Astro files | 8 | Active application source |
-| CSS files | 5 | Active styling source |
+| CSS files | 4 | Active styling source |
 | JavaScript files | 5 | Active tooling/application source |
 | TypeScript files | 8 | Active application/configuration source |
 | Rust files | 2 | Active compiler + optional contrast engine |
@@ -92,6 +92,7 @@ The five existing local font families and their original license/source notices 
 ## 7. Remaining classification work
 
 - Verify every remaining non-archive asset in `public/` and map its source/license.
+- Generate and commit a reproducible npm lockfile; direct dependencies are pinned but transitive resolution is not yet locked.
 - Review all package transitive dependencies and licenses after dependency installation.
 - Identify route/content facts that are volatile and record their source/date.
 - Review archive references for provenance and ensure no archive file is imported by the active application.
