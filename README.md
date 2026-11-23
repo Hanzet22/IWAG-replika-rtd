@@ -11,6 +11,7 @@ The dedicated reconstruction plan, source inventory and compiler contract are ma
 - [Application and compiler architecture](docs/ARCHITECTURE.md)
 - [Global UX/UI system](docs/UX-UI-SYSTEM.md)
 - [Source and technology inventory](docs/SOURCE-TECHNOLOGY-INVENTORY.md)
+- [Dependency license inventory](docs/DEPENDENCY-LICENSE-INVENTORY.md)
 - [Rust Active Compiler specification](docs/ACTIVE-COMPILER-SPEC.md)
 - [Research evidence](docs/RESEARCH-EVIDENCE.md)
 - [Graphics and motion policy](docs/GRAPHICS-AND-MOTION-POLICY.md)
