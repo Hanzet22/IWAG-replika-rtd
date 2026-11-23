@@ -2,8 +2,9 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { css } from "../../../styled-system/css";
 
-const eventFactsClass = css({ display: "grid", gap: "1rem" });
 import { isLocale, localeKeys } from "../../i18n/locales";
+
+const eventFactsClass = css({ display: "grid", gap: "1rem" });
 
 export function getStaticPaths() {
   return localeKeys.map((lang) => ({ params: { lang } }));
@@ -33,8 +34,8 @@ const copy = {
       <h1 id="home-title">IWAG 2027: <em>Fantastic Arcana</em></h1>
       <p class="lead">{copy.intro}</p>
       <div class="hero-actions">
-        <a class="action-link" href={`/${lang}/about/`}>{copy.explore}</a>
-        <a class="action-link secondary" href={`/${lang}/participate/`}>{copy.passes}</a>
+        <a class="action-link motion-safe:transition-colors motion-safe:duration-150" href={`/${lang}/about/`}>{copy.explore}</a>
+        <a class="action-link secondary motion-safe:transition-colors motion-safe:duration-150" href={`/${lang}/participate/`}>{copy.passes}</a>
       </div>
     </div>
     <div class="arcana-art" role="img" aria-label="Abstract decorative illustration representing an illuminated arcane academy">
