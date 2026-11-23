@@ -7,11 +7,12 @@ interface Props {
   lang: string;
   title: string;
   description: string;
+  contentLang?: string;
 }
-const { lang: requestedLang, title, description } = Astro.props;
+const { lang: requestedLang, title, description, contentLang } = Astro.props;
 const lang = isLocale(requestedLang) ? requestedLang : "en";
 const t = getMessages(lang);
-const htmlLang = locales[lang].htmlLang;
+const htmlLang = contentLang ?? locales[lang].htmlLang;
 const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(?=/|$)"), "");
 ---
 <!doctype html>
@@ -28,7 +29,7 @@ const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(
   </head>
   <body>
     <a class="skip-link" href="#main">{t.skip}</a>
-    <header class="site-header">
+    <header class="site-header" lang={lang === "id" ? "id" : "en"}>
       <a class="wordmark" href={`/${lang}/`} aria-label="IWAG V2 independent project home">IWAG<span>V2</span></a>
       <nav class="primary-nav" aria-label={t.primaryNavigation}>
         <a href={`/${lang}/`}>{t.home}</a>
@@ -59,7 +60,7 @@ const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(
     <main id="main" tabindex="-1">
       <slot />
     </main>
-    <footer class="site-footer">
+    <footer class="site-footer" lang={lang === "id" ? "id" : "en"}>
       <p>{t.footer}</p>
       <nav aria-label={lang === "id" ? "Informasi lainnya" : "More information"}>
         <a href={`/${lang}/events/`}>{lang === "id" ? "Acara" : "Events"}</a>
