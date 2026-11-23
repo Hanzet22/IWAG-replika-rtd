@@ -1,7 +1,7 @@
 use std::env;
 use std::fs;
 use std::path::{Component, Path, PathBuf};
-use std::process::{Command, ExitCode, Stdio};
+use std::process::{Command, ExitCode};
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
