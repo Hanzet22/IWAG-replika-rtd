@@ -7,28 +7,28 @@ import { isLocale, localeKeys } from "../../i18n/locales";
 
 const pageTitles: Record<string, Record<string, string>> = {
   en: {
-    about: "About this project", accessibility: "Accessibility", brand: "Brand resources",
+    about: "About this project", community: "Community", "plan-your-visit": "Plan your visit", accessibility: "Accessibility", brand: "Brand resources",
     coc: "Code of Conduct", "code-of-conduct": "Code of Conduct", dealers: "Dealers",
     events: "Events", "join-iwag-team": "Join the team", links: "Links", cookies: "Cookie Policy", copyright: "Copyright & Intellectual Property", disclaimer: "Disclaimer", moderation: "Moderation & Reporting", retention: "Data Retention",
     location: "Location", participate: "Participate", policy: "Policies",
     privacy: "Privacy", terms: "Terms", tnc: "Terms and Conditions", updates: "Updates"
   },
   id: {
-    about: "Tentang proyek ini", accessibility: "Aksesibilitas", brand: "Sumber daya merek",
+    about: "Tentang proyek ini", community: "Komunitas", "plan-your-visit": "Rencanakan kunjungan", accessibility: "Aksesibilitas", brand: "Sumber daya merek",
     coc: "Kode Etik", "code-of-conduct": "Kode Etik", dealers: "Dealer",
     events: "Acara", "join-iwag-team": "Bergabung dengan tim", links: "Tautan", cookies: "Kebijakan Cookie", copyright: "Hak Cipta & Kekayaan Intelektual", disclaimer: "Penyangkalan", moderation: "Moderasi & Pelaporan", retention: "Retensi Data",
     location: "Lokasi", participate: "Partisipasi", policy: "Kebijakan",
     privacy: "Privasi", terms: "Ketentuan", tnc: "Syarat dan Ketentuan", updates: "Pembaruan"
   },
   "en-sg": {
-    about: "About this project", accessibility: "Accessibility", brand: "Brand resources",
+    about: "About this project", community: "Community", "plan-your-visit": "Plan your visit", accessibility: "Accessibility", brand: "Brand resources",
     coc: "Code of Conduct", "code-of-conduct": "Code of Conduct", dealers: "Dealers",
     events: "Events", "join-iwag-team": "Join the team", links: "Links",
     location: "Location", participate: "Participate", policy: "Policies",
     privacy: "Privacy", terms: "Terms", tnc: "Terms and Conditions", updates: "Updates"
   },
   "ms-my": {
-    about: "Perihal projek ini", accessibility: "Kebolehcapaian", brand: "Sumber jenama",
+    about: "Perihal projek ini", community: "Komuniti", "plan-your-visit": "Rancang lawatan", accessibility: "Kebolehcapaian", brand: "Sumber jenama",
     coc: "Kod Tatakelakuan", "code-of-conduct": "Kod Tatakelakuan", dealers: "Peniaga",
     events: "Acara", "join-iwag-team": "Sertai pasukan", links: "Pautan",
     location: "Lokasi", participate: "Penyertaan", policy: "Dasar",
@@ -38,7 +38,7 @@ const pageTitles: Record<string, Record<string, string>> = {
 
 export function getStaticPaths() {
   const pageKeys = [
-    "about", "accessibility", "brand", "coc", "code-of-conduct", "dealers",
+    "about", "community", "plan-your-visit", "accessibility", "brand", "coc", "code-of-conduct", "dealers",
     "join-iwag-team", "links", "location", "participate", "policy", "cookies", "copyright", "disclaimer", "moderation", "retention",
     "privacy", "terms", "tnc", "updates"
   ] as const;
@@ -60,6 +60,8 @@ const isTerms = page === "terms" || page === "tnc";
 const isPrivacy = page === "privacy";
 const isAccessibility = page === "accessibility";
 const isAbout = page === "about";
+const isPlan = page === "plan-your-visit";
+const isCommunity = page === "community";
 const isLocation = page === "location";
 const isParticipate = page === "participate";
 const isUpdates = page === "updates";
@@ -74,6 +76,8 @@ const copy = policy?.summary ?? (isConduct
   ? (lang === "id" ? "Kode Etik V2 merupakan draf independen." : "The V2 Code of Conduct is an independent draft.")
   : isLegal ? contentMessages.legalDraft
   : isAccessibility ? contentMessages.levelText
+  : isPlan ? (lang === "id" ? "Satu titik awal untuk merencanakan kunjungan." : "One starting point for planning a visit.")
+  : isCommunity ? (lang === "id" ? "Temukan latar komunitas dan cara terlibat." : "Explore community context and ways to take part.")
   : isAbout ? (lang === "id"
       ? "IWAG V2 adalah rekayasa ulang independen dari arsip referensi. Proyek ini berfokus pada informasi yang mudah dibaca, navigasi konsisten, aksesibilitas, dan minimisasi data."
       : "IWAG V2 is an independent re-engineering project based on a separately archived reference. It focuses on readable information, predictable navigation, accessibility, and data minimisation.")
@@ -89,6 +93,18 @@ const copy = policy?.summary ?? (isConduct
     <p class="eyebrow">IWAG V2 · Independent project</p>
     <h1>{title}</h1>
     <p class="lead">{copy}</p>
+    {isPlan && <section class="landing-grid" aria-label={lang === "id" ? "Rencana kunjungan" : "Visit planning"}>
+      <article class="content-card"><p class="eyebrow">01 · EVENT</p><h2>{lang === "id" ? "Tanggal dan acara" : "Dates and event"}</h2><p>3–4 July 2027 · Fantastic Arcana.</p><a href={"/" + lang + "/events/"}>{lang === "id" ? "Lihat informasi acara" : "Explore event information"}</a></article>
+      <article class="content-card"><p class="eyebrow">02 · VENUE</p><h2>{lang === "id" ? "Lokasi acara" : "Venue"}</h2><p>Hotel Ciputra Jakarta, West Jakarta.</p><a href={"/" + lang + "/location/"}>{lang === "id" ? "Baca panduan lokasi" : "Read venue information"}</a></article>
+      <article class="content-card"><p class="eyebrow">03 · TRAVEL</p><h2>{lang === "id" ? "Perjalanan" : "Getting there"}</h2><p>{lang === "id" ? "Informasi transportasi dan panduan pengunjung internasional." : "Transport information and guidance for international visitors."}</p><a href={"/" + lang + "/international-travelers-guide/"}>{lang === "id" ? "Buka panduan perjalanan" : "Open travel guide"}</a></article>
+      <article class="content-card"><p class="eyebrow">04 · PARTICIPATION</p><h2>{lang === "id" ? "Partisipasi" : "Participation"}</h2><p>{lang === "id" ? "Ringkasan tingkat partisipasi yang diumumkan dan status ketersediaannya." : "A snapshot of announced participation tiers and their published availability status."}</p><a href={"/" + lang + "/participate/"}>{lang === "id" ? "Lihat partisipasi" : "View participation"}</a></article>
+    </section>}
+    {isCommunity && <section class="landing-grid" aria-label={lang === "id" ? "Jelajahi komunitas" : "Explore the community"}>
+      <article class="content-card"><p class="eyebrow">01 · CONTEXT</p><h2>{lang === "id" ? "Tentang proyek" : "About the project"}</h2><p>{lang === "id" ? "Konteks dan sejarah pertemuan yang dirangkum secara independen." : "Independent context and a concise history of the gathering."}</p><a href={"/" + lang + "/about/"}>{lang === "id" ? "Baca tentang proyek" : "Read about the project"}</a></article>
+      <article class="content-card"><p class="eyebrow">02 · PEOPLE</p><h2>{lang === "id" ? "Tim dan kontribusi" : "Team and contributions"}</h2><p>{lang === "id" ? "Bidang kontribusi yang pernah diumumkan; bukan konfirmasi lowongan aktif." : "Previously announced contribution areas; not confirmation of active vacancies."}</p><a href={"/" + lang + "/join-iwag-team/"}>{lang === "id" ? "Jelajahi peran" : "Explore roles"}</a></article>
+      <article class="content-card"><p class="eyebrow">03 · RESOURCES</p><h2>{lang === "id" ? "Sumber daya" : "Resources"}</h2><p>{lang === "id" ? "Tautan, dealer, dan materi merek yang tersedia dalam arsip referensi." : "Links, dealer information, and brand resources available in the reference archive."}</p><a href={"/" + lang + "/links/"}>{lang === "id" ? "Buka sumber daya" : "Browse resources"}</a></article>
+      <article class="content-card"><p class="eyebrow">04 · UPDATES</p><h2>{lang === "id" ? "Pembaruan komunitas" : "Community updates"}</h2><p>{lang === "id" ? "Pengumuman dan arsip pembaruan berdasarkan tanggal." : "Dated announcements and the historical update archive."}</p><a href={"/" + lang + "/updates/"}>{lang === "id" ? "Lihat pembaruan" : "Read updates"}</a></article>
+    </section>}
     {isEvents && <section class="content-card">
       <p class="eyebrow">IWAG 2027 · FANTASTIC ARCANA</p>
       <h2>3–4 July 2027</h2>
