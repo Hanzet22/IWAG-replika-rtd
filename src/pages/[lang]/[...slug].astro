@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { isLocale } from "../../i18n/locales";
+import { nestedRoutes } from "../../i18n/nested-routes";
+
+export function getStaticPaths() {
+  return (["en", "id"] as const).flatMap((lang) =>
+    nestedRoutes.map((slug) => ({ params: { lang, slug }, props: { lang, slug } }))
+  );
+}
+
+const langParam = Astro.params.lang;
+const lang = isLocale(langParam) ? langParam : "en";
+const slug = Astro.params.slug ?? "";
+const segments = slug.split("/");
+const lastSegment = segments.at(-1) ?? slug;
+const title = lastSegment
+  .replace(/^\d{4}-\d{2}-\d{2}-/, "")
+  .split("-")
+  .map((part) => part.length <= 3 ? part.toUpperCase() : part.charAt(0).toUpperCase() + part.slice(1))
+  .join(" ");
+const isUpdate = segments[0] === "updates";
+const intro = lang === "id"
+  ? "Rute ini dipertahankan dari inventaris arsip V1. Konten V2 sedang ditulis ulang dan belum diterbitkan pada pratinjau ini."
+  : "This route is preserved from the V1 archive inventory. V2 content is being independently rewritten and is not published in this preview.";
+const context = isUpdate
+  ? (lang === "id" ? "Arsip rute pembaruan" : "Update route archive")
+  : (lang === "id" ? "Arsip struktur peran tim" : "Team role route archive");
+---
+<BaseLayout lang={lang} title={title} description={intro}>
+  <article class="page-content">
+    <p class="eyebrow">IWAG V2 · {context}</p>
+    <h1>{title}</h1>
+    <p class="lead">{intro}</p>
+    <aside class="notice">
+      <h2>{lang === "id" ? "Status migrasi" : "Migration status"}</h2>
+      <p>{lang === "id" ? "Tidak ada jadwal, syarat pendaftaran, harga, atau informasi operasional V1 yang dianggap masih berlaku. Setiap detail akan ditulis ulang setelah diverifikasi." : "No V1 schedule, registration requirement, price, or operational detail is assumed to remain current. Each detail will be rewritten after verification."}</p>
+    </aside>
+    <p><a href={`/${lang}/updates/`}>{lang === "id" ? "Kembali ke pembaruan" : "Back to updates"}</a></p>
+  </article>
+</BaseLayout>
