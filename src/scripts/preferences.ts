@@ -58,8 +58,7 @@ function applyAccent(hex: string) {
   root.style.setProperty("--accent-contrast", contrast);
   root.style.setProperty("--link", `hsl(${h} 72% 24%)`);
   root.style.setProperty("--link-visited", `hsl(${(h + 58) % 360} 55% 25%)`);
-  // Keep focus independent from the freely chosen accent hue.
-  root.style.setProperty("--focus", "#111111");
+  // Focus remains a semantic theme token and is not derived from the user accent.
 }
 
 function applyTheme(theme: string) {
