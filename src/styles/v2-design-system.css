@@ -204,3 +204,35 @@
     outline-offset: 3px;
   }
 }
+
+@layer components {
+  .landing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    margin-block: 2rem 3rem;
+  }
+
+  .landing-grid .content-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 100%;
+  }
+
+  .landing-grid .content-card p:last-of-type {
+    max-width: 48ch;
+  }
+
+  .landing-grid .content-card a {
+    margin-block-start: auto;
+    padding-block-start: 1rem;
+    font-weight: 750;
+  }
+
+  .primary-nav a[aria-current="page"] {
+    text-decoration-line: underline;
+    text-decoration-thickness: .18em;
+    text-underline-offset: .3em;
+  }
+}
