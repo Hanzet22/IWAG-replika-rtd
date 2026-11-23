@@ -3,6 +3,7 @@ import { localeKeys } from "../i18n/locales";
 const themeSelect = document.querySelector<HTMLSelectElement>("[data-theme-choice]");
 const languageSelect = document.querySelector<HTMLSelectElement>("[data-language-choice]");
 const root = document.documentElement;
+root.dataset.js = "true";
 const validThemes = ["system", "light", "black", "super-black", "amoled-black", "dynamic"];
 const storageKey = "iwag-v2-theme";
 
