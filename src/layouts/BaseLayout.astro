@@ -14,6 +14,7 @@ const lang = isLocale(requestedLang) ? requestedLang : "en";
 const t = getMessages(lang);
 const htmlLang = contentLang ?? locales[lang].htmlLang;
 const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(?=/|$)"), "");
+const hasMalayTranslation = pathWithoutLocale === "/" || pathWithoutLocale === "";
 ---
 <!doctype html>
 <html lang={htmlLang} data-theme="system">
@@ -25,7 +26,7 @@ const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(
     <meta name="theme-color" content="#f0eeeb" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>{title} · IWAG V2 Independent Project</title>
-    {localeKeys.map((locale) => <link rel="alternate" hreflang={locales[locale].htmlLang} href={new URL(`/${locale}${pathWithoutLocale}`, Astro.site ?? Astro.url).toString()} />)}
+    {localeKeys.filter((locale) => locale !== "ms-my" || hasMalayTranslation).map((locale) => <link rel="alternate" hreflang={locales[locale].htmlLang} href={new URL(`/${locale}${pathWithoutLocale}`, Astro.site ?? Astro.url).toString()} />)}
   </head>
   <body>
     <a class="skip-link" href="#main">{t.skip}</a>
