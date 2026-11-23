@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+import { isLocale } from "../../../../i18n/locales";
+
+export async function getStaticPaths() {
+  const events = await getCollection("events", ({ data }) => data.status === "published");
+  return events.map((event) => {
+    const [lang, ...slugParts] = event.id.split("/");
+    return { params: { lang, slug: slugParts.join("/") }, props: { event } };
+  });
+}
+
+const langParam = Astro.params.lang;
+const lang = isLocale(langParam) ? langParam : "en";
+const { event } = Astro.props;
+const { Content } = await render(event);
+const dateLabel = event.data.start
+  ? event.data.start.toLocaleString(lang, { dateStyle: "long", timeStyle: "short", timeZone: event.data.timezone })
+  : null;
+---
+<BaseLayout lang={lang} title={event.data.title} description={event.data.summary}>
+  <article class="page-content">
+    <p class="eyebrow">IWAG V2 · Event information</p>
+    <h1>{event.data.title}</h1>
+    <p class="lead">{event.data.summary}</p>
+    <section class="content-card" aria-labelledby="event-details">
+      <h2 id="event-details">Event details</h2>
+      {dateLabel && <p><strong>Date:</strong> {dateLabel}</p>}
+      {event.data.end && <p><strong>End:</strong> {event.data.end.toLocaleString(lang, { dateStyle: "long", timeStyle: "short", timeZone: event.data.timezone })}</p>}
+      {event.data.venue && <p><strong>Venue:</strong> {event.data.venue}</p>}
+      <p><strong>Format:</strong> {event.data.online ? "Online" : "In person"}</p>
+      {event.data.accessInformation.length > 0 && <><h3>Accessibility information</h3><ul>{event.data.accessInformation.map((item) => <li>{item}</li>)}</ul></>}
+      {event.data.registrationUrl && <p><a class="action-link" href={event.data.registrationUrl}>Registration information</a></p>}
+    </section>
+    <div class="measure"><Content /></div>
+  </article>
+</BaseLayout>
