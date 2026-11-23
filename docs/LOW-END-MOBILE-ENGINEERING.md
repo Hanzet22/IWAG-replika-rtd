@@ -50,6 +50,7 @@ A review of 44 mobile-web energy studies found CPU use, wireless communication a
 - Repaired seven literal escaped-newline sequences in the global stylesheet's breadcrumb block so the selectors are parsed as separate CSS rules.
 - Added a native details/summary mobile navigation disclosure for viewports at or below 54rem; it works without JavaScript and retains explicit current-page semantics.
 - Preserved the current URL query string and fragment when the user changes locale.
+- Marked homepage event dates and update-card dates with semantic time elements and machine-readable datetime values.
 - Extended the Rust-invoked output validator to inspect local srcset candidates and local HTML fragment references.
 - Added generation of .iwag-build/route-manifest.json from the actual generated HTML routes, outside the public dist/ directory.
 
