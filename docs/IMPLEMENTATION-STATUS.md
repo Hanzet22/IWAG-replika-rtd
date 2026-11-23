@@ -100,7 +100,7 @@ Updated: 2026-11-23
 
 
 ## Global accessibility and legal rewrite
-- [x] Added global text-scale, high-contrast and reduced-motion controls with local-only preference storage.
+- [x] Added global text-scale, high-contrast, reduced-motion and content-spacing controls with local-only preference storage.
 - [x] Added nine separately addressable legal policy pages with English and Indonesian draft copy.
 - [x] Updated the legal banner to drafting-only, not official, not verified, not approved and not in force.
 - [x] Added a policy index linking all nine documents.
