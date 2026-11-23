@@ -143,7 +143,83 @@ V2 requirements:
 
 Official GDPR text: https://eur-lex.europa.eu/eli/reg/2016/679/oj
 
-### 3.2 International copyright treaties
+### 3.2 Singapore — Personal Data Protection Act
+
+Singapore's PDPA governs organisations' collection, use and disclosure of personal data in Singapore. The PDPC's guidance describes the Act as applying to organisations carrying out activities involving personal data in Singapore; overseas collection followed by processing in Singapore can therefore require assessment. A transfer of personal data from Singapore to an overseas recipient is subject to the Transfer Limitation Obligation: the recipient must provide a standard of protection comparable to the PDPA, using an applicable method such as contractual protections or comparable laws.
+
+V2 requirements:
+- Do not treat Singapore nationality alone as the territorial trigger; map where the organisation and processing activities are situated.
+- If personal data is processed in Singapore, assess the organisation definition, exclusions and applicable obligations.
+- Map every onward transfer from Singapore and document the comparable-protection mechanism and destination.
+- If using a vendor or cloud service, include transfer protections and onward-transfer controls in the contract.
+
+Official sources:
+- PDPC PDPA overview: https://www.pdpc.gov.sg/about/the-legislation/pdpa-overview
+- PDPC Guide to Cross-Border Data Transfers (published 14 April 2026): https://www.pdpc.gov.sg/organisations/resources/guidance-by-topic/guide-to-cross-border-data-transfers
+- Singapore Statutes Online, PDPA 2012: https://sso.agc.gov.sg/Act/PDPA2012
+
+### 3.3 Malaysia — Personal Data Protection Act 2010 (Act 709)
+
+Malaysia's Act 709 regulates personal-data processing in connection with commercial transactions, subject to its territorial and statutory scope. The Personal Data Protection (Amendment) Act 2024 (Act A1727) commenced in phases: 1 January, 1 April and 1 June 2025. The Commissioner's 2026 reprint of Act 709 records those commencement dates. Section 129 governs transfers outside Malaysia; the Commissioner's 2025 Cross-Border Personal Data Transfer Guideline explains the available conditions and transfer-impact assessment approach.
+
+V2 requirements:
+- Assess whether the operator's processing is in respect of commercial transactions and whether the Act's territorial provisions are met.
+- Map transfers from Malaysia and apply the current Section 129 conditions; do not assume a generic consent checkbox is the only route.
+- Provide the required notice of overseas transfers and document the assessment and safeguards.
+- Review the 2024 amendments and current Commissioner's guidelines rather than relying on pre-2025 summaries.
+
+Official sources:
+- Act 709 reprint as at 15 September 2026: https://www.pdp.gov.my/wp-content/uploads/2026/10/Akta-709-cetakan-semula-2026-BI.pdf
+- Federal Gazette P.U. (B) 522 — commencement dates for Act A1727: https://www.pdp.gov.my/wp-content/uploads/2024/12/PENETAPAN-TARIKH-PERMULAAN-KUAT-KUASA-2.pdf
+- Personal Data Protection Guidelines No. 3/2025 — Cross-Border Personal Data Transfer: https://www.pdp.gov.my/wp-content/uploads/2025/08/GP_CBPDT_EN.pdf
+
+### 3.4 Thailand — Personal Data Protection Act B.E. 2562 (2019)
+
+Section 5 applies to controllers/processors in Thailand regardless of where processing occurs. It also reaches a controller or processor outside Thailand when processing personal data of people in Thailand in connection with offering goods or services to them or monitoring their behaviour in Thailand. Sections 28–29 govern transfers abroad. The official PDPC English version is labelled an unofficial translation; consult the Thai-language Gazette text for authoritative interpretation.
+
+V2 requirements:
+- Assess both the operator's location and whether it intentionally offers services to, or monitors, people physically in Thailand.
+- If the foreign-controller provision applies, review the local representative requirement in Section 37(5).
+- Map international transfers and the applicable Section 28/29 safeguard route.
+- Do not infer applicability solely from a visitor's Thai nationality.
+
+Official regulator sources:
+- Thailand PDPC — Personal Data Protection Act B.E. 2562 (2019): https://www.pdpc.or.th/en/10455/
+- PDPC Act and subordinate legislation index: https://www.pdpc.or.th/en/pdpc-act/
+
+### 3.5 United Kingdom — UK GDPR and Children's Code
+
+UK GDPR applies to processing in the context of a UK establishment and can also apply to an organisation outside the UK that offers goods or services to people in the UK or monitors their behaviour there. The ICO's Children's Code applies to online services likely to be accessed by children, subject to its territorial and service-scope rules; it is not limited to services marketed exclusively to children. A simple information-only site may not qualify as an information society service, but online registration, booking, accounts or other interactive services can change the assessment.
+
+V2 requirements:
+- Assess UK targeting/monitoring and the service's actual functionality before deciding whether UK GDPR applies.
+- If the Children's Code applies, assess the standards for high-privacy defaults, age-appropriate transparency, profiling, geolocation, nudges and children's rights.
+- Do not equate an event age rating with the online service's child-protection scope.
+
+Official ICO sources:
+- Who does the UK GDPR apply to?: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/personal-information-what-is-it/who-does-the-uk-gdpr-apply-to
+- Services covered by the Children's Code: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/childrens-information/childrens-code-guidance-and-resources/age-appropriate-design-a-code-of-practice-for-online-services/services-covered-by-this-code/
+
+### 3.6 United States — COPPA and California CCPA
+
+COPPA applies to operators of child-directed websites/services and general-audience operators with actual knowledge that they collect personal information online from a child under 13. The FTC's 2025 Rule amendments add requirements concerning separate parental consent for certain third-party disclosures, data retention/deletion and security; the compliance deadline for the amended Rule was in April 2026. COPPA is not a general privacy law for every teen or adult visitor.
+
+The California CCPA applies to qualifying for-profit businesses doing business in California that determine the purposes and means of processing California residents' personal information and meet statutory thresholds. As of 1 January 2025, the revenue threshold is USD 26.625 million; alternative thresholds include processing the personal information of 100,000 or more California residents/households or deriving at least 50% of annual revenue from selling or sharing that information. Nonprofits and government agencies are generally outside the CCPA's business definition.
+
+V2 requirements:
+- Assess child-directed design and actual knowledge before collecting any under-13 personal information from US users.
+- If COPPA applies, implement verifiable parental consent, notice, minimisation, security and retention/deletion controls as required by the current Rule.
+- Do not assume CCPA applies merely because a California resident visits the site; assess the for-profit/business and threshold tests.
+- Recheck thresholds and state privacy laws before any US-targeted commercial or registration feature is launched.
+
+Official sources:
+- FTC COPPA Rule, 16 CFR Part 312: https://www.ecfr.gov/current/title-16/chapter-I/subchapter-C/part-312
+- Federal Register, 2025 COPPA Rule amendments: https://www.federalregister.gov/documents/2025/04/22/2025-05904/childrens-online-privacy-protection-rule
+- California Privacy Protection Agency FAQ: https://cppa.ca.gov/faq
+- CCPA statute effective 1 January 2026: https://cppa.ca.gov/pdf/20260101_ccpa_statute.pdf
+- CCPA updated monetary thresholds: https://cppa.ca.gov/regulations/cpi_adjustment.html
+
+### 3.7 International copyright treaties
 
 The Berne Convention and WIPO Copyright Treaty form part of the international copyright framework. They do not grant permission to reuse third-party assets. Use the rights/permission process in Section 2.6 and comply with the licence or applicable national law.
 
@@ -151,7 +227,7 @@ References:
 - Berne Convention: https://www.wipo.int/treaties/en/ip/berne/
 - WIPO Copyright Treaty: https://www.wipo.int/treaties/en/ip/wct/
 
-### 3.3 WCAG 2.2 Level A — product target, not a legal shortcut
+### 3.8 WCAG 2.2 Level A — product target, not a legal shortcut
 
 WCAG 2.2 is a W3C Recommendation (12 December 2024). For this project the requested conformance target is **Level A only**, not AA. WCAG is an international technical standard; it is not itself a blanket Indonesian statute for every private event website. Separate statutory disability/accessibility duties may still apply.
 
