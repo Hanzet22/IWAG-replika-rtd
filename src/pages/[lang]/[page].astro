@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import GraphicsCapabilityLab from "../../components/GraphicsCapabilityLab.vue";
 import { getMessages } from "../../i18n/ui";
 import { isLocale, localeKeys } from "../../i18n/locales";
 
@@ -79,6 +80,11 @@ const copy = isConduct
   <article class="page-content">
     <p class="eyebrow">IWAG V2 · Independent project</p>
     <h1>{title}</h1>
+    {isLegal && <aside class="legal-draft-banner" role="note" aria-label={lang === "id" ? "Status dokumen hukum" : "Legal document status"}>
+      <strong>{lang === "id" ? "DOKUMEN INI MERUPAKAN DRAF KERJA." : "THIS DOCUMENT IS A WORKING DRAFT."}</strong>
+      <span>{lang === "id" ? "Bukan kebijakan resmi IWAG; belum diverifikasi atau disetujui penyelenggara dan belum berlaku." : "Not an official IWAG policy; not verified or approved by the organiser and not in force."}</span>
+      <small>{lang === "id" ? "Versi draf 0.2 · 23 November 2026 · Tidak memiliki tanggal berlaku" : "Draft version 0.2 · 23 November 2026 · No effective date"}</small>
+    </aside>}
     <p class="lead">{copy}</p>
     {isEvents && <section class="content-card">
       <p class="eyebrow">IWAG 2027 · FANTASTIC ARCANA</p>
@@ -300,6 +306,7 @@ const copy = isConduct
       </ul>
       <p class="muted">{lang === "id" ? "Kanal kontak berbasis teks dan akomodasi acara akan diterbitkan setelah alamat kontak serta layanan pendukung diverifikasi." : "Text-based contact channels and event accommodations will be published after contact details and support services are verified."}</p>
     </section>}
+    {isAccessibility && <GraphicsCapabilityLab client:visible lang={lang} />}
     {isLegal && !isConduct && <aside class="notice"><h2>{lang === "id" ? "Belum disahkan" : "Not approved"}</h2><p>{copy}</p></aside>}
     {!isLegal && !isAccessibility && !isAbout && !isBrand && !isDealers && !isLocation && !isParticipate && !isUpdates && !isEvents && !isJoinTeam && !isLinks && !isPolicy && <aside class="notice"><p>{lang === "id" ? "Informasi acara dan operasional akan diterbitkan setelah sumbernya diverifikasi. Arsip V1 tidak dianggap sebagai informasi terkini." : "Event and operational information will be published only after its source is verified. V1 archive material is not treated as current information."}</p></aside>}
   </article>
