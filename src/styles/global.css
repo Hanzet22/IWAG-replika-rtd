@@ -321,3 +321,10 @@
   .conduct-content li { margin-block: .45rem; }
   .conduct-content .notice { margin-block: 0 1rem; }
 }
+
+
+@layer components {
+  .size-table { width: 100%; border-collapse: collapse; margin-block: 1rem 1.5rem; background: var(--surface); }
+  .size-table th, .size-table td { padding: .8rem; border: 1px solid var(--border); text-align: left; }
+  .size-table th { background: var(--notice); }
+}
