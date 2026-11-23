@@ -97,3 +97,13 @@ Updated: 2026-11-23
 - [ ] Complete manual WCAG 2.2 Level A review with keyboard, screen readers, TalkBack, zoom/reflow, and representative disabled users.
 - [ ] Verify actual browser/device support before enabling WebGPU or other GPU features in production.
 - [ ] Verify Rust/WASM build output and license/dependency inventory before shipping generated binaries.
+
+
+## Global accessibility and legal rewrite
+- [x] Added global text-scale, high-contrast and reduced-motion controls with local-only preference storage.
+- [x] Added nine separately addressable legal policy pages with English and Indonesian draft copy.
+- [x] Updated the legal banner to drafting-only, not official, not verified, not approved and not in force.
+- [x] Added a policy index linking all nine documents.
+- [ ] Manual review across all routes, locales, viewports and assistive technologies remains outstanding.
+- [ ] Verify deployed cookies, hosting/CDN logs, vendors, data locations, retention and transfers.
+- [ ] Qualified legal review and operator approval remain mandatory before any document becomes operative.
