@@ -297,4 +297,4 @@ Non-negotiable requirements:
 
 
 ## Global UI/UX reconstruction
-Every tab and route must use the shared accessibility-first layer: predictable navigation, scalable text, contrast preferences, reduced-motion controls, semantic structure, meaningful text alternatives, visible keyboard focus and responsive layouts. This does not claim one configuration fits everyone or that WCAG conformance has been achieved.
+Every tab and route must use the shared accessibility-first layer: predictable navigation, scalable text, contrast preferences, reduced-motion and content-spacing controls, semantic structure, meaningful text alternatives, visible keyboard focus and responsive layouts. This does not claim one configuration fits everyone or that WCAG conformance has been achieved.
