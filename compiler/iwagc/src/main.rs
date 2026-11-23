@@ -342,7 +342,16 @@ fn main_result() -> Result<(), String> {
                 .args(["build", "rust/contrast-engine", "--target", "web", "--out-dir", "../../public/wasm", "--release"])
                 .current_dir(&root).status()
                 .map_err(|e| format!("failed to launch wasm-pack: {e}"))?;
-            if status.success() { Ok(()) } else { Err(format!("wasm-pack exited with status {status}")) }
+            if !status.success() {
+                return Err(format!("wasm-pack exited with status {status}"));
+            }
+            let js_output = root.join("public/wasm/iwag_contrast_engine.js");
+            let wasm_output = root.join("public/wasm/iwag_contrast_engine_bg.wasm");
+            if !js_output.is_file() || !wasm_output.is_file() {
+                return Err("wasm-pack completed but the expected JS/WASM outputs are missing".into());
+            }
+            println!("[iwagc] generated Rust/WASM contrast module and browser binding");
+            Ok(())
         }
         "help" | "--help" | "-h" => {
             println!("IWAG Active Compiler {VERSION}\n\nCommands:\n  inspect   Inventory V2 source and manifest\n  doctor    Check required build tools\n  dev       Start Astro development server through the compiler\n  build     Run production compilation and validate output\n  preview   Preview the production build\n  wasm      Build the registered contrast-engine WASM module");
