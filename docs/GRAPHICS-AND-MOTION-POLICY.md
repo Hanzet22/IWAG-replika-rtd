@@ -53,3 +53,10 @@ Record:
 - battery and thermal behavior where measurement is available.
 
 Do not treat desktop Lighthouse scores as a substitute for real-device evaluation. Do not invent a performance budget before a baseline exists.
+
+
+## 6. Optional contrast computation
+
+The accessibility page includes a two-colour sRGB contrast calculator. It attempts to load the Rust/WASM contrast engine only after the user activates the calculation button. If the module is unavailable, a local JavaScript implementation computes the same relative-luminance ratio.
+
+The utility reports only the contrast ratio for two opaque colours. It is not a complete WCAG audit and does not evaluate font size, images, opacity, gradients, focus states, text embedded in images or the whole page.
