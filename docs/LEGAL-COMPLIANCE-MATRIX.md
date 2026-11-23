@@ -46,8 +46,9 @@ V2 requirements:
 - Do not describe PP 33/2026 as already effective before 16 January 2027.
 - Review implementing detail on data-subject rights, processing, DPIA, DPO, cross-border transfer and sanctions with Indonesian counsel before launch or continued processing after commencement.
 
-Reference copy and commencement analysis: https://peraturan.go.id/id/pp-no-33-tahun-2026  
-Secondary commencement explainer (not a substitute for the official text): https://www.deloitte.com/content/dam/assets-zone1/southeast-asia/en/docs/services/legal/2026/sea-id-legal-client-alert-oct2026-en.pdf
+Signed-text mirror (third-party host; not an official repository): https://legaltrans.id/downloads/pp-33-tahun-2026-pelindungan-data-pribadi.pdf
+Secondary commencement analysis (not a substitute for the official text): https://www.deloitte.com/content/dam/assets-zone1/southeast-asia/en/docs/services/legal/2026/sea-id-legal-client-alert-oct2026-en.pdf
+**Source limitation:** an official BPK/peraturan.go.id listing for PP 33/2026 was not located during this review on 23 November 2026. Verify the signed regulation against the official State Gazette and authoritative government repository before relying on article-level requirements or publishing a legal conclusion.
 
 ### 2.3 Children and online services
 
