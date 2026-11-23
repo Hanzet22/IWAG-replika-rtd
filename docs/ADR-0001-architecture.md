@@ -12,7 +12,7 @@ The requirements prioritise WCAG 2.2 Level A as the stated conformance target, s
 
 ## Decision
 
-Use Astro 6 with TypeScript and static output. Render public pages as HTML at build time. Use Astro components and plain CSS for the baseline. Add browser JavaScript only for explicit progressive enhancements such as theme preference and language selection. Do not add a client-side UI framework to the initial foundation.
+Use Astro 7 with TypeScript and static output. Render public pages as HTML at build time. Use Astro components and plain CSS for the baseline. Add browser JavaScript only for explicit progressive enhancements such as theme preference and language selection. Do not add a client-side UI framework to the initial foundation.
 
 Use locale-prefixed routes:
 - `/en/` — English
@@ -45,7 +45,7 @@ The locale route is an editorial identifier; each document declares its proper B
 
 ## Runtime baseline
 
-The package manifest requires Node.js 22.23.4 or later, matching the current Astro 6 runtime floor identified during implementation research. Dependencies are intentionally limited to Astro and TypeScript.
+The package manifest requires Node.js 22.23.4 or later, matching the current Astro 7 runtime floor identified during implementation research. Dependencies are intentionally limited to Astro and TypeScript.
 
 ## References
 
