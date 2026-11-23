@@ -65,7 +65,20 @@ const copy = isLegal ? t.legalDraft
     <p class="eyebrow">IWAG V2 · Independent project</p>
     <h1>{title}</h1>
     <p class="lead">{copy}</p>
-    {isAccessibility && <section class="content-card"><h2>{t.level}</h2><p>{t.levelText}</p><p>{lang === "id" ? "Target Level A tidak berarti halaman ini telah lulus audit. Pengujian manual dan teknologi bantu masih diperlukan." : "A Level A target does not mean this page has passed an audit. Manual and assistive-technology review is still required."}</p></section>}
+    {isAccessibility && <section class="content-card">
+      <h2>{t.level}</h2>
+      <p>{t.levelText}</p>
+      <p>{lang === "id" ? "Target Level A tidak berarti halaman ini telah lulus audit. Pengujian manual dan teknologi bantu masih diperlukan." : "A Level A target does not mean this page has passed an audit. Manual and assistive-technology review is still required."}</p>
+      <h2>{lang === "id" ? "Komitmen desain V2" : "V2 design commitments"}</h2>
+      <ul>
+        <li>{lang === "id" ? "Tidak ada tindakan penting yang mewajibkan pengguna berbicara atau memakai suara." : "No essential action will require speech or voice input."}</li>
+        <li>{lang === "id" ? "Informasi penting tidak disampaikan melalui warna saja." : "Important information will never be conveyed through colour alone."}</li>
+        <li>{lang === "id" ? "Media audio-visual yang diterbitkan harus menyediakan caption atau transkrip yang sesuai." : "Published audiovisual media must provide suitable captions or transcripts."}</li>
+        <li>{lang === "id" ? "Animasi dekoratif tidak berjalan otomatis dan menghormati preferensi reduced motion." : "Decorative motion does not autoplay and respects reduced-motion preferences."}</li>
+        <li>{lang === "id" ? "Informasi dan navigasi utama tetap tersedia tanpa JavaScript." : "Core information and navigation remain available without JavaScript."}</li>
+      </ul>
+      <p class="muted">{lang === "id" ? "Kanal kontak berbasis teks dan akomodasi acara akan diterbitkan setelah alamat kontak serta layanan pendukung diverifikasi." : "Text-based contact channels and event accommodations will be published after contact details and support services are verified."}</p>
+    </section>}
     {isLegal && <aside class="notice"><h2>{lang === "id" ? "Belum disahkan" : "Not approved"}</h2><p>{copy}</p></aside>}
     {!isLegal && !isAccessibility && <aside class="notice"><p>{lang === "id" ? "Informasi acara dan operasional akan diterbitkan setelah sumbernya diverifikasi. Arsip V1 tidak dianggap sebagai informasi terkini." : "Event and operational information will be published only after its source is verified. V1 archive material is not treated as current information."}</p></aside>}
   </article>
