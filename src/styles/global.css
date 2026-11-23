@@ -136,7 +136,8 @@
   .wordmark span { margin-left: .3rem; color: var(--accent); }
   .primary-nav, .site-footer nav { display: flex; flex-wrap: wrap; gap: .75rem 1rem; }
   .primary-nav a, .site-footer nav a { font-weight: 650; }
-  .preferences { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .6rem; margin-left: auto; }
+  .preferences { display: none; flex-wrap: wrap; align-items: center; gap: .35rem .6rem; margin-left: auto; }
+  :root[data-js="true"] .preferences { display: flex; }
   .preferences label { font-size: .85rem; font-weight: 650; }
   select {
     min-height: 2.75rem; max-width: 12rem; padding: .35rem 2rem .35rem .6rem;
