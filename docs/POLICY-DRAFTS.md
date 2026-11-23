@@ -4,7 +4,7 @@ Updated: 2026-11-23
 
 ## Draft notice
 
-The Terms, Privacy, and Code of Conduct pages contain independently authored working drafts for an independent website recreation. They are not official IWAG policies, have not been verified or approved by IWAG or its event organiser, and are not in force. The on-page notice is at least 50 CSS pixels tall and appears immediately below the document title.
+The Terms, Privacy, and Code of Conduct pages contain independently authored working drafts for an independent website recreation. They are not official IWAG policies, have not been verified or approved by IWAG or its event organiser, and are not in force. The on-page notice is at least 50 CSS pixels tall and is the first item inside each policy article, above the eyebrow and document title.
 
 ## Document inventory
 
