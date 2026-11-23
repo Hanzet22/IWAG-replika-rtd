@@ -11,7 +11,7 @@ export default defineConfig({
   vite: {
     plugins: [
       stylex.vite({
-        useCSSLayers: true,
+        useCSSLayers: {\n          before: ["reset", "theme", "base", "tokens", "recipes", "components"],\n          after: ["utilities"],\n          prefix: "stylex"\n        },
         dev: process.env.NODE_ENV === "development",
         runtimeInjection: false
       }),
