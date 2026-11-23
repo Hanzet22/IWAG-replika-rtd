@@ -330,3 +330,15 @@
   .size-table th, .size-table td { padding: .8rem; border: 1px solid var(--border); text-align: left; }
   .size-table th { background: var(--notice); }
 }
+
+
+/* Locale fallback notice: visible without relying on colour alone. */
+.translation-note {
+  max-width: 76rem;
+  margin: 1rem auto;
+  padding: .75rem 1rem;
+  border-inline-start: 3px solid var(--accent);
+  background: var(--notice);
+  color: var(--text);
+  font-size: .9rem;
+}
