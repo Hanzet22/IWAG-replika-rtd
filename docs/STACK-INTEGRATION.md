@@ -57,3 +57,16 @@ Next-specific APIs such as App Router, Server Actions, Next middleware, and Next
 - https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API
 - https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API
 - https://wgpu.rs/doc/wgpu/documentation/platforms/web/index.html
+
+
+## Optional Rust/WASM build
+
+The contrast helper is isolated under `rust/contrast-engine`. It is not imported by the default application and its generated files are not required for the static site.
+
+When deliberately building the optional module:
+
+1. Install the Rust toolchain and `wasm-pack`.
+2. Add the browser target with `rustup target add wasm32-unknown-unknown`.
+3. Run `npm run wasm:build`.
+
+The build script writes generated output under `public/wasm`. Review generated artifacts and the dependency/license inventory before deciding to publish or load them.
