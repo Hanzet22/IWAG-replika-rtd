@@ -48,7 +48,8 @@ const page = Astro.params.page ?? "about";
 const lang = isLocale(langParam) ? langParam : "en";
 const t = getMessages(lang);
 const contentMessages = lang === "ms-my" ? getMessages("en") : t;
-const title = lang === "ms-my" ? pageTitles.en[page] ?? "Information" : pageTitles[lang]?.[page] ?? pageTitles.en[page] ?? "Information";
+const englishFallback = lang === "ms-my" || (lang === "id" && ["location", "participate", "updates"].includes(page));
+const title = englishFallback ? pageTitles.en[page] ?? "Information" : pageTitles[lang]?.[page] ?? pageTitles.en[page] ?? "Information";
 const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct"];
 const isLegal = legalPages.includes(page);
 const isTerms = page === "terms" || page === "tnc";
@@ -74,7 +75,7 @@ const copy = isConduct
       : "IWAG V2 is an independent re-engineering project based on a separately archived reference. It focuses on readable information, predictable navigation, accessibility, and data minimisation.")
   : contentMessages.notPublished;
 ---
-<BaseLayout lang={lang} contentLang={lang === "id" ? "id" : "en"} title={title} description={copy}>
+<BaseLayout lang={lang} contentLang={englishFallback ? "en" : lang === "id" ? "id" : "en"} title={title} description={copy}>
   <article class="page-content">
     <p class="eyebrow">IWAG V2 · Independent project</p>
     <h1>{title}</h1>
@@ -127,7 +128,7 @@ const copy = isConduct
     {isLocation && <section class="content-card detail-grid">
       <div><p class="eyebrow">IWAG 2027 · VENUE</p><h2>Hotel Ciputra Jakarta</h2><p>West Jakarta, Indonesia</p><p>The published venue announcement describes event spaces grouped on the sixth floor, with a connection to Mal Ciputra Jakarta.</p><p><strong>Address</strong><br />Jl. Letnan Jenderal S Parman, Tanjung Duren, Grogol Petamburan, Jakarta 11470, Indonesia</p><p><a href="https://hotelciputra.com/jakarta/" rel="external">Hotel website</a></p></div>
       <div class="venue-visual venue-visual-detail" aria-hidden="true"><span>HOTEL CIPUTRA</span><strong>JKT</strong><small>WEST JAKARTA</small></div>
-      <div class="detail-wide"><h2>Venue notes</h2><ul><li>Event spaces are announced on the sixth floor.</li><li>The venue connects to Mal Ciputra Jakarta.</li><li>The source announcement describes lift and escalator access through the mall connection.</li></ul><p class="muted">Travel guidance and access arrangements may change. Confirm transport, room reservations, and accessibility services with the official event and venue channels before travelling.</p></div>
+      <div class="detail-wide"><h2>Venue notes</h2><ul><li>Event spaces are announced on the sixth floor.</li><li>The venue connects to Mal Ciputra Jakarta.</li><li>The source announcement describes lift and escalator access through the mall connection.</li></ul><p class="muted">Travel guidance and access arrangements may change. Confirm transport, room reservations, and accessibility services with the official event and venue channels before travelling.</p><h2>Visitor guides</h2><ul><li><a href={`/${lang}/location/public-transit-guide/`}>Public transit guide</a></li><li><a href={`/${lang}/location/private-vehicles-guide/`}>Private vehicle guide (legacy warning)</a></li><li><a href={`/${lang}/international-travelers-guide/`}>International travelers guide</a></li></ul></div>
     </section>}
     {isParticipate && <section class="pass-grid">
       {[
@@ -138,7 +139,7 @@ const copy = isConduct
         { name: "Eternal", price: "IDR 9,900,000", note: "Everything in Magister, plus:", perks: ["Full-body custom art by the IWAG Creative team", "Fursona standee", "Exclusive acrylic convention badge", "Deluxe room stay: 4 days / 3 nights (2–5 July)", "First priority for hotel upgrades and stay extensions", "To-your-room badge delivery", "Included IWAG Special Experiences", "Fursona inclusion in IWAG 2027 animated media and immersion assets"], limit: "10 passes available via raffle. Entrants must already hold an IWAG 2027 Event Pass of any available tier.", availability: "Coming Soon" }
       ].map((tier) => <article class="pass-card"><p class="eyebrow">EVENT PASS TIER</p><h2>{tier.name}</h2><p class="pass-price">{tier.price}</p>{tier.tag && <span class="pass-tag">{tier.tag}</span>}<p>{tier.note}</p><ul>{tier.perks.map((perk) => <li>{perk}</li>)}</ul>{tier.limit && <p class="muted">{tier.limit}</p>}<span class="pass-status">{tier.availability} · Source snapshot</span></article>)}
       <p class="detail-wide muted">Names, prices, benefits, limits, and booking priorities reflect the public participation page captured on 23 November 2026. All tiers were marked “Coming Soon” on that date. These are source snapshots, not a live offer or reservation. Verify the official event page before making decisions.</p>
-      <p class="detail-wide"><a href={`/${lang}/participate/super-sponsor-ych/`}>{lang === "id" ? "Lihat referensi YCH Super Sponsor" : "View Super Sponsor YCH reference"}</a></p>
+      <p class="detail-wide"><a href={`/${lang}/participate/super-sponsor-ych/`}>{lang === "id" ? "Lihat referensi YCH Super Sponsor" : "View Super Sponsor YCH reference"}</a> · <a href={`/${lang}/participate/t-shirt-guide/`}>{lang === "id" ? "Panduan ukuran kaus" : "T-shirt size guide"}</a></p>
     </section>}
     {isUpdates && <section class="update-grid update-grid-page">
       {[
