@@ -4,7 +4,7 @@ const messages = {
   en: {
     skip: "Skip to main content", home: "Home", about: "About", events: "Events",
     accessibility: "Accessibility", terms: "Terms", privacy: "Privacy",
-    conduct: "Code of Conduct", primaryNavigation: "Primary navigation", legalNavigation: "Legal information", footerNote: "V2 preview · Content and policies are subject to review.", language: "Language", theme: "Theme",
+    conduct: "Code of Conduct", primaryNavigation: "Primary navigation", legalNavigation: "Legal information", footerNote: "V2 preview · Content and policies are subject to review.", language: "Language", theme: "Theme", accent: "Accent colour", accent: "Accent colour",
     system: "System", light: "Light", black: "Black", superBlack: "Super Black",
     amoled: "AMOLED Black", dynamic: "Dynamic Color", footer: "Independent project. Not an official IWAG website.",
     eyebrow: "IWAG V2 · Independent re-engineering", title: "A clearer, lighter way to explore event information.",
@@ -19,7 +19,7 @@ const messages = {
   id: {
     skip: "Lewati ke konten utama", home: "Beranda", about: "Tentang", events: "Acara",
     accessibility: "Aksesibilitas", terms: "Ketentuan", privacy: "Privasi",
-    conduct: "Kode Etik", primaryNavigation: "Navigasi utama", legalNavigation: "Informasi hukum", footerNote: "Pratinjau V2 · Konten dan kebijakan masih dalam peninjauan.", language: "Bahasa", theme: "Tema",
+    conduct: "Kode Etik", primaryNavigation: "Navigasi utama", legalNavigation: "Informasi hukum", footerNote: "Pratinjau V2 · Konten dan kebijakan masih dalam peninjauan.", language: "Bahasa", theme: "Tema", accent: "Warna aksen", accent: "Warna aksen",
     system: "Sistem", light: "Terang", black: "Hitam", superBlack: "Super Hitam",
     amoled: "Hitam AMOLED", dynamic: "Warna Dinamis", footer: "Proyek independen. Bukan situs web resmi IWAG.",
     eyebrow: "IWAG V2 · Rekayasa ulang independen", title: "Cara yang lebih jelas dan ringan untuk menjelajahi informasi acara.",
