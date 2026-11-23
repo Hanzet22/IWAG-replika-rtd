@@ -52,6 +52,9 @@ const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct"];
 const isLegal = legalPages.includes(page);
 const isAccessibility = page === "accessibility";
 const isAbout = page === "about";
+const isLocation = page === "location";
+const isParticipate = page === "participate";
+const isUpdates = page === "updates";
 const copy = isLegal ? t.legalDraft
   : isAccessibility ? t.levelText
   : isAbout ? (lang === "id"
@@ -64,6 +67,28 @@ const copy = isLegal ? t.legalDraft
     <p class="eyebrow">IWAG V2 · Independent project</p>
     <h1>{title}</h1>
     <p class="lead">{copy}</p>
+    {isLocation && <section class="content-card detail-grid">
+      <div><p class="eyebrow">IWAG 2027 · VENUE</p><h2>Hotel Ciputra Jakarta</h2><p>West Jakarta, Indonesia</p><p>The published venue announcement describes event spaces grouped on the sixth floor, with a connection to Mal Ciputra Jakarta.</p><p><strong>Address</strong><br />Jl. Letnan Jenderal S Parman, Tanjung Duren, Grogol Petamburan, Jakarta 11470, Indonesia</p><p><a href="https://hotelciputra.com/jakarta/" rel="external">Hotel website</a></p></div>
+      <div class="venue-visual venue-visual-detail" aria-hidden="true"><span>HOTEL CIPUTRA</span><strong>JKT</strong><small>WEST JAKARTA</small></div>
+      <div class="detail-wide"><h2>Venue notes</h2><ul><li>Event spaces are announced on the sixth floor.</li><li>The venue connects to Mal Ciputra Jakarta.</li><li>The source announcement describes lift and escalator access through the mall connection.</li></ul><p class="muted">Travel guidance and access arrangements may change. Confirm transport, room reservations, and accessibility services with the official event and venue channels before travelling.</p></div>
+    </section>}
+    {isParticipate && <section class="pass-grid">
+      {[
+        { name: "Aspirant", price: "IDR 350,000", note: "Basic event merchandise and attendee materials", perks: ["Con badge", "Con book", "Postcard and poster", "Basic lanyard", "Sticker pack"] },
+        { name: "Technician", price: "IDR 700,000", note: "Aspirant items plus additional themed merchandise", perks: ["IWAG 2027 T-shirt", "Mascot pins", "Mascot keychains"] },
+        { name: "Preceptor", price: "IDR 1,100,000", note: "Expanded merchandise and early-access benefits", perks: ["Tote bag and coasters", "Mascot standee", "Custom con badge", "Early Dealers Den access", "Early badge pickup"] },
+        { name: "Super Sponsor", price: "IDR 3,300,000", note: "Limited tier with additional sponsor benefits", perks: ["Fursona keychain and YCH headshot", "Special acrylic badge and gift pack", "Priority main-event seating", "Hotel booking priority"] },
+        { name: "Benefactor", price: "IDR 9,900,000", note: "Limited raffle-based tier with premium inclusions", perks: ["Custom full-body art", "Fursona standee", "Deluxe room stay (4 days / 3 nights)", "Special experiences and media inclusion"] }
+      ].map((tier) => <article class="pass-card"><p class="eyebrow">EVENT PASS TIER</p><h2>{tier.name}</h2><p class="pass-price">{tier.price}</p><p>{tier.note}</p><ul>{tier.perks.map((perk) => <li>{perk}</li>)}</ul><span class="pass-status">Coming soon · Source snapshot</span></article>)}
+      <p class="detail-wide muted">Prices and benefit summaries reflect the public participation page captured on 23 November 2026. All tiers were marked “Coming Soon” on that date. Benefits, limits, and availability can change; verify the official page before making decisions. This independent preview does not sell or reserve passes.</p>
+    </section>}
+    {isUpdates && <section class="update-grid update-grid-page">
+      {[
+        { date: "15 November 2026", title: "Welcome to West Jakarta", summary: "The 2027 gathering announces Hotel Ciputra Jakarta as its new venue.", href: "https://iwag.furries.id/en/updates/2026-11-15-venue-reveal" },
+        { date: "8 November 2026", title: "Join our Team!", summary: "A public call for people interested in contributing to the event team.", href: "https://iwag.furries.id/en/updates/2026-11-08-staff-applications" },
+        { date: "14 July 2026", title: "IWAG 2026 — Memories from You and Our Team", summary: "A retrospective following the 2026 gathering.", href: "https://iwag.furries.id/en/updates/2026-07-14-conclusion" }
+      ].map((item) => <article class="update-card"><span class="update-date">{item.date}</span><h2>{item.title}</h2><p>{item.summary}</p><a href={item.href} rel="external">Open original announcement</a></article>)}
+    </section>}
     {isAccessibility && <section class="content-card">
       <h2>{t.level}</h2>
       <p>{t.levelText}</p>
@@ -79,6 +104,6 @@ const copy = isLegal ? t.legalDraft
       <p class="muted">{lang === "id" ? "Kanal kontak berbasis teks dan akomodasi acara akan diterbitkan setelah alamat kontak serta layanan pendukung diverifikasi." : "Text-based contact channels and event accommodations will be published after contact details and support services are verified."}</p>
     </section>}
     {isLegal && <aside class="notice"><h2>{lang === "id" ? "Belum disahkan" : "Not approved"}</h2><p>{copy}</p></aside>}
-    {!isLegal && !isAccessibility && <aside class="notice"><p>{lang === "id" ? "Informasi acara dan operasional akan diterbitkan setelah sumbernya diverifikasi. Arsip V1 tidak dianggap sebagai informasi terkini." : "Event and operational information will be published only after its source is verified. V1 archive material is not treated as current information."}</p></aside>}
+    {!isLegal && !isAccessibility && !isLocation && !isParticipate && !isUpdates && <aside class="notice"><p>{lang === "id" ? "Informasi acara dan operasional akan diterbitkan setelah sumbernya diverifikasi. Arsip V1 tidak dianggap sebagai informasi terkini." : "Event and operational information will be published only after its source is verified. V1 archive material is not treated as current information."}</p></aside>}
   </article>
 </BaseLayout>
