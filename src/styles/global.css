@@ -413,6 +413,7 @@
 /* Draft status banner: visible at the top of every legal-policy page. */
 @layer components {
   .legal-draft-banner {
+    --iwag-visual-progress: 1;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -421,7 +422,7 @@
     margin-block: 1rem 1.5rem;
     padding: .7rem 1rem;
     border: 2px solid var(--focus);
-    border-inline-start-width: 6px;
+    border-inline-start-width: calc(3px + var(--iwag-visual-progress) * 3px);
     border-radius: .55rem;
     background: var(--notice);
     color: var(--text);
@@ -432,13 +433,14 @@
   .legal-draft-banner small { display: block; flex-basis: 100%; color: var(--muted); font-size: .78rem; }
   .graphics-lab { margin-block: 2rem 3rem; }
   .graphics-stage {
+    --iwag-accent-angle: 0deg;
     display: grid;
     place-items: center;
     min-height: 12rem;
     padding: 1rem;
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    background: var(--surface-raised);
+    background: linear-gradient(var(--iwag-accent-angle), var(--surface-raised), var(--surface));
   }
   .graphics-stage svg, .graphics-stage canvas { width: 100%; max-width: 40rem; height: auto; }
   .graphics-stage canvas { aspect-ratio: 640 / 240; }
