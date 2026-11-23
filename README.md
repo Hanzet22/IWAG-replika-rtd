@@ -10,6 +10,8 @@ The dedicated reconstruction plan, source inventory and compiler contract are ma
 - [Greenfield reconstruction plan](docs/GREENFIELD-RECONSTRUCTION-PLAN.md)
 - [Source and technology inventory](docs/SOURCE-TECHNOLOGY-INVENTORY.md)
 - [Rust Active Compiler specification](docs/ACTIVE-COMPILER-SPEC.md)
+- [Research evidence](docs/RESEARCH-EVIDENCE.md)
+- [ADR-0002: Greenfield V2 and Rust Active Compiler](docs/ADR-0002-greenfield-active-compiler.md)
 
 ## Architecture direction
 
@@ -17,7 +19,7 @@ The dedicated reconstruction plan, source inventory and compiler contract are ma
 - Vite is the single frontend build engine.
 - Vue is limited to interactive islands.
 - TypeScript and semantic HTML form the application baseline.
-- CSS, Tailwind, Panda CSS and StyleX have distinct, non-overlapping responsibilities; integrations must be validated before activation.
+- CSS, Tailwind CSS 4, Panda CSS 2.6.0 and StyleX 0.19.2 are integrated with distinct responsibilities and a central CSS layer contract.
 - Rust Active Compiler controls the build graph, source validation, backend invocation, diagnostics and production-output verification.
 - WebAssembly, Canvas, WebGL and WebGPU are optional enhancements and never gate core content.
 - Next.js is an architectural reference only; no second framework runtime is introduced.
