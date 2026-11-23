@@ -51,7 +51,7 @@ The implementation must prioritize clarity, accessibility, privacy, maintainabil
 
 ### Stack decision
 
-ADR-0001 records Astro 7 with TypeScript and static output as the selected foundation after considering semantic output, static rendering, runtime cost, maintainability, security updates, localization, low-end performance and deployment portability.
+ADR-0001 records Astro 7 + TypeScript + Vite with static output as the only application and build foundation. Vue 3 is permitted only as a narrowly scoped Astro island; Tailwind CSS 4 is integrated through Vite without replacing the existing semantic component system. CSS Houdini, Canvas, SVG, WebGL, WebGPU and Rust/WASM remain progressive enhancements with non-JavaScript/static fallbacks. Compatible Next.js architectural patterns may be adapted, but a second Next.js application/runtime is explicitly out of scope.
 
 Reopen this decision only if a material requirement changes or measured limitations show that the current architecture cannot meet the product goals. Do not replace the stack solely because another framework is fashionable or because V1 used Astro.
 
