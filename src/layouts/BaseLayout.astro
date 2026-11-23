@@ -15,6 +15,7 @@ const lang = isLocale(requestedLang) ? requestedLang : "en";
 const t = getMessages(lang);
 const htmlLang = contentLang ?? locales[lang].htmlLang;
 const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(?=/|$)"), "");
+const currentPath = pathWithoutLocale.replace(/\/$/, "") || "/";
 const hasMalayTranslation = ["/", "/events", "/events/", "/events/iwag-2027", "/events/iwag-2027/"].includes(pathWithoutLocale);
 ---
 <!doctype html>
@@ -36,13 +37,11 @@ const hasMalayTranslation = ["/", "/events", "/events/", "/events/iwag-2027", "/
     <header class="site-header" lang={locales[lang].htmlLang}>
       <a class="wordmark" href={`/${lang}/`} aria-label="IWAG V2 independent project home">IWAG<span>V2</span></a>
       <nav class="primary-nav" aria-label={t.primaryNavigation}>
-        <a href={`/${lang}/`}>{t.home}</a>
-        <a href={`/${lang}/about/`}>{t.about}</a>
-        <a href={`/${lang}/events/`}>{lang === "id" || lang === "ms-my" ? "Acara" : "Events"}</a>
-        <a href={`/${lang}/location/`}>{lang === "id" ? "Lokasi" : "Venue"}</a>
-        <a href={`/${lang}/participate/`}>{lang === "id" ? "Partisipasi" : "Participate"}</a>
-        <a href={`/${lang}/international-travelers-guide/`}>{lang === "id" ? "Panduan" : "Travel Guide"}</a>
-        <a href={`/${lang}/updates/`}>{lang === "id" ? "Pembaruan" : "Updates"}</a>
+        <a href={`/${lang}/`} aria-current={currentPath === "/" ? "page" : undefined}>{t.home}</a>
+        <a href={`/${lang}/events/`} aria-current={currentPath === "/events" ? "page" : undefined}>{lang === "id" || lang === "ms-my" ? "Acara" : "Discover"}</a>
+        <a href={`/${lang}/plan-your-visit/`} aria-current={currentPath === "/plan-your-visit" ? "page" : undefined}>{lang === "id" ? "Rencanakan kunjungan" : lang === "ms-my" ? "Rancang lawatan" : "Plan your visit"}</a>
+        <a href={`/${lang}/community/`} aria-current={currentPath === "/community" ? "page" : undefined}>{lang === "id" ? "Komunitas" : lang === "ms-my" ? "Komuniti" : "Community"}</a>
+        <a href={`/${lang}/updates/`} aria-current={currentPath === "/updates" ? "page" : undefined}>{lang === "id" ? "Pembaruan" : lang === "ms-my" ? "Kemas kini" : "Updates"}</a>
       </nav>
       <div class="preferences">
         <label for="language-choice">{t.language}</label>
