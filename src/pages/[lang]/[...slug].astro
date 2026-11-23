@@ -14,11 +14,31 @@ const lang = isLocale(langParam) ? langParam : "en";
 const slug = Astro.params.slug ?? "";
 const segments = slug.split("/");
 const lastSegment = segments.at(-1) ?? slug;
-const title = lastSegment
+const rawTitle = lastSegment
   .replace(/^\d{4}-\d{2}-\d{2}-/, "")
   .split("-")
   .map((part) => part.length <= 3 ? part.toUpperCase() : part.charAt(0).toUpperCase() + part.slice(1))
   .join(" ");
+const routeTitles: Record<string, string> = {
+  "international-travelers-guide": "International Travelers Guide",
+  "participate/super-sponsor-ych": "Super Sponsor YCH",
+  "join-iwag-team/roles": "Team roles",
+  "location/public-transit-guide": "Public Transit Guide",
+  "location/private-vehicles-guide": "Private Vehicle Guide",
+  "participate/t-shirt-guide": "T-shirt Size Guide",
+  "updates/2026-11-15-venue-reveal": "Welcome to West Jakarta",
+  "updates/2026-11-08-staff-applications": "Join our Team!"
+};
+const routeTitlesId: Record<string, string> = {
+  "international-travelers-guide": "Panduan Wisatawan Internasional",
+  "participate/super-sponsor-ych": "Referensi Super Sponsor YCH",
+  "join-iwag-team/roles": "Peran Tim",
+  "location/public-transit-guide": "Panduan Transportasi Umum",
+  "location/private-vehicles-guide": "Panduan Kendaraan Pribadi",
+  "participate/t-shirt-guide": "Panduan Ukuran Kaus",
+  "updates/2026-11-15-venue-reveal": "Selamat Datang di Jakarta Barat",
+  "updates/2026-11-08-staff-applications": "Bergabung dengan Tim!"
+};
 const isUpdate = segments[0] === "updates";
 const isVenueArticle = slug === "updates/2026-11-15-venue-reveal";
 const isTeamArticle = slug === "updates/2026-11-08-staff-applications";
@@ -76,14 +96,39 @@ const roleNames: Record<string, string> = {
 const roleSlug = segments[1] === "roles" ? segments[2] : undefined;
 const isRoleDetail = Boolean(roleSlug && roleNames[roleSlug]);
 const roleTitle = roleSlug ? roleNames[roleSlug] : "Team roles";
+const title = lang === "id" ? routeTitlesId[slug] ?? rawTitle : routeTitles[slug] ?? rawTitle;
 const intro = lang === "id"
-  ? "Rute ini dipertahankan dari inventaris arsip V1. Konten V2 sedang ditulis ulang dan belum diterbitkan pada pratinjau ini."
-  : "This route is preserved from the V1 archive inventory. V2 content is being independently rewritten and is not published in this preview.";
+  ? isInternationalGuide ? "Panduan perjalanan independen untuk pengunjung antarabangsa. Syarat visa, deklarasi, dan transportasi perlu diperiksa kembali melalui sumber resmi sebelum berangkat."
+    : isYchGuide ? "Referensi struktur halaman YCH; bukan penawaran komisi atau jaminan ketersediaan manfaat."
+    : isTransitGuide ? "Panduan umum untuk memeriksa pilihan transportasi menuju area venue Jakarta Barat."
+    : isPrivateVehicleGuide ? "Peringatan bahwa petunjuk kendaraan pribadi lama mengarah ke venue BSD City dan bukan venue Jakarta 2027."
+    : isTshirtGuide ? "Snapshot ukuran kaus dari halaman referensi; konfirmasi ukuran terbaru sebelum memesan."
+    : isRoleIndex ? "Direktori ringkas kategori peran yang tercatat dalam arsip; bukan pengumuman lowongan aktif."
+    : isRoleDetail ? "Ringkasan umum fungsi peran berdasarkan nama jabatan, bukan uraian resmi atau lowongan aktif."
+    : isVenueArticle ? "Snapshot pengumuman venue IWAG 2027 yang diterbitkan pada 15 November 2026."
+    : isTeamArticle ? "Snapshot panggilan kontribusi tim yang diterbitkan pada 8 November 2026."
+    : isArchiveArticle ? archiveArticles[slug].summary
+    : isUpdatePagination ? "Rute paginasi arsip V1 yang diarahkan ke arsip kronologis V2."
+    : isLegacyUpdate ? "Rute arsip historis; ringkasan spesifik belum direkonstruksi dari sumber yang dapat diverifikasi."
+    : "Rute ini dipertahankan dari inventaris arsip V1. Konten spesifik belum direkonstruksi dari sumber yang diverifikasi."
+  : isInternationalGuide ? "An independently written visitor guide. Visa, arrival declaration and transport requirements must be checked against official sources before departure."
+    : isYchGuide ? "A reference to the YCH page structure; not a commission offer or guarantee that any benefit is available."
+    : isTransitGuide ? "General guidance for checking public transport options serving the West Jakarta venue area."
+    : isPrivateVehicleGuide ? "A warning that the archived private-vehicle directions point to the former BSD City venue, not the announced 2027 Jakarta venue."
+    : isTshirtGuide ? "A source size-chart snapshot; confirm current measurements before ordering."
+    : isRoleIndex ? "A directory of role categories found in the archive; not an announcement of active vacancies."
+    : isRoleDetail ? "A general role-function overview based on the role name, not an official job description or active vacancy."
+    : isVenueArticle ? "A snapshot of the IWAG 2027 venue announcement published on 15 November 2026."
+    : isTeamArticle ? "A snapshot of the team contribution announcement published on 8 November 2026."
+    : isArchiveArticle ? archiveArticles[slug].summary
+    : isUpdatePagination ? "A legacy archive pagination route consolidated into the chronological V2 archive."
+    : isLegacyUpdate ? "A historical archive route; a route-specific summary has not been reconstructed from verifiable sources."
+    : "This route is preserved from the V1 archive inventory. Its specific content has not yet been reconstructed from verified sources.";
 const context = isUpdate
   ? (lang === "id" ? "Arsip rute pembaruan" : "Update route archive")
   : (lang === "id" ? "Arsip struktur peran tim" : "Team role route archive");
 ---
-<BaseLayout lang={lang} title={title} description={intro}>
+<BaseLayout lang={lang} contentLang={lang === "id" ? "id" : "en"} title={title} description={intro}>
   <article class="page-content">
     <p class="eyebrow">IWAG V2 · {context}</p>
     <h1>{title}</h1>
@@ -113,9 +158,13 @@ const context = isUpdate
         <li>{lang === "id" ? "Ajukan visa hanya melalui portal resmi Direktorat Jenderal Imigrasi." : "Apply for a visa only through the official Directorate General of Immigration portal."}</li>
       </ul>
       <p><a href="https://evisa.imigrasi.go.id/" rel="external">Official Indonesian e-Visa portal</a> · <a href="https://www.imigrasi.go.id/faq/visa" rel="external">Immigration visa FAQ</a></p>
+      <h3>{lang === "id" ? "Tujuan kunjungan dan kegiatan konvensi" : "Visit purpose and convention activities"}</h3>
+      <p>{lang === "id" ? "Portal resmi e-Visa menyediakan kategori visa yang dapat mencakup peserta pertemuan, insentif, konvensi, dan pameran. Ketentuan pada kategori tertentu dapat melarang kegiatan mencari keuntungan atau hadir sebagai pembicara. Jangan menganggap visa wisata atau VOA otomatis sesuai untuk semua aktivitas acara; pilih kategori berdasarkan kegiatan sebenarnya dan konfirmasikan kepada Imigrasi bila ragu." : "The official e-Visa portal lists visitor categories that may cover participation in meetings, incentives, conventions and exhibitions. Conditions for specific categories may prohibit profit-making activities or attending as a speaker. Do not assume a tourist visa or VOA automatically covers every event activity; select a category based on what you will actually do and confirm with Immigration if unsure."}</p>
+      <p><a href="https://evisa.imigrasi.go.id/front/faq/aff9642b-0b57-443f-8de1-a51601de0ebb" rel="external">Official visa activity and conditions reference</a> · <a href="https://evisa.imigrasi.go.id/web/visa-selection" rel="external">Choose a suitable visa category</a></p>
       <h2>{lang === "id" ? "Deklarasi kedatangan All Indonesia" : "All Indonesia arrival declaration"}</h2>
-      <p>{lang === "id" ? "Direktorat Jenderal Bea dan Cukai menjelaskan bahwa All Indonesia mengintegrasikan deklarasi imigrasi, bea cukai, kesehatan, dan karantina. Pengisian dapat dilakukan mulai H-3 hingga hari kedatangan. Gunakan portal resmi, simpan QR konfirmasi, dan waspadai situs tiruan yang meminta biaya untuk formulir pemerintah." : "Indonesia's Directorate General of Customs and Excise explains that All Indonesia integrates immigration, customs, health, and quarantine declarations. It can be completed from three days before arrival through arrival day. Use the official portal, keep the confirmation QR code, and beware of imitation sites charging for a government form."}</p>
+      <p>{lang === "id" ? "Direktorat Jenderal Imigrasi menjelaskan bahwa All Indonesia mengintegrasikan deklarasi imigrasi, bea cukai, kesehatan, dan karantina. Deklarasi dapat diisi sejak tiga hari sebelum kedatangan. Gunakan portal resmi, simpan QR konfirmasi, dan waspadai situs tiruan yang meminta biaya untuk formulir pemerintah." : "Indonesia's Ministry of Immigration and Corrections explains that All Indonesia integrates immigration, customs, health, and quarantine declarations. The declaration can be completed from three days before arrival. Use the official portal, keep the confirmation QR code, and beware of imitation sites charging for a government form."}</p>
       <p><a href="https://allindonesia.imigrasi.go.id/" rel="external">All Indonesia — official arrival portal</a> · <a href="https://www.beacukai.go.id/barang-penumpang" rel="external">Customs rules for passenger baggage</a> · <a href="https://www.beacukai.go.id/ecd" rel="external">Electronic Customs Declaration information</a></p>
+      <aside class="notice"><strong>{lang === "id" ? "Deklarasi uang tunai" : "Cash declaration"}</strong><p>{lang === "id" ? "Bea Cukai menyatakan bahwa uang tunai atau instrumen pembayaran lain senilai IDR 100.000.000 atau lebih wajib diberitahukan kepada petugas. Aturan khusus dapat berlaku untuk uang kertas asing bernilai sangat besar; periksa petunjuk Bea Cukai sebelum bepergian." : "Customs states that cash or other payment instruments worth IDR 100,000,000 or more must be declared to an officer. Additional rules may apply to very large amounts of foreign banknotes; check Customs guidance before travelling."}</p></aside>
       <h2>{lang === "id" ? "Tiba di Bandara Soekarno-Hatta (CGK)" : "Arriving at Soekarno-Hatta Airport (CGK)"}</h2>
       <p>{lang === "id" ? "Ikuti petunjuk resmi bandara untuk imigrasi, pengambilan bagasi, bea cukai, dan titik penjemputan. Jangan mengikuti orang yang menawarkan transportasi secara tidak resmi di area kedatangan." : "Follow airport signage for immigration, baggage reclaim, customs, and designated pickup areas. Do not follow unsolicited transport offers inside the arrivals area."}</p>
       <h3>{lang === "id" ? "Kereta bandara" : "Airport rail"}</h3>
