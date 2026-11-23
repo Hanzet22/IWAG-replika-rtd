@@ -14,15 +14,17 @@ Updated: 2026-11-23
 - [x] Reduced-motion and forced-colors CSS handling
 - [x] Responsive layout with system fonts and no external font CDN
 - [x] Independent-project notice
-- [x] Distinct structural routes for Terms, Privacy, and Code of Conduct
-- [x] Reconstructed homepage, events, about, venue, participate, team, links, policy index and resources pages
+- [x] Independently authored Terms, Privacy, and Code of Conduct draft pages, with V1 rules and wording explicitly excluded; all three remain unpublished/unapproved pending operator and legal verification
+- [x] Reconstructed homepage, about, venue, participate, team, links, policy index and resources pages
+- [x] Published locale-specific IWAG 2027 event collection entries for English, Indonesian, English (Singapore), and Bahasa Melayu; event dates render as dates, not invented midnight times
 - [x] International Travelers Guide, public transit guide, obsolete private-vehicle guide warning, and T-shirt size reference
+- [x] Expanded international guide with official convention-attendee visa activity conditions, All Indonesia declaration, customs cash-declaration threshold, and direct government/operator links
 - [x] Current five-tier participation snapshot with source-listed benefits, pass limits and raffle notes
 - [x] Super Sponsor YCH reference route without copying unlicensed artwork
 - [x] Historical update archive: all 34 nested update routes across the 2024–2026 inventory, including pagination
 - [x] Nine staff role overview routes; source pages were checked and found unavailable, so summaries are explicitly non-official
 - [x] Nested route generation for all four supported locales
-- [x] Correct document language metadata and an explicit Malay-to-English fallback notice on untranslated routes
+- [x] Correct document language metadata and an explicit Malay-to-English fallback notice on untranslated routes, including nested routes and top-level information pages
 - [x] Base theme text, muted text, link, visited-link, and focus token contrast calculated across the available palettes; full component/state review remains outstanding
 - [x] Accessibility target statement with no premature conformance claim
 - [x] Architecture decision record
@@ -54,7 +56,7 @@ Updated: 2026-11-23
 - [x] Flagged stale legacy travel/parking references to ibis Styles BSD City after the new Hotel Ciputra Jakarta venue announcement.
 - [x] Documented third-party logo approval and Kiki/Tama CC BY-NC conditions; V2 does not import those assets.
 - [x] Added and expanded the legal/regulatory implementation matrix: Indonesia PDP and child-online-safety rules, electronic systems, consumer/PMSE, copyright, disability/accessibility, GDPR, UK GDPR/Children's Code, Singapore PDPA, Malaysia Act 709, Thailand PDPA, US COPPA/CCPA, WCAG 2.2 Level A and release gates.
-- [x] Updated the PP 33/2026 source caveat: its 16 January 2027 commencement is corroborated by signed-text mirrors and secondary legal analysis, but an official BPK/peraturan.go.id record was not located during this review.
+- [x] Updated the PP 33/2026 source caveat: its 16 January 2027 commencement is corroborated by a signed-text mirror and secondary legal analysis, but an official BPK/peraturan.go.id record was not located during this review; official Gazette verification remains required.
 
 ## Still blocked pending real-world verification
 
