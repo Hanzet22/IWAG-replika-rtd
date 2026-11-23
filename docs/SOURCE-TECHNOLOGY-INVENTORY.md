@@ -5,7 +5,7 @@
 
 ## 1. Repository snapshot
 
-The current branch tree contains 367 entries at the time of this inventory.
+The current branch tree contains 369 entries at the time of this inventory.
 
 | Category | Count | Classification |
 |---|---:|---|
@@ -14,7 +14,7 @@ The current branch tree contains 367 entries at the time of this inventory.
 | Archived CSS files | 2 | V1 reference only; excluded from V2 source |
 | Active CSS files | 2 | `src/styles/` semantic layers and global styling |
 | Archived JavaScript files | 4 | V1 reference only; excluded from V2 source |
-| Active JavaScript modules | 1 | `astro.config.mjs`; browser behavior is authored in TypeScript |
+| Active JavaScript modules | 2 | `astro.config.mjs`; browser behavior is authored in TypeScript |
 | TypeScript files | 8 | Active application/configuration source |
 | Vue files | 1 | Scoped interactive graphics island |
 | Rust files | 2 | Active compiler + optional contrast engine |
