@@ -65,3 +65,12 @@ Updated: 2026-11-23
 - No attendee registration, ticketing, payment, account, tracking or sensitive-data collection is enabled.
 - Legal applicability and final public policy require review against the real operator/service model by qualified Indonesian counsel.
 - WCAG Level A manual and assistive-technology review is still outstanding; this documentation is not a conformance claim.
+
+## Typography migration
+
+- [x] Imported five locally hosted font families from the dedicated font branch: Alan Sans, Amarna, Capo Sfogliato, Sekuya and Starveler.
+- [x] Applied Alan Sans to body/UI, Amarna to headings, and the remaining families only to short display/editorial accents.
+- [x] Preloaded only the primary body and heading variable fonts; decorative fonts use optional loading.
+- [x] Preserved each selected font's original SIL Open Font License 1.1 notice and source README.
+- [x] Excluded Love Malia from the public build because its supplied notice grants personal use only; its binaries were not copied into V2 and were removed from the public font branch.
+- [x] Documented asset provenance and usage boundaries in `docs/FONT-LICENSING.md`.
