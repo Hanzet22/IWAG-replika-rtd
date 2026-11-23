@@ -284,6 +284,15 @@ fn build(root: &Path, manifest: &str) -> Result<(), String> {
     println!("[iwagc] backend: Astro + Vite");
     run_backend(root, &["build".to_string()])?;
 
+    let validation = Command::new("node")
+        .args(["compiler/iwagc/scripts/validate-output.mjs", output_name])
+        .current_dir(root)
+        .status()
+        .map_err(|e| format!("failed to launch local route validator: {e}"))?;
+    if !validation.success() {
+        return Err(format!("local route and asset validation failed with status {validation}"));
+    }
+
     let output = canonical_inside_root(root, &output_path, "output_root")?;
     let output_stats = scan_output(&output)?;
     if output_stats.html == 0 { return Err("production output contains no HTML pages".into()); }
