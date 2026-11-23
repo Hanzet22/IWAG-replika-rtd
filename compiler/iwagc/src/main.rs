@@ -142,20 +142,56 @@ fn run_backend(root: &Path, backend_args: &[String]) -> Result<(), String> {
     }
 }
 
-fn walk_count_extension(root: &Path, extension: &str) -> Result<usize, String> {
-    let mut count = 0;
+#[derive(Default)]
+struct OutputStats {
+    files: usize,
+    html: usize,
+    css: usize,
+    js: usize,
+    images: usize,
+    fonts: usize,
+    total_bytes: u64,
+    html_bytes: u64,
+    css_bytes: u64,
+    js_bytes: u64,
+    media_bytes: u64,
+}
+
+fn scan_output(root: &Path) -> Result<OutputStats, String> {
+    let mut stats = OutputStats::default();
     let mut pending = vec![root.to_path_buf()];
     while let Some(dir) = pending.pop() {
-        for entry in fs::read_dir(&dir).map_err(|e| e.to_string())? {
+        for entry in fs::read_dir(&dir).map_err(|e| format!("cannot read {}: {e}", dir.display()))? {
             let entry = entry.map_err(|e| e.to_string())?;
             let file_type = entry.file_type().map_err(|e| e.to_string())?;
             if file_type.is_symlink() { continue; }
             let path = entry.path();
-            if file_type.is_dir() { pending.push(path); }
-            else if file_type.is_file() && path.extension().and_then(|v| v.to_str()) == Some(extension) { count += 1; }
+            if file_type.is_dir() {
+                pending.push(path);
+                continue;
+            }
+            if !file_type.is_file() { continue; }
+            let bytes = entry.metadata().map_err(|e| e.to_string())?.len();
+            let extension = path.extension().and_then(|v| v.to_str()).unwrap_or("").to_ascii_lowercase();
+            stats.files += 1;
+            stats.total_bytes += bytes;
+            match extension.as_str() {
+                "html" => { stats.html += 1; stats.html_bytes += bytes; }
+                "css" => { stats.css += 1; stats.css_bytes += bytes; }
+                "js" | "mjs" => { stats.js += 1; stats.js_bytes += bytes; }
+                "png" | "jpg" | "jpeg" | "webp" | "avif" | "svg" | "gif" => {
+                    stats.images += 1;
+                    stats.media_bytes += bytes;
+                }
+                "woff" | "woff2" | "ttf" | "otf" => {
+                    stats.fonts += 1;
+                    stats.media_bytes += bytes;
+                }
+                _ => {}
+            }
         }
     }
-    Ok(count)
+    Ok(stats)
 }
 
 fn json_escape(value: &str) -> String {
@@ -220,21 +256,22 @@ fn build(root: &Path, manifest: &str) -> Result<(), String> {
     run_backend(root, &["build".to_string()])?;
 
     let output = canonical_inside_root(root, &output_path, "output_root")?;
-    let html_output = walk_count_extension(&output, "html")?;
-    if html_output == 0 { return Err("production output contains no HTML pages".into()); }
+    let output_stats = scan_output(&output)?;
+    if output_stats.html == 0 { return Err("production output contains no HTML pages".into()); }
+    if css > 0 && output_stats.css == 0 { return Err("production output contains no CSS files although CSS source files exist".into()); }
 
     let elapsed_ms = started.elapsed().as_millis();
     let report_dir = root.join(".iwag-build");
     fs::create_dir_all(&report_dir).map_err(|e| format!("cannot create build report directory: {e}"))?;
     let report = format!(
-        "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"backend\": \"astro-vite\",\n  \"toolchain\": {{\"node\": \"{}\", \"npm\": \"{}\", \"cargo\": \"{}\"}},\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output_html_files\": {},\n  \"build_duration_ms\": {},\n  \"status\": \"success\"\n}}\n",
+        "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"backend\": \"astro-vite\",\n  \"toolchain\": {{\"node\": \"{}\", \"npm\": \"{}\", \"cargo\": \"{}\"}},\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output\": {{\"files\": {}, \"html\": {}, \"css\": {}, \"javascript\": {}, \"images\": {}, \"fonts\": {}, \"total_bytes\": {}, \"html_bytes\": {}, \"css_bytes\": {}, \"javascript_bytes\": {}, \"media_bytes\": {}}},\n  \"build_duration_ms\": {},\n  \"status\": \"success\"\n}}\n",
         VERSION, json_escape(&toolchain.node), json_escape(&toolchain.npm), json_escape(&toolchain.cargo),
         json_escape(source_name), json_escape(archive_name), json_escape(output_name),
-        astro, ts, js, css, html, html_output, elapsed_ms
+        astro, ts, js, css, html, output_stats.files, output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts, output_stats.total_bytes, output_stats.html_bytes, output_stats.css_bytes, output_stats.js_bytes, output_stats.media_bytes, elapsed_ms
     );
     fs::write(report_dir.join("iwag-build-report.json"), report)
         .map_err(|e| format!("cannot write build report: {e}"))?;
-    println!("[iwagc] validated {html_output} generated HTML files in {elapsed_ms} ms");
+    println!("[iwagc] validated {} HTML files, {} CSS files, {} JS files, {} images and {} fonts", output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts);\n    println!("[iwagc] output footprint: {} bytes across {} files; build duration: {elapsed_ms} ms", output_stats.total_bytes, output_stats.files);
     println!("[iwagc] build report: .iwag-build/iwag-build-report.json");
     Ok(())
 }
