@@ -17,6 +17,35 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  bootstrap-lockfile:
+    name: Bootstrap reproducible npm lockfile
+    if: github.event_name == 'push' && github.ref == 'refs/heads/v2/greenfield-global-reconstruction'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out reconstruction branch
+        uses: actions/checkout@v4
+        with:
+          ref: v2/greenfield-global-reconstruction
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.23.4"
+      - name: Resolve and write npm lockfile
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - name: Commit lockfile when changed
+        run: |
+          git add package-lock.json
+          if git diff --cached --quiet; then
+            echo "package-lock.json is already current"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: add npm dependency lockfile [skip ci]"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
   build:
     name: Rust Active Compiler → Astro/Vite
     runs-on: ubuntu-latest
@@ -30,7 +59,12 @@ jobs:
       - name: Set up Rust toolchain
         uses: dtolnay/rust-toolchain@stable
       - name: Install frontend dependencies
-        run: npm install --no-audit --no-fund
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --no-audit --no-fund
+          else
+            npm install --no-audit --no-fund
+          fi
       - name: Inspect compiler source manifest
         run: npm run compiler:inspect
       - name: Run Active Compiler production build
