@@ -14,6 +14,7 @@ The current V2 implementation includes:
 - Compatible Next.js architectural patterns documented without adding a second Next.js runtime
 - Locale-prefixed routes for English, Indonesian, English (Singapore), and Bahasa Melayu (Malaysia); the homepage and event pages have Malay copy; untranslated Malay routes and selected Indonesian information pages display an explicit English-fallback notice until reviewed translations are ready
 - Semantic HTML-first layouts and progressive enhancement
+- Task-oriented primary navigation with dedicated Plan your visit and Community landing routes
 - Global accessibility preferences for text scaling, contrast, reduced motion, and content spacing across all site routes
 - System, Light, Black, Super Black, AMOLED Black, and Dynamic Color themes
 - Five locally hosted font families (Alan Sans, Amarna, Capo Sfogliato, Sekuya and Starveler); no external font CDN
