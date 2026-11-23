@@ -177,3 +177,7 @@ The latest implementation is a working reconstruction foundation and shared home
 - [x] Added Rust output-report accounting for generated WASM modules and bytes.
 - [ ] Verify the generated wasm-bindgen wrapper and module load path in the production output.
 - [ ] Measure first-use latency and memory against the JavaScript fallback on target Android devices.
+
+- [x] Committed Cargo lockfiles for both the Rust compiler and contrast-engine crate.
+- [x] Added a pinned Rust 1.100.0 toolchain manifest including the WASM target.
+- [x] Pinned wasm-pack to 0.13.1 in the production workflow.
