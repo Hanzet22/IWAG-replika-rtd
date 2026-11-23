@@ -162,7 +162,7 @@ async function main() {
   if (errors.length) {
     for (const error of errors.slice(0, 60)) console.error("[iwagc:routes] " + error);
     if (errors.length > 60) console.error("[iwagc:routes] " + (errors.length - 60) + " additional issues omitted");
-    console.error("[iwagc:routes] failed with " + errors.length + " broken local references");
+    console.error("[iwagc:routes] failed with " + errors.length + " output validation issues");
     process.exitCode = 1;
   } else {
     console.log("[iwagc:routes] no broken local references found");
