@@ -457,5 +457,6 @@
     cursor: pointer;
   }
   .graphics-lab button:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+  .graphics-lab button:disabled { cursor: not-allowed; opacity: .65; }
   .graphics-status { min-height: 1.8em; font-weight: 700; }
 }
