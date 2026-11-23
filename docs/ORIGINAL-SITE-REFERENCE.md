@@ -43,6 +43,19 @@ Sources:
 
 The original homepage and venue announcement now identify Hotel Ciputra Jakarta. Older travel/parking content still names the former ibis Styles BSD City venue. This is a concrete example of why route existence and archived content do not prove that a page is current.
 
+## 2.1 Expanded route and feature review (23 November 2026)
+
+The route inventory was compared against the live source and the public content available on the review date:
+
+- **Updates archive:** 34 nested update routes were inventoried across the 2024–2026 editions, including pagination. The V2 archive uses independently written summaries and marks expired deadlines, prices, hotel details and event procedures as historical.
+- **Staff role routes:** all nine nested role URLs in the route inventory were checked. Each returned the source site's branded not-found page on the review date. V2 keeps the route structure, but its short role descriptions are explicitly generic and non-official; they are not presented as current vacancies or copied job descriptions.
+- **2027 participation:** the public page listed Aspirant (IDR 350,000), Technician (IDR 700,000), Preceptor (IDR 1,100,000), Magister (IDR 3,300,000) and Eternal (IDR 9,900,000). All were marked “Coming Soon” at capture time. The page described 40 Magister passes and 10 Eternal raffle passes, with Preceptor ladder gifts at 100/150/200/250 sold. Benefits and limits are a dated snapshot, not a live offer.
+- **Super Sponsor YCH:** the route title retains “Super Sponsor”, while the current 2027 pass page calls the relevant tier Magister and lists a YCH headshot. The source route's visible options are image-based; V2 does not reproduce those images because reproduction rights have not been verified.
+- **International travel:** the source guide covers immigration, customs, airport transport, payment, connectivity and power. V2 directs visitors to current official sources, including the Indonesian e-Visa and All Indonesia portals, rather than copying stale legal or fare claims.
+- **Airport rail:** the current official ticket portal is https://airport-train.kci.id/ and the airport's visitor guide is https://soekarnohatta.injourneyairports.id/access/city-transportation/airport-train. Timetables, route changes and fares remain volatile and are not hardcoded into the V2 visitor guide.
+
+These route checks improve coverage but do not establish that the original site's entire source code, every interaction, every language variant, or every third-party link has been audited.
+
 ## 3. Important policy observations (not adopted as V2 policy)
 
 - The Code of Conduct states a 14+ event content rating, parental consent for attendees aged 14–16, and guardian accompaniment for children under 14. This is the event's published policy, not proof that it alone satisfies Indonesian child-data or child-online-safety obligations.
