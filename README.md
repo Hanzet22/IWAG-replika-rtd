@@ -26,7 +26,7 @@ The dedicated reconstruction plan, source inventory and compiler contract are ma
 - TypeScript and semantic HTML form the application baseline.
 - CSS, Tailwind CSS 4, Panda CSS 2.6.0 and StyleX 0.19.2 are integrated with distinct responsibilities and a central CSS layer contract.
 - Rust Active Compiler controls the build graph, source validation, backend invocation, diagnostics and production-output verification.
-- WebAssembly, Canvas, WebGL and WebGPU are optional enhancements and never gate core content.
+- WebAssembly powers an optional contrast calculator loaded only on user request; Canvas, WebGL and WebGPU remain optional enhancements and never gate core content.
 - Next.js is an architectural reference only; no second framework runtime is introduced.
 - Java is not a native browser animation runtime and is excluded unless a concrete build-time/service use case justifies a JVM dependency.
 
