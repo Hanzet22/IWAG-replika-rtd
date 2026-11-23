@@ -11,6 +11,8 @@ The dedicated reconstruction plan, source inventory and compiler contract are ma
 - [Source and technology inventory](docs/SOURCE-TECHNOLOGY-INVENTORY.md)
 - [Rust Active Compiler specification](docs/ACTIVE-COMPILER-SPEC.md)
 - [Research evidence](docs/RESEARCH-EVIDENCE.md)
+- [Graphics and motion policy](docs/GRAPHICS-AND-MOTION-POLICY.md)
+- [Performance measurement plan](docs/PERFORMANCE-MEASUREMENT-PLAN.md)
 - [ADR-0002: Greenfield V2 and Rust Active Compiler](docs/ADR-0002-greenfield-active-compiler.md)
 
 ## Architecture direction
