@@ -11,7 +11,8 @@ The current branch tree contains 364 entries at the time of this inventory.
 |---|---:|---|
 | HTML files | 120 | All moved under `archive/v1-reference/site/` |
 | Astro files | 9 | Active application source |
-| CSS files | 4 | Active styling source |
+| Archived CSS files | 2 | V1 reference only; excluded from V2 source |
+| Active CSS files | 2 | `src/styles/` semantic layers and global styling |
 | JavaScript files | 5 | Active tooling/application source |
 | TypeScript files | 8 | Active application/configuration source |
 | Rust files | 2 | Active compiler + optional contrast engine |
