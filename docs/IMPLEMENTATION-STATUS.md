@@ -36,7 +36,7 @@ Updated: 2026-11-23
 - Organiser/controller identity and legal review
 - Final translations and editorial review for all locales
 - Full manual keyboard, screen-reader, TalkBack, zoom, and assistive-technology audit
-- WebGL/WebGPU enhancement (not required by the initial content shell)
+- Full WebGL/WebGPU rendering backend; the current lab only probes WebGL2 and detects WebGPU API exposure without creating a GPU device
 - Contact forms or attendee data collection
 - Production deployment and domain configuration
 
