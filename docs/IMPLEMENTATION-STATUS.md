@@ -191,3 +191,6 @@ The latest implementation is a working reconstruction foundation and shared home
 - [x] Added a generated route manifest outside public output.
 - [ ] Verify the mobile navigation with keyboard, zoom/reflow and Android TalkBack.
 - [ ] Review route-manifest and fragment-validator results on the latest full build.
+
+- [x] Removed the one-time lockfile bootstrap job after npm and both Cargo lockfiles were committed; the workflow now installs deterministically with npm ci.
+- [x] Rust Active Compiler now reconciles the generated route manifest count with the complete HTML file count and records generated_routes in its machine-readable report.
