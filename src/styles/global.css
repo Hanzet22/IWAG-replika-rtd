@@ -470,7 +470,8 @@
  :root[data-contrast="high"] a{text-decoration-thickness:.14em}
 }
 @layer components {
- .accessibility-preferences{margin-inline-start:auto}
+ .accessibility-preferences{display:none;margin-inline-start:auto}
+ :root[data-js="true"] .accessibility-preferences{display:block}
  .accessibility-preferences summary{cursor:pointer;display:inline-flex;align-items:center;min-height:2.75rem;padding:.4rem .75rem;border:1px solid var(--border);border-radius:.5rem;background:var(--surface);color:var(--text);font-weight:700}
  .accessibility-controls{display:grid;grid-template-columns:minmax(7rem,auto) minmax(9rem,1fr);gap:.65rem;min-width:min(19rem,calc(100vw - 2rem));margin-top:.5rem;padding:1rem;border:1px solid var(--border);border-radius:.65rem;background:var(--surface-raised);color:var(--text)}
  .accessibility-controls label{font-weight:700}.accessibility-controls select{width:100%;max-width:none}
