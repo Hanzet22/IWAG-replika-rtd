@@ -107,7 +107,9 @@ languageSelect?.addEventListener("change", () => {
   const selected = languageSelect.value;
   if ((localeKeys as readonly string[]).includes(selected)) {
     const path = window.location.pathname.replace(/^\/[a-z-]+(?=\/|$)/, "");
-    window.location.assign(`/${selected}${path || "/"}`);
+    const destination = new URL(window.location.href);
+    destination.pathname = `/${selected}${path || "/"}`;
+    window.location.assign(destination.toString());
   }
 });
 
