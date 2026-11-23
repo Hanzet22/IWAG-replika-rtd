@@ -36,7 +36,7 @@ The root route renders the English homepage directly. It does not show a languag
 ## 4. Layout and responsive behavior
 
 - One centered content system with a wider site frame and a readable text measure.
-- Flexible navigation that wraps instead of requiring hover or a desktop-only menu.
+- Flexible desktop navigation plus a native details/summary mobile disclosure at narrow widths; both work without JavaScript and preserve the current-page marker.
 - Cards use auto-fit grids and collapse to one column on narrow screens.
 - Tables and preformatted content have bounded horizontal overflow.
 - Controls use a minimum target height of 44 CSS pixels where practical.
