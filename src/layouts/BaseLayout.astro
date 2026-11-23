@@ -1,7 +1,10 @@
 ---
+import "../styles/compiler-layers.css";
 import "../styles/global.css";
 import "../styles/v2-design-system.css";
 import { getMessages } from "../i18n/ui";
+import * as stylex from "@stylexjs/stylex";
+import { shellStyles } from "../styles/shell.stylex";
 import { isLocale, localeKeys, locales } from "../i18n/locales";
 
 interface Props {
@@ -11,6 +14,8 @@ interface Props {
   contentLang?: string;
 }
 const { lang: requestedLang, title, description, contentLang } = Astro.props;
+const brandStyle = stylex.props(shellStyles.wordmark);
+const brandClass = [brandStyle.className, "wordmark"].filter(Boolean).join(" ");
 const lang = isLocale(requestedLang) ? requestedLang : "en";
 const t = getMessages(lang);
 const htmlLang = contentLang ?? locales[lang].htmlLang;
@@ -35,7 +40,7 @@ const hasMalayTranslation = ["/", "/events", "/events/", "/events/iwag-2027", "/
   <body>
     <a class="skip-link" href="#main">{t.skip}</a>
     <header class="site-header" lang={locales[lang].htmlLang}>
-      <a class="wordmark" href={`/${lang}/`} aria-label="IWAG V2 independent project home">IWAG<span>V2</span></a>
+      <a class={brandClass} href={`/${lang}/`} aria-label="IWAG V2 independent project home">IWAG<span>V2</span></a>
       <nav class="primary-nav" aria-label={t.primaryNavigation}>
         <a href={`/${lang}/`} aria-current={currentPath === "/" ? "page" : undefined}>{t.home}</a>
         <a href={`/${lang}/events/`} aria-current={currentPath === "/events" ? "page" : undefined}>{lang === "id" || lang === "ms-my" ? "Acara" : "Discover"}</a>
