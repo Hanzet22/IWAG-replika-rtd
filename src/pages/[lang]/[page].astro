@@ -63,7 +63,7 @@ const isJoinTeam = page === "join-iwag-team";
 const isLinks = page === "links";
 const isPolicy = page === "policy";
 const copy = isConduct
-  ? (lang === "id" ? "Ringkasan referensi dari halaman Code of Conduct sumber. Ini bukan kebijakan V2 yang disahkan atau instruksi resmi untuk menghadiri acara." : "A reference summary of the source Code of Conduct page. This is not an approved V2 policy or official event-attendance instruction.")
+  ? (lang === "id" ? "Kode Etik V2 belum diterbitkan. Ketentuan V1 tidak diadopsi sebagai kebijakan V2; halaman ini hanya menjelaskan ruang lingkup penulisan ulang yang akan dilakukan." : "The V2 Code of Conduct has not been published. V1 terms are not adopted as V2 policy; this page only outlines the scope of the future rewrite.")
   : isLegal ? t.legalDraft
   : isAccessibility ? t.levelText
   : isAbout ? (lang === "id"
@@ -179,6 +179,15 @@ const copy = isConduct
         { date: "1 November 2024", title: "Welcome to Tangerang", summary: "The 2025 venue and date reveal.", href: "updates/2024-11-01-venue-reveal" },
         { date: "31 August 2024", title: "Return of The Wild", summary: "The community-selected theme for the 2025 edition.", href: "updates/2024-08-31-theme-reveal" }
       ].map((item) => <article class="update-card"><span class="update-date">{item.date}</span><h2>{item.title}</h2><p>{item.summary}</p><a href={`/${lang}/${item.href}/`}>{lang === "id" ? "Baca arsip V2" : "Read V2 archive"}</a></article>)}
+    </section>}
+    {isConduct && <section class="content-card">
+      <h2>{lang === "id" ? "Penulisan ulang kebijakan V2" : "V2 policy redevelopment"}</h2>
+      <p>{lang === "id" ? "Kode Etik V2 akan ditulis dari nol. Halaman V1 hanya pernah dipakai untuk mengidentifikasi kategori topik; teks, batasan, sanksi, dan prosedurnya tidak menjadi dasar aturan V2." : "The V2 Code of Conduct will be written from first principles. The V1 page was only used to identify topic categories; its wording, restrictions, sanctions, and procedures are not the basis of V2 rules."}</p>
+      <h3>{lang === "id" ? "Hal yang harus diverifikasi sebelum penulisan" : "What must be verified before drafting"}</h3>
+      <ul><li>{lang === "id" ? "Identitas penyelenggara dan pihak yang berwenang menetapkan serta menegakkan aturan." : "The organiser's identity and the party authorised to set and enforce event rules."}</li><li>{lang === "id" ? "Aturan venue, prosedur keselamatan, dan batas kewenangan staff serta volunteer." : "Venue rules, safety procedures, and the authority limits of staff and volunteers."}</li><li>{lang === "id" ? "Kanal pelaporan yang benar-benar dipantau, perlindungan pelapor, dan jalur eskalasi." : "A genuinely monitored reporting channel, reporter safeguards, and escalation paths."}</li><li>{lang === "id" ? "Proses peninjauan yang adil, dokumentasi, sanksi proporsional, dan mekanisme keberatan." : "A fair review process, documentation, proportionate sanctions, and an appeal mechanism."}</li><li>{lang === "id" ? "Kebutuhan safeguarding peserta di bawah umur dan prosedur respons insiden." : "Safeguarding needs for underage attendees and incident-response procedures."}</li></ul>
+      <h3>{lang === "id" ? "Ruang lingkup yang akan disusun" : "Planned policy scope"}</h3>
+      <p>{lang === "id" ? "Standar perilaku, pelecehan dan diskriminasi, persetujuan dan dokumentasi media, ruang terbatas, interaksi staff, pelaporan, penanganan kasus, perlindungan peserta, serta pemisahan aturan perilaku dari prosedur darurat dan keselamatan venue." : "Behaviour standards, harassment and discrimination, consent and media recording, restricted spaces, staff interactions, reporting, case handling, attendee safeguarding, and a clear separation between conduct rules and venue emergency/safety procedures."}</p>
+      <aside class="notice"><strong>{lang === "id" ? "Belum menjadi kebijakan resmi" : "Not an official policy"}</strong><p>{lang === "id" ? "Tidak ada batas usia, sanksi, kewenangan, atau prosedur pelaporan V2 yang ditetapkan melalui halaman ini. Jangan menggunakannya sebagai instruksi kehadiran acara." : "No V2 age limit, sanction, authority, or reporting procedure is established by this page. Do not use it as event-attendance instructions."}</p></aside>
     </section>}
     {isAccessibility && <section class="content-card">
       <h2>{t.level}</h2>
