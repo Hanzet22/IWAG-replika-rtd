@@ -49,19 +49,11 @@ The implementation must prioritize clarity, accessibility, privacy, maintainabil
 - Use secure defaults, dependency pinning, license inventory, and a documented update process.
 - Define deployment, environment variables, secrets handling, backups, and rollback before production.
 
-### Stack decision gate
+### Stack decision
 
-The final language/framework choice must be recorded in an Architecture Decision Record (ADR) comparing:
-- accessibility and semantic output;
-- static/server rendering options;
-- build output and runtime cost;
-- maintainability and ecosystem health;
-- security/update cadence;
-- localization support;
-- low-end device performance;
-- deployment portability and cost.
+ADR-0001 records Astro 7 with TypeScript and static output as the selected foundation after considering semantic output, static rendering, runtime cost, maintainability, security updates, localization, low-end performance and deployment portability.
 
-Do not select a stack solely because it is fashionable or because V1 used Astro.
+Reopen this decision only if a material requirement changes or measured limitations show that the current architecture cannot meet the product goals. Do not replace the stack solely because another framework is fashionable or because V1 used Astro.
 
 ## 4. Theme system
 
@@ -272,7 +264,7 @@ A V2 release candidate is not ready until:
 | Age-inclusive support | Mandatory |
 | V1 archive role | Reference/audit only; not V2 source template |
 | Legal documents | Separate and subject to qualified review |
-| Framework/language | Pending ADR; do not pre-decide without comparison |
+| Framework/language | Recorded in ADR-0001: Astro 7 + TypeScript, static output |
 
 ## 18. Primary references
 
