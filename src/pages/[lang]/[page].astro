@@ -173,8 +173,8 @@ const copy = isConduct
         { date: "12 January 2025", title: "Fairness First: IWAG 2025 Pass Raffle Announcement", summary: "A historical raffle notice for limited sponsor-tier upgrades.", href: "updates/2025-01-11-high-tier-raffle" },
         { date: "6 January 2025", title: "IWAG 2025 Registration Day 1: Behind the Scenes", summary: "A technical postmortem of the first registration opening.", href: "updates/2025-01-06-crash-postmortem" },
         { date: "4 January 2025", title: "IWAG 2025 Registration Update", summary: "A revised pass release and hotel booking schedule.", href: "updates/2025-01-04-registration-update" },
-        { date: "23 November 2024", title: "Five Tiers of Fun!", summary: "The first five-tier event-pass announcement for 2025.", href: "updates/2024-11-23-tier-reveal" },
         { date: "29 December 2024", title: "IWAG 2025 Registration Opening", summary: "A pre-registration guide to the historical pass release schedule.", href: "updates/2024-12-29-registration-opening" },
+        { date: "23 November 2024", title: "Five Tiers of Fun!", summary: "The first five-tier event-pass announcement for 2025.", href: "updates/2024-11-23-tier-reveal" },
         { date: "1 November 2024", title: "Welcome to Tangerang", summary: "The 2025 venue and date reveal.", href: "updates/2024-11-01-venue-reveal" },
         { date: "31 August 2024", title: "Return of The Wild", summary: "The community-selected theme for the 2025 edition.", href: "updates/2024-08-31-theme-reveal" }
       ].map((item) => <article class="update-card"><span class="update-date">{item.date}</span><h2>{item.title}</h2><p>{item.summary}</p><a href={`/${lang}/${item.href}/`}>{lang === "id" ? "Baca arsip V2" : "Read V2 archive"}</a></article>)}
