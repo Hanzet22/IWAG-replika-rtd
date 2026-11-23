@@ -111,3 +111,25 @@ Updated: 2026-11-23
 - [ ] Manual review across all routes, locales, viewports and assistive technologies remains outstanding.
 - [ ] Verify deployed cookies, hosting/CDN logs, vendors, data locations, retention and transfers.
 - [ ] Qualified legal review and operator approval remain mandatory before any document becomes operative.
+
+## Greenfield reconstruction execution (2026-11-23)
+
+- [x] Created dedicated `v2/greenfield-global-reconstruction` branch.
+- [x] Moved 120 root/static HTML snapshots plus six compiled/CDN assets into `archive/v1-reference/site/`; original blob contents were preserved.
+- [x] Added archive README and source/technology inventory.
+- [x] Added Rust Active Compiler CLI with `inspect`, `doctor`, `dev`, `build`, `preview`, and `wasm` commands.
+- [x] Routed normal npm dev/build/preview commands through the Rust CLI.
+- [x] Updated the production workflow to provision Rust and invoke the Active Compiler.
+- [x] Added build-report generation outside the public `dist/` directory.
+- [x] Integrated Panda CSS 2.6.0 and StyleX 0.19.2 into the Astro/Vite pipeline alongside Tailwind CSS 4.
+- [x] Defined a centralized CSS layer order and disabled duplicate Panda/Tailwind preflight resets.
+- [x] Added new semantic Panda tokens and a replacement global CSS baseline; the shared layout no longer imports the previous global V2 stylesheets.
+- [x] Added literature and engineering evidence notes for cognitive accessibility, motion, typography, color vision, and low-resource mobile rendering.
+- [ ] Complete a full route-by-route UI/UX and content-template rewrite.
+- [ ] Validate Panda/StyleX/Tailwind plugin interoperability and generated CSS in production.
+- [ ] Complete the Rust compiler's deeper manifest, route, asset, dependency and output validation.
+- [ ] Review every remaining asset and transitive dependency license.
+- [ ] Complete keyboard, screen-reader, TalkBack, zoom/reflow and disabled-user evaluations.
+- [ ] Measure JavaScript/CSS transfer, LCP/INP/CLS, CPU, memory, GPU, battery and thermal behavior on representative mid/low-end devices.
+
+CI runs are diagnostic evidence only. Cancelled or pending workflow runs do not close the reconstruction scope or halt engineering work.
