@@ -90,9 +90,11 @@ const copy = policy?.summary ?? (isConduct
       <span>{lang === "id" ? "Bukan kebijakan resmi IWAG; belum diverifikasi atau disetujui penyelenggara dan belum berlaku." : "Not an official IWAG policy; not verified or approved by the organiser and not in force."}</span>
       <small>{lang === "id" ? "Draf v1.0 · 23 November 2026 · Tidak ada tanggal berlaku" : "Draft v1.0 · 23 November 2026 · No effective date"}</small>
     </aside>}
-    <p class="eyebrow">IWAG V2 · Independent project</p>
-    <h1>{title}</h1>
-    <p class="lead">{copy}</p>
+    <header class="page-intro">
+      <p class="eyebrow">IWAG V2 · Independent project</p>
+      <h1>{title}</h1>
+      <p class="lead">{copy}</p>
+    </header>
     {isPlan && <section class="landing-grid" aria-label={lang === "id" ? "Rencana kunjungan" : "Visit planning"}>
       <article class="content-card"><p class="eyebrow">01 · EVENT</p><h2>{lang === "id" ? "Tanggal dan acara" : "Dates and event"}</h2><p>3–4 July 2027 · Fantastic Arcana.</p><a href={"/" + lang + "/events/"}>{lang === "id" ? "Lihat informasi acara" : "Explore event information"}</a></article>
       <article class="content-card"><p class="eyebrow">02 · VENUE</p><h2>{lang === "id" ? "Lokasi acara" : "Venue"}</h2><p>Hotel Ciputra Jakarta, West Jakarta.</p><a href={"/" + lang + "/location/"}>{lang === "id" ? "Baca panduan lokasi" : "Read venue information"}</a></article>
