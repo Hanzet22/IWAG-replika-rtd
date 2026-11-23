@@ -30,6 +30,7 @@ Event details are independently rewritten source snapshots, not official IWAG in
 
 - Node.js 22.23.4 or newer
 - npm
+- Optional Rust/WASM build only: Rust toolchain, `wasm32-unknown-unknown`, and `wasm-pack` (not needed for the default Astro build)
 
 ## Development
 
