@@ -137,7 +137,9 @@ The EU GDPR applies to a non-EU operator only where its territorial-scope rules 
 
 V2 requirements:
 - Keep an applicability register for each market intentionally targeted.
-- If GDPR applies, assess Articles 3, 5–6, 12–22, 25, 28, 32–35 and Chapter V transfers as relevant.
+- If GDPR applies, assess Articles 3, 5–6, 8, 12–22, 25, 28, 32–35 and Chapter V transfers as relevant.
+- Article 8 concerns consent under Article 6(1)(a) for information-society services offered directly to a child: the default age is 16, and a Member State may lower it to no less than 13. Verify the national rule for each relevant Member State; this is not a universal age threshold for every processing basis.
+- Article 44 and the following Chapter V provisions govern transfers to third countries/international organisations.
 - Do not claim worldwide compliance from an Indonesian-only review.
 - Review local consumer and marketing rules before selling to or targeting users in a foreign market.
 
@@ -295,7 +297,7 @@ A Code of Conduct draft should cover harassment/discrimination, consent and phot
 The following links are starting points to official or primary repositories. Verify the consolidated text, amendments, status and effective date at the time of implementation:
 
 - UU 27/2022 PDP: https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
-- PP 33/2026 PDP implementing regulation: https://peraturan.go.id/id/pp-no-33-tahun-2026
+- PP 33/2026 PDP implementing regulation: signed-text mirror (third-party host; not an official repository): https://legaltrans.id/downloads/pp-33-tahun-2026-pelindungan-data-pribadi.pdf — official BPK/peraturan.go.id listing was not located on 23 November 2026; verify against the official Gazette before relying on article-level details.
 - PP 17/2025 child online protection: https://peraturan.bpk.go.id/Details/316698/pp-no-17-tahun-2025
 - Permenkomdigi 9/2026: https://peraturan.bpk.go.id/Details/346040/permenkomdigi-no-9-tahun-2026
 - PP 71/2019 electronic systems: https://peraturan.bpk.go.id/Details/122030/pp-no-71-tahun-2019
@@ -307,4 +309,10 @@ The following links are starting points to official or primary repositories. Ver
 - UU 8/2016 disability rights: https://peraturan.bpk.go.id/Details/37251/uu-no-8-tahun-2016
 - PP 42/2020: https://peraturan.bpk.go.id/Details/142301/pp-no-42-tahun-2020
 - GDPR: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- Singapore PDPA: https://sso.agc.gov.sg/Act/PDPA2012
+- Malaysia Act 709 reprint: https://www.pdp.gov.my/wp-content/uploads/2026/10/Akta-709-cetakan-semula-2026-BI.pdf
+- Thailand PDPA: https://www.pdpc.or.th/en/10455/
+- UK GDPR applicability: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/personal-information-what-is-it/who-does-the-uk-gdpr-apply-to
+- US COPPA Rule: https://www.ecfr.gov/current/title-16/chapter-I/subchapter-C/part-312
+- California CCPA: https://cppa.ca.gov/faq
 - WCAG 2.2: https://www.w3.org/TR/WCAG22/
