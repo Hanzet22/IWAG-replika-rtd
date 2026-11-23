@@ -59,6 +59,16 @@ const breadcrumbName = (segment: string) => breadcrumbLabels[segment] ?? segment
     <a class="skip-link" href="#main">{t.skip}</a>
     <header class="site-header" lang={locales[lang].htmlLang}>
       <a class={brandClass} href={`/${lang}/`} aria-label="IWAG V2 independent project home">IWAG<span>V2</span></a>
+      <details class="mobile-nav">
+        <summary>{lang === "id" ? "Menu utama" : lang === "ms-my" ? "Menu utama" : "Main menu"}</summary>
+        <nav class="mobile-nav-links" aria-label={t.primaryNavigation}>
+          <a href={`/${lang}/`} aria-current={currentPath === "/" ? "page" : undefined}>{t.home}</a>
+          <a href={`/${lang}/events/`} aria-current={isEventsPath ? "page" : undefined}>{lang === "id" || lang === "ms-my" ? "Acara" : "Discover"}</a>
+          <a href={`/${lang}/plan-your-visit/`} aria-current={isVisitPath ? "page" : undefined}>{lang === "id" ? "Rencanakan kunjungan" : lang === "ms-my" ? "Rancang lawatan" : "Plan your visit"}</a>
+          <a href={`/${lang}/community/`} aria-current={isCommunityPath ? "page" : undefined}>{lang === "id" ? "Komunitas" : lang === "ms-my" ? "Komuniti" : "Community"}</a>
+          <a href={`/${lang}/updates/`} aria-current={isUpdatesPath ? "page" : undefined}>{lang === "id" ? "Pembaruan" : lang === "ms-my" ? "Kemas kini" : "Updates"}</a>
+        </nav>
+      </details>
       <nav class="primary-nav" aria-label={t.primaryNavigation}>
         <a href={`/${lang}/`} aria-current={currentPath === "/" ? "page" : undefined}>{t.home}</a>
         <a href={`/${lang}/events/`} aria-current={isEventsPath ? "page" : undefined}>{lang === "id" || lang === "ms-my" ? "Acara" : "Discover"}</a>
