@@ -60,9 +60,9 @@ const copy = {
   <section class="home-section updates-section" aria-labelledby="updates-title">
     <div class="section-heading updates-heading"><div><p class="eyebrow">FROM THE COMMUNITY</p><h2 id="updates-title">{copy.updatesTitle}</h2><p>{copy.updatesIntro}</p></div><a class="text-link" href={`/${lang}/updates/`}>{copy.moreUpdates} <span aria-hidden="true">→</span></a></div>
     <div class="update-grid">
-      <article class="update-card"><span class="update-date">15 NOV 2026</span><h3>{copy.updateVenue}</h3><p>{copy.updateVenueText}</p><a href={`/${lang}/updates/2026-11-15-venue-reveal/`}>{lang === "id" ? "Baca pembaruan" : "Read update"}</a></article>
-      <article class="update-card"><span class="update-date">08 NOV 2026</span><h3>{copy.updateTeam}</h3><p>{copy.updateTeamText}</p><a href={`/${lang}/updates/2026-11-08-staff-applications/`}>{lang === "id" ? "Baca pembaruan" : "Read update"}</a></article>
-      <article class="update-card"><span class="update-date">14 JUL 2026</span><h3>{copy.updateMemory}</h3><p>{copy.updateMemoryText}</p><a href={`/${lang}/updates/2026-07-14-conclusion/`}>{lang === "id" ? "Baca pembaruan" : "Read update"}</a></article>
+      <article class="update-card"><time class="update-date" datetime="2026-11-15">15 NOV 2026</time><h3>{copy.updateVenue}</h3><p>{copy.updateVenueText}</p><a href={`/${lang}/updates/2026-11-15-venue-reveal/`}>{lang === "id" ? "Baca pembaruan" : "Read update"}</a></article>
+      <article class="update-card"><time class="update-date" datetime="2026-11-08">08 NOV 2026</time><h3>{copy.updateTeam}</h3><p>{copy.updateTeamText}</p><a href={`/${lang}/updates/2026-11-08-staff-applications/`}>{lang === "id" ? "Baca pembaruan" : "Read update"}</a></article>
+      <article class="update-card"><time class="update-date" datetime="2026-07-14">14 JUL 2026</time><h3>{copy.updateMemory}</h3><p>{copy.updateMemoryText}</p><a href={`/${lang}/updates/2026-07-14-conclusion/`}>{lang === "id" ? "Baca pembaruan" : "Read update"}</a></article>
     </div>
   </section>
   <p class="source-note">{copy.source}</p>
