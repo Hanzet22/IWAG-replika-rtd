@@ -11,16 +11,21 @@ const langParam = Astro.params.lang;
 const lang = isLocale(langParam) ? langParam : "en";
 const events = (await getCollection("events", ({ data }) => data.locale === lang && data.status === "published"))
   .sort((a, b) => (a.data.start?.getTime() ?? 0) - (b.data.start?.getTime() ?? 0));
-const isId = lang === "id";
+const copy = {
+  en: { title: "Events", eyebrow: "Event information", empty: "No published events yet", message: "Event information will appear only after its schedule, venue, accessibility details, and status have been verified." },
+  id: { title: "Acara", eyebrow: "Informasi acara", empty: "Belum ada acara yang diterbitkan", message: "Informasi acara hanya akan ditampilkan setelah jadwal, lokasi, aksesibilitas, dan statusnya diverifikasi." },
+  "en-sg": { title: "Events", eyebrow: "Event information", empty: "No published events yet", message: "Event information will appear only after its schedule, venue, accessibility details, and status have been verified." },
+  "ms-my": { title: "Acara", eyebrow: "Maklumat acara", empty: "Belum ada acara diterbitkan", message: "Maklumat acara hanya akan dipaparkan selepas jadual, lokasi, butiran kebolehcapaian dan status disahkan." }
+}[lang];
 ---
-<BaseLayout lang={lang} title={isId ? "Acara" : "Events"} description={isId ? "Daftar acara yang telah dikonfirmasi dan diterbitkan." : "Confirmed and published event information."}>
+<BaseLayout lang={lang} title={copy.title} description={copy.message}>
   <section class="page-content">
-    <p class="eyebrow">IWAG V2 · {isId ? "Informasi acara" : "Event information"}</p>
-    <h1>{isId ? "Acara" : "Events"}</h1>
+    <p class="eyebrow">IWAG V2 · {copy.eyebrow}</p>
+    <h1>{copy.title}</h1>
     {events.length === 0 ? (
       <aside class="notice">
-        <h2>{isId ? "Belum ada acara yang diterbitkan" : "No published events yet"}</h2>
-        <p>{isId ? "Informasi acara hanya akan ditampilkan setelah jadwal, lokasi, aksesibilitas, dan statusnya diverifikasi." : "Event information will appear only after its schedule, venue, accessibility details, and status have been verified."}</p>
+        <h2>{copy.empty}</h2>
+        <p>{copy.message}</p>
       </aside>
     ) : (
       <ul class="event-list">
