@@ -8,6 +8,7 @@ root.dataset.js = "true";
 const validThemes = ["system", "light", "black", "super-black", "amoled-black", "dynamic"];
 const storageKey = "iwag-v2-theme";
 const accentStorageKey = "iwag-v2-accent";
+let selectedAccent = "#426b9b";
 
 function hexToRgb(hex: string) {
   const value = hex.replace("#", "");
@@ -46,6 +47,9 @@ function toHsl({ r, g, b }: { r: number; g: number; b: number }) {
 
 function applyAccent(hex: string) {
   if (!/^#[0-9a-fA-F]{6}$/.test(hex)) return;
+  selectedAccent = hex;
+  if (accentSelect) accentSelect.value = hex;
+  if (root.dataset.theme !== "dynamic") return;
   const rgb = hexToRgb(hex);
   const { h } = toHsl(rgb);
   const contrast = relativeLuminance(rgb) > 0.179 ? "#000000" : "#ffffff";
@@ -54,7 +58,6 @@ function applyAccent(hex: string) {
   root.style.setProperty("--link", `hsl(${h} 72% 30%)`);
   root.style.setProperty("--link-visited", `hsl(${(h + 58) % 360} 55% 32%)`);
   root.style.setProperty("--focus", `hsl(${(h + 32) % 360} 68% 36%)`);
-  if (accentSelect) accentSelect.value = hex;
 }
 
 function applyTheme(theme: string) {
@@ -62,6 +65,14 @@ function applyTheme(theme: string) {
   root.dataset.theme = selected;
   root.style.colorScheme = selected === "system" ? "" : selected === "light" || selected === "dynamic" ? "light" : "dark";
   if (themeSelect) themeSelect.value = selected;
+  if (selected === "dynamic") applyAccent(selectedAccent);
+  else {
+    root.style.removeProperty("--accent");
+    root.style.removeProperty("--accent-contrast");
+    root.style.removeProperty("--link");
+    root.style.removeProperty("--link-visited");
+    root.style.removeProperty("--focus");
+  }
 }
 
 try {
