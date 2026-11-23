@@ -1,6 +1,8 @@
 // Nested public routes found in the archived EN/ID V1 tree.
 // These paths are preserved as route inventory only; V1 copy is not imported.
 export const nestedRoutes = [
+  "international-travelers-guide",
+  "participate/super-sponsor-ych",
   "join-iwag-team/roles/attendee-experience-design-staff",
   "join-iwag-team/roles/con-store-officer",
   "join-iwag-team/roles/dealer-relations-officer",
