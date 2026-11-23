@@ -88,6 +88,8 @@ A successful `iwagc build` means the Rust controller completed its validation an
 ## 6. Styling pipeline
 
 - CSS layer order is declared once in `src/styles/compiler-layers.css`.
+- StyleX uses its documented `useCSSLayers` object with a `stylex` prefix, base/design layers before its priority layers, and Tailwind utilities after them. This prevents the StyleX layer order from accidentally outranking utility classes.
+- Unlayered semantic CSS still outranks normal declarations inside named layers; use utilities only where they do not conflict with the semantic base, or move the relevant rule into a named layer.
 - Tailwind CSS v4 imports only its theme and utility layers; preflight remains disabled to avoid competing resets.
 - Panda CSS runs through its Vite integration and uses generated typed tokens.
 - StyleX runs as a build-time transform with runtime injection disabled.
