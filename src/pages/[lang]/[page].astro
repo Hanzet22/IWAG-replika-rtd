@@ -55,7 +55,10 @@ const isAbout = page === "about";
 const isLocation = page === "location";
 const isParticipate = page === "participate";
 const isUpdates = page === "updates";
-const copy = isLegal ? t.legalDraft
+const isConduct = page === "coc" || page === "code-of-conduct";
+const copy = isConduct
+  ? (lang === "id" ? "Ringkasan referensi dari halaman Code of Conduct sumber. Ini bukan kebijakan V2 yang disahkan atau instruksi resmi untuk menghadiri acara." : "A reference summary of the source Code of Conduct page. This is not an approved V2 policy or official event-attendance instruction.")
+  : isLegal ? t.legalDraft
   : isAccessibility ? t.levelText
   : isAbout ? (lang === "id"
       ? "IWAG V2 adalah rekayasa ulang independen dari arsip referensi. Proyek ini berfokus pada informasi yang mudah dibaca, navigasi konsisten, aksesibilitas, dan minimisasi data."
@@ -72,6 +75,14 @@ const copy = isLegal ? t.legalDraft
       <div class="history-entry"><span>2022</span><div><h2>{lang === "id" ? "Pertemuan kembali" : "A renewed gathering"}</h2><p>{lang === "id" ? "IWFM kembali digelar dengan kegiatan komunitas, seni, permainan, dan sesi foto bersama." : "IWFM returned with community activities, art, games, and a group photo gathering."}</p></div></div>
       <div class="history-entry"><span>2023</span><div><h2>{lang === "id" ? "IWAG pertama" : "The first IWAG"}</h2><p>{lang === "id" ? "Format berkembang menjadi pertemuan akhir pekan dengan panggung, artist alley, panel, dan lounge." : "The format grew into a weekend gathering with a stage, artist alley, panels, and a casual lounge."}</p></div></div>
       <div class="history-entry"><span>2024</span><div><h2>{lang === "id" ? "Akhir pekan penuh" : "A full weekend format"}</h2><p>{lang === "id" ? "Acara memperluas program dan memperkenalkan sistem pengelolaan acara Community." : "The event expanded its programme and introduced the Community event-management platform."}</p></div></div>
+    </section>}
+    {isConduct && <section class="conduct-content">
+      <aside class="notice"><strong>{lang === "id" ? "Snapshot referensi — 23 November 2026" : "Reference snapshot — 23 November 2026"}</strong><p>{lang === "id" ? "Ketentuan asli dapat berubah. Ringkasan ini dibuat untuk merekonstruksi struktur informasi, bukan menggantikan dokumen resmi atau menciptakan aturan baru." : "The source rules may change. This summary reconstructs the information structure; it does not replace the official document or create new event rules."}</p></aside>
+      <section><h2>{lang === "id" ? "Usia dan pendampingan" : "Age and supervision"}</h2><p>{lang === "id" ? "Halaman sumber menyatakan acara ditujukan bagi usia 14 tahun ke atas. Peserta usia 14–16 memerlukan persetujuan orang tua/wali; peserta di bawah 14 harus selalu didampingi wali yang sah. Periksa dokumen sumber untuk ketentuan rinci dan perubahan." : "The source page states that the event is intended for ages 14 and above. Attendees aged 14–16 require parent or guardian consent; attendees under 14 must remain accompanied by a legal guardian. Consult the source document for full details and changes."}</p></section>
+      <section><h2>{lang === "id" ? "Saling menghormati" : "Respect and conduct"}</h2><ul><li>{lang === "id" ? "Perlakukan peserta lain dengan hormat dan jangan melakukan pelecehan atau diskriminasi." : "Treat other attendees respectfully; harassment and discrimination are not accepted."}</li><li>{lang === "id" ? "Jaga konten dan perilaku tetap sesuai lingkungan acara yang ramah remaja." : "Keep content and behaviour appropriate for a teen-friendly event environment."}</li><li>{lang === "id" ? "Ikuti arahan petugas acara dan aturan fasilitas venue." : "Follow event-staff instructions and venue facility rules."}</li><li>{lang === "id" ? "Jaga kebersihan, properti, serta ruang bersama." : "Respect shared spaces, property, and cleanliness."}</li></ul></section>
+      <section><h2>{lang === "id" ? "Privasi, foto, dan perekaman" : "Privacy, photos, and recording"}</h2><ul><li>{lang === "id" ? "Minta izin sebelum memotret atau merekam orang lain." : "Ask before photographing or recording other people."}</li><li>{lang === "id" ? "Hormati area yang melarang fotografi, termasuk lounge khusus." : "Respect areas where photography is restricted, including designated lounges."}</li><li>{lang === "id" ? "Hormati permintaan privasi dan jangan membagikan momen pribadi orang lain." : "Respect privacy requests and do not share other people's private moments."}</li></ul></section>
+      <section><h2>{lang === "id" ? "Keselamatan dan fasilitas" : "Safety and facilities"}</h2><ul><li>{lang === "id" ? "Patuhi kebijakan venue mengenai fasilitas, kebisingan, dan area terbatas." : "Follow venue policies on facilities, noise, and restricted areas."}</li><li>{lang === "id" ? "Perlengkapan atau properti yang memerlukan pemeriksaan harus mengikuti prosedur pemeriksaan acara." : "Props or equipment requiring inspection must follow the event's inspection process."}</li><li>{lang === "id" ? "Laporkan masalah kepada petugas acara atau pihak venue yang berwenang." : "Report concerns to event staff or the appropriate venue personnel."}</li></ul></section>
+      <p><a href="https://iwag.furries.id/en/coc" rel="external">{lang === "id" ? "Buka Code of Conduct sumber" : "Open the original Code of Conduct"}</a></p>
     </section>}
     {isLocation && <section class="content-card detail-grid">
       <div><p class="eyebrow">IWAG 2027 · VENUE</p><h2>Hotel Ciputra Jakarta</h2><p>West Jakarta, Indonesia</p><p>The published venue announcement describes event spaces grouped on the sixth floor, with a connection to Mal Ciputra Jakarta.</p><p><strong>Address</strong><br />Jl. Letnan Jenderal S Parman, Tanjung Duren, Grogol Petamburan, Jakarta 11470, Indonesia</p><p><a href="https://hotelciputra.com/jakarta/" rel="external">Hotel website</a></p></div>
@@ -109,7 +120,7 @@ const copy = isLegal ? t.legalDraft
       </ul>
       <p class="muted">{lang === "id" ? "Kanal kontak berbasis teks dan akomodasi acara akan diterbitkan setelah alamat kontak serta layanan pendukung diverifikasi." : "Text-based contact channels and event accommodations will be published after contact details and support services are verified."}</p>
     </section>}
-    {isLegal && <aside class="notice"><h2>{lang === "id" ? "Belum disahkan" : "Not approved"}</h2><p>{copy}</p></aside>}
+    {isLegal && !isConduct && <aside class="notice"><h2>{lang === "id" ? "Belum disahkan" : "Not approved"}</h2><p>{copy}</p></aside>}
     {!isLegal && !isAccessibility && !isLocation && !isParticipate && !isUpdates && <aside class="notice"><p>{lang === "id" ? "Informasi acara dan operasional akan diterbitkan setelah sumbernya diverifikasi. Arsip V1 tidak dianggap sebagai informasi terkini." : "Event and operational information will be published only after its source is verified. V1 archive material is not treated as current information."}</p></aside>}
   </article>
 </BaseLayout>
