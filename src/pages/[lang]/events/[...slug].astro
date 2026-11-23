@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
-import { isLocale } from "../../../../i18n/locales";
+import { isLocale } from "../../../i18n/locales";
 
 export async function getStaticPaths() {
   const events = await getCollection("events", ({ data }) => data.status === "published");
