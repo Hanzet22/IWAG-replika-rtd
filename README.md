@@ -7,7 +7,11 @@
 IWAG V2 is a fresh implementation. The archived V1 files are retained as a reference for structural research; they are not the V2 application source.
 
 The current V2 implementation includes:
-- Astro static output with TypeScript
+- Astro 7 static output with TypeScript and Vite as the single application/build pipeline
+- Vue 3 interactive islands via the official Astro integration; Tailwind CSS 4 via the Vite plugin
+- CSS Houdini typed custom properties, plus an opt-in SVG/Canvas 2D/WebGL2/WebGPU capability lab
+- Optional standalone Rust/WASM contrast utility; the normal site build does not require Rust
+- Compatible Next.js architectural patterns documented without adding a second Next.js runtime
 - Locale-prefixed routes for English, Indonesian, English (Singapore), and Bahasa Melayu (Malaysia); the homepage and event pages have Malay copy; untranslated Malay routes and selected Indonesian information pages display an explicit English-fallback notice until reviewed translations are ready
 - Semantic HTML-first layouts and progressive enhancement
 - System, Light, Black, Super Black, AMOLED Black, and Dynamic Color themes
@@ -49,6 +53,8 @@ See:
 - [Legal and regulatory compliance matrix](docs/LEGAL-COMPLIANCE-MATRIX.md)
 - [V2 requirements](docs/V2-REQUIREMENTS.md)
 - [ADR-0001: static-first Astro architecture](docs/ADR-0001-architecture.md)
+- [Stack integration map](docs/STACK-INTEGRATION.md)
+- [Legal policy draft status](docs/POLICY-DRAFTS.md)
 - [Implementation status](docs/IMPLEMENTATION-STATUS.md)
 
 ## Guardrails
