@@ -8,6 +8,8 @@ IWAG V2 is undergoing a greenfield global reconstruction. V1 is a read-only rese
 
 The dedicated reconstruction plan, source inventory and compiler contract are maintained in:
 - [Greenfield reconstruction plan](docs/GREENFIELD-RECONSTRUCTION-PLAN.md)
+- [Application and compiler architecture](docs/ARCHITECTURE.md)
+- [Global UX/UI system](docs/UX-UI-SYSTEM.md)
 - [Source and technology inventory](docs/SOURCE-TECHNOLOGY-INVENTORY.md)
 - [Rust Active Compiler specification](docs/ACTIVE-COMPILER-SPEC.md)
 - [Research evidence](docs/RESEARCH-EVIDENCE.md)
