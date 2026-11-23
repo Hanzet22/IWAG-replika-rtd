@@ -1,6 +1,6 @@
 # IWAG Active Compiler — Architecture Specification
 
-**Status:** Proposed implementation contract  
+**Status:** Initial CLI implementation committed; architecture remains under active development  
 **Parent project:** IWAG V2 Greenfield Global Reconstruction  
 **Language:** Rust  
 **Role:** Active build orchestrator, project-specific compiler, validator and diagnostics engine
