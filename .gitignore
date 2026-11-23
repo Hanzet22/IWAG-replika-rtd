@@ -21,3 +21,5 @@ yarn-error.log*
 compiler/iwagc/target/
 public/wasm/
 .iwag-build/
+
+styled-system/
