@@ -41,7 +41,8 @@ The locale route is an editorial identifier; each document declares its proper B
 - Reproducing V1's compiled Astro output or copying its bundled dependencies.
 - Claiming WCAG conformance based only on the framework or automated checks.
 - Publishing invented event facts, legal terms, privacy promises, or organiser identities.
-- Adding analytics, trackers, remote fonts, social embeds, or GPU effects by default.
+- Adding analytics, trackers, remote font providers, social embeds, or GPU effects by default.
+- Using remote font requests; the selected five font families are self-hosted with their license notices retained.
 
 ## Runtime baseline
 
