@@ -47,6 +47,7 @@ const langParam = Astro.params.lang;
 const page = Astro.params.page ?? "about";
 const lang = isLocale(langParam) ? langParam : "en";
 const t = getMessages(lang);
+const contentMessages = lang === "ms-my" ? getMessages("en") : t;
 const title = pageTitles[lang]?.[page] ?? pageTitles.en[page] ?? "Information";
 const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct"];
 const isLegal = legalPages.includes(page);
@@ -64,12 +65,12 @@ const isLinks = page === "links";
 const isPolicy = page === "policy";
 const copy = isConduct
   ? (lang === "id" ? "Kode Etik V2 belum diterbitkan. Ketentuan V1 tidak diadopsi sebagai kebijakan V2; halaman ini hanya menjelaskan ruang lingkup penulisan ulang yang akan dilakukan." : "The V2 Code of Conduct has not been published. V1 terms are not adopted as V2 policy; this page only outlines the scope of the future rewrite.")
-  : isLegal ? t.legalDraft
-  : isAccessibility ? t.levelText
+  : isLegal ? contentMessages.legalDraft
+  : isAccessibility ? contentMessages.levelText
   : isAbout ? (lang === "id"
       ? "IWAG V2 adalah rekayasa ulang independen dari arsip referensi. Proyek ini berfokus pada informasi yang mudah dibaca, navigasi konsisten, aksesibilitas, dan minimisasi data."
       : "IWAG V2 is an independent re-engineering project based on a separately archived reference. It focuses on readable information, predictable navigation, accessibility, and data minimisation.")
-  : t.notPublished;
+  : contentMessages.notPublished;
 ---
 <BaseLayout lang={lang} title={title} description={copy}>
   <article class="page-content">
