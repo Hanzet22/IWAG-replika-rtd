@@ -107,3 +107,8 @@ At commit `06c8a9dfb4bb47a370176c48b9adf9b27db99570`, the Rust Active Compiler r
 | CI build duration | 4,600 ms |
 
 This is a build-runner baseline, not a browser/device benchmark. The raw footprint is not compressed transfer size. It does not measure LCP, INP, CLS, CPU, memory, battery, thermal behavior or real-user task completion. Repeat the measurements after meaningful changes and on representative Android devices.
+
+
+## Optional WASM startup guardrail
+
+The contrast calculator loads the WASM module only after a direct calculation request. Measure the JS wrapper and WASM binary separately, and do not preload or instantiate the module on initial page load. Compare first-use latency and memory against the JavaScript fallback on representative Android devices. Retain the fallback even when the module is present.
