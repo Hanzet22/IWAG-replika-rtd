@@ -1,0 +1,8 @@
+# IWAG Active Compiler project manifest
+source_root = "src"
+archive_root = "archive/v1-reference"
+output_root = "dist"
+frontend_backend = "astro"
+package_manager = "npm"
+node_minimum = "22.23.4"
+wasm_default = "false"
