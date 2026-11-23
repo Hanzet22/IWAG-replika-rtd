@@ -1,0 +1,180 @@
+/* IWAG V2 design-system foundations.
+   Imported after global.css so these semantic tokens and safeguards are the shared baseline. */
+@layer base {
+  :root {
+    --type-body: 1rem;
+    --type-small: .875rem;
+    --type-lead: 1.2rem;
+    --line-body: 1.75;
+    --line-heading: 1.2;
+    --measure-reading: 68ch;
+    --measure-wide: 76ch;
+    --measure-compact: 48ch;
+    --control-min: 2.75rem;
+    --focus-width: 3px;
+    --radius-control: .5rem;
+    --radius-card: .8rem;
+    --motion-fast: 120ms;
+    --motion-standard: 180ms;
+    --motion-easing: cubic-bezier(.2, .65, .3, 1);
+  }
+
+  body {
+    font-size: var(--type-body);
+    line-height: var(--line-body);
+  }
+
+  p, li {
+    overflow-wrap: anywhere;
+  }
+
+  :where(button, input, select, textarea, summary, .action-link) {
+    min-height: var(--control-min);
+  }
+
+  :where(button, input, select, textarea) {
+    max-width: 100%;
+  }
+
+  :where(img, video, canvas, svg) {
+    max-width: 100%;
+  }
+
+  :where(h1, h2, h3, h4) {
+    line-height: var(--line-heading);
+  }
+
+  :where(pre, code) {
+    overflow-wrap: anywhere;
+  }
+
+  :root[data-text-scale="large"] {
+    font-size: 112.5%;
+  }
+
+  :root[data-text-scale="larger"] {
+    font-size: 125%;
+  }
+
+  :root[data-density="spacious"] {
+    --space-1: .5rem;
+    --space-2: 1rem;
+    --space-3: 1.35rem;
+    --space-4: 1.9rem;
+    --space-5: 2.75rem;
+    --line-body: 1.85;
+  }
+
+  /* Use platform semantic colors instead of a single hard-coded yellow focus hue. */
+  :root[data-contrast="high"] {
+    --canvas: Canvas;
+    --surface: Canvas;
+    --surface-raised: Canvas;
+    --text: CanvasText;
+    --muted: CanvasText;
+    --border: CanvasText;
+    --link: LinkText;
+    --link-visited: VisitedText;
+    --accent: Highlight;
+    --accent-contrast: HighlightText;
+    --focus: Highlight;
+    --notice: Canvas;
+  }
+
+  :root[data-contrast="high"] :where(.notice, .status-card, .content-card, .policy-link, .accessibility-controls) {
+    border-width: 2px;
+  }
+
+  :root[data-contrast="high"] :focus-visible {
+    outline: 4px solid Highlight;
+    outline-offset: 3px;
+  }
+
+  :root[data-contrast="high"] a {
+    text-decoration-line: underline;
+    text-decoration-thickness: .14em;
+    text-underline-offset: .18em;
+  }
+}
+
+@layer components {
+  .accessibility-preferences summary,
+  .accessibility-controls select {
+    min-height: var(--control-min);
+  }
+
+  .accessibility-preferences summary:focus-visible,
+  .accessibility-controls :focus-visible {
+    outline: var(--focus-width) solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .accessibility-controls {
+    max-width: min(28rem, calc(100vw - 2rem));
+  }
+}
+
+/* Explicit in-product setting takes precedence; OS preference remains the default. */
+:root[data-motion="reduce"] *,
+:root[data-motion="reduce"] *::before,
+:root[data-motion="reduce"] *::after {
+  scroll-behavior: auto !important;
+  animation-duration: .01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .01ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="system"]) *,
+  :root:not([data-motion="system"]) *::before,
+  :root:not([data-motion="system"]) *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* System high-contrast / forced-colors modes remain authoritative. */
+@media (forced-colors: active) {
+  :where(.notice, .status-card, .content-card, .policy-link, .accessibility-controls) {
+    border: 1px solid CanvasText;
+  }
+
+  :focus-visible {
+    outline: 3px solid Highlight;
+    outline-offset: 3px;
+  }
+
+  .action-link,
+  button,
+  select {
+    forced-color-adjust: auto;
+  }
+}
+
+/* Reflow safety for narrow viewports and large text settings. */
+@media (max-width: 38rem) {
+  .home-hero,
+  .venue-panel,
+  .event-facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .event-facts > div + div {
+    border-inline-start: 0;
+    border-top: 1px solid var(--border);
+    padding-inline-start: 0;
+  }
+
+  .accessibility-preferences {
+    margin-inline-start: 0;
+    width: 100%;
+  }
+
+  .accessibility-controls {
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
