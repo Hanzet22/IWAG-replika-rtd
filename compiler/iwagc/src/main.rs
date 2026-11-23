@@ -2,8 +2,15 @@ use std::env;
 use std::fs;
 use std::path::{Component, Path, PathBuf};
 use std::process::{Command, ExitCode};
+use std::time::Instant;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
+
+struct Toolchain {
+    node: String,
+    npm: String,
+    cargo: String,
+}
 
 fn project_root() -> Result<PathBuf, String> {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
@@ -109,6 +116,20 @@ fn version_at_least(actual: &str, minimum: &str) -> bool {
     }
 }
 
+fn doctor(manifest: &str) -> Result<Toolchain, String> {
+    let minimum = manifest_value(manifest, "node_minimum").unwrap_or("22.23.4");
+    let node = command_version("node")?;
+    if !version_at_least(&node, minimum) {
+        return Err(format!("Node.js {minimum} or newer is required; found {node}"));
+    }
+    let npm = command_version("npm")?;
+    let cargo = command_version("cargo")?;
+    println!("node: {node}");
+    println!("npm: {npm}");
+    println!("cargo: {cargo}");
+    Ok(Toolchain { node, npm, cargo })
+}
+
 fn run_backend(root: &Path, backend_args: &[String]) -> Result<(), String> {
     let status = Command::new("npm")
         .args(["exec", "--", "astro"])
@@ -163,22 +184,9 @@ fn inspect(root: &Path, manifest: &str) -> Result<(), String> {
     Ok(())
 }
 
-fn doctor(manifest: &str) -> Result<(), String> {
-    let minimum = manifest_value(manifest, "node_minimum").unwrap_or("22.23.4");
-    let node = command_version("node")?;
-    println!("node: {node}");
-    if !version_at_least(&node, minimum) {
-        return Err(format!("Node.js {minimum} or newer is required; found {node}"));
-    }
-    for tool in ["npm", "cargo"] {
-        let value = command_version(tool)?;
-        println!("{tool}: {value}");
-    }
-    Ok(())
-}
-
 fn build(root: &Path, manifest: &str) -> Result<(), String> {
-    doctor(manifest)?;
+    let toolchain = doctor(manifest)?;
+    let started = Instant::now();
     let source_name = manifest_value(manifest, "source_root").unwrap_or("src");
     let output_name = manifest_value(manifest, "output_root").unwrap_or("dist");
     let archive_name = manifest_value(manifest, "archive_root").unwrap_or("archive/v1-reference");
@@ -215,16 +223,18 @@ fn build(root: &Path, manifest: &str) -> Result<(), String> {
     let html_output = walk_count_extension(&output, "html")?;
     if html_output == 0 { return Err("production output contains no HTML pages".into()); }
 
+    let elapsed_ms = started.elapsed().as_millis();
     let report_dir = root.join(".iwag-build");
     fs::create_dir_all(&report_dir).map_err(|e| format!("cannot create build report directory: {e}"))?;
     let report = format!(
-        "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"backend\": \"astro-vite\",\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output_html_files\": {},\n  \"status\": \"success\"\n}}\n",
-        VERSION, json_escape(source_name), json_escape(archive_name), json_escape(output_name),
-        astro, ts, js, css, html, html_output
+        "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"backend\": \"astro-vite\",\n  \"toolchain\": {{\"node\": \"{}\", \"npm\": \"{}\", \"cargo\": \"{}\"}},\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output_html_files\": {},\n  \"build_duration_ms\": {},\n  \"status\": \"success\"\n}}\n",
+        VERSION, json_escape(&toolchain.node), json_escape(&toolchain.npm), json_escape(&toolchain.cargo),
+        json_escape(source_name), json_escape(archive_name), json_escape(output_name),
+        astro, ts, js, css, html, html_output, elapsed_ms
     );
     fs::write(report_dir.join("iwag-build-report.json"), report)
         .map_err(|e| format!("cannot write build report: {e}"))?;
-    println!("[iwagc] validated {html_output} generated HTML files");
+    println!("[iwagc] validated {html_output} generated HTML files in {elapsed_ms} ms");
     println!("[iwagc] build report: .iwag-build/iwag-build-report.json");
     Ok(())
 }
@@ -236,7 +246,7 @@ fn main_result() -> Result<(), String> {
     let manifest = load_manifest(&root)?;
     match command.as_str() {
         "inspect" => inspect(&root, &manifest),
-        "doctor" => doctor(&manifest),
+        "doctor" => { doctor(&manifest)?; Ok(()) },
         "build" => build(&root, &manifest),
         "dev" | "preview" => {
             doctor(&manifest)?;
