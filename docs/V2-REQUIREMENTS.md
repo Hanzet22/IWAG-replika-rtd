@@ -51,7 +51,7 @@ The implementation must prioritize clarity, accessibility, privacy, maintainabil
 
 ### Stack decision
 
-ADR-0001 records Astro 7 with TypeScript and static output as the selected foundation after considering semantic output, static rendering, runtime cost, maintainability, security updates, localization, low-end performance and deployment portability.
+ADR-0001 records Astro 7 + TypeScript + Vite with static output as the only application and build foundation. Vue 3 is permitted only as a narrowly scoped Astro island; Tailwind CSS 4 is integrated through Vite without replacing the existing semantic component system. CSS Houdini, Canvas, SVG, WebGL, WebGPU and Rust/WASM remain progressive enhancements with non-JavaScript/static fallbacks. Compatible Next.js architectural patterns may be adapted, but a second Next.js application/runtime is explicitly out of scope.
 
 Reopen this decision only if a material requirement changes or measured limitations show that the current architecture cannot meet the product goals. Do not replace the stack solely because another framework is fashionable or because V1 used Astro.
 
@@ -294,3 +294,7 @@ Non-negotiable requirements:
 - Do not copy V1 legal wording, event rules, assets, staff details, photographs or brand elements without a documented rights basis and content-owner review.
 - Mark all event, venue, transport, visa, ticket, pricing, sponsorship and accessibility facts with a source and review date. Revalidate volatile information before release.
 - Do not publish legal compliance or accessibility conformance claims based only on automated checks or draft documentation.
+
+
+## Global UI/UX reconstruction
+Every tab and route must use the shared accessibility-first layer: predictable navigation, scalable text, contrast preferences, reduced-motion and content-spacing controls, semantic structure, meaningful text alternatives, visible keyboard focus and responsive layouts. This does not claim one configuration fits everyone or that WCAG conformance has been achieved.

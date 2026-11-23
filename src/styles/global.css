@@ -1,3 +1,21 @@
+@layer theme, reset, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@source "../components/**/*.{astro,vue,ts}";
+@source "../pages/**/*.{astro,ts}";
+
+@property --iwag-visual-progress {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --iwag-accent-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
 @font-face {
   font-family: "Alan Sans";
   src: url("/fonts/alan-sans/AlanSans%5Bwght%5D.woff2") format("woff2");
@@ -389,4 +407,90 @@
   background: var(--notice);
   color: var(--text);
   font-size: .9rem;
+}
+
+
+/* Draft status banner: visible at the top of every legal-policy page. */
+@layer components {
+  .legal-draft-banner {
+    --iwag-visual-progress: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .35rem .8rem;
+    min-height: 50px;
+    margin-block: 1rem 1.5rem;
+    padding: .7rem 1rem;
+    border: 2px solid var(--focus);
+    border-inline-start-width: calc(3px + var(--iwag-visual-progress) * 3px);
+    border-radius: .55rem;
+    background: var(--notice);
+    color: var(--text);
+    font-size: .95rem;
+    line-height: 1.45;
+  }
+  .legal-draft-banner strong { font-weight: 850; }
+  .legal-draft-banner small { display: block; flex-basis: 100%; color: var(--muted); font-size: .78rem; }
+  .graphics-lab { margin-block: 2rem 3rem; }
+  .graphics-stage {
+    --iwag-accent-angle: 0deg;
+    display: grid;
+    place-items: center;
+    min-height: 12rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: linear-gradient(var(--iwag-accent-angle), var(--surface-raised), var(--surface));
+  }
+  .graphics-stage svg, .graphics-stage canvas { width: 100%; max-width: 40rem; height: auto; }
+  .graphics-stage canvas { aspect-ratio: 640 / 240; }
+  .graphics-lab button {
+    min-height: 2.75rem;
+    margin-block: 1rem .5rem;
+    padding: .65rem 1rem;
+    border: 2px solid var(--accent);
+    border-radius: .55rem;
+    background: var(--accent);
+    color: var(--accent-contrast);
+    font: inherit;
+    font-weight: 750;
+    cursor: pointer;
+  }
+  .graphics-lab button:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+  .graphics-lab button:disabled { cursor: not-allowed; opacity: .65; }
+  .graphics-status { min-height: 1.8em; font-weight: 700; }
+}
+
+/* Shared accessibility-first UI layer applied to every route and tab. */
+@layer base {
+ :root{--reading-line:1.75} body{line-height:var(--reading-line)}
+ :root[data-text-scale="large"]{font-size:112.5%}
+ :root[data-text-scale="larger"]{font-size:125%}
+ :root[data-density="spacious"]{--space-2:1rem;--space-3:1.25rem;--space-4:1.75rem;--space-5:2.5rem}
+ :root[data-contrast="high"]{--border:currentColor;--muted:var(--text);--focus:#ffbf00}
+ :root[data-contrast="high"] a{text-decoration-thickness:.14em}
+}
+@layer components {
+ .accessibility-preferences{display:none;margin-inline-start:auto}
+ :root[data-js="true"] .accessibility-preferences{display:block}
+ .accessibility-preferences summary{cursor:pointer;display:inline-flex;align-items:center;min-height:2.75rem;padding:.4rem .75rem;border:1px solid var(--border);border-radius:.5rem;background:var(--surface);color:var(--text);font-weight:700}
+ .accessibility-controls{display:grid;grid-template-columns:minmax(7rem,auto) minmax(9rem,1fr);gap:.65rem;min-width:min(19rem,calc(100vw - 2rem));margin-top:.5rem;padding:1rem;border:1px solid var(--border);border-radius:.65rem;background:var(--surface-raised);color:var(--text)}
+ .accessibility-controls label{font-weight:700}.accessibility-controls select{width:100%;max-width:none}
+ .legal-draft-banner{display:grid;gap:.25rem;align-content:center;min-height:50px;margin-block:1rem 1.5rem;padding:.75rem 1rem;border:2px solid var(--focus);border-inline-start-width:6px;border-radius:.55rem;background:var(--notice);color:var(--text)}
+ .legal-draft-banner small{color:var(--muted)}
+ .policy-index{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem}
+ .policy-link{display:block;min-height:100%;padding:1rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+ .policy-section{margin-block:2rem;padding-block:.5rem;border-bottom:1px solid var(--border)}.policy-section p{max-width:72ch}
+}
+:root[data-motion="reduce"] *,:root[data-motion="reduce"] *::before,:root[data-motion="reduce"] *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+@media(prefers-reduced-motion:reduce){:root:not([data-motion="reduce"]) *,:root:not([data-motion="reduce"]) *::before,:root:not([data-motion="reduce"]) *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+@media(forced-colors:active){.legal-draft-banner,.policy-link,.accessibility-preferences summary{border:1px solid CanvasText}:focus-visible{outline:2px solid Highlight}}
+
+:root[data-density="spacious"] .page-content > * + * { margin-block-start: 1.75rem; }
+:root[data-density="spacious"] .home-section,
+:root[data-density="spacious"] .content-card,
+:root[data-density="spacious"] .notice { margin-block: 2rem; }
+@media (prefers-contrast: more) {
+  :root:not([data-contrast="normal"]) { --border: currentColor; --muted: var(--text); }
+  :root:not([data-contrast="normal"]) :focus-visible { outline-width: 4px; }
 }

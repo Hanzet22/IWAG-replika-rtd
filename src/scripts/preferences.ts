@@ -3,6 +3,7 @@ import { localeKeys } from "../i18n/locales";
 const themeSelect = document.querySelector<HTMLSelectElement>("[data-theme-choice]");
 const languageSelect = document.querySelector<HTMLSelectElement>("[data-language-choice]");
 const accentSelect = document.querySelector<HTMLInputElement>("[data-accent-choice]");
+const resetButton = document.querySelector<HTMLButtonElement>("[data-reset-preferences]");
 const root = document.documentElement;
 root.dataset.js = "true";
 const validThemes = ["system", "light", "black", "super-black", "amoled-black", "dynamic"];
@@ -57,7 +58,7 @@ function applyAccent(hex: string) {
   root.style.setProperty("--accent-contrast", contrast);
   root.style.setProperty("--link", `hsl(${h} 72% 24%)`);
   root.style.setProperty("--link-visited", `hsl(${(h + 58) % 360} 55% 25%)`);
-  root.style.setProperty("--focus", `hsl(${(h + 32) % 360} 68% 28%)`);
+  // Focus remains a semantic theme token and is not derived from the user accent.
 }
 
 function applyTheme(theme: string) {
@@ -107,5 +108,47 @@ languageSelect?.addEventListener("change", () => {
   if ((localeKeys as readonly string[]).includes(selected)) {
     const path = window.location.pathname.replace(/^\/[a-z-]+(?=\/|$)/, "");
     window.location.assign(`/${selected}${path || "/"}`);
+  }
+});
+
+const preferenceSelects = [
+ {key:"iwag-v2-text-scale",selector:"[data-text-scale]",attribute:"textScale",allowed:["normal","large","larger"],fallback:"normal"},
+ {key:"iwag-v2-contrast",selector:"[data-contrast-mode]",attribute:"contrast",allowed:["normal","high"],fallback:"normal"},
+ {key:"iwag-v2-motion",selector:"[data-motion-mode]",attribute:"motion",allowed:["system","reduce"],fallback:"system"}
+] as const;
+for(const item of preferenceSelects){
+ const select=document.querySelector<HTMLSelectElement>(item.selector);let value:string=item.fallback;
+ try{const saved=localStorage.getItem(item.key);if(saved&&(item.allowed as readonly string[]).includes(saved))value=saved;}catch{}
+ root.dataset[item.attribute]=value;
+ if(select){select.value=value;select.addEventListener("change",()=>{const next=select.value;if(!(item.allowed as readonly string[]).includes(next))return;root.dataset[item.attribute]=next;try{if(next===item.fallback)localStorage.removeItem(item.key);else localStorage.setItem(item.key,next);}catch{}});}
+}
+
+const densitySelect=document.querySelector<HTMLSelectElement>("[data-density-mode]");
+let density="normal";
+try{const saved=localStorage.getItem("iwag-v2-density");if(saved==="spacious")density=saved;}catch{}
+root.dataset.density=density;
+if(densitySelect){densitySelect.value=density;densitySelect.addEventListener("change",()=>{const next=densitySelect.value==="spacious"?"spacious":"normal";root.dataset.density=next;try{if(next==="normal")localStorage.removeItem("iwag-v2-density");else localStorage.setItem("iwag-v2-density",next);}catch{}});}
+
+resetButton?.addEventListener("click", () => {
+  for (const key of [storageKey, accentStorageKey, "iwag-v2-text-scale", "iwag-v2-contrast", "iwag-v2-motion", "iwag-v2-density"]) {
+    try { localStorage.removeItem(key); } catch { /* Preferences still reset for this page. */ }
+  }
+  selectedAccent = "#726550";
+  applyTheme("system");
+  applyAccent(selectedAccent);
+  root.dataset.textScale = "normal";
+  root.dataset.contrast = "normal";
+  root.dataset.motion = "system";
+  root.dataset.density = "normal";
+  if (accentSelect) accentSelect.value = selectedAccent;
+  const defaults: Array<[string, string]> = [
+    ["[data-text-scale]", "normal"],
+    ["[data-contrast-mode]", "normal"],
+    ["[data-motion-mode]", "system"],
+    ["[data-density-mode]", "normal"]
+  ];
+  for (const [selector, value] of defaults) {
+    const control = document.querySelector<HTMLSelectElement>(selector);
+    if (control) control.value = value;
   }
 });

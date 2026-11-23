@@ -32,11 +32,11 @@ Updated: 2026-11-23
 ## Intentionally not represented as complete
 
 - Official confirmation of every event detail, programme schedule, ticket release, and operational arrangement; current event content is a dated public-source snapshot only
-- Final Terms, Privacy Notice, and Code of Conduct — these must be fully rewritten independently and approved by the actual operator; V1 wording is not adopted
+- Terms, Privacy Notice, and Code of Conduct are independently authored working drafts; they are not approved or in force until the actual operator, data flows, and applicable legal requirements are verified
 - Organiser/controller identity and legal review
 - Final translations and editorial review for all locales
 - Full manual keyboard, screen-reader, TalkBack, zoom, and assistive-technology audit
-- WebGL/WebGPU enhancement (not required by the initial content shell)
+- Full WebGL/WebGPU rendering backend; the current lab only probes WebGL2 and detects WebGPU API exposure without creating a GPU device
 - Contact forms or attendee data collection
 - Production deployment and domain configuration
 
@@ -61,7 +61,7 @@ Updated: 2026-11-23
 ## Still blocked pending real-world verification
 
 - Actual legal operator, contracting party and data controller remain unverified.
-- Final Terms, Privacy Notice and Code of Conduct remain deferred for a full independent rewrite and cannot be approved or represented as official.
+- Terms, Privacy Notice and Code of Conduct drafts are present, but cannot be approved or represented as official until the actual operator and service model are verified and qualified legal review is completed.
 - No attendee registration, ticketing, payment, account, tracking or sensitive-data collection is enabled.
 - Legal applicability and final public policy require review against the real operator/service model by qualified Indonesian counsel.
 - WCAG Level A manual and assistive-technology review is still outstanding; this documentation is not a conformance claim.
@@ -74,3 +74,40 @@ Updated: 2026-11-23
 - [x] Preserved each selected font's original SIL Open Font License 1.1 notice and source README.
 - [x] Excluded Love Malia from the public build because its supplied notice grants personal use only; its binaries were not copied into V2 and were removed from the public font branch.
 - [x] Documented asset provenance and usage boundaries in `docs/FONT-LICENSING.md`.
+
+## Full-stack and policy-draft integration (2026-11-23)
+
+- [x] Kept Astro 7 + TypeScript + Vite as the only application/build pipeline.
+- [x] Added the official Vue 3 Astro renderer for isolated, visibility-hydrated UI islands.
+- [x] Added Tailwind CSS 4 through the official Vite plugin without enabling Tailwind Preflight over the existing reset/design system.
+- [x] Added CSS Houdini Properties and Values API registrations for typed visual custom properties; Paint Worklets remain optional and are not required.
+- [x] Added an opt-in graphics capability panel with an SVG baseline, user-triggered Canvas 2D rendering, WebGL2 capability probing, and WebGPU availability detection.
+- [x] Added an isolated Rust/WASM contrast utility source and an optional build script; normal Astro builds do not require Rust or generated WASM.
+- [x] Documented compatible Next.js architectural patterns and explicitly excluded the separate Next.js runtime/App Router from the single-app architecture.
+- [x] Added a 50px-minimum draft-status banner above the body of every Terms, Privacy, and Code of Conduct page.
+- [x] Added draft version/date metadata and clear non-official, unapproved, not-in-force wording in English and Indonesian.
+- [x] Existing Terms, Privacy, and Code of Conduct content is independently authored; it remains a working draft pending verification of the real operator, actual service/data flows, and qualified legal review.
+
+## Remaining real-world release blockers
+
+- [ ] Confirm legal operator, controller, service scope, event authority, and responsible policy owner.
+- [ ] Verify hosting/CDN/DNS providers, access logs, retention, international transfers, and actual cookie behavior.
+- [ ] Obtain qualified legal review and explicit approval before any policy is represented as official or in force.
+- [ ] Complete manual WCAG 2.2 Level A review with keyboard, screen readers, TalkBack, zoom/reflow, and representative disabled users.
+- [ ] Verify actual browser/device support before enabling WebGPU or other GPU features in production.
+- [ ] Verify Rust/WASM build output and license/dependency inventory before shipping generated binaries.
+
+## Global accessibility and legal rewrite
+
+- [x] Added global text-scale, high-contrast, reduced-motion and content-spacing controls with local-only preference storage.
+- [x] Added a single reset action that restores theme, accent, text scale, contrast, motion, and spacing preferences to their defaults.
+- [x] Reworked primary navigation around Home, Discover, Plan your visit, Community, and Updates; added dedicated Plan your visit and Community landing routes.
+- [x] Added nine separately addressable legal policy pages with English and Indonesian draft copy.
+- [x] Updated the legal banner to drafting-only, not official, not verified, not approved and not in force.
+- [x] Added a policy index linking all nine documents.
+- [x] Added an independent V2 design-system specification at `docs/V2-DESIGN-SYSTEM.md`.
+- [x] Added shared design tokens and an imported global stylesheet for responsive reflow, user text scaling, high-contrast system colors, focus visibility, reduced motion, and narrow-screen controls.
+- [ ] Audit all routes and components for actual alt text quality, meaningful/decorative image handling, and text equivalents.
+- [ ] Manual review across all routes, locales, viewports and assistive technologies remains outstanding.
+- [ ] Verify deployed cookies, hosting/CDN logs, vendors, data locations, retention and transfers.
+- [ ] Qualified legal review and operator approval remain mandatory before any document becomes operative.

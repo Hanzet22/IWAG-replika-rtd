@@ -1,0 +1,11 @@
+[package]
+name = "iwag-contrast-engine"
+version = "0.1.0"
+edition = "2021"
+description = "Optional Rust/WASM colour-contrast utility for the independent IWAG V2 project"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
