@@ -75,7 +75,6 @@ Updated: 2026-11-23
 - [x] Excluded Love Malia from the public build because its supplied notice grants personal use only; its binaries were not copied into V2 and were removed from the public font branch.
 - [x] Documented asset provenance and usage boundaries in `docs/FONT-LICENSING.md`.
 
-
 ## Full-stack and policy-draft integration (2026-11-23)
 
 - [x] Kept Astro 7 + TypeScript + Vite as the only application/build pipeline.
@@ -98,12 +97,15 @@ Updated: 2026-11-23
 - [ ] Verify actual browser/device support before enabling WebGPU or other GPU features in production.
 - [ ] Verify Rust/WASM build output and license/dependency inventory before shipping generated binaries.
 
-
 ## Global accessibility and legal rewrite
+
 - [x] Added global text-scale, high-contrast, reduced-motion and content-spacing controls with local-only preference storage.
 - [x] Added nine separately addressable legal policy pages with English and Indonesian draft copy.
 - [x] Updated the legal banner to drafting-only, not official, not verified, not approved and not in force.
 - [x] Added a policy index linking all nine documents.
+- [x] Added an independent V2 design-system specification at `docs/V2-DESIGN-SYSTEM.md`.
+- [x] Added shared design tokens and an imported global stylesheet for responsive reflow, user text scaling, high-contrast system colors, focus visibility, reduced motion, and narrow-screen controls.
+- [ ] Audit all routes and components for actual alt text quality, meaningful/decorative image handling, and text equivalents.
 - [ ] Manual review across all routes, locales, viewports and assistive technologies remains outstanding.
 - [ ] Verify deployed cookies, hosting/CDN logs, vendors, data locations, retention and transfers.
 - [ ] Qualified legal review and operator approval remain mandatory before any document becomes operative.
