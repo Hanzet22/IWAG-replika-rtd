@@ -301,7 +301,8 @@ fn build(root: &Path, manifest: &str) -> Result<(), String> {
     );
     fs::write(report_dir.join("iwag-build-report.json"), report)
         .map_err(|e| format!("cannot write build report: {e}"))?;
-    println!("[iwagc] validated {} HTML files, {} CSS files, {} JS files, {} images and {} fonts", output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts);\n    println!("[iwagc] verified {required_routes_checked} required root and locale routes");
+    println!("[iwagc] validated {} HTML files, {} CSS files, {} JS files, {} images and {} fonts", output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts);
+    println!("[iwagc] verified {required_routes_checked} required root and locale routes");
     println!("[iwagc] output footprint: {} bytes across {} files; build duration: {elapsed_ms} ms", output_stats.total_bytes, output_stats.files);
     println!("[iwagc] build report: .iwag-build/iwag-build-report.json");
     Ok(())
