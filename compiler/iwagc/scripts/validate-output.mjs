@@ -1,7 +1,6 @@
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
-import { pathToFileURL } from "node:url";
 
 const outputRoot = path.resolve(process.cwd(), process.argv[2] ?? "dist");
 const origin = "https://iwag-v2.invalid";
@@ -28,7 +27,7 @@ function publicUrlForFile(file) {
   return new URL(publicPath, origin);
 }
 
-async function resolveLocalReference(raw, base, owner, kind, htmlText) {
+async function resolveLocalReference(raw, base, owner, kind) {
   const value = raw.trim();
   if (!value || value.startsWith("#") === false && /^(?:data:|blob:|mailto:|tel:|javascript:|https?:|\/\/)/i.test(value)) return;
   let url;
@@ -69,7 +68,8 @@ async function resolveLocalReference(raw, base, owner, kind, htmlText) {
 
   if (kind === "href" && url.hash && path.extname(target).toLowerCase() === ".html") {
     const anchor = decodeURIComponent(url.hash.slice(1));
-    if (anchor && !new RegExp(`(?:id|name)=[\"']${anchor.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}[\"']`).test(htmlText ?? "")) {
+    const targetHtml = await readFile(target, "utf8");
+    if (anchor && !new RegExp(`(?:id|name)=[\"']${anchor.replace(/[.*+?^${}()|[\]\\]/g, "\\    if (anchor && !new RegExp(`(?:id|name)=[\"']${anchor.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}[\"']`).test(htmlText ?? "")) {")}[\"']`).test(targetHtml)) {
       errors.push(`${owner}: missing fragment target "${value}"`);
       return;
     }
@@ -88,7 +88,7 @@ async function main() {
     const relative = path.relative(outputRoot, file);
     const attrs = /\b(href|src|poster)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi;
     for (const match of html.matchAll(attrs)) {
-      await resolveLocalReference(match[2] ?? match[3] ?? "", base, relative, match[1].toLowerCase(), html);
+      await resolveLocalReference(match[2] ?? match[3] ?? "", base, relative, match[1].toLowerCase());
     }
   }
 
