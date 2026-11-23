@@ -72,7 +72,7 @@ The design should reduce unnecessary memory, attention, and decision demands:
 - Put important information in the page, not only in tooltips or transient notices.
 - Break long information into meaningful sections without hiding essential context.
 - Make the current location and next step apparent.
-- Keep global controls in consistent locations.
+- Keep global controls in consistent locations and provide a visible reset-to-defaults action for preferences.
 - Avoid competing banners, autoplay, animated decoration, unnecessary prompts, and clutter.
 - Explain uncommon terms and abbreviations.
 - Provide concrete examples where abstract wording may be unclear.
