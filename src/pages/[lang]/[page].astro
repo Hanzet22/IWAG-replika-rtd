@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import GraphicsCapabilityLab from "../../components/GraphicsCapabilityLab.vue";
+import ContrastChecker from "../../components/ContrastChecker.vue";
 import { legalPolicies, legalPolicySlugs, legalPolicyLinks } from "../../data/legal";
 import { getMessages } from "../../i18n/ui";
 import { isLocale, localeKeys } from "../../i18n/locales";
@@ -327,6 +328,7 @@ const copy = policy?.summary ?? (isConduct
       </ul>
       <p class="muted">{lang === "id" ? "Kanal kontak berbasis teks dan akomodasi acara akan diterbitkan setelah alamat kontak serta layanan pendukung diverifikasi." : "Text-based contact channels and event accommodations will be published after contact details and support services are verified."}</p>
     </section>}
+    {isAccessibility && <ContrastChecker client:visible lang={lang} />}
     {isAccessibility && <GraphicsCapabilityLab client:visible lang={lang} />}
     {isLegal && policy && <section class="policy-document" aria-label={policy.title}>
       {policy.sections.map((section) => <section class="policy-section"><h2>{section.heading}</h2>{section.body.map((paragraph) => <p>{paragraph}</p>)}</section>)}
