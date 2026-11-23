@@ -121,3 +121,9 @@ for(const item of preferenceSelects){
  root.dataset[item.attribute]=value;
  if(select){select.value=value;select.addEventListener("change",()=>{const next=select.value;if(!(item.allowed as readonly string[]).includes(next))return;root.dataset[item.attribute]=next;try{if(next===item.fallback)localStorage.removeItem(item.key);else localStorage.setItem(item.key,next);}catch{}});}
 }
+
+const densitySelect=document.querySelector<HTMLSelectElement>("[data-density-mode]");
+let density="normal";
+try{const saved=localStorage.getItem("iwag-v2-density");if(saved==="spacious")density=saved;}catch{}
+root.dataset.density=density;
+if(densitySelect){densitySelect.value=density;densitySelect.addEventListener("change",()=>{const next=densitySelect.value==="spacious"?"spacious":"normal";root.dataset.density=next;try{if(next==="normal")localStorage.removeItem("iwag-v2-density");else localStorage.setItem("iwag-v2-density",next);}catch{}});}
