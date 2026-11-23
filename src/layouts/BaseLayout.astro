@@ -35,7 +35,6 @@ const hasMalayTranslation = ["/", "/events", "/events/", "/events/iwag-2027", "/
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>{title} · IWAG V2 Independent Project</title>
     <link rel="preload" href="/fonts/alan-sans/AlanSans%5Bwght%5D.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/amarna/Amarna[ital,wght].woff2" as="font" type="font/woff2" crossorigin />
     {localeKeys.filter((locale) => locale !== "ms-my" || hasMalayTranslation).map((locale) => <link rel="alternate" hreflang={locales[locale].htmlLang} href={new URL(`/${locale}${pathWithoutLocale}`, Astro.site ?? Astro.url).toString()} />)}
   </head>
   <body>
