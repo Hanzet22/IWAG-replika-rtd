@@ -133,3 +133,7 @@ Updated: 2026-11-23
 - [ ] Measure JavaScript/CSS transfer, LCP/INP/CLS, CPU, memory, GPU, battery and thermal behavior on representative mid/low-end devices.
 
 CI runs are diagnostic evidence only. Cancelled or pending workflow runs do not close the reconstruction scope or halt engineering work.
+
+- [x] Added a user-activated Canvas motion preview capped at 30 fps; it stops when the document is hidden, the lab leaves the viewport, or reduced-motion is enabled.
+- [x] Kept SVG as the static fallback; WebGL2 is probed with context release and WebGPU is detected without requesting an adapter/device.
+- [ ] Implement or adopt a real WebGL/WebGPU renderer only if a measured use case justifies its startup, memory and GPU costs.
