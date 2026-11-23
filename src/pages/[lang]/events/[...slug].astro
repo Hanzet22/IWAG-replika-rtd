@@ -22,7 +22,7 @@ const labels = {
   "ms-my": { eyebrow: "Maklumat acara", details: "Butiran acara", date: "Tarikh", end: "Tamat", venue: "Lokasi", format: "Format", online: "Dalam talian", inPerson: "Bersemuka", access: "Maklumat kebolehcapaian", registration: "Maklumat pendaftaran" }
 }[lang];
 const dateLabel = event.data.start
-  ? event.data.start.toLocaleString(lang, { dateStyle: "long", timeStyle: "short", timeZone: event.data.timezone })
+  ? event.data.start.toLocaleDateString(lang, { dateStyle: "long", timeZone: event.data.timezone })
   : null;
 ---
 <BaseLayout lang={lang} title={event.data.title} description={event.data.summary}>
@@ -33,7 +33,7 @@ const dateLabel = event.data.start
     <section class="content-card" aria-labelledby="event-details">
       <h2 id="event-details">{labels.details}</h2>
       {dateLabel && <p><strong>{labels.date}:</strong> {dateLabel}</p>}
-      {event.data.end && <p><strong>{labels.end}:</strong> {event.data.end.toLocaleString(lang, { dateStyle: "long", timeStyle: "short", timeZone: event.data.timezone })}</p>}
+      {event.data.end && <p><strong>{labels.end}:</strong> {event.data.end.toLocaleDateString(lang, { dateStyle: "long", timeZone: event.data.timezone })}</p>}
       {event.data.venue && <p><strong>{labels.venue}:</strong> {event.data.venue}</p>}
       <p><strong>{labels.format}:</strong> {event.data.online ? labels.online : labels.inPerson}</p>
       {event.data.accessInformation.length > 0 && <><h3>{labels.access}</h3><ul>{event.data.accessInformation.map((item) => <li>{item}</li>)}</ul></>}
