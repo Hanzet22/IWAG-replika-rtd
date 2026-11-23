@@ -196,3 +196,5 @@ The latest implementation is a working reconstruction foundation and shared home
 - [x] Rust Active Compiler now reconciles the generated route manifest count with the complete HTML file count and records generated_routes in its machine-readable report.
 
 - [x] Marked the homepage event date range and recent update dates with semantic time elements and machine-readable datetime values.
+
+- [x] Wired the existing dynamic link/visited-link tokens into global anchor styles and added distinct high-contrast default pairs for light and dark themes.
