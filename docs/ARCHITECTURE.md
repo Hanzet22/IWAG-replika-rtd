@@ -102,6 +102,7 @@ Do not introduce a second CSS reset or duplicate the same design tokens across a
 - Static HTML is the default; hydrate only components that need interaction.
 - No analytics, tracking or remote font service is required by the architecture.
 - No graphics context or WebGPU device is created during initial page load.
+- Narrow-screen primary navigation uses a native disclosure control; the desktop navigation is hidden at the same breakpoint so duplicate links are not exposed to assistive technology.
 - Motion is opt-in and must respect reduced-motion settings.
 - SVG and semantic HTML remain available when Canvas, WebGL, WebGPU or WASM are unavailable.
 - Measure transfer, main-thread work, memory and real-device behavior before adopting heavier libraries.
