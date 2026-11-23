@@ -294,3 +294,7 @@ Non-negotiable requirements:
 - Do not copy V1 legal wording, event rules, assets, staff details, photographs or brand elements without a documented rights basis and content-owner review.
 - Mark all event, venue, transport, visa, ticket, pricing, sponsorship and accessibility facts with a source and review date. Revalidate volatile information before release.
 - Do not publish legal compliance or accessibility conformance claims based only on automated checks or draft documentation.
+
+
+## Global UI/UX reconstruction
+Every tab and route must use the shared accessibility-first layer: predictable navigation, scalable text, contrast preferences, reduced-motion controls, semantic structure, meaningful text alternatives, visible keyboard focus and responsive layouts. This does not claim one configuration fits everyone or that WCAG conformance has been achieved.
