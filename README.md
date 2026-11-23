@@ -21,7 +21,7 @@ The current V2 implementation includes:
 - Historical update archive covering the discovered 2024–2026 update routes
 - Nine staff-role overview routes, clearly marked as non-official summaries where source pages are unavailable
 - Dated event and pass information snapshots; no live ticket sales, registration, accounts, or payments
-- Independently authored Terms, Privacy, and Code of Conduct working drafts; none are approved or in force until the actual operator and legal review are confirmed
+- Nine independently drafted bilingual legal and governance documents, all explicitly marked drafting-only and not in force
 - WCAG 2.2 Level A as the engineering target only, without claiming conformance or pursuing certification
 
 Event details are independently rewritten source snapshots, not official IWAG information or guarantees. Volatile facts must be rechecked before publication. Terms, Privacy, and Code of Conduct are independently written V2 working drafts, not copied from V1 and not final public policies. They must be reviewed and approved after the actual operator, data flows, responsibilities, and applicable jurisdictions are verified. Do not treat preview copy as an approved legal policy.
@@ -56,6 +56,7 @@ See:
 - [ADR-0001: static-first Astro architecture](docs/ADR-0001-architecture.md)
 - [Stack integration map](docs/STACK-INTEGRATION.md)
 - [Legal policy draft status](docs/POLICY-DRAFTS.md)
+- [Legal rewrite research](docs/LEGAL-REWRITE-RESEARCH.md)
 - [Implementation status](docs/IMPLEMENTATION-STATUS.md)
 
 ## Guardrails
