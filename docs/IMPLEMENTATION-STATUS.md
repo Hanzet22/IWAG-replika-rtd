@@ -183,3 +183,11 @@ The latest implementation is a working reconstruction foundation and shared home
 - [x] Pinned wasm-pack to 0.13.1 in the production workflow.
 
 - [x] Investigated the yanked `spin 0.9.8` warning from wasm-pack 0.13.1 and moved the CI pin to wasm-pack 0.15.0; the next build log must confirm the warning is gone.
+
+- [x] Repaired literal escaped-newline sequences in the global breadcrumb CSS block.
+- [x] Added a native, keyboard-operable mobile navigation disclosure for narrow viewports; core navigation works without JavaScript.
+- [x] Preserved query strings and fragments during locale changes.
+- [x] Extended generated-output validation to local srcset references and same-site HTML fragments.
+- [x] Added a generated route manifest outside public output.
+- [ ] Verify the mobile navigation with keyboard, zoom/reflow and Android TalkBack.
+- [ ] Review route-manifest and fragment-validator results on the latest full build.
