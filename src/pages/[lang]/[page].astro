@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getMessages } from "../../i18n/ui";
+import { isLocale, localeKeys } from "../../i18n/locales";
+
+const pageKeys = ["about", "events", "accessibility", "terms", "privacy", "code-of-conduct"] as const;
+type PageKey = typeof pageKeys[number];
+
+const pageCopy: Record<string, Record<PageKey, { title: string; body: string; note?: string }>> = {
+  en: {
+    about: { title: "About this project", body: "IWAG V2 is an independent re-engineering exercise based on a separately archived reference website. The V2 source is being rebuilt around semantic HTML, static delivery, maintainable content, privacy minimisation, and accessible interaction.", note: "This project is not affiliated with IWAG or its organisers." },
+    events: { title: "Events", body: "Event schedules, registration details, venue information, and ticketing have not been published in this development preview." },
+    accessibility: { title: "Accessibility", body: "The stated conformance target is WCAG 2.2 Level A. The implementation also adopts selected usability improvements beyond that target where practical. This preview has not completed a full manual or assistive-technology audit.", note: "Contact and accommodation procedures will be documented before any public event information is presented." },
+    terms: { title: "Terms", body: "Terms are not yet published. This page is intentionally a placeholder until the responsible operator, scope, and applicable legal review are confirmed.", note: "Do not treat this preview as an agreement or legal notice." },
+    privacy: { title: "Privacy", body: "A complete privacy notice is not yet published. Before collecting information, the project must document its data controller, purposes, legal basis, fields, processors, retention periods, user rights, and contact route.", note: "This preview does not provide attendee registration or account creation." },
+    "code-of-conduct": { title: "Code of Conduct", body: "A complete Code of Conduct is not yet published. Reporting channels, moderation scope, response procedures, and accessibility accommodations must be confirmed before this policy is activated.", note: "This placeholder is not an active event policy." }
+  },
+  id: {
+    about: { title: "Tentang proyek ini", body: "IWAG V2 adalah latihan rekayasa ulang independen berdasarkan situs referensi yang diarsipkan secara terpisah. Source V2 dibangun ulang dengan HTML semantik, distribusi statis, konten yang mudah dirawat, minimisasi privasi, dan interaksi yang aksesibel.", note: "Proyek ini tidak berafiliasi dengan IWAG atau penyelenggaranya." },
+    events: { title: "Acara", body: "Jadwal acara, detail pendaftaran, informasi lokasi, dan tiket belum diterbitkan dalam pratinjau pengembangan ini." },
+    accessibility: { title: "Aksesibilitas", body: "Target kesesuaian yang ditetapkan adalah WCAG 2.2 Level A. Implementasi juga mengadopsi sejumlah peningkatan kegunaan di luar target tersebut jika memungkinkan. Pratinjau ini belum menyelesaikan audit manual maupun teknologi bantu.", note: "Kontak dan prosedur akomodasi akan didokumentasikan sebelum informasi acara publik ditampilkan." },
+    terms: { title: "Ketentuan", body: "Ketentuan belum diterbitkan. Halaman ini sengaja menjadi placeholder sampai operator yang bertanggung jawab, cakupan, dan tinjauan hukum yang berlaku dikonfirmasi.", note: "Jangan perlakukan pratinjau ini sebagai perjanjian atau pemberitahuan hukum." },
+    privacy: { title: "Privasi", body: "Pemberitahuan privasi lengkap belum diterbitkan. Sebelum mengumpulkan informasi, proyek harus mendokumentasikan pengendali data, tujuan, dasar hukum, jenis data, pemroses, masa penyimpanan, hak pengguna, dan jalur kontak.", note: "Pratinjau ini tidak menyediakan pendaftaran peserta atau pembuatan akun." },
+    "code-of-conduct": { title: "Kode Etik", body: "Kode Etik lengkap belum diterbitkan. Kanal pelaporan, cakupan moderasi, prosedur respons, dan akomodasi aksesibilitas harus dikonfirmasi sebelum kebijakan ini diaktifkan.", note: "Placeholder ini bukan kebijakan acara yang sedang berlaku." }
+  },
+  "en-sg": {
+    about: { title: "About this project", body: "IWAG V2 is an independent re-engineering exercise based on a separately archived reference website. The V2 source is being rebuilt around semantic HTML, static delivery, maintainable content, privacy minimisation, and accessible interaction.", note: "This project is not affiliated with IWAG or its organisers." },
+    events: { title: "Events", body: "Event schedules, registration details, venue information, and ticketing have not been published in this development preview." },
+    accessibility: { title: "Accessibility", body: "The stated conformance target is WCAG 2.2 Level A. This preview has not completed a full manual or assistive-technology audit.", note: "Contact and accommodation procedures will be documented before any public event information is presented." },
+    terms: { title: "Terms", body: "Terms are not yet published. This page is intentionally a placeholder pending confirmation of the responsible operator and legal review." },
+    privacy: { title: "Privacy", body: "A complete privacy notice is not yet published. Data purposes, legal basis, processors, retention, and user rights must be documented before collection begins." },
+    "code-of-conduct": { title: "Code of Conduct", body: "A complete Code of Conduct is not yet published. Reporting and response procedures must be confirmed before activation." }
+  },
+  "ms-my": {
+    about: { title: "Perihal projek ini", body: "IWAG V2 ialah latihan kejuruteraan semula bebas berdasarkan laman rujukan yang diarkibkan secara berasingan. Source V2 dibina semula dengan HTML semantik, penyampaian statik, kandungan yang mudah diselenggara, peminimuman privasi dan interaksi yang boleh diakses.", note: "Projek ini tidak bergabung dengan IWAG atau penganjurnya." },
+    events: { title: "Acara", body: "Jadual acara, butiran pendaftaran, maklumat lokasi dan tiket belum diterbitkan dalam pratonton pembangunan ini." },
+    accessibility: { title: "Kebolehcapaian", body: "Sasaran pematuhan yang dinyatakan ialah WCAG 2.2 Tahap A. Pratonton ini belum melengkapkan audit manual atau teknologi bantuan.", note: "Prosedur hubungan dan kemudahan akses akan didokumenkan sebelum maklumat acara awam dipaparkan." },
+    terms: { title: "Terma", body: "Terma belum diterbitkan. Halaman ini sengaja menjadi ruang letak sehingga pengendali yang bertanggungjawab dan semakan undang-undang disahkan." },
+    privacy: { title: "Privasi", body: "Notis privasi lengkap belum diterbitkan. Tujuan data, asas undang-undang, pemproses, tempoh penyimpanan dan hak pengguna mesti didokumenkan sebelum data dikumpulkan." },
+    "code-of-conduct": { title: "Kod Tatakelakuan", body: "Kod Tatakelakuan lengkap belum diterbitkan. Prosedur laporan dan tindak balas mesti disahkan sebelum diaktifkan." }
+  }
+};
+
+export function getStaticPaths() {
+  return localeKeys.flatMap((lang) => pageKeys.map((page) => ({ params: { lang, page } })));
+}
+
+const langParam = Astro.params.lang;
+const pageParam = Astro.params.page as PageKey;
+const lang = isLocale(langParam) ? langParam : "en";
+const t = getMessages(lang);
+const fallback = pageCopy[lang]?.[pageParam] ?? pageCopy.en[pageParam];
+---
+<BaseLayout lang={lang} title={fallback.title} description={fallback.body}>
+  <article class="page-content">
+    <p class="eyebrow">IWAG V2 · Independent project</p>
+    <h1>{fallback.title}</h1>
+    <p class="lead">{fallback.body}</p>
+    {fallback.note && <aside class="notice"><p>{fallback.note}</p></aside>}
+    {pageParam === "accessibility" && <section class="content-card"><h2>{t.level}</h2><p>{t.levelText}</p></section>}
+  </article>
+</BaseLayout>
