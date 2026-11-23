@@ -1,0 +1,88 @@
+---
+import "../styles/global.css";
+import { getMessages } from "../i18n/ui";
+import { isLocale, localeKeys, locales } from "../i18n/locales";
+
+interface Props {
+  lang: string;
+  title: string;
+  description: string;
+  contentLang?: string;
+}
+const { lang: requestedLang, title, description, contentLang } = Astro.props;
+const lang = isLocale(requestedLang) ? requestedLang : "en";
+const t = getMessages(lang);
+const htmlLang = contentLang ?? locales[lang].htmlLang;
+const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(?=/|$)"), "");
+const hasMalayTranslation = ["/", "/events", "/events/", "/events/iwag-2027", "/events/iwag-2027/"].includes(pathWithoutLocale);
+---
+<!doctype html>
+<html lang={htmlLang} data-theme="system">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f0eeeb" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>{title} · IWAG V2 Independent Project</title>
+    <link rel="preload" href="/fonts/alan-sans/AlanSans%5Bwght%5D.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/amarna/Amarna%5Bital%2Cwght%5D.woff2" as="font" type="font/woff2" crossorigin />
+    {localeKeys.filter((locale) => locale !== "ms-my" || hasMalayTranslation).map((locale) => <link rel="alternate" hreflang={locales[locale].htmlLang} href={new URL(`/${locale}${pathWithoutLocale}`, Astro.site ?? Astro.url).toString()} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.skip}</a>
+    <header class="site-header" lang={locales[lang].htmlLang}>
+      <a class="wordmark" href={`/${lang}/`} aria-label="IWAG V2 independent project home">IWAG<span>V2</span></a>
+      <nav class="primary-nav" aria-label={t.primaryNavigation}>
+        <a href={`/${lang}/`}>{t.home}</a>
+        <a href={`/${lang}/about/`}>{t.about}</a>
+        <a href={`/${lang}/events/`}>{lang === "id" || lang === "ms-my" ? "Acara" : "Events"}</a>
+        <a href={`/${lang}/location/`}>{lang === "id" ? "Lokasi" : "Venue"}</a>
+        <a href={`/${lang}/participate/`}>{lang === "id" ? "Partisipasi" : "Participate"}</a>
+        <a href={`/${lang}/international-travelers-guide/`}>{lang === "id" ? "Panduan" : "Travel Guide"}</a>
+        <a href={`/${lang}/updates/`}>{lang === "id" ? "Pembaruan" : "Updates"}</a>
+      </nav>
+      <div class="preferences">
+        <label for="language-choice">{t.language}</label>
+        <select id="language-choice" name="language" data-language-choice>
+          {localeKeys.map((locale) => <option value={locale} selected={locale === lang}>{locales[locale].nativeName}</option>)}
+        </select>
+        <label for="theme-choice">{t.theme}</label>
+        <select id="theme-choice" name="theme" data-theme-choice>
+          <option value="system">{t.system}</option>
+          <option value="light">{t.light}</option>
+          <option value="black">{t.black}</option>
+          <option value="super-black">{t.superBlack}</option>
+          <option value="amoled-black">{t.amoled}</option>
+          <option value="dynamic">{t.dynamic}</option>
+        </select>
+        <label for="accent-choice" data-accent-label>{t.accent}</label>
+        <input id="accent-choice" type="color" value="#726550" data-accent-choice aria-label={t.accent} />
+      </div>
+    </header>
+    <main id="main" tabindex="-1" lang={htmlLang}>
+      {htmlLang === "en" && lang !== "en" && lang !== "en-sg" && <p class="translation-note" lang={locales[lang].htmlLang}>{lang === "id" ? "Halaman ini belum diterjemahkan sepenuhnya ke Bahasa Indonesia. Versi bahasa Inggris ditampilkan." : "Halaman ini belum diterjemahkan ke Bahasa Melayu. Versi bahasa Inggeris dipaparkan."}</p>}
+      <slot />
+    </main>
+    <footer class="site-footer" lang={locales[lang].htmlLang}>
+      <p>{t.footer}</p>
+      <nav aria-label={lang === "id" ? "Informasi lainnya" : "More information"}>
+        <a href={`/${lang}/events/`}>{lang === "id" ? "Acara" : "Events"}</a>
+        <a href={`/${lang}/join-iwag-team/`}>{lang === "id" ? "Tim" : "Team"}</a>
+        <a href={`/${lang}/links/`}>{lang === "id" ? "Tautan" : "Links"}</a>
+        <a href={`/${lang}/policy/`}>{lang === "id" ? "Kebijakan" : "Policies"}</a>
+        <a href={`/${lang}/accessibility/`}>{lang === "id" ? "Aksesibilitas" : "Accessibility"}</a>
+      </nav>
+      <nav aria-label={t.legalNavigation}>
+        <a href={`/${lang}/terms/`}>{t.terms}</a>
+        <a href={`/${lang}/privacy/`}>{t.privacy}</a>
+        <a href={`/${lang}/code-of-conduct/`}>{t.conduct}</a>
+      </nav>
+      <p class="footer-note">{t.footerNote}</p>
+    </footer>
+    <script>
+      import "../scripts/preferences.ts";
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { isLocale } from "../../../i18n/locales";
+
+export async function getStaticPaths() {
+  return (["en", "id", "en-sg", "ms-my"] as const).map((lang) => ({ params: { lang } }));
+}
+
+const langParam = Astro.params.lang;
+const lang = isLocale(langParam) ? langParam : "en";
+const events = (await getCollection("events", ({ data }) => data.locale === lang && data.status === "published"))
+  .sort((a, b) => (a.data.start?.getTime() ?? 0) - (b.data.start?.getTime() ?? 0));
+const copy = {
+  en: { title: "Events", eyebrow: "Event information", empty: "No published events yet", message: "Event listings are independently written from dated public announcements. Check the organiser for the latest schedule, ticket and access updates." },
+  id: { title: "Acara", eyebrow: "Informasi acara", empty: "Belum ada acara yang diterbitkan", message: "Daftar acara ditulis secara independen berdasarkan pengumuman publik bertanggal. Periksa kanal penyelenggara untuk pembaruan jadwal, tiket, dan akses." },
+  "en-sg": { title: "Events", eyebrow: "Event information", empty: "No published events yet", message: "Event information will appear only after its schedule, venue, accessibility details, and status have been verified." },
+  "ms-my": { title: "Acara", eyebrow: "Maklumat acara", empty: "Belum ada acara diterbitkan", message: "Senarai acara ditulis secara bebas berdasarkan pengumuman awam bertarikh. Semak saluran penganjur untuk kemas kini jadual, tiket dan akses." }
+}[lang];
+---
+<BaseLayout lang={lang} title={copy.title} description={copy.message}>
+  <section class="page-content">
+    <p class="eyebrow">IWAG V2 · {copy.eyebrow}</p>
+    <h1>{copy.title}</h1>
+    {events.length === 0 ? (
+      <aside class="notice">
+        <h2>{copy.empty}</h2>
+        <p>{copy.message}</p>
+      </aside>
+    ) : (
+      <ul class="event-list">
+        {events.map((event) => (
+          <li class="content-card">
+            <h2><a href={`/${lang}/events/${event.id.split("/").slice(1).join("/")}/`}>{event.data.title}</a></h2>
+            <p>{event.data.summary}</p>
+            {event.data.start && <p>{event.data.start.toLocaleDateString(lang, { dateStyle: "long", timeZone: event.data.timezone })}</p>}
+            {event.data.venue && <p>{event.data.venue}</p>}
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</BaseLayout>

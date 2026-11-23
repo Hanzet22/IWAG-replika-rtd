@@ -1,0 +1,306 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getMessages } from "../../i18n/ui";
+import { isLocale, localeKeys } from "../../i18n/locales";
+
+const pageTitles: Record<string, Record<string, string>> = {
+  en: {
+    about: "About this project", accessibility: "Accessibility", brand: "Brand resources",
+    coc: "Code of Conduct", "code-of-conduct": "Code of Conduct", dealers: "Dealers",
+    events: "Events", "join-iwag-team": "Join the team", links: "Links",
+    location: "Location", participate: "Participate", policy: "Policies",
+    privacy: "Privacy", terms: "Terms", tnc: "Terms and Conditions", updates: "Updates"
+  },
+  id: {
+    about: "Tentang proyek ini", accessibility: "Aksesibilitas", brand: "Sumber daya merek",
+    coc: "Kode Etik", "code-of-conduct": "Kode Etik", dealers: "Dealer",
+    events: "Acara", "join-iwag-team": "Bergabung dengan tim", links: "Tautan",
+    location: "Lokasi", participate: "Partisipasi", policy: "Kebijakan",
+    privacy: "Privasi", terms: "Ketentuan", tnc: "Syarat dan Ketentuan", updates: "Pembaruan"
+  },
+  "en-sg": {
+    about: "About this project", accessibility: "Accessibility", brand: "Brand resources",
+    coc: "Code of Conduct", "code-of-conduct": "Code of Conduct", dealers: "Dealers",
+    events: "Events", "join-iwag-team": "Join the team", links: "Links",
+    location: "Location", participate: "Participate", policy: "Policies",
+    privacy: "Privacy", terms: "Terms", tnc: "Terms and Conditions", updates: "Updates"
+  },
+  "ms-my": {
+    about: "Perihal projek ini", accessibility: "Kebolehcapaian", brand: "Sumber jenama",
+    coc: "Kod Tatakelakuan", "code-of-conduct": "Kod Tatakelakuan", dealers: "Peniaga",
+    events: "Acara", "join-iwag-team": "Sertai pasukan", links: "Pautan",
+    location: "Lokasi", participate: "Penyertaan", policy: "Dasar",
+    privacy: "Privasi", terms: "Terma", tnc: "Terma dan Syarat", updates: "Kemas kini"
+  }
+};
+
+export function getStaticPaths() {
+  const pageKeys = [
+    "about", "accessibility", "brand", "coc", "code-of-conduct", "dealers",
+    "join-iwag-team", "links", "location", "participate", "policy",
+    "privacy", "terms", "tnc", "updates"
+  ] as const;
+  return localeKeys.flatMap((lang) => pageKeys.map((page) => ({ params: { lang, page } })));
+}
+
+const langParam = Astro.params.lang;
+const page = Astro.params.page ?? "about";
+const lang = isLocale(langParam) ? langParam : "en";
+const t = getMessages(lang);
+const contentMessages = lang === "ms-my" ? getMessages("en") : t;
+const englishFallback = lang === "ms-my" || (lang === "id" && ["location", "participate", "updates"].includes(page));
+const title = englishFallback ? pageTitles.en[page] ?? "Information" : pageTitles[lang]?.[page] ?? pageTitles.en[page] ?? "Information";
+const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct"];
+const isLegal = legalPages.includes(page);
+const isTerms = page === "terms" || page === "tnc";
+const isPrivacy = page === "privacy";
+const isAccessibility = page === "accessibility";
+const isAbout = page === "about";
+const isLocation = page === "location";
+const isParticipate = page === "participate";
+const isUpdates = page === "updates";
+const isConduct = page === "coc" || page === "code-of-conduct";
+const isBrand = page === "brand";
+const isDealers = page === "dealers";
+const isEvents = page === "events";
+const isJoinTeam = page === "join-iwag-team";
+const isLinks = page === "links";
+const isPolicy = page === "policy";
+const copy = isConduct
+  ? (lang === "id" ? "Kode Etik V2 belum diterbitkan. Ketentuan V1 tidak diadopsi sebagai kebijakan V2; halaman ini hanya menjelaskan ruang lingkup penulisan ulang yang akan dilakukan." : "The V2 Code of Conduct has not been published. V1 terms are not adopted as V2 policy; this page only outlines the scope of the future rewrite.")
+  : isLegal ? contentMessages.legalDraft
+  : isAccessibility ? contentMessages.levelText
+  : isAbout ? (lang === "id"
+      ? "IWAG V2 adalah rekayasa ulang independen dari arsip referensi. Proyek ini berfokus pada informasi yang mudah dibaca, navigasi konsisten, aksesibilitas, dan minimisasi data."
+      : "IWAG V2 is an independent re-engineering project based on a separately archived reference. It focuses on readable information, predictable navigation, accessibility, and data minimisation.")
+  : contentMessages.notPublished;
+---
+<BaseLayout lang={lang} contentLang={englishFallback ? "en" : lang === "id" ? "id" : "en"} title={title} description={copy}>
+  <article class="page-content">
+    <p class="eyebrow">IWAG V2 · Independent project</p>
+    <h1>{title}</h1>
+    <p class="lead">{copy}</p>
+    {isEvents && <section class="content-card">
+      <p class="eyebrow">IWAG 2027 · FANTASTIC ARCANA</p>
+      <h2>3–4 July 2027</h2>
+      <h3>Hotel Ciputra Jakarta</h3>
+      <p>{lang === "id" ? "Pengumuman publik yang diperiksa pada 23 November 2026 menempatkan IWAG 2027 di Hotel Ciputra Jakarta, Jakarta Barat. Informasi jadwal program, tiket, dan pendaftaran belum dianggap final oleh pratinjau independen ini." : "The public announcement reviewed on 23 November 2026 places IWAG 2027 at Hotel Ciputra Jakarta, West Jakarta. Programme schedules, passes, and registration details are not treated as final by this independent preview."}</p>
+      <p><a href="https://iwag.furries.id/en/" rel="external">{lang === "id" ? "Periksa situs acara sumber" : "Check the original event website"}</a></p>
+      <p class="muted">{lang === "id" ? "Informasi edisi 2026 tersedia sebagai arsip historis dan tidak boleh dianggap sebagai jadwal atau kebijakan 2027." : "The 2026 edition is available as a historical archive and must not be treated as the 2027 schedule or policy."}</p>
+    </section>}
+    {isJoinTeam && <section class="conduct-content">
+      <aside class="notice"><strong>{lang === "id" ? "Status pengumuman" : "Announcement status"}</strong><p>{lang === "id" ? "Halaman ini merangkum struktur kontribusi yang pernah diumumkan pada November 2026. Ini bukan formulir pendaftaran dan tidak mengonfirmasi bahwa lowongan masih tersedia." : "This page summarises contribution areas announced in November 2026. It is not an application form and does not confirm that vacancies remain open."}</p></aside>
+      <h2>{lang === "id" ? "Bidang kontribusi" : "Contribution areas"}</h2>
+      <ul><li><strong>Media</strong> — {lang === "id" ? "Fotografi, videografi, dokumentasi, dan koordinasi relawan media." : "Photography, videography, documentation, and media volunteer coordination."}</li><li><strong>Con Store and Dealers Den</strong> — {lang === "id" ? "Operasional toko acara dan dukungan hubungan dealer." : "Event-store operations and dealer relations support."}</li><li><strong>Logistics</strong> — {lang === "id" ? "Inventaris, perlengkapan, distribusi, dan dukungan lapangan." : "Inventory, equipment, distribution, and on-site support."}</li><li><strong>Attendee Services</strong> — {lang === "id" ? "Informasi dan dukungan peserta sebelum serta selama acara." : "Attendee information and support before and during the event."}</li><li><strong>Experience and Decoration</strong> — {lang === "id" ? "Pengalaman tematik, penataan ruang, dan dekorasi." : "Themed experiences, space planning, and decoration."}</li></ul>
+      <h2>{lang === "id" ? "Staff dan volunteer" : "Staff and volunteers"}</h2>
+      <p>{lang === "id" ? "Pengumuman sumber membedakan staff yang merencanakan dan bertanggung jawab atas hasil, dengan volunteer yang membantu pelaksanaan rencana saat acara. Persyaratan dan komitmen untuk setiap peran harus ditetapkan melalui pengumuman resmi yang masih berlaku." : "The source announcement distinguishes staff, who plan and own outcomes, from volunteers, who help execute plans during the event. Requirements and commitments for each role must be defined by a current official announcement."}</p>
+      <p><a href={`/${lang}/join-iwag-team/roles`}>{lang === "id" ? "Jelajahi direktori peran" : "Explore the role directory"}</a></p>
+      <p><a href="https://iwag.furries.id/en/updates/2026-11-08-staff-applications" rel="external">{lang === "id" ? "Buka pengumuman sumber" : "Open the original announcement"}</a></p>
+    </section>}
+    {isLinks && <section class="conduct-content">
+      <h2>{lang === "id" ? "Sumber perjalanan resmi" : "Official travel resources"}</h2>
+      <ul><li><a href="https://www.imigrasi.go.id/" rel="external">Directorate General of Immigration</a></li><li><a href="https://evisa.imigrasi.go.id/" rel="external">Official Indonesian e-Visa</a></li><li><a href="https://evisa.imigrasi.go.id/web/visa-selection" rel="external">Official visa category selector</a></li><li><a href="https://evisa.imigrasi.go.id/front/faq/aff9642b-0b57-443f-8de1-a51601de0ebb" rel="external">Visa activity and convention-attendee conditions</a></li><li><a href="https://allindonesia.imigrasi.go.id/" rel="external">All Indonesia arrival portal</a></li><li><a href="https://kemenimipas.go.id/berita-utama/mulai-1-oktober-deklarasi-kedatangan-penumpang-wajib-dilakukan-di-aplikasi-all-indonesia" rel="external">Ministry announcement on the unified arrival declaration</a></li><li><a href="https://www.beacukai.go.id/barang-penumpang" rel="external">Customs rules for passenger baggage</a></li><li><a href="https://www.beacukai.go.id/ecd" rel="external">Electronic Customs Declaration</a></li><li><a href="https://airport-train.kci.id/" rel="external">KAI Commuter airport train tickets</a></li><li><a href="https://soekarnohatta.injourneyairports.id/access/city-transportation/airport-train" rel="external">Soekarno-Hatta Airport train information</a></li><li><a href="https://www.jakarta.go.id/" rel="external">Jakarta Provincial Government</a></li></ul>
+      <h2>{lang === "id" ? "Sumber venue" : "Venue resources"}</h2>
+      <ul><li><a href="https://hotelciputra.com/jakarta/" rel="external">Hotel Ciputra Jakarta</a></li><li><a href="https://www.ciputramall.com/" rel="external">Mal Ciputra Jakarta</a></li></ul>
+      <h2>{lang === "id" ? "Sumber acara" : "Event resources"}</h2>
+      <ul><li><a href="https://iwag.furries.id/en/" rel="external">Original IWAG website</a></li><li><a href="https://iwag.furries.id/en/updates/" rel="external">Original IWAG updates</a></li><li><a href="https://iwag-archive.furries.id/en" rel="external">IWAG historical archive</a></li></ul>
+      <p class="muted">{lang === "id" ? "Tautan eksternal mengarah ke situs pihak lain. Pratinjau ini tidak mengendalikan ketersediaan, kebijakan privasi, atau keamanan layanan eksternal." : "External links lead to third-party websites. This preview does not control their availability, privacy policies, or service security."}</p>
+    </section>}
+    {isPolicy && <section class="content-card">
+      <h2>{lang === "id" ? "Dokumen tata kelola V2" : "V2 governance documents"}</h2>
+      <p>{lang === "id" ? "Dokumen kebijakan V2 akan ditulis ulang berdasarkan operasi nyata, tanggung jawab pihak terkait, dan aturan lintas yurisdiksi yang relevan. Arsip V1 bukan sumber otomatis untuk ketentuan V2." : "V2 policy documents will be rewritten around actual operations, stakeholder responsibilities, and relevant cross-jurisdictional rules. The V1 archive is not an automatic source for V2 terms."}</p>
+      <ul><li><a href={`/${lang}/terms/`}>{lang === "id" ? "Syarat dan Ketentuan" : "Terms and Conditions"}</a></li><li><a href={`/${lang}/code-of-conduct/`}>{lang === "id" ? "Kode Etik" : "Code of Conduct"}</a></li><li><a href={`/${lang}/privacy/`}>{lang === "id" ? "Kebijakan Privasi" : "Privacy Policy"}</a></li></ul>
+      <p class="muted">{lang === "id" ? "Belum ada dokumen yang disajikan sebagai kebijakan final atau nasihat hukum. Tidak ada identitas pengendali data, badan hukum, atau proses operasional yang akan dikarang." : "No document is presented as a final policy or legal advice. No data-controller identity, legal entity, or operational process will be invented."}</p>
+    </section>}
+    {isAbout && <section class="history-section" aria-label={lang === "id" ? "Sejarah pertemuan" : "Gathering history"}>
+      <div class="history-entry"><span>2017</span><div><h2>{lang === "id" ? "Awal komunitas" : "Community beginnings"}</h2><p>{lang === "id" ? "Pertemuan akhir tahun Indonesia Winter Furmeet menjadi awal tradisi berkumpul." : "The year-end Indonesia Winter Furmeet meetups began a recurring tradition of bringing the community together."}</p></div></div>
+      <div class="history-entry"><span>2022</span><div><h2>{lang === "id" ? "Pertemuan kembali" : "A renewed gathering"}</h2><p>{lang === "id" ? "IWFM kembali digelar dengan kegiatan komunitas, seni, permainan, dan sesi foto bersama." : "IWFM returned with community activities, art, games, and a group photo gathering."}</p></div></div>
+      <div class="history-entry"><span>2023</span><div><h2>{lang === "id" ? "IWAG pertama" : "The first IWAG"}</h2><p>{lang === "id" ? "Format berkembang menjadi pertemuan akhir pekan dengan panggung, artist alley, panel, dan lounge." : "The format grew into a weekend gathering with a stage, artist alley, panels, and a casual lounge."}</p></div></div>
+      <div class="history-entry"><span>2024</span><div><h2>{lang === "id" ? "Akhir pekan penuh" : "A full weekend format"}</h2><p>{lang === "id" ? "Acara memperluas program dan memperkenalkan sistem pengelolaan acara Community." : "The event expanded its programme and introduced the Community event-management platform."}</p></div></div>
+    </section>}
+    {isBrand && <section class="conduct-content">
+      <aside class="notice"><strong>{lang === "id" ? "Catatan hak penggunaan" : "Usage and permissions"}</strong><p>{lang === "id" ? "Halaman sumber meminta pihak ketiga menghubungi IWAG untuk memperoleh persetujuan sebelum memakai logo. Proyek V2 ini tidak menyalin logo atau maskot." : "The source page asks third parties to contact IWAG and obtain approval before using its logo. This V2 project does not reproduce the logo or mascot artwork."}</p></aside>
+      <section><h2>{lang === "id" ? "Logo dan identitas visual" : "Logo and visual identity"}</h2><p>{lang === "id" ? "Penggunaan logo dalam kegiatan kolaborasi memerlukan persetujuan terlebih dahulu. Pedoman sumber juga menekankan proporsi asli, ruang kosong, kontras latar, dan larangan mengubah bentuk atau memberi efek." : "Use of the logo in collaborative projects requires prior approval. The source guidelines also emphasise preserving proportions, clear space, background contrast, and avoiding distortion or visual effects."}</p></section>
+      <section><h2>{lang === "id" ? "Karya karakter" : "Character artwork"}</h2><p>{lang === "id" ? "Sumber menyatakan ilustrasi Kiki dan Tama dilisensikan CC BY-NC 4.0 dengan atribusi kepada Reo. Ketentuan non-komersial dan atribusi harus diperhatikan; lisensi ini bukan izin penggunaan komersial." : "The source states that Kiki and Tama reference artwork is licensed under CC BY-NC 4.0 with attribution to Reo. The non-commercial and attribution conditions matter; this is not permission for commercial use."}</p><a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="external">Creative Commons BY-NC 4.0</a></section>
+      <p><a href="https://iwag.furries.id/en/brand" rel="external">{lang === "id" ? "Buka pedoman merek sumber" : "Open the original brand guidelines"}</a></p>
+    </section>}
+    {isDealers && <aside class="notice"><h2>{lang === "id" ? "Halaman sumber tidak tersedia" : "Source page unavailable"}</h2><p>{lang === "id" ? "Saat diperiksa pada 23 November 2026, rute Dealers mengembalikan halaman tidak ditemukan. V2 tidak akan mengarang daftar dealer atau formulir pendaftaran." : "When checked on 23 November 2026, the Dealers route returned a not-found page. V2 will not invent a dealer list or application form."}</p></aside>}
+    {isLocation && <section class="content-card detail-grid">
+      <div><p class="eyebrow">IWAG 2027 · VENUE</p><h2>Hotel Ciputra Jakarta</h2><p>West Jakarta, Indonesia</p><p>The published venue announcement describes event spaces grouped on the sixth floor, with a connection to Mal Ciputra Jakarta.</p><p><strong>Address</strong><br />Jl. Letnan Jenderal S Parman, Tanjung Duren, Grogol Petamburan, Jakarta 11470, Indonesia</p><p><a href="https://hotelciputra.com/jakarta/" rel="external">Hotel website</a></p></div>
+      <div class="venue-visual venue-visual-detail" aria-hidden="true"><span>HOTEL CIPUTRA</span><strong>JKT</strong><small>WEST JAKARTA</small></div>
+      <div class="detail-wide"><h2>Venue notes</h2><ul><li>Event spaces are announced on the sixth floor.</li><li>The venue connects to Mal Ciputra Jakarta.</li><li>The source announcement describes lift and escalator access through the mall connection.</li></ul><p class="muted">Travel guidance and access arrangements may change. Confirm transport, room reservations, and accessibility services with the official event and venue channels before travelling.</p><h2>Visitor guides</h2><ul><li><a href={`/${lang}/location/public-transit-guide/`}>Public transit guide</a></li><li><a href={`/${lang}/location/private-vehicles-guide/`}>Private vehicle guide (legacy warning)</a></li><li><a href={`/${lang}/international-travelers-guide/`}>International travelers guide</a></li></ul></div>
+    </section>}
+    {isParticipate && <section class="pass-grid">
+      {[
+        { name: "Aspirant", price: "IDR 350,000", note: "The entry tier for the two-day gathering.", perks: ["Convention badge", "Convention book", "Postcard", "Poster", "Basic lanyard", "Sticker pack"], availability: "Coming Soon" },
+        { name: "Technician", price: "IDR 700,000", note: "Everything in Aspirant, plus:", perks: ["IWAG 2027 T-shirt", "Mascot pins", "Mascot keychains"], availability: "Coming Soon" },
+        { name: "Preceptor", price: "IDR 1,100,000", note: "Everything in Technician, plus:", perks: ["Tote bag", "Coasters", "Mascot standee", "Custom convention badge", "Special lanyard", "Special ladder gift", "Convention book mention", "Early Dealers Den access", "Early badge pickup"], tag: "Best Value", limit: "Special ladder gifts unlock at 100, 150, 200, and 250 Preceptor passes. Early pickup is before Aspirant and Technician tiers.", availability: "Coming Soon" },
+        { name: "Magister", price: "IDR 3,300,000", note: "Everything in Preceptor, plus:", perks: ["Fursona keychain", "YCH headshot by the IWAG Creative team", "Fursona nightstand", "Special acrylic convention badge", "Special goodie pack", "Super Sponsor lanyard", "Exclusive Super Sponsor gift", "Priority seating at main events", "No-queue Dealers Den access when capacity allows", "Second-priority hotel booking", "Hotel welcome amenities", "Special mentions", "Early and priority registration queue"], limit: "40 passes only. IWAG announced hotel booking priority emails five days before general booking opens.", availability: "Coming Soon" },
+        { name: "Eternal", price: "IDR 9,900,000", note: "Everything in Magister, plus:", perks: ["Full-body custom art by the IWAG Creative team", "Fursona standee", "Exclusive acrylic convention badge", "Deluxe room stay: 4 days / 3 nights (2–5 July)", "First priority for hotel upgrades and stay extensions", "To-your-room badge delivery", "Included IWAG Special Experiences", "Fursona inclusion in IWAG 2027 animated media and immersion assets"], limit: "10 passes available via raffle. Entrants must already hold an IWAG 2027 Event Pass of any available tier.", availability: "Coming Soon" }
+      ].map((tier) => <article class="pass-card"><p class="eyebrow">EVENT PASS TIER</p><h2>{tier.name}</h2><p class="pass-price">{tier.price}</p>{tier.tag && <span class="pass-tag">{tier.tag}</span>}<p>{tier.note}</p><ul>{tier.perks.map((perk) => <li>{perk}</li>)}</ul>{tier.limit && <p class="muted">{tier.limit}</p>}<span class="pass-status">{tier.availability} · Source snapshot</span></article>)}
+      <p class="detail-wide muted">Names, prices, benefits, limits, and booking priorities reflect the public participation page captured on 23 November 2026. All tiers were marked “Coming Soon” on that date. These are source snapshots, not a live offer or reservation. Verify the official event page before making decisions.</p>
+      <p class="detail-wide"><a href={`/${lang}/participate/super-sponsor-ych/`}>{lang === "id" ? "Lihat referensi YCH Super Sponsor" : "View Super Sponsor YCH reference"}</a> · <a href={`/${lang}/participate/t-shirt-guide/`}>{lang === "id" ? "Panduan ukuran kaus" : "T-shirt size guide"}</a></p>
+    </section>}
+    {isUpdates && <section class="update-grid update-grid-page">
+      {[
+        { date: "15 November 2026", title: "Welcome to West Jakarta", summary: "Hotel Ciputra Jakarta is announced as the venue for IWAG 2027.", href: "updates/2026-11-15-venue-reveal" },
+        { date: "8 November 2026", title: "Join our Team!", summary: "A call for community members interested in staff roles for the next gathering.", href: "updates/2026-11-08-staff-applications" },
+        { date: "14 July 2026", title: "IWAG 2026 — Memories from You and Our Team", summary: "A post-event retrospective, feedback invitation, and links to community media archives.", href: "updates/2026-07-14-conclusion" },
+        { date: "5 June 2026", title: "Welcome to the Fureats Café!", summary: "A dedicated café experience announced for the 2026 gathering; historical schedule only.", href: "updates/2026-06-05-furcafe" },
+        { date: "14 March 2026", title: "Introducing the IWAG Art Show", summary: "A gallery and auction format for community-created artwork at IWAG 2026.", href: "updates/2026-03-14-art-show" },
+        { date: "13 March 2026", title: "IWAG 2026 Conbook Applications", summary: "A historical call for community artwork submissions to the convention book.", href: "updates/2026-03-13-conbook" },
+        { date: "16 February 2026", title: "IWAG 2026 Talent Show Applications Open", summary: "A historical call for solo and group performance submissions.", href: "updates/2026-02-16-talent-show" },
+        { date: "7 February 2026", title: "Introducing Auveiss: IWAG 2026 Guest of Honor", summary: "The Guest of Honor announcement for the 2026 edition.", href: "updates/2026-02-07-goh-reveal" },
+        { date: "5 February 2026", title: "IWAG 2026 DJ Applications Now Open", summary: "A historical invitation for DJ mix submissions.", href: "updates/2026-02-05-dj" },
+        { date: "31 January 2026", title: "IWAG 2026 Panel and Activity Applications", summary: "A historical invitation for entertainment, social, and educational sessions.", href: "updates/2026-01-13-panel-registration" },
+        { date: "28 January 2026", title: "Dealers Den Applications for IWAG 2026", summary: "A historical call for vendors, community representatives, and display creators.", href: "updates/2026-01-28-dealers" },
+        { date: "24 January 2026", title: "Volunteer Applications for IWAG 2026", summary: "A historical volunteer recruitment announcement for event operations.", href: "updates/2026-01-24-volunteer" },
+        { date: "5 January 2026", title: "Hotel Reservation Info for IWAG 2026", summary: "Historical accommodation information for the former BSD venue.", href: "updates/2026-01-05-hotel-information" },
+        { date: "20 December 2025", title: "IWAG 2026 Event Pass Registration Starts 3 January", summary: "Historical registration schedule and raffle information for the 2026 edition.", href: "updates/2025-12-20-registration-information" },
+        { date: "19 December 2025", title: "We Have Updated our Policies", summary: "A historical notice describing V1 policy revisions; not adopted as V2 policy.", href: "updates/2025-12-19-updated-policies" },
+        { date: "15 November 2025", title: "IWAG 2026: Event Pass Reveal", summary: "The five-tier pass announcement for the 2026 edition.", href: "updates/2025-11-15-event-pass-reveal" },
+        { date: "20 September 2025", title: "IWAG 2026: Electric Dreams", summary: "The 2026 theme and previous venue announcement.", href: "updates/2025-09-20-electric-dreams" },
+        { date: "17 July 2025", title: "Everything Goes On", summary: "A post-event retrospective for Return of the Wild.", href: "updates/2025-07-17-everything-goes-on" },
+        { date: "9 July 2025", title: "Get Ready to Pack!", summary: "A historical convention travel and packing checklist.", href: "updates/2025-07-09-packing-up" },
+        { date: "15 June 2025", title: "Ready, Set, Shop", summary: "A historical Dealers Den directory announcement for 2025.", href: "updates/2025-06-15-dealers-den-reveal" },
+        { date: "14 June 2025", title: "IWAG 2025 Hotel Reservation Update", summary: "A historical notice about an overbooking issue and attendee options.", href: "updates/2025-06-14-hotel-reservation-update" },
+        { date: "15 March 2025", title: "Meet the Guest of Honor", summary: "The Guest of Honor announcement for IWAG 2025.", href: "updates/2025-03-15-goh-reveal" },
+        { date: "12 February 2025", title: "IWAG 2025 Custom Merch", summary: "Custom artwork merchandise details for the 2025 sponsor tiers.", href: "updates/2025-02-12-custom-merch" },
+        { date: "12 January 2025", title: "We Are Taking Hotel Reservations!", summary: "Historical host-hotel booking information for the 2025 edition.", href: "updates/2025-01-12-iwag-2025-hotel-reservations" },
+        { date: "12 January 2025", title: "Fairness First: IWAG 2025 Pass Raffle Announcement", summary: "A historical raffle notice for limited sponsor-tier upgrades.", href: "updates/2025-01-11-high-tier-raffle" },
+        { date: "6 January 2025", title: "IWAG 2025 Registration Day 1: Behind the Scenes", summary: "A technical postmortem of the first registration opening.", href: "updates/2025-01-06-crash-postmortem" },
+        { date: "4 January 2025", title: "IWAG 2025 Registration Update", summary: "A revised pass release and hotel booking schedule.", href: "updates/2025-01-04-registration-update" },
+        { date: "29 December 2024", title: "IWAG 2025 Registration Opening", summary: "A pre-registration guide to the historical pass release schedule.", href: "updates/2024-12-29-registration-opening" },
+        { date: "23 November 2024", title: "Five Tiers of Fun!", summary: "The first five-tier event-pass announcement for 2025.", href: "updates/2024-11-23-tier-reveal" },
+        { date: "1 November 2024", title: "Welcome to Tangerang", summary: "The 2025 venue and date reveal.", href: "updates/2024-11-01-venue-reveal" },
+        { date: "31 August 2024", title: "Return of The Wild", summary: "The community-selected theme for the 2025 edition.", href: "updates/2024-08-31-theme-reveal" }
+      ].map((item) => <article class="update-card"><span class="update-date">{item.date}</span><h2>{item.title}</h2><p>{item.summary}</p><a href={`/${lang}/${item.href}/`}>{lang === "id" ? "Baca arsip V2" : "Read V2 archive"}</a></article>)}
+    </section>}
+    {isConduct && <section class="conduct-content">
+      <aside class="notice"><strong>{lang === "id" ? "DRAF KEBIJAKAN V2 — BELUM BERLAKU" : "V2 POLICY DRAFT — NOT IN FORCE"}</strong><p>{lang === "id" ? "Kode Etik ini ditulis secara independen dan tidak menyalin ketentuan V1. Draf ini belum menjadi aturan acara, belum disahkan penyelenggara, dan tidak boleh dipakai sebagai dasar sanksi atau keputusan kehadiran sebelum identitas serta kewenangan operator diverifikasi." : "This Code of Conduct is independently written and does not adopt V1 terms. It is not an event rule, has not been approved by an organiser, and must not be used to impose sanctions or make attendance decisions until the operator and its authority are verified."}</p></aside>
+      <h2>{lang === "id" ? "1. Tujuan dan cakupan yang diusulkan" : "1. Purpose and proposed scope"}</h2>
+      <p>{lang === "id" ? "Draf ini menetapkan standar keselamatan, martabat, aksesibilitas, dan perilaku yang dimaksudkan untuk ruang acara, aktivitas resmi, kanal digital resmi, serta interaksi yang dilakukan atas nama penyelenggara. Cakupan final harus ditetapkan oleh operator yang sah dan dijelaskan sebelum acara." : "This draft sets proposed standards for safety, dignity, accessibility, and conduct across event spaces, official activities, official digital channels, and interactions carried out on behalf of the organiser. The authorised operator must define the final scope and publish it before the event."}</p>
+      <h2>{lang === "id" ? "2. Perilaku yang diwajibkan" : "2. Expected behaviour"}</h2>
+      <ul>
+        <li>{lang === "id" ? "Perlakukan semua orang secara bermartabat tanpa diskriminasi berdasarkan karakteristik yang dilindungi hukum yang berlaku." : "Treat everyone with dignity and without discrimination based on characteristics protected by applicable law."}</li>
+        <li>{lang === "id" ? "Hormati batas pribadi, persetujuan, ruang fisik, dan keputusan seseorang untuk mengakhiri interaksi." : "Respect personal boundaries, consent, physical space, and a person's decision to end an interaction."}</li>
+        <li>{lang === "id" ? "Ikuti instruksi keselamatan yang sah dari venue dan petugas yang kewenangannya telah diumumkan." : "Follow lawful safety instructions from the venue and event personnel whose authority has been communicated."}</li>
+        <li>{lang === "id" ? "Gunakan fasilitas, area bersama, dan properti pihak lain secara bertanggung jawab." : "Use facilities, shared areas, and other people's property responsibly."}</li>
+        <li>{lang === "id" ? "Laporkan bahaya atau insiden dengan itikad baik melalui kanal resmi yang nantinya harus dipublikasikan dan dipantau." : "Report hazards or incidents in good faith through an official channel that must be published and monitored before launch."}</li>
+      </ul>
+      <h2>{lang === "id" ? "3. Perilaku yang dilarang" : "3. Prohibited conduct"}</h2>
+      <ul>
+        <li>{lang === "id" ? "Pelecehan, intimidasi, perundungan, penguntitan, ancaman, ujaran kebencian, atau diskriminasi." : "Harassment, intimidation, bullying, stalking, threats, hate speech, or discrimination."}</li>
+        <li>{lang === "id" ? "Kontak fisik, pendekatan seksual, atau komunikasi berulang yang tidak diinginkan." : "Unwanted physical contact, sexual advances, or repeated unwanted communication."}</li>
+        <li>{lang === "id" ? "Merekam, memotret, menyiarkan, atau menyebarkan gambar seseorang dengan melanggar hukum, batas area, atau permintaan privasi yang sah." : "Recording, photographing, streaming, or distributing a person's image in breach of law, area restrictions, or a legitimate privacy request."}</li>
+        <li>{lang === "id" ? "Membagikan informasi pribadi, lokasi, dokumen, atau percakapan privat tanpa dasar dan izin yang sah." : "Sharing personal information, location, documents, or private communications without a lawful basis and permission."}</li>
+        <li>{lang === "id" ? "Membawa barang terlarang, mengabaikan prosedur keselamatan venue, merusak properti, menghalangi jalur evakuasi, atau memasuki area terbatas tanpa izin." : "Bringing prohibited items, disregarding venue safety procedures, damaging property, obstructing evacuation routes, or entering restricted areas without permission."}</li>
+        <li>{lang === "id" ? "Menyalahgunakan jabatan staff, volunteer, vendor, atau akses khusus untuk menekan, mengeksploitasi, atau memperoleh keuntungan yang tidak sah." : "Abusing staff, volunteer, vendor, or privileged access to coerce, exploit, or obtain an improper benefit."}</li>
+        <li>{lang === "id" ? "Melakukan pembalasan terhadap orang yang melaporkan kekhawatiran atau membantu proses peninjauan." : "Retaliating against anyone who reports a concern or assists a review."}</li>
+      </ul>
+      <h2>{lang === "id" ? "4. Persetujuan, media, dan kostum" : "4. Consent, media, and costumes"}</h2>
+      <p>{lang === "id" ? "Persetujuan harus diberikan secara bebas, spesifik, dan dapat ditarik. Persetujuan untuk berfoto tidak otomatis berarti persetujuan untuk publikasi, penandaan nama, penggunaan komersial, atau pengiriman kepada pihak lain. Jangan menyentuh kostum, properti, atau tubuh seseorang tanpa izin. Area privat dan area yang dibatasi dokumentasi harus dihormati." : "Consent must be freely given, specific, and withdrawable. Agreeing to a photograph does not automatically permit publication, tagging, commercial use, or sharing with others. Do not touch a person's costume, props, or body without permission. Private spaces and areas with recording restrictions must be respected."}</p>
+      <h2>{lang === "id" ? "5. Perlindungan anak dan peserta rentan" : "5. Safeguarding children and vulnerable attendees"}</h2>
+      <ul>
+        <li>{lang === "id" ? "Aturan usia, persetujuan wali, pendampingan, dan akses area harus ditetapkan oleh operator berdasarkan hukum yang berlaku dan penilaian risiko acara; ketentuan V1 tidak otomatis berlaku di V2." : "Age rules, guardian consent, supervision, and area access must be set by the operator based on applicable law and event risk assessment; V1 rules do not automatically carry over to V2."}</li>
+        <li>{lang === "id" ? "Staff dan volunteer tidak boleh meminta rahasia, dokumen identitas, komunikasi privat, atau pertemuan tertutup dari peserta di bawah umur di luar prosedur resmi yang disetujui." : "Staff and volunteers must not solicit secrets, identity documents, private communications, or isolated meetings from underage attendees outside approved official procedures."}</li>
+        <li>{lang === "id" ? "Informasi safeguarding hanya boleh diakses personel yang berwenang dan harus ditangani dengan minimisasi data serta kerahasiaan." : "Safeguarding information must be restricted to authorised personnel and handled with data minimisation and confidentiality."}</li>
+        <li>{lang === "id" ? "Prosedur respons untuk risiko langsung, dugaan eksploitasi, atau kebutuhan perlindungan harus disiapkan sebelum kegiatan menerima peserta." : "Response procedures for immediate risks, suspected exploitation, or protection needs must be in place before attendees are accepted."}</li>
+      </ul>
+      <h2>{lang === "id" ? "6. Pelaporan dan penanganan" : "6. Reporting and response"}</h2>
+      <p>{lang === "id" ? "Operator wajib menunjuk kanal pelaporan yang benar-benar dipantau, petugas terlatih, jalur eskalasi darurat, serta prosedur konflik kepentingan. Kanal dan kontak belum tersedia pada pratinjau ini sehingga halaman ini bukan sarana pelaporan." : "The operator must appoint a genuinely monitored reporting channel, trained responders, an emergency escalation path, and a conflict-of-interest procedure. No reporting contact is available in this preview, so this page is not a reporting channel."}</p>
+      <ol>
+        <li>{lang === "id" ? "Prioritaskan keselamatan segera dan hubungi layanan darurat atau petugas venue yang berwenang bila ada bahaya langsung." : "Prioritise immediate safety and contact emergency services or authorised venue personnel when there is imminent danger."}</li>
+        <li>{lang === "id" ? "Dengarkan laporan tanpa menyalahkan pelapor; jelaskan batas kerahasiaan dan pilihan yang tersedia." : "Listen without blaming the reporter; explain confidentiality limits and available options."}</li>
+        <li>{lang === "id" ? "Catat hanya informasi yang relevan, batasi akses, dan pisahkan pihak yang memiliki konflik kepentingan." : "Record only relevant information, restrict access, and separate anyone with a conflict of interest."}</li>
+        <li>{lang === "id" ? "Berikan peninjauan yang tidak memihak, kesempatan menjawab, keputusan beralasan, dan mekanisme keberatan." : "Provide an impartial review, an opportunity to respond, a reasoned decision, and an appeal mechanism."}</li>
+      </ol>
+      <h2>{lang === "id" ? "7. Tindakan dan keberatan" : "7. Measures and appeals"}</h2>
+      <p>{lang === "id" ? "Setelah kebijakan disahkan, tindakan harus proporsional, konsisten, terdokumentasi, dan sesuai hukum. Pilihan dapat mencakup arahan keselamatan, peringatan, pembatasan akses area, penghentian aktivitas, atau pengeluaran dari acara jika memiliki dasar dan kewenangan yang sah. Larangan jangka panjang atau pelaporan kepada otoritas harus mengikuti penilaian hukum dan prosedur yang transparan. Tidak ada sanksi V2 yang ditetapkan oleh draf ini." : "After approval, measures must be proportionate, consistent, documented, and lawful. Options may include safety directions, warnings, area restrictions, activity stoppage, or removal from an event where there is a lawful basis and authority. Long-term bans or referrals to authorities require legal assessment and transparent procedure. This draft establishes no V2 sanction."}</p>
+      <h2>{lang === "id" ? "8. Revisi, aksesibilitas, dan akuntabilitas" : "8. Review, accessibility, and accountability"}</h2>
+      <p>{lang === "id" ? "Kebijakan final harus tersedia sebelum acara dalam bahasa yang dapat dipahami peserta, format yang dapat diakses, dengan tanggal berlaku, versi, identitas operator, kontak pelaporan, dan riwayat perubahan. Peninjauan berkala harus melibatkan masukan peserta serta pemeriksaan hukum lintas yurisdiksi yang relevan." : "The final policy must be available before the event in languages attendees can understand and in accessible formats, with an effective date, version, operator identity, reporting contact, and change history. Periodic review should include attendee feedback and legal review across relevant jurisdictions."}</p>
+      <aside class="notice"><strong>{lang === "id" ? "Gerbang penerbitan" : "Publication gate"}</strong><p>{lang === "id" ? "Draf ini baru dapat menjadi kebijakan setelah operator, venue, kewenangan petugas, batas usia, kanal laporan, prosedur respons, sanksi, dan mekanisme keberatan diverifikasi serta disahkan." : "This draft can become policy only after the operator, venue, staff authority, age rules, reporting channel, response procedures, measures, and appeal process are verified and approved."}</p></aside>
+    </section>}
+    {isTerms && <section class="conduct-content">
+      <aside class="notice"><strong>{lang === "id" ? "DRAF SYARAT V2 — BELUM BERLAKU" : "V2 TERMS DRAFT — NOT IN FORCE"}</strong><p>{lang === "id" ? "Dokumen ini adalah draf independen untuk pratinjau replika, bukan kontrak dengan penyelenggara IWAG. Identitas operator, layanan, yurisdiksi, dan mekanisme transaksi belum diverifikasi." : "This is an independent draft for a replica preview, not a contract with the IWAG organiser. The operator identity, service, jurisdictions, and transaction model have not been verified."}</p></aside>
+      <h2>{lang === "id" ? "1. Status situs dan hubungan dengan acara" : "1. Website status and relationship to the event"}</h2>
+      <p>{lang === "id" ? "Situs ini merupakan proyek rekayasa ulang independen untuk tujuan pembelajaran dan penelitian. Situs ini tidak berafiliasi, tidak disahkan, dan tidak mewakili IWAG atau penyelenggaranya. Penyebutan nama acara, venue, dan pihak ketiga hanya untuk konteks referensi." : "This website is an independent re-engineering project for educational and research purposes. It is not affiliated with, endorsed by, or representative of IWAG or its organisers. Event, venue, and third-party names are used only for reference context."}</p>
+      <h2>{lang === "id" ? "2. Status informasi" : "2. Information status"}</h2>
+      <p>{lang === "id" ? "Informasi acara merupakan snapshot sumber publik pada tanggal yang disebutkan. Jadwal, harga, lokasi, fasilitas, transportasi, manfaat, dan status pendaftaran dapat berubah. Pengunjung harus memeriksa kanal resmi sebelum mengambil keputusan." : "Event information is a dated snapshot of public sources. Schedules, prices, locations, facilities, transport, benefits, and registration status may change. Visitors must verify details through official channels before acting."}</p>
+      <h2>{lang === "id" ? "3. Penggunaan yang diperbolehkan" : "3. Permitted use"}</h2>
+      <p>{lang === "id" ? "Pengguna dapat membaca dan membagikan tautan situs untuk penggunaan pribadi yang sah. Pengguna tidak boleh mengganggu layanan, mengakses sistem tanpa izin, mengirim kode berbahaya, menyamar sebagai penyelenggara, atau menggunakan materi pihak ketiga melampaui izin dan hak yang berlaku." : "Visitors may read and share links to the website for lawful personal use. They must not disrupt the service, access systems without authorisation, transmit malicious code, impersonate an organiser, or use third-party material beyond applicable permissions and rights."}</p>
+      <h2>{lang === "id" ? "4. Tiket, pembayaran, dan pendaftaran" : "4. Tickets, payments, and registration"}</h2>
+      <p>{lang === "id" ? "Pratinjau ini tidak menjual tiket, menerima pembayaran, membuat akun, atau mendaftarkan peserta. Tidak ada harga pada halaman ini yang merupakan penawaran transaksi. Jika operator resmi kelak menyediakan transaksi, syarat penjual, penyedia pembayaran, pembatalan, pengembalian dana, pajak, dan hak konsumen harus diterbitkan secara terpisah sebelum pembelian." : "This preview does not sell tickets, accept payments, create accounts, or register attendees. No price shown here is an offer to transact. If an authorised operator later provides transactions, seller terms, payment provider, cancellation, refunds, taxes, and consumer rights must be published separately before purchase."}</p>
+      <h2>{lang === "id" ? "5. Usia, wali, dan keselamatan" : "5. Age, guardians, and safety"}</h2>
+      <p>{lang === "id" ? "Situs ini tidak menetapkan batas usia acara atau persyaratan pendampingan. Operator acara harus menerbitkan ketentuan usia, persetujuan wali, safeguarding, aksesibilitas, dan keselamatan berdasarkan hukum yang berlaku. Ketentuan V1 tidak otomatis menjadi ketentuan V2." : "This website does not set event age limits or supervision requirements. The event operator must publish age, guardian-consent, safeguarding, accessibility, and safety requirements based on applicable law. V1 terms do not automatically become V2 terms."}</p>
+      <h2>{lang === "id" ? "6. Kekayaan intelektual dan tautan pihak ketiga" : "6. Intellectual property and third-party links"}</h2>
+      <p>{lang === "id" ? "Hak atas nama, merek, karya seni, foto, dan materi pihak ketiga tetap pada pemiliknya. Penggunaan ulang memerlukan dasar izin yang sesuai. Tautan eksternal disediakan untuk kemudahan; situs ini tidak mengendalikan layanan atau kebijakan pihak ketiga." : "Rights in third-party names, marks, artwork, photographs, and materials remain with their respective owners. Reuse requires an appropriate permission basis. External links are provided for convenience; this website does not control third-party services or policies."}</p>
+      <h2>{lang === "id" ? "7. Ketersediaan dan batas tanggung jawab" : "7. Availability and liability"}</h2>
+      <p>{lang === "id" ? "Pratinjau disediakan sebagaimana adanya untuk evaluasi. Tidak ada klausul di draf ini yang dimaksudkan untuk menghapus hak konsumen atau hak wajib lain yang tidak dapat dikesampingkan menurut hukum yang berlaku, atau membatasi tanggung jawab yang secara hukum tidak dapat dibatasi." : "The preview is provided as-is for evaluation. Nothing in this draft is intended to remove consumer or other mandatory rights that cannot be waived under applicable law, or to limit liability that the law does not permit to be limited."}</p>
+      <h2>{lang === "id" ? "8. Perubahan dan penyelesaian sengketa" : "8. Changes and dispute resolution"}</h2>
+      <p>{lang === "id" ? "Versi final harus mencantumkan operator yang bertanggung jawab, tanggal berlaku, mekanisme pemberitahuan perubahan, hukum yang berlaku, forum penyelesaian sengketa, serta akses ke proses pengaduan konsumen yang relevan. Bagian tersebut sengaja belum ditentukan karena fakta operator dan yurisdiksi belum diverifikasi." : "A final version must identify the responsible operator, effective date, change-notice process, governing law, dispute forum, and access to relevant consumer complaint processes. These items are intentionally unset because the operator and applicable jurisdictions have not been verified."}</p>
+      <aside class="notice"><strong>{lang === "id" ? "Belum merupakan kontrak" : "Not a contract"}</strong><p>{lang === "id" ? "Draf ini tidak mengikat peserta, penyelenggara, hotel, atau pihak lain dan tidak boleh dipakai sebagai syarat penjualan atau kehadiran acara." : "This draft does not bind attendees, organisers, the hotel, or any other party and must not be used as ticket-sale or event-attendance terms."}</p></aside>
+    </section>}
+    {isPrivacy && <section class="conduct-content">
+      <aside class="notice"><strong>{lang === "id" ? "DRAF PRIVASI V2 — BELUM BERLAKU" : "V2 PRIVACY DRAFT — NOT IN FORCE"}</strong><p>{lang === "id" ? "Draf ini menjelaskan perilaku teknis pratinjau yang dapat diamati dan data yang masih harus diverifikasi. Pengendali data, penyedia hosting, lokasi pemrosesan, retensi log, dan kanal hak subjek data belum dikonfirmasi." : "This draft describes observable preview behaviour and data flows that still require verification. The controller, hosting provider, processing locations, log retention, and data-rights contact have not been confirmed."}</p></aside>
+      <h2>{lang === "id" ? "1. Pengendali dan cakupan" : "1. Controller and scope"}</h2>
+      <p>{lang === "id" ? "Identitas badan atau orang yang bertindak sebagai pengendali data harus diverifikasi dan dicantumkan sebelum pemrosesan data pribadi untuk layanan acara dimulai. Proyek replika ini tidak mengaku sebagai pengendali data IWAG." : "The legal identity of the person or entity acting as data controller must be verified and published before personal data is processed for event services. This replica project does not claim to be IWAG's data controller."}</p>
+      <h2>{lang === "id" ? "2. Data pada pratinjau saat ini" : "2. Data in the current preview"}</h2>
+      <ul>
+        <li>{lang === "id" ? "Tidak tersedia formulir akun, pendaftaran, pembayaran, newsletter, komentar, atau unggahan pengguna." : "There are no account, registration, payment, newsletter, comment, or user-upload forms."}</li>
+        <li>{lang === "id" ? "Pilihan tema dan warna aksen disimpan pada penyimpanan lokal browser dengan kunci iwag-v2-theme dan iwag-v2-accent. Keduanya digunakan untuk preferensi tampilan pada perangkat tersebut." : "Theme and accent choices are stored in browser local storage under iwag-v2-theme and iwag-v2-accent. They are used for display preferences on that device."}</li>
+        <li>{lang === "id" ? "Skrip preferensi tidak mengirim nilai tema atau aksen ke layanan analitik atau server aplikasi." : "The preference script does not send theme or accent values to analytics services or the application server."}</li>
+        <li>{lang === "id" ? "Tidak ada font jarak jauh, pelacak analitik, iklan perilaku, atau media sosial tertanam pada fondasi pratinjau." : "The preview foundation contains no remote fonts, analytics trackers, behavioural advertising, or embedded social media."}</li>
+      </ul>
+      <h2>{lang === "id" ? "3. Metadata koneksi dan penyedia infrastruktur" : "3. Connection metadata and infrastructure providers"}</h2>
+      <p>{lang === "id" ? "Saat situs statis diakses, penyedia hosting, CDN, DNS, atau keamanan jaringan dapat memproses alamat IP, waktu permintaan, user-agent, URL, dan log teknis untuk mengirim serta melindungi layanan. Penyedia, lokasi, tujuan, dan masa retensi aktual belum diverifikasi untuk pratinjau ini; informasi tersebut wajib dilengkapi sebelum kebijakan final diterbitkan." : "When a static site is accessed, hosting, CDN, DNS, or network-security providers may process IP addresses, request times, user-agent strings, URLs, and technical logs to deliver and protect the service. The actual providers, locations, purposes, and retention periods have not been verified for this preview and must be documented before a final notice is published."}</p>
+      <h2>{lang === "id" ? "4. Tujuan, dasar hukum, dan minimisasi" : "4. Purposes, legal basis, and minimisation"}</h2>
+      <p>{lang === "id" ? "Setiap fitur interaktif di masa depan harus memiliki tujuan spesifik, dasar pemrosesan yang sah, pemberitahuan sebelum pengumpulan, pembatasan akses, dan masa retensi. Data tidak boleh dikumpulkan hanya untuk kemungkinan penggunaan di masa depan. Persetujuan tidak boleh dipaksakan atau digabungkan dengan layanan yang tidak memerlukannya." : "Every future interactive feature must have a specific purpose, lawful processing basis, notice before collection, access restrictions, and a retention period. Data must not be collected merely for possible future use. Consent must not be coerced or bundled with services that do not require it."}</p>
+      <h2>{lang === "id" ? "5. Anak dan data sensitif" : "5. Children and sensitive data"}</h2>
+      <p>{lang === "id" ? "Pratinjau tidak meminta tanggal lahir, identitas, lokasi presisi, biometrik, informasi kesehatan, atau data sensitif lainnya. Fitur yang dapat diakses anak harus menjalani penilaian risiko dan menerapkan perlindungan sesuai UU PDP, aturan perlindungan anak dalam sistem elektronik, serta hukum negara lain yang berlaku. Persetujuan orang tua/wali harus diperoleh bila diwajibkan hukum; jangan menganggap satu batas usia berlaku di semua negara." : "The preview does not request date of birth, identity documents, precise location, biometrics, health information, or other sensitive data. Features accessible to children must undergo a risk assessment and apply safeguards under Indonesia's PDP and child online-safety rules and any other applicable national laws. Parent or guardian authorisation must be obtained where legally required; no single age threshold applies worldwide."}</p>
+      <h2>{lang === "id" ? "6. Penerima, transfer lintas negara, dan keamanan" : "6. Recipients, international transfers, and security"}</h2>
+      <p>{lang === "id" ? "Sebelum layanan akun atau formulir dibuat, operator harus mengidentifikasi setiap prosesor, subprosesor, penerima, negara tujuan, kontrak pemrosesan, dan mekanisme transfer lintas negara. Kontrol keamanan harus mencakup akses berbasis peran, autentikasi yang sesuai, enkripsi, pencatatan akses, respons insiden, serta penghapusan aman." : "Before accounts or forms are introduced, the operator must identify every processor, subprocessor, recipient, destination country, processing contract, and international-transfer mechanism. Security controls must include role-based access, appropriate authentication, encryption, access logging, incident response, and secure deletion."}</p>
+      <h2>{lang === "id" ? "7. Retensi dan hak subjek data" : "7. Retention and data-subject rights"}</h2>
+      <p>{lang === "id" ? "Preferensi lokal tetap berada di browser sampai diubah atau dihapus melalui pengaturan data situs browser. Untuk pemrosesan server di masa depan, operator harus menetapkan jadwal retensi dan mendukung hak akses, koreksi, penghapusan, penarikan persetujuan, keberatan, pembatasan, portabilitas, dan pengaduan sesuai hukum yang berlaku. Kanal permintaan belum tersedia di pratinjau ini." : "Local preferences remain in the browser until changed or cleared through browser site-data settings. For future server-side processing, the operator must define retention schedules and support access, correction, deletion, consent withdrawal, objection, restriction, portability, and complaint rights where applicable. A request channel is not available in this preview."}</p>
+      <h2>{lang === "id" ? "8. Penerapan lintas yurisdiksi" : "8. Cross-jurisdiction applicability"}</h2>
+      <p>{lang === "id" ? "Kewajiban privasi ditentukan oleh lokasi operator, kegiatan pemrosesan, jenis layanan, pengguna yang dituju, dan aliran data — bukan kewarganegaraan pengunjung semata. Sebelum fitur interaktif diluncurkan, operator harus menilai UU PDP dan aturan perlindungan anak Indonesia; GDPR dan UK GDPR beserta Children's Code bila cakupannya terpenuhi; Singapore PDPA; Malaysia Act 709; Thailand PDPA; serta COPPA atau CCPA/CPRA Amerika Serikat jika pemicu hukumnya berlaku. Batas usia, hak, kewajiban pemberitahuan, dan mekanisme transfer berbeda antaraturan; satu checkbox atau satu batas usia global tidak cukup." : "Privacy obligations depend on the operator's location, processing activities, service model, intended users, and data flows — not a visitor's nationality alone. Before interactive features launch, the operator must assess Indonesia's PDP and child online-safety rules; GDPR and UK GDPR with the Children's Code where in scope; Singapore's PDPA; Malaysia's Act 709; Thailand's PDPA; and US COPPA or CCPA/CPRA where their statutory triggers are met. Age thresholds, rights, notice duties, and transfer mechanisms differ; one checkbox or one global age threshold is not sufficient."}</p>
+      <p>{lang === "id" ? "Untuk layanan masyarakat informasi yang ditawarkan langsung kepada anak di EU, GDPR Pasal 8 mengatur persetujuan berdasarkan Pasal 6(1)(a), dengan usia default 16 tahun yang dapat diturunkan negara anggota hingga tidak kurang dari 13 tahun. Ketentuan itu bukan batas usia universal untuk semua dasar pemrosesan. Aturan UK dan negara lain harus dinilai secara terpisah." : "For information-society services offered directly to a child in the EU, GDPR Article 8 addresses consent under Article 6(1)(a), with a default age of 16 that a Member State may lower to no less than 13. This is not a universal age threshold for every processing basis. UK and other national rules require separate assessment."}</p>
+      <h2>{lang === "id" ? "9. Perubahan kebijakan" : "9. Policy changes"}</h2>
+      <p>{lang === "id" ? "Pemberitahuan final harus mencantumkan versi, tanggal berlaku, ringkasan perubahan, identitas pengendali, kontak privasi, serta mekanisme pemberitahuan kepada subjek data jika perubahan berdampak pada pemrosesan." : "The final notice must include a version, effective date, change summary, controller identity, privacy contact, and a process for notifying data subjects when changes affect processing."}</p>
+      <aside class="notice"><strong>{lang === "id" ? "Jangan kirim data pribadi" : "Do not submit personal data"}</strong><p>{lang === "id" ? "Pratinjau ini tidak menyediakan kanal pengumpulan atau permintaan privasi. Jangan mengirim dokumen identitas, informasi kesehatan, alamat, atau data anak melalui proyek ini." : "This preview provides no personal-data collection or privacy-request channel. Do not send identity documents, health information, addresses, or children's data through this project."}</p></aside>
+    </section>}
+    {isAccessibility && <section class="content-card">
+      <h2>{contentMessages.level}</h2>
+      <p>{contentMessages.levelText}</p>
+      <p>{lang === "id" ? "Target Level A tidak berarti halaman ini telah lulus audit. Pengujian manual dan teknologi bantu masih diperlukan." : "A Level A target does not mean this page has passed an audit. Manual and assistive-technology review is still required."}</p>
+      <h2>{lang === "id" ? "Komitmen desain V2" : "V2 design commitments"}</h2>
+      <ul>
+        <li>{lang === "id" ? "Tidak ada tindakan penting yang mewajibkan pengguna berbicara atau memakai suara." : "No essential action will require speech or voice input."}</li>
+        <li>{lang === "id" ? "Informasi penting tidak disampaikan melalui warna saja." : "Important information will never be conveyed through colour alone."}</li>
+        <li>{lang === "id" ? "Media audio-visual yang diterbitkan harus menyediakan caption atau transkrip yang sesuai." : "Published audiovisual media must provide suitable captions or transcripts."}</li>
+        <li>{lang === "id" ? "Animasi dekoratif tidak berjalan otomatis dan menghormati preferensi reduced motion." : "Decorative motion does not autoplay and respects reduced-motion preferences."}</li>
+        <li>{lang === "id" ? "Informasi dan navigasi utama tetap tersedia tanpa JavaScript." : "Core information and navigation remain available without JavaScript."}</li>
+      </ul>
+      <h2>{lang === "id" ? "Implementasi yang tersedia pada pratinjau" : "Implemented in this preview"}</h2>
+      <ul>
+        <li>{lang === "id" ? "Tautan lewati ke konten utama, landmark semantik, dan struktur heading." : "Skip-to-content navigation, semantic landmarks, and structured headings."}</li>
+        <li>{lang === "id" ? "Indikator fokus yang terlihat dan kontrol native untuk navigasi serta FAQ." : "Visible focus indicators and native controls for navigation and FAQs."}</li>
+        <li>{lang === "id" ? "Enam pilihan tema, termasuk mode gelap dan AMOLED." : "Six theme choices, including dark and AMOLED modes."}</li>
+        <li>{lang === "id" ? "Warna aksen dinamis memilih warna teks kontras berdasarkan luminansi dan menjaga tautan serta fokus tetap mudah dibedakan." : "Dynamic accents choose a contrasting foreground by luminance and keep link and focus hues distinguishable."}</li>
+        <li>{lang === "id" ? "Dukungan prefers-reduced-motion, forced-colors, dan preferensi kontras lebih tinggi." : "Support for prefers-reduced-motion, forced-colors, and higher-contrast preferences."}</li>
+        <li>{lang === "id" ? "Fallback bahasa ditandai secara eksplisit ketika halaman belum diterjemahkan." : "Language fallbacks are explicitly identified when a page has not been translated."}</li>
+        <li>{lang === "id" ? "Tidak ada font CDN, pelacak pihak ketiga, atau media otomatis pada fondasi saat ini." : "No font CDN, third-party trackers, or autoplay media in the current foundation."}</li>
+      </ul>
+      <h2>{lang === "id" ? "Belum diverifikasi" : "Not yet verified"}</h2>
+      <ul>
+        <li>{lang === "id" ? "Pengujian manual menyeluruh dengan keyboard, pembaca layar desktop, dan Android TalkBack." : "Full manual testing with keyboard-only navigation, desktop screen readers, and Android TalkBack."}</li>
+        <li>{lang === "id" ? "Pengukuran kontras untuk seluruh komponen, status, tema, dan kondisi interaksi." : "Contrast measurements across all components, states, themes, and interaction conditions."}</li>
+        <li>{lang === "id" ? "Terjemahan editorial untuk seluruh halaman dan semua locale." : "Editorial translations for every page and locale."}</li>
+        <li>{lang === "id" ? "Fakta aksesibilitas fisik venue dan dukungan acara dari penyelenggara." : "Verified physical venue accessibility and event support from the organiser."}</li>
+      </ul>
+      <p class="muted">{lang === "id" ? "Kanal kontak berbasis teks dan akomodasi acara akan diterbitkan setelah alamat kontak serta layanan pendukung diverifikasi." : "Text-based contact channels and event accommodations will be published after contact details and support services are verified."}</p>
+    </section>}
+    {isLegal && !isConduct && <aside class="notice"><h2>{lang === "id" ? "Belum disahkan" : "Not approved"}</h2><p>{copy}</p></aside>}
+    {!isLegal && !isAccessibility && !isAbout && !isBrand && !isDealers && !isLocation && !isParticipate && !isUpdates && !isEvents && !isJoinTeam && !isLinks && !isPolicy && <aside class="notice"><p>{lang === "id" ? "Informasi acara dan operasional akan diterbitkan setelah sumbernya diverifikasi. Arsip V1 tidak dianggap sebagai informasi terkini." : "Event and operational information will be published only after its source is verified. V1 archive material is not treated as current information."}</p></aside>}
+  </article>
+</BaseLayout>

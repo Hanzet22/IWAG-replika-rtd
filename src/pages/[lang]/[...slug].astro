@@ -1,0 +1,300 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { isLocale, localeKeys } from "../../i18n/locales";
+import { nestedRoutes } from "../../i18n/nested-routes";
+
+export function getStaticPaths() {
+  return localeKeys.flatMap((lang) =>
+    nestedRoutes.map((slug) => ({ params: { lang, slug }, props: { lang, slug } }))
+  );
+}
+
+const langParam = Astro.params.lang;
+const lang = isLocale(langParam) ? langParam : "en";
+const slug = Astro.params.slug ?? "";
+const segments = slug.split("/");
+const lastSegment = segments.at(-1) ?? slug;
+const rawTitle = lastSegment
+  .replace(/^\d{4}-\d{2}-\d{2}-/, "")
+  .split("-")
+  .map((part) => part.length <= 3 ? part.toUpperCase() : part.charAt(0).toUpperCase() + part.slice(1))
+  .join(" ");
+const routeTitles: Record<string, string> = {
+  "international-travelers-guide": "International Travelers Guide",
+  "participate/super-sponsor-ych": "Super Sponsor YCH",
+  "join-iwag-team/roles": "Team roles",
+  "location/public-transit-guide": "Public Transit Guide",
+  "location/private-vehicles-guide": "Private Vehicle Guide",
+  "participate/t-shirt-guide": "T-shirt Size Guide",
+  "updates/2026-11-15-venue-reveal": "Welcome to West Jakarta",
+  "updates/2026-11-08-staff-applications": "Join our Team!"
+};
+const routeTitlesId: Record<string, string> = {
+  "international-travelers-guide": "Panduan Wisatawan Internasional",
+  "participate/super-sponsor-ych": "Referensi Super Sponsor YCH",
+  "join-iwag-team/roles": "Peran Tim",
+  "location/public-transit-guide": "Panduan Transportasi Umum",
+  "location/private-vehicles-guide": "Panduan Kendaraan Pribadi",
+  "participate/t-shirt-guide": "Panduan Ukuran Kaus",
+  "updates/2026-11-15-venue-reveal": "Selamat Datang di Jakarta Barat",
+  "updates/2026-11-08-staff-applications": "Bergabung dengan Tim!"
+};
+const isUpdate = segments[0] === "updates";
+const isVenueArticle = slug === "updates/2026-11-15-venue-reveal";
+const isTeamArticle = slug === "updates/2026-11-08-staff-applications";
+const archiveArticles: Record<string, { date: string; summary: string; details: string[] }> = {
+  "updates/2026-01-24-volunteer": { date: "24 January 2026", summary: "A recruitment notice for volunteer support across event operations.", details: ["The source announcement listed security, runner, photography, videography, registration, medical, and audio-visual teams.", "It described volunteering as an event-day support role distinct from year-round staff planning.", "The source listed age and physical task expectations; these are historical 2026 criteria, not current recruitment terms."] },
+  "updates/2026-01-28-dealers": { date: "28 January 2026", summary: "A historical call for vendors, community representatives, and creators wishing to display work at the 2026 Dealers Den.", details: ["The announcement described applications for merchandise sales, community representation, and display-only creative work.", "It outlined table dimensions, shared equipment, and limited electrical access as 2026 event arrangements.", "The announcement's application deadline and operational conditions have passed and must not be reused for a future event."] },
+  "updates/2026-01-13-panel-registration": { date: "31 January 2026", summary: "An invitation for community members to propose panels and activities for IWAG 2026.", details: ["The source grouped proposals into entertainment, social, and educational categories.", "It described sessions typically lasting 30–60 minutes and organiser review based on relevance and community appeal.", "The application deadline and pass arrangements were specific to the 2026 event and are expired."] },
+  "updates/2026-02-16-talent-show": { date: "16 February 2026", summary: "A historical invitation for solo and group performers to apply for the IWAG 2026 talent show.", details: ["The source requested a demonstration or record of the proposed act and supporting media.", "It described a maximum ten-minute performance and an all-ages content expectation.", "The submission deadline and application process have passed."] },
+  "updates/2026-03-13-conbook": { date: "13 March 2026", summary: "A historical call for community artwork submissions to the IWAG 2026 convention book.", details: ["The source requested family-friendly artwork in JPG or PNG format and specified print-oriented dimensions and resolution.", "It described a review process for print suitability and publication in event media.", "The original submission deadline and artwork terms were specific to the 2026 publication."] },
+  "updates/2026-03-14-art-show": { date: "14 March 2026", summary: "The 2026 event introduced a dedicated space for displaying and auctioning community-created artwork.", details: ["The source described display-only and auction submissions, with curation before exhibition.", "It outlined silent and live auction stages, creator pickup, and a service fee on successfully sold items.", "The original dimensions, bidding increments, fees, and event procedures are historical and are not V2 policy."] },
+  "updates/2026-06-05-furcafe": { date: "5 June 2026", summary: "A themed café experience announced as part of the IWAG 2026 programme.", details: ["The source described a reserved dining experience with limited seating and menu selection.", "It stated that reservations were required and that a submitted form alone did not guarantee a seat.", "The schedule, hotel restaurant, prices, menu, and booking process applied to the 2026 venue and are expired."] },
+  "updates/2026-07-14-conclusion": { date: "14 July 2026", summary: "A post-event retrospective covering new experiences, attendee feedback, and community media archives.", details: ["The source highlighted the 2026 Art Show and Fureats Café as new event experiences.", "It invited feedback and described attendee-submitted photo and video archives.", "The source requested consent for identifiable attendee images and asked contributors to avoid private spaces without permission."] },
+  "updates/2024-08-31-theme-reveal": { date: "31 August 2024", summary: "The announcement revealed Return of the Wild as the theme for IWAG 2025 after a community vote.", details: ["The theme used a post-apocalyptic setting and framed renewal and nature's recovery as its central idea.", "This is a historical theme announcement for the 2025 edition."] },
+  "updates/2024-11-01-venue-reveal": { date: "1 November 2024", summary: "The 2025 venue and event dates were announced as ibis Styles BSD and 12–13 July 2025.", details: ["The announcement described the Tangerang venue as the host location for the 2025 edition.", "Venue and date details are historical and must not be used for the 2027 Jakarta edition."] },
+  "updates/2024-11-23-tier-reveal": { date: "23 November 2024", summary: "The first 2025 event-pass tier announcement described five tiers and a ladder-gift mechanism.", details: ["The source described Settler, Scout, Pathfindeer, Pioneer, and Guardian tiers.", "It announced ticketing and payment arrangements for the 2025 edition; these are not current pass terms."] },
+  "updates/2024-12-29-registration-opening": { date: "29 December 2024", summary: "A pre-registration guide outlined the split opening schedule for 2025 event-pass tiers.", details: ["The source described separate release windows for lower tiers and sponsor tiers.", "It summarised account preparation, international payment options, transfers, upgrades, and age-related entry information.", "All times, payment methods, and policies are historical."] },
+  "updates/2026-01-05-hotel-information": { date: "5 January 2026", summary: "A hotel reservation announcement for IWAG 2026 at ibis Styles Serpong BSD City.", details: ["The source listed historical room types, rates, stay dates, and a group-booking process.", "It described payment through the event team and a minimum age for hotel check-in.", "This venue and all hotel details are obsolete for IWAG 2027."] },
+  "updates/2026-02-05-dj": { date: "5 February 2026", summary: "A historical call for DJs to submit mixes for the IWAG 2026 programme.", details: ["The source requested a 30–60 minute sample set and information about genre and prior performances.", "It described anonymous judging based on transitions, theme fit, pacing, and track selection.", "The application deadline and pass benefit applied only to the 2026 edition."] },
+  "updates/2026-02-07-goh-reveal": { date: "7 February 2026", summary: "The announcement introduced digital artist and streamer Auveiss as Guest of Honor for IWAG 2026.", details: ["The source described Auveiss's digital-art, streaming, and multimedia work.", "Guest-of-honor and programme information is specific to the 2026 edition."] },
+  "updates/2025-01-04-registration-update": { date: "4 January 2025", summary: "A registration update revised the 2025 pass release schedule after an inconvenient opening experience.", details: ["The announcement described additional lower-tier pass slots and staggered sponsor-tier registration windows.", "It also gave a historical hotel-booking opening date and starting rate.", "All schedules, prices, and availability are expired."] },
+  "updates/2025-01-06-crash-postmortem": { date: "6 January 2025", summary: "A technical postmortem described service disruption during the first 2025 event-pass registration opening.", details: ["The source explained frontend, backend, single sign-on, database, and load-balancer components in accessible terms.", "It outlined database locking and scaling actions taken during the incident.", "This is a historical incident report, not a description of the current V2 system."] },
+  "updates/2025-01-11-high-tier-raffle": { date: "12 January 2025", summary: "A raffle was announced for limited Pioneer and Guardian pass upgrades after some payments were invalidated.", details: ["The source described eligibility for existing lower-tier attendees and a random draw.", "It included a historical application deadline and payment window; both have passed."] },
+  "updates/2025-01-12-iwag-2025-hotel-reservations": { date: "12 January 2025", summary: "Hotel reservations opened for the 2025 edition at ibis Styles BSD.", details: ["The article described room types, hotel facilities, breakfast, and group-booking procedures.", "The source included historical room rates and July 2025 stay dates.", "These details are unrelated to the 2027 Hotel Ciputra Jakarta venue."] },
+  "updates/2025-02-12-custom-merch": { date: "12 February 2025", summary: "The announcement described custom artwork merchandise for Pioneer and Guardian passholders.", details: ["The source outlined bust-shot and full-body artwork benefits for the respective tiers.", "It described character-reference submission and a historical production deadline.", "Artist participation and artwork rights are not imported as V2 arrangements."] },
+  "updates/2025-03-15-goh-reveal": { date: "15 March 2025", summary: "The 2025 Guest of Honor announcement introduced artist and streamer Kuttoyaki from Thailand.", details: ["The announcement described a talk-show panel about creative work, confidence, and convention experiences.", "Guest and programme information applies only to the 2025 edition."] },
+  "updates/2025-06-14-hotel-reservation-update": { date: "14 June 2025", summary: "A hotel reservation update addressed an overbooking issue affecting some 2025 attendees.", details: ["The source described a full-refund option or relocation to a nearby hotel with shuttle service for affected reservations.", "This is an incident-specific historical notice and does not describe current hotel operations or V2 refund terms."] },
+  "updates/2025-06-15-dealers-den-reveal": { date: "15 June 2025", summary: "The 2025 Dealers Den announcement presented a directory of participating vendor tables.", details: ["The source listed 22 vendor and event-support table positions.", "The directory is historical and is not a vendor list for IWAG 2027."] },
+  "updates/2025-07-09-packing-up": { date: "9 July 2025", summary: "A pre-event packing guide offered practical reminders for convention travel.", details: ["The guide covered travel documents, clothing, hygiene items, payment methods, chargers, fursuit equipment, and luggage planning.", "It encouraged early preparation and checking airline baggage rules."] },
+  "updates/2025-07-17-everything-goes-on": { date: "17 July 2025", summary: "A post-event thank-you and retrospective closed the Return of the Wild 2025 edition.", details: ["The source thanked attendees, volunteers, dealers, and panelists and invited feedback.", "It included guidance for uploading public event memories, including consent and private-space considerations.", "The source also invited the community to participate in choosing the 2026 theme."] },
+  "updates/2025-09-20-electric-dreams": { date: "20 September 2025", summary: "The Electric Dreams theme and 4–5 July 2026 dates were announced for the next edition.", details: ["The announcement identified ibis Styles Serpong BSD City as the 2026 venue.", "The venue is obsolete for IWAG 2027 and is retained only as historical context."] },
+  "updates/2025-11-15-event-pass-reveal": { date: "15 November 2025", summary: "The 2026 event-pass reveal introduced five tiers and described planned premium benefits.", details: ["The source outlined tiered benefits and a ladder-gift mechanism for the 2026 edition.", "It announced a January 2026 sales opening; prices, quotas, and registration details are historical."] },
+  "updates/2025-12-19-updated-policies": { date: "19 December 2025", summary: "A policy-change announcement described revisions to the 2026 Code of Conduct, Terms and Conditions, and Privacy Policy.", details: ["The announcement listed subject areas including registration, attendee age verification, restricted items, recording, hotel conduct, commercial activity, liability, and creative work.", "It also described privacy-rights and media-coverage updates.", "The V1 documents are not adopted as V2 policy; this article is retained only as a historical record of the update announcement."] },
+  "updates/2025-12-20-registration-information": { date: "20 December 2025", summary: "The announcement outlined the 2026 event-pass release schedule and a raffle-only top tier.", details: ["The source described Community ticketing, a separate raffle for the Architect tier, and early hotel booking for selected tiers.", "All registration windows, eligibility rules, and hotel booking dates are expired."] }
+};
+const isArchiveArticle = Boolean(archiveArticles[slug]);
+const isUpdatePagination = isUpdate && ["2", "3", "4"].includes(lastSegment);
+const isLegacyUpdate = isUpdate && !isVenueArticle && !isTeamArticle && !isArchiveArticle && !isUpdatePagination;
+const isTransitGuide = slug === "location/public-transit-guide";
+const isPrivateVehicleGuide = slug === "location/private-vehicles-guide";
+const isTshirtGuide = slug === "participate/t-shirt-guide";
+const isInternationalGuide = slug === "international-travelers-guide";
+const isYchGuide = slug === "participate/super-sponsor-ych";
+const isRoleIndex = slug === "join-iwag-team/roles";
+const roleNames: Record<string, string> = {
+  "attendee-experience-design-staff": "Attendee Experience Design Staff",
+  "con-store-officer": "Con Store Officer",
+  "dealer-relations-officer": "Dealer Relations Officer",
+  "decoration-and-interior-team": "Decoration and Interior Team",
+  "front-desk-staff": "Front Desk Staff",
+  "fursuit-lounge-staff": "Fursuit Lounge Staff",
+  "help-desk-staff": "Help Desk Staff",
+  "logistics-staff": "Logistics Staff",
+  "media-team": "Media Team"
+};
+const roleSlug = segments[1] === "roles" ? segments[2] : undefined;
+const isRoleDetail = Boolean(roleSlug && roleNames[roleSlug]);
+const roleTitle = roleSlug ? roleNames[roleSlug] : "Team roles";
+const title = lang === "id" ? routeTitlesId[slug] ?? rawTitle : routeTitles[slug] ?? rawTitle;
+const intro = lang === "id"
+  ? isInternationalGuide ? "Panduan perjalanan independen untuk pengunjung antarabangsa. Syarat visa, deklarasi, dan transportasi perlu diperiksa kembali melalui sumber resmi sebelum berangkat."
+    : isYchGuide ? "Referensi struktur halaman YCH; bukan penawaran komisi atau jaminan ketersediaan manfaat."
+    : isTransitGuide ? "Panduan umum untuk memeriksa pilihan transportasi menuju area venue Jakarta Barat."
+    : isPrivateVehicleGuide ? "Peringatan bahwa petunjuk kendaraan pribadi lama mengarah ke venue BSD City dan bukan venue Jakarta 2027."
+    : isTshirtGuide ? "Snapshot ukuran kaus dari halaman referensi; konfirmasi ukuran terbaru sebelum memesan."
+    : isRoleIndex ? "Direktori ringkas kategori peran yang tercatat dalam arsip; bukan pengumuman lowongan aktif."
+    : isRoleDetail ? "Ringkasan umum fungsi peran berdasarkan nama jabatan, bukan uraian resmi atau lowongan aktif."
+    : isVenueArticle ? "Snapshot pengumuman venue IWAG 2027 yang diterbitkan pada 15 November 2026."
+    : isTeamArticle ? "Snapshot panggilan kontribusi tim yang diterbitkan pada 8 November 2026."
+    : isArchiveArticle ? archiveArticles[slug].summary
+    : isUpdatePagination ? "Rute paginasi arsip V1 yang diarahkan ke arsip kronologis V2."
+    : isLegacyUpdate ? "Rute arsip historis; ringkasan spesifik belum direkonstruksi dari sumber yang dapat diverifikasi."
+    : "Rute ini dipertahankan dari inventaris arsip V1. Konten spesifik belum direkonstruksi dari sumber yang diverifikasi."
+  : isInternationalGuide ? "An independently written visitor guide. Visa, arrival declaration and transport requirements must be checked against official sources before departure."
+    : isYchGuide ? "A reference to the YCH page structure; not a commission offer or guarantee that any benefit is available."
+    : isTransitGuide ? "General guidance for checking public transport options serving the West Jakarta venue area."
+    : isPrivateVehicleGuide ? "A warning that the archived private-vehicle directions point to the former BSD City venue, not the announced 2027 Jakarta venue."
+    : isTshirtGuide ? "A source size-chart snapshot; confirm current measurements before ordering."
+    : isRoleIndex ? "A directory of role categories found in the archive; not an announcement of active vacancies."
+    : isRoleDetail ? "A general role-function overview based on the role name, not an official job description or active vacancy."
+    : isVenueArticle ? "A snapshot of the IWAG 2027 venue announcement published on 15 November 2026."
+    : isTeamArticle ? "A snapshot of the team contribution announcement published on 8 November 2026."
+    : isArchiveArticle ? archiveArticles[slug].summary
+    : isUpdatePagination ? "A legacy archive pagination route consolidated into the chronological V2 archive."
+    : isLegacyUpdate ? "A historical archive route; a route-specific summary has not been reconstructed from verifiable sources."
+    : "This route is preserved from the V1 archive inventory. Its specific content has not yet been reconstructed from verified sources.";
+const context = isUpdate
+  ? (lang === "id" ? "Arsip rute pembaruan" : "Update route archive")
+  : (lang === "id" ? "Arsip struktur peran tim" : "Team role route archive");
+const backHref = isUpdate ? `/${lang}/updates/`
+  : slug.startsWith("participate/") ? `/${lang}/participate/`
+  : slug.startsWith("location/") ? `/${lang}/location/`
+  : slug.startsWith("join-iwag-team/") ? `/${lang}/join-iwag-team/`
+  : `/${lang}/`;
+const backLabel = isUpdate
+  ? (lang === "id" ? "Kembali ke arsip pembaruan" : "Back to updates")
+  : slug.startsWith("participate/")
+    ? (lang === "id" ? "Kembali ke partisipasi" : "Back to participation")
+    : slug.startsWith("location/")
+      ? (lang === "id" ? "Kembali ke lokasi" : "Back to location")
+      : slug.startsWith("join-iwag-team/")
+        ? (lang === "id" ? "Kembali ke tim" : "Back to team")
+        : (lang === "id" ? "Kembali ke beranda" : "Back to home");
+---
+<BaseLayout lang={lang} contentLang={lang === "id" ? "id" : "en"} title={title} description={intro}>
+  <article class="page-content">
+    <p class="eyebrow">IWAG V2 · {context}</p>
+    <h1>{title}</h1>
+    <p class="lead">{intro}</p>
+    {isTransitGuide && <div class="article-body">
+      <aside class="notice"><strong>{lang === "id" ? "Panduan perlu pembaruan" : "Guide requires a current update"}</strong><p>{lang === "id" ? "Panduan transportasi lama dibuat untuk venue BSD City. Lokasi yang diumumkan untuk IWAG 2027 adalah Hotel Ciputra Jakarta, sehingga rute lama tidak boleh diikuti sebagai petunjuk perjalanan." : "The older transport guide was written for the BSD City venue. IWAG 2027 is announced for Hotel Ciputra Jakarta, so the old route instructions must not be used as current travel directions."}</p></aside>
+      <h2>{lang === "id" ? "Pilihan transportasi umum" : "Public transport options"}</h2>
+      <p>{lang === "id" ? "Sistem transportasi umum kawasan Jakarta mencakup KRL Commuter Line, TransJakarta, MRT Jakarta, LRT Jakarta, dan LRT Jabodebek. Rute yang paling sesuai bergantung pada titik keberangkatan dan kondisi layanan saat perjalanan." : "Greater Jakarta public transport includes KRL Commuter Line, TransJakarta, MRT Jakarta, LRT Jakarta, and LRT Jabodebek. The most suitable route depends on your starting point and service conditions on the day."}</p>
+      <h2>{lang === "id" ? "Rencanakan perjalanan" : "Plan your journey"}</h2>
+      <ul><li>{lang === "id" ? "Periksa rute dan gangguan layanan melalui kanal resmi operator." : "Check routes and service disruptions through official operator channels."}</li><li>{lang === "id" ? "Pastikan halte atau stasiun yang dipilih benar-benar melayani tujuan di sekitar venue." : "Confirm that your selected stop or station serves the venue area."}</li><li>{lang === "id" ? "Sisakan waktu tambahan untuk perpindahan moda dan kondisi lalu lintas." : "Allow extra time for transfers and road traffic."}</li></ul>
+      <p><a href="https://transportforjakarta.or.id/" rel="external">Transport for Jakarta</a></p>
+      <p class="muted">{lang === "id" ? "Tarif, jadwal, rute, dan metode pembayaran dapat berubah. Periksa operator sebelum berangkat." : "Fares, schedules, routes, and payment methods can change. Check the operators before departure."}</p>
+    </div>}
+    {isPrivateVehicleGuide && <div class="article-body">
+      <aside class="notice"><strong>{lang === "id" ? "Konten lama — jangan gunakan rute ini" : "Legacy content — do not use these directions"}</strong><p>{lang === "id" ? "Panduan kendaraan pribadi yang masih tersimpan di arsip mengarahkan pengunjung ke ibis Styles BSD City, venue lama. Lokasi IWAG 2027 yang diumumkan adalah Hotel Ciputra Jakarta. Informasi parkir, tarif, dan stasiun pengisian untuk venue baru belum dikonfirmasi dalam sumber yang diperiksa." : "The archived private-vehicle guide still directs visitors to ibis Styles BSD City, the previous venue. IWAG 2027 is announced for Hotel Ciputra Jakarta. Parking, rates, and charging information for the new venue were not confirmed in the sources reviewed."}</p></aside>
+      <h2>{lang === "id" ? "Sebelum berkendara" : "Before driving"}</h2>
+      <p>{lang === "id" ? "Gunakan alamat venue terbaru, periksa kondisi lalu lintas, kebijakan parkir hotel, serta pembatasan kendaraan yang berlaku pada hari perjalanan." : "Use the current venue address, check traffic conditions, the hotel's parking policy, and any vehicle restrictions in effect on your travel date."}</p>
+      <p><a href={`/${lang}/location/`}>{lang === "id" ? "Kembali ke informasi venue" : "Return to venue information"}</a></p>
+    </div>}
+    {isInternationalGuide && <div class="article-body">
+      <aside class="notice"><strong>{lang === "id" ? "Periksa aturan sebelum berangkat" : "Verify requirements before departure"}</strong><p>{lang === "id" ? "Panduan ini bukan nasihat imigrasi, hukum, atau perjalanan yang dipersonalisasi. Aturan bergantung pada kewarganegaraan, dokumen perjalanan, tujuan kunjungan, dan tanggal kedatangan. Gunakan situs pemerintah resmi untuk menentukan persyaratan yang berlaku." : "This guide is not personalised immigration, legal, or travel advice. Requirements depend on nationality, travel document, purpose of visit, and arrival date. Use official government websites to determine which requirements apply."}</p></aside>
+      <h2>{lang === "id" ? "Sebelum memesan perjalanan" : "Before booking your trip"}</h2>
+      <ul>
+        <li>{lang === "id" ? "Pastikan paspor dan dokumen perjalanan memenuhi masa berlaku serta persyaratan negara tujuan." : "Confirm that your passport and travel document meet the destination's validity and entry requirements."}</li>
+        <li>{lang === "id" ? "Periksa jenis visa atau fasilitas bebas visa berdasarkan kewarganegaraan dan tujuan perjalanan. Jangan menganggap semua pemegang paspor memenuhi syarat VOA." : "Check visa or visa-exemption eligibility by nationality and travel purpose. Do not assume every passport holder qualifies for VOA."}</li>
+        <li>{lang === "id" ? "Siapkan tiket keluar/lanjutan, alamat akomodasi, dan dokumen pendukung yang diminta oleh otoritas." : "Prepare onward or return travel details, accommodation information, and supporting documents requested by the authorities."}</li>
+        <li>{lang === "id" ? "Ajukan visa hanya melalui portal resmi Direktorat Jenderal Imigrasi." : "Apply for a visa only through the official Directorate General of Immigration portal."}</li>
+      </ul>
+      <p><a href="https://evisa.imigrasi.go.id/" rel="external">Official Indonesian e-Visa portal</a> · <a href="https://www.imigrasi.go.id/faq/visa" rel="external">Immigration visa FAQ</a></p>
+      <h3>{lang === "id" ? "Tujuan kunjungan dan kegiatan konvensi" : "Visit purpose and convention activities"}</h3>
+      <p>{lang === "id" ? "Portal resmi e-Visa menyediakan kategori visa yang dapat mencakup peserta pertemuan, insentif, konvensi, dan pameran. Ketentuan pada kategori tertentu dapat melarang kegiatan mencari keuntungan atau hadir sebagai pembicara. Jangan menganggap visa wisata atau VOA otomatis sesuai untuk semua aktivitas acara; pilih kategori berdasarkan kegiatan sebenarnya dan konfirmasikan kepada Imigrasi bila ragu." : "The official e-Visa portal lists visitor categories that may cover participation in meetings, incentives, conventions and exhibitions. Conditions for specific categories may prohibit profit-making activities or attending as a speaker. Do not assume a tourist visa or VOA automatically covers every event activity; select a category based on what you will actually do and confirm with Immigration if unsure."}</p>
+      <p><a href="https://evisa.imigrasi.go.id/front/faq/aff9642b-0b57-443f-8de1-a51601de0ebb" rel="external">Official visa activity and conditions reference</a> · <a href="https://evisa.imigrasi.go.id/web/visa-selection" rel="external">Choose a suitable visa category</a></p>
+      <h2>{lang === "id" ? "Deklarasi kedatangan All Indonesia" : "All Indonesia arrival declaration"}</h2>
+      <p>{lang === "id" ? "Direktorat Jenderal Imigrasi menjelaskan bahwa All Indonesia mengintegrasikan deklarasi imigrasi, bea cukai, kesehatan, dan karantina. Deklarasi dapat diisi sejak tiga hari sebelum kedatangan. Gunakan portal resmi, simpan QR konfirmasi, dan waspadai situs tiruan yang meminta biaya untuk formulir pemerintah." : "Indonesia's Ministry of Immigration and Corrections explains that All Indonesia integrates immigration, customs, health, and quarantine declarations. The declaration can be completed from three days before arrival. Use the official portal, keep the confirmation QR code, and beware of imitation sites charging for a government form."}</p>
+      <p><a href="https://allindonesia.imigrasi.go.id/" rel="external">All Indonesia — official arrival portal</a> · <a href="https://www.beacukai.go.id/barang-penumpang" rel="external">Customs rules for passenger baggage</a> · <a href="https://www.beacukai.go.id/ecd" rel="external">Electronic Customs Declaration information</a></p>
+      <aside class="notice"><strong>{lang === "id" ? "Deklarasi uang tunai" : "Cash declaration"}</strong><p>{lang === "id" ? "Bea Cukai menyatakan bahwa uang tunai atau instrumen pembayaran lain senilai IDR 100.000.000 atau lebih wajib diberitahukan kepada petugas. Aturan khusus dapat berlaku untuk uang kertas asing bernilai sangat besar; periksa petunjuk Bea Cukai sebelum bepergian." : "Customs states that cash or other payment instruments worth IDR 100,000,000 or more must be declared to an officer. Additional rules may apply to very large amounts of foreign banknotes; check Customs guidance before travelling."}</p></aside>
+      <h2>{lang === "id" ? "Tiba di Bandara Soekarno-Hatta (CGK)" : "Arriving at Soekarno-Hatta Airport (CGK)"}</h2>
+      <p>{lang === "id" ? "Ikuti petunjuk resmi bandara untuk imigrasi, pengambilan bagasi, bea cukai, dan titik penjemputan. Jangan mengikuti orang yang menawarkan transportasi secara tidak resmi di area kedatangan." : "Follow airport signage for immigration, baggage reclaim, customs, and designated pickup areas. Do not follow unsolicited transport offers inside the arrivals area."}</p>
+      <h3>{lang === "id" ? "Kereta bandara" : "Airport rail"}</h3>
+      <p>{lang === "id" ? "Commuter Line Basoetta menghubungkan bandara dengan jaringan kereta di Jakarta. Akses stasiun melalui petunjuk terminal dan skytrain bandara. Periksa jadwal, stasiun pemberhentian, kapasitas bagasi, serta pembelian tiket pada operator sebelum memilih rute." : "Commuter Line Basoetta connects the airport with Jakarta's rail network. Follow terminal and airport skytrain signs to reach the station. Check the operator for current schedules, stops, luggage arrangements, and ticket purchase before choosing this option."}</p>
+      <p><a href="https://airport-train.kci.id/" rel="external">KAI Commuter — official airport train ticket portal</a> · <a href="https://soekarnohatta.injourneyairports.id/access/city-transportation/airport-train" rel="external">Soekarno-Hatta Airport — airport train information</a></p>
+      <h3>{lang === "id" ? "Taksi dan layanan perjalanan daring" : "Taxis and ride-hailing"}</h3>
+      <ul><li>{lang === "id" ? "Gunakan loket atau pangkalan resmi, atau pesan melalui aplikasi yang kamu kenal." : "Use official taxi counters or ranks, or book through a recognised app."}</li><li>{lang === "id" ? "Cocokkan nama pengemudi, nomor kendaraan, dan titik jemput dengan aplikasi sebelum naik." : "Match the driver's name, vehicle registration, and pickup point with the app before entering the vehicle."}</li><li>{lang === "id" ? "Bagikan detail perjalanan kepada orang tepercaya dan simpan alamat hotel secara luring." : "Share trip details with someone you trust and keep your hotel address available offline."}</li></ul>
+      <h2>{lang === "id" ? "Pembayaran dan uang tunai" : "Payments and cash"}</h2>
+      <p>{lang === "id" ? "Ketersediaan kartu debit/kredit internasional, QRIS, uang elektronik, dan uang tunai berbeda antar-merchant dan moda transportasi. Tanyakan metode pembayaran sebelum transaksi, periksa biaya transaksi luar negeri pada bank penerbit kartu, dan siapkan metode cadangan." : "Acceptance of international debit or credit cards, QRIS, stored-value transit cards, and cash varies by merchant and transport mode. Ask about payment before a transaction, check foreign transaction fees with your card issuer, and keep a backup payment method."}</p>
+      <p>{lang === "id" ? "Jangan mengandalkan satu aplikasi pembayaran atau menganggap QRIS dapat digunakan oleh setiap pengunjung asing. Dukungan lintas negara bergantung pada bank dan aplikasi asal." : "Do not rely on one payment app or assume every international visitor can use QRIS. Cross-border support depends on the visitor's home bank and payment app."}</p>
+      <h2>{lang === "id" ? "Konektivitas seluler" : "Mobile connectivity"}</h2>
+      <p>{lang === "id" ? "Periksa pilihan roaming operator asal atau paket SIM/eSIM turis dari penyedia resmi. Persyaratan registrasi perangkat, identitas, masa aktif, dan cakupan dapat berubah. Jangan membeli paket dari penjual tidak resmi." : "Check roaming options from your home carrier or tourist SIM/eSIM plans from an authorised provider. Device registration, identity, validity, and coverage requirements can change. Avoid purchasing plans from unofficial sellers."}</p>
+      <h2>{lang === "id" ? "Perlengkapan dan kebutuhan khusus" : "Equipment and special needs"}</h2>
+      <ul><li>{lang === "id" ? "Gunakan pelindung koper yang sesuai dan dokumentasikan kondisi bagasi sebelum check-in." : "Use suitable luggage protection and document your baggage condition before check-in."}</li><li>{lang === "id" ? "Jika membawa kostum, properti, atau peralatan besar, tanyakan kebijakan maskapai mengenai ukuran, baterai, bahan, dan bagasi khusus sebelum berangkat." : "If travelling with a costume, props, or bulky equipment, ask the airline about size, battery, material, and special-baggage rules before departure."}</li><li>{lang === "id" ? "Bawa adaptor daya yang sesuai dan periksa label tegangan/frekuensi perangkat; jangan menganggap semua perangkat kompatibel." : "Bring a suitable power adapter and check your device's voltage and frequency label; do not assume every device is compatible."}</li><li>{lang === "id" ? "Untuk kebutuhan aksesibilitas atau bantuan mobilitas, hubungi maskapai, bandara, dan hotel secara langsung sebelum perjalanan." : "For accessibility or mobility assistance, contact the airline, airport, and hotel directly before travelling."}</li></ul>
+      <h2>{lang === "id" ? "Menuju venue IWAG 2027" : "Getting to the IWAG 2027 venue"}</h2>
+      <p>{lang === "id" ? "Venue yang diumumkan adalah Hotel Ciputra Jakarta, Jl. Letnan Jenderal S Parman, Tanjung Duren, Grogol Petamburan, Jakarta Barat 11470. Rute terbaik dari bandara bergantung pada waktu tiba, bagasi, dan kondisi layanan. Periksa peta serta informasi hotel sebelum berangkat." : "The announced venue is Hotel Ciputra Jakarta, Jl. Letnan Jenderal S Parman, Tanjung Duren, Grogol Petamburan, West Jakarta 11470. The best airport route depends on arrival time, luggage, and service conditions. Check maps and hotel information before departure."}</p>
+      <p><a href="https://hotelciputra.com/jakarta/" rel="external">Hotel Ciputra Jakarta — official website</a></p>
+      <h2>{lang === "id" ? "Sumber resmi dan pembaruan" : "Official sources and updates"}</h2>
+      <ul><li><a href="https://www.imigrasi.go.id/" rel="external">Directorate General of Immigration</a></li><li><a href="https://evisa.imigrasi.go.id/" rel="external">Official e-Visa</a></li><li><a href="https://allindonesia.imigrasi.go.id/" rel="external">All Indonesia arrival portal</a></li><li><a href="https://www.kai.id/" rel="external">KAI</a></li><li><a href="https://www.jakarta.go.id/" rel="external">Jakarta Provincial Government</a></li></ul>
+      <p class="muted">{lang === "id" ? "Halaman ini ditulis ulang secara independen pada 23 November 2026. Informasi operasional bersifat dinamis dan tidak menggantikan instruksi otoritas, operator, maskapai, atau penyedia layanan." : "This page was independently written on 23 November 2026. Operational information is dynamic and does not replace instructions from authorities, operators, airlines, or service providers."}</p>
+    </div>}
+    {isYchGuide && <div class="article-body">
+      <aside class="notice"><strong>{lang === "id" ? "Referensi visual saja" : "Visual reference only"}</strong><p>{lang === "id" ? "Halaman sumber yang diperiksa menampilkan lembar opsi YCH horizontal dan vertikal untuk tier Super Sponsor. Pratinjau V2 tidak menyalin, mengunduh, atau menampilkan ilustrasi tersebut karena hak penggunaan dan izin reproduksi belum diverifikasi." : "The reviewed source page displays horizontal and vertical YCH option sheets for the Super Sponsor tier. This V2 preview does not copy, download, or display that artwork because reproduction rights and permissions have not been verified."}</p></aside>
+      <h2>{lang === "id" ? "Apa yang dimaksud halaman ini?" : "What this page represents"}</h2>
+      <p>{lang === "id" ? "YCH (Your Character Here) merujuk pada karya dengan komposisi dasar yang telah disiapkan dan kemudian disesuaikan dengan karakter pemesan. Detail pose, pilihan, revisi, format berkas, jadwal, serta proses pengumpulan referensi harus dikonfirmasi kepada penyelenggara atau seniman yang berwenang." : "YCH (Your Character Here) refers to artwork built around a prepared composition and then customised with a commissioner's character. Pose options, revisions, file format, timeline, and reference-submission process must be confirmed with the organiser or authorised artist."}</p>
+      <p>{lang === "id" ? "Catatan penamaan: halaman referensi ini masih memakai label Super Sponsor, sedangkan halaman partisipasi IWAG 2027 memakai nama tier Magister. Halaman partisipasi terbaru mencantumkan YCH headshot sebagai salah satu manfaat Magister." : "Naming note: this reference route still uses the Super Sponsor label, while the IWAG 2027 participation page names the tier Magister. The current participation page lists a YCH headshot among Magister benefits."}</p>
+      <h2>{lang === "id" ? "Sebelum mengirim referensi karakter" : "Before submitting character references"}</h2>
+      <ul><li>{lang === "id" ? "Pastikan kamu memiliki hak untuk membagikan seluruh gambar referensi." : "Make sure you have the right to share every reference image."}</li><li>{lang === "id" ? "Jangan mengirim data pribadi yang tidak diperlukan." : "Do not send unnecessary personal information."}</li><li>{lang === "id" ? "Konfirmasikan batas revisi, format hasil, tenggat, dan izin penggunaan karya secara tertulis." : "Confirm revision limits, delivery format, timeline, and artwork-use permissions in writing."}</li><li>{lang === "id" ? "Jangan menganggap ilustrasi dapat digunakan ulang untuk tujuan komersial tanpa izin." : "Do not assume the artwork may be reused commercially without permission."}</li></ul>
+      <p><a href="https://iwag.furries.id/en/participate/super-sponsor-ych/" rel="external">{lang === "id" ? "Lihat halaman referensi sumber" : "View the original reference page"}</a></p>
+      <p class="muted">{lang === "id" ? "Konten ini mendeskripsikan struktur halaman, bukan menawarkan layanan komisi atau menjamin ketersediaan tier." : "This content describes the page structure; it does not offer a commission service or guarantee tier availability."}</p>
+    </div>}
+    {isRoleIndex && <div class="article-body">
+      <p>{lang === "id" ? "Daftar berikut mempertahankan kategori peran yang tercatat pada inventaris arsip. Deskripsi singkat adalah penjelasan umum berdasarkan nama peran, bukan uraian resmi atau lowongan yang sedang aktif." : "The list below preserves role categories recorded in the archived route inventory. Short descriptions are general explanations based on role names, not official job descriptions or active vacancies."}</p>
+      <div class="update-grid">
+        {Object.entries(roleNames).map(([key, name]) => <article class="update-card"><h2>{name}</h2><p>{lang === "id" ? "Lihat ringkasan fungsi peran dan status referensinya." : "View the role overview and its reference status."}</p><a href={`/${lang}/join-iwag-team/roles/${key}`}>{lang === "id" ? "Buka ringkasan peran" : "Open role overview"}</a></article>)}
+      </div>
+      <p class="muted">{lang === "id" ? "Status perekrutan harus diperiksa melalui pengumuman resmi terbaru." : "Recruitment status must be checked through the latest official announcement."}</p>
+    </div>}
+    {isRoleDetail && <div class="article-body">
+      <h2>{roleTitle}</h2>
+      <p>{lang === "id" ? "Ringkasan fungsi umum" : "General role overview"}</p>
+      <p>{roleSlug === "media-team"
+        ? (lang === "id" ? "Mendukung dokumentasi visual dan komunikasi acara melalui koordinasi foto, video, serta materi media yang disetujui." : "Supports event documentation and communications through coordinated photography, video, and approved media materials.")
+        : roleSlug === "logistics-staff"
+          ? (lang === "id" ? "Membantu pencatatan, penyimpanan, distribusi, dan pengembalian perlengkapan acara sesuai arahan koordinator." : "Helps track, store, distribute, and return event equipment under the coordinator's direction.")
+          : roleSlug === "dealer-relations-officer"
+            ? (lang === "id" ? "Mendukung komunikasi operasional dengan dealer, penyampaian informasi area, dan koordinasi kebutuhan vendor." : "Supports operational communication with dealers, area information, and vendor coordination.")
+            : roleSlug === "con-store-officer"
+              ? (lang === "id" ? "Membantu operasional toko acara, alur antrean, informasi produk, dan pencatatan stok sesuai prosedur." : "Assists event-store operations, queue flow, product information, and stock records under established procedures.")
+              : roleSlug === "decoration-and-interior-team"
+                ? (lang === "id" ? "Membantu penataan ruang, dekorasi, pemeriksaan area, dan pengembalian fasilitas tanpa merusak properti venue." : "Helps prepare spaces, install decorations, inspect areas, and restore venue facilities without damaging property.")
+                : roleSlug === "front-desk-staff"
+                  ? (lang === "id" ? "Mendukung penerimaan tamu, pengarahan dasar, dan alur meja depan sesuai prosedur penyelenggara." : "Supports guest reception, basic wayfinding, and front-desk flow under organiser procedures.")
+                  : roleSlug === "fursuit-lounge-staff"
+                    ? (lang === "id" ? "Membantu menjaga area lounge, alur masuk, kebersihan, serta penyampaian informasi keselamatan dan fasilitas." : "Helps maintain lounge access, cleanliness, and communication about safety and facilities.")
+                    : roleSlug === "help-desk-staff"
+                      ? (lang === "id" ? "Membantu menjawab pertanyaan umum, mengarahkan peserta ke kanal yang tepat, dan meneruskan masalah kepada koordinator." : "Helps answer general questions, direct attendees to the right channel, and escalate issues to a coordinator.")
+                      : (lang === "id" ? "Membantu merancang pengalaman peserta, alur aktivitas, dan peningkatan kenyamanan berdasarkan masukan yang ditinjau." : "Helps shape attendee experiences, activity flow, and comfort improvements using reviewed feedback.")}</p>
+      <h2>{lang === "id" ? "Batas informasi" : "Information boundaries"}</h2>
+      <ul><li>{lang === "id" ? "Ini bukan pengumuman bahwa posisi sedang tersedia." : "This is not an announcement that the position is currently open."}</li><li>{lang === "id" ? "Persyaratan usia, jadwal, kompensasi, kewenangan, dan proses seleksi belum dikonfirmasi di halaman ini." : "Age requirements, schedules, compensation, authority, and selection procedures are not confirmed on this page."}</li><li>{lang === "id" ? "Jangan mengirim identitas atau dokumen pribadi melalui halaman pratinjau ini." : "Do not submit identity documents or personal information through this preview page."}</li></ul>
+      <p><a href={`/${lang}/join-iwag-team/roles`}>{lang === "id" ? "Kembali ke direktori peran" : "Back to role directory"}</a></p>
+    </div>}
+    {isArchiveArticle && <div class="article-body">
+      <p class="update-date">{archiveArticles[slug].date} · Historical archive</p>
+      <p>{archiveArticles[slug].summary}</p>
+      <ul>{archiveArticles[slug].details.map((detail) => <li>{detail}</li>)}</ul>
+      <aside class="notice"><strong>{lang === "id" ? "Arsip historis — bukan pengumuman aktif" : "Historical archive — not an active announcement"}</strong><p>{lang === "id" ? "Seluruh tenggat, formulir, tarif, kuota, dan prosedur di artikel ini merujuk pada acara 2026 yang telah berlalu. Jangan menggunakannya sebagai instruksi pendaftaran atau ketentuan IWAG 2027." : "All deadlines, forms, prices, quotas, and procedures in this article refer to the past 2026 event. Do not use them as registration instructions or IWAG 2027 terms."}</p></aside>
+      <p><a href={`https://iwag.furries.id/en/${slug}/`} rel="external">{lang === "id" ? "Buka artikel sumber" : "Open original source article"}</a></p>
+    </div>}
+    {isUpdatePagination && <div class="article-body">
+      <p>{lang === "id" ? "Rute ini merupakan halaman paginasi dari arsip pembaruan V1. Pratinjau V2 menggabungkan pembaruan yang telah direkonstruksi ke dalam satu arsip kronologis." : "This route is a pagination page from the V1 updates archive. The V2 preview consolidates reconstructed updates into one chronological archive."}</p>
+      <p><a href={`/${lang}/updates/`}>{lang === "id" ? "Buka arsip pembaruan V2" : "Open the V2 updates archive"}</a></p>
+    </div>}
+    {isLegacyUpdate && <div class="article-body">
+      <aside class="notice"><strong>{lang === "id" ? "Arsip historis" : "Historical archive"}</strong><p>{lang === "id" ? "Rute ini berasal dari inventaris pembaruan V1. Kontennya berkaitan dengan edisi terdahulu dan tidak boleh dianggap sebagai informasi acara 2027. Ringkasan spesifik belum direkonstruksi dari sumber yang dapat diverifikasi." : "This route comes from the V1 updates inventory. Its content relates to an earlier event edition and must not be treated as 2027 event information. A route-specific summary has not yet been reconstructed from a verifiable source."}</p></aside>
+      <p><a href={`https://iwag.furries.id/en/${slug}/`} rel="external">{lang === "id" ? "Buka artikel sumber" : "Open original source article"}</a></p>
+    </div>}
+    {isTshirtGuide && <div class="article-body">
+      <h2>{lang === "id" ? "Tabel ukuran kaus" : "T-shirt size chart"}</h2>
+      <p>{lang === "id" ? "Ukuran berikut berasal dari panduan ukuran yang tersedia pada sumber saat diperiksa. Konfirmasi kembali sebelum memilih ukuran." : "The measurements below are from the size guide available on the source when reviewed. Confirm again before selecting a size."}</p>
+      <table class="size-table"><thead><tr><th>{lang === "id" ? "Ukuran" : "Size"}</th><th>{lang === "id" ? "Panjang" : "Length"}</th><th>{lang === "id" ? "Lebar" : "Width"}</th></tr></thead><tbody>{[["S","67 cm","46 cm"],["M","69 cm","48 cm"],["L","71 cm","50 cm"],["XL","73 cm","52 cm"],["XXL","75 cm","54 cm"]].map(([size,length,width]) => <tr><td>{size}</td><td>{length}</td><td>{width}</td></tr>)}</tbody></table>
+      <p class="muted">{lang === "id" ? "Tabel ini merupakan snapshot sumber dan bukan jaminan ketersediaan atau ukuran produk saat ini." : "This is a source snapshot, not a guarantee of current product availability or sizing."}</p>
+      <a href="https://iwag.furries.id/en/participate/t-shirt-guide" rel="external">{lang === "id" ? "Buka panduan ukuran sumber" : "Open the original size guide"}</a>
+    </div>}
+    {isVenueArticle && <div class="article-body">
+      <p>{lang === "id" ? "Pengumuman 15 November 2026 menyebut Hotel Ciputra Jakarta sebagai lokasi baru untuk IWAG 2027." : "The 15 November 2026 announcement identifies Hotel Ciputra Jakarta as the new venue for IWAG 2027."}</p>
+      <h2>{lang === "id" ? "Ruang acara" : "Event spaces"}</h2>
+      <p>{lang === "id" ? "Informasi yang dipublikasikan menyebut penggunaan area konferensi dan acara di lantai enam, termasuk grand ballroom, ballroom kedua, dan enam ruang pertemuan." : "The published announcement describes the sixth-floor conference and event areas, including a grand ballroom, a second ballroom, and six meeting rooms."}</p>
+      <h2>{lang === "id" ? "Fasilitas hotel dan mal" : "Hotel and mall connection"}</h2>
+      <p>{lang === "id" ? "Sumber menyebut atrium lobi, kolam renang, pusat kebugaran, spa, restoran, serta akses langsung ke Mal Ciputra Jakarta. Fasilitas dan jam layanan tetap mengikuti ketentuan hotel." : "The source describes a lobby atrium, swimming pool, fitness centre, spa, restaurants, and direct access to Mal Ciputra Jakarta. Facilities and operating hours remain subject to the hotel's own terms."}</p>
+      <h2>{lang === "id" ? "Akses dan transportasi" : "Access and transport"}</h2>
+      <p>{lang === "id" ? "Pengumuman menyebut halte TransJakarta Grogol Reformasi dan Stasiun KRL Grogol sebagai koneksi transportasi di sekitar lokasi. Waktu tempuh kendaraan dapat berubah mengikuti lalu lintas." : "The announcement names the Grogol Reformasi TransJakarta stop and Grogol commuter rail station as nearby public-transport connections. Road travel times vary with traffic."}</p>
+      <h2>{lang === "id" ? "Pemesanan kamar" : "Hotel reservations"}</h2>
+      <p>{lang === "id" ? "Snapshot pengumuman menyebut harga mulai IDR 999.000 nett per malam termasuk sarapan untuk dua orang. Pemesanan melalui IWAG dijadwalkan dibuka pertengahan Januari 2027 menurut sumber pada tanggal publikasi." : "The announcement snapshot lists room rates from IDR 999,000 nett per night, including breakfast for two. At publication, bookings through IWAG were expected to open in mid-January 2027."}</p>
+      <p class="muted">{lang === "id" ? "Semua detail venue, tarif, transportasi, dan waktu pembukaan pemesanan dapat berubah. Periksa pengumuman resmi sebelum melakukan perjalanan atau reservasi." : "Venue details, rates, transport information, and booking dates may change. Check the official announcement before travelling or making a reservation."}</p>
+      <a href="https://iwag.furries.id/en/updates/2026-11-15-venue-reveal" rel="external">{lang === "id" ? "Baca pengumuman sumber" : "Read the original announcement"}</a>
+    </div>}
+    {isTeamArticle && <div class="article-body">
+      <p>{lang === "id" ? "Pengumuman 8 November 2026 membuka panggilan untuk anggota komunitas yang ingin membantu persiapan dan pelaksanaan acara." : "The 8 November 2026 announcement invited community members to help plan and deliver the gathering."}</p>
+      <h2>{lang === "id" ? "Bidang kontribusi" : "Areas of contribution"}</h2>
+      <ul>
+        <li><strong>Media:</strong> {lang === "id" ? "Fotografi, videografi, dan koordinasi tim dokumentasi." : "Photography, videography, and documentation-team coordination."}</li>
+        <li><strong>Con Store and Dealers Den:</strong> {lang === "id" ? "Dukungan operasional toko acara dan area dealer." : "Event-store and Dealers Den operations."}</li>
+        <li><strong>Logistics:</strong> {lang === "id" ? "Pengelolaan perlengkapan, alur barang, dan kebutuhan lapangan." : "Equipment, inventory movement, and on-site logistics."}</li>
+        <li><strong>Attendee Services:</strong> {lang === "id" ? "Bantuan informasi dan kebutuhan peserta sebelum dan saat acara." : "Information and attendee support before and during the event."}</li>
+        <li><strong>Experience and Decoration:</strong> {lang === "id" ? "Pengalaman tematik, dekorasi, dan suasana acara." : "Themed experiences, decoration, and event atmosphere."}</li>
+      </ul>
+      <h2>{lang === "id" ? "Staff dan volunteer" : "Staff and volunteers"}</h2>
+      <p>{lang === "id" ? "Pengumuman membedakan staff sebagai peran perencanaan dan tanggung jawab hasil, sedangkan volunteer membantu menjalankan rencana selama acara. Keduanya merupakan kontribusi sukarela." : "The announcement distinguishes staff roles, which carry planning and outcome responsibilities, from volunteers who help execute plans during the event. Both are voluntary contributions."}</p>
+      <p class="muted">{lang === "id" ? "Panggilan ini merupakan snapshot pengumuman 2026, bukan konfirmasi bahwa pendaftaran masih dibuka. Periksa kanal resmi untuk status terkini." : "This is a snapshot of the 2026 announcement, not confirmation that applications remain open. Check official channels for current status."}</p>
+      <a href="https://iwag.furries.id/en/updates/2026-11-08-staff-applications" rel="external">{lang === "id" ? "Baca pengumuman sumber" : "Read the original announcement"}</a>
+    </div>}
+    {!isVenueArticle && !isTeamArticle && !isArchiveArticle && !isUpdatePagination && !isLegacyUpdate && !isTransitGuide && !isPrivateVehicleGuide && !isTshirtGuide && !isInternationalGuide && !isYchGuide && !isRoleIndex && !isRoleDetail && <aside class="notice">
+      <h2>{lang === "id" ? "Status migrasi" : "Migration status"}</h2>
+      <p>{lang === "id" ? "Rute ini dipertahankan dari inventaris arsip. Konten spesifiknya belum direkonstruksi dari sumber yang diverifikasi." : "This route is preserved from the archive inventory. Its specific content has not yet been reconstructed from a verified source."}</p>
+    </aside>}
+    <p><a href={backHref}>{backLabel}</a></p>
+  </article>
+</BaseLayout>
