@@ -300,21 +300,27 @@ fn build(root: &Path, manifest: &str) -> Result<(), String> {
     let output_stats = scan_output(&output)?;
     if output_stats.html == 0 { return Err("production output contains no HTML pages".into()); }
     let required_routes_checked = validate_required_routes(&output)?;
+    let generated_routes: usize = fs::read_to_string(root.join(".iwag-build/route-count.txt"))
+        .map_err(|e| format!("cannot read generated route count: {e}"))?
+        .trim().parse().map_err(|e| format!("invalid generated route count: {e}"))?;
+    if generated_routes != output_stats.html {
+        return Err(format!("route manifest count {generated_routes} does not match HTML output count {}", output_stats.html));
+    }
     if css > 0 && output_stats.css == 0 { return Err("production output contains no CSS files although CSS source files exist".into()); }
 
     let elapsed_ms = started.elapsed().as_millis();
     let report_dir = root.join(".iwag-build");
     fs::create_dir_all(&report_dir).map_err(|e| format!("cannot create build report directory: {e}"))?;
     let report = format!(
-        "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"backend\": \"astro-vite\",\n  \"toolchain\": {{\"node\": \"{}\", \"npm\": \"{}\", \"cargo\": \"{}\"}},\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output\": {{\"files\": {}, \"html\": {}, \"css\": {}, \"javascript\": {}, \"images\": {}, \"fonts\": {}, \"wasm\": {}, \"total_bytes\": {}, \"html_bytes\": {}, \"css_bytes\": {}, \"javascript_bytes\": {}, \"media_bytes\": {}, \"wasm_bytes\": {}}},\n  \"required_routes_checked\": {},\n  \"build_duration_ms\": {},\n  \"status\": \"success\"\n}}\n",
+        "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"backend\": \"astro-vite\",\n  \"toolchain\": {{\"node\": \"{}\", \"npm\": \"{}\", \"cargo\": \"{}\"}},\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output\": {{\"files\": {}, \"html\": {}, \"css\": {}, \"javascript\": {}, \"images\": {}, \"fonts\": {}, \"wasm\": {}, \"total_bytes\": {}, \"html_bytes\": {}, \"css_bytes\": {}, \"javascript_bytes\": {}, \"media_bytes\": {}, \"wasm_bytes\": {}}},\n  \"generated_routes\": {},\n  \"required_routes_checked\": {},\n  \"build_duration_ms\": {},\n  \"status\": \"success\"\n}}\n",
         VERSION, json_escape(&toolchain.node), json_escape(&toolchain.npm), json_escape(&toolchain.cargo),
         json_escape(source_name), json_escape(archive_name), json_escape(output_name),
-        astro, ts, js, css, html, output_stats.files, output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts, output_stats.wasm, output_stats.total_bytes, output_stats.html_bytes, output_stats.css_bytes, output_stats.js_bytes, output_stats.media_bytes, output_stats.wasm_bytes, required_routes_checked, elapsed_ms
+        astro, ts, js, css, html, output_stats.files, output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts, output_stats.wasm, output_stats.total_bytes, output_stats.html_bytes, output_stats.css_bytes, output_stats.js_bytes, output_stats.media_bytes, output_stats.wasm_bytes, generated_routes, required_routes_checked, elapsed_ms
     );
     fs::write(report_dir.join("iwag-build-report.json"), report)
         .map_err(|e| format!("cannot write build report: {e}"))?;
     println!("[iwagc] validated {} HTML files, {} CSS files, {} JS files, {} images, {} fonts and {} WASM modules", output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts, output_stats.wasm);
-    println!("[iwagc] verified {required_routes_checked} required root and locale routes");
+    println!("[iwagc] verified {generated_routes} generated routes and {required_routes_checked} required root/locale routes");
     println!("[iwagc] output footprint: {} bytes across {} files; build duration: {elapsed_ms} ms", output_stats.total_bytes, output_stats.files);
     println!("[iwagc] build report: .iwag-build/iwag-build-report.json");
     Ok(())
