@@ -50,6 +50,8 @@ const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(
           <option value="amoled-black">{t.amoled}</option>
           <option value="dynamic">{t.dynamic}</option>
         </select>
+        <label for="accent-choice" data-accent-label>{t.accent}</label>
+        <input id="accent-choice" type="color" value="#426b9b" data-accent-choice aria-label={t.accent} />
       </div>
     </header>
     <main id="main" tabindex="-1">
