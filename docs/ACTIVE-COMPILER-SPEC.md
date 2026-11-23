@@ -75,8 +75,8 @@ Implemented:
 - build report written outside public output.
 
 Still required:
-- a committed npm lockfile and reproducible `npm ci` workflow;
-- transitive dependency and license inventory;
+- verify the committed npm lockfile with `npm ci` on the updated branch;
+- review transitive dependency licenses and provenance;
 - local-link and asset-reference validation;
 - content/locale manifest validation;
 - stable diagnostic codes and structured JSON output for all commands.
