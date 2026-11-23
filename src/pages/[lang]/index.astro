@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getMessages } from "../../i18n/ui";
+import { isLocale, localeKeys } from "../../i18n/locales";
+
+export function getStaticPaths() {
+  return localeKeys.map((lang) => ({ params: { lang } }));
+}
+
+const requestedLang = Astro.params.lang;
+const lang = isLocale(requestedLang) ? requestedLang : "en";
+const t = getMessages(lang);
+---
+<BaseLayout lang={lang} title={t.home} description={t.intro}>
+  <section class="hero">
+    <p class="eyebrow">{t.eyebrow}</p>
+    <h1>{t.title}</h1>
+    <p class="lead">{t.intro}</p>
+    <div class="actions">
+      <a class="action-link" href={`/${lang}/about/`}>{t.explore}</a>
+      <a class="action-link secondary" href={`/${lang}/accessibility/`}>{t.learn}</a>
+    </div>
+    <section class="status-card" aria-labelledby="status-title">
+      <span class="status-label">{t.status}</span>
+      <h2 id="status-title">{t.status}</h2>
+      <p>{t.statusText}</p>
+    </section>
+    <aside class="notice" aria-labelledby="notice-title">
+      <h2 id="notice-title">{t.noticeTitle}</h2>
+      <p>{t.notice}</p>
+    </aside>
+  </section>
+</BaseLayout>
