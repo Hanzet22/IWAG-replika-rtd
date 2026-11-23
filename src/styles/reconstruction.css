@@ -1,8 +1,8 @@
 /* IWAG V2 global reconstruction — semantic CSS baseline.
    Panda owns tokens, Tailwind owns utilities, StyleX owns component atoms.
    Keep preflight disabled and retain plain-CSS fallbacks. */
-@import "tailwindcss/theme" layer(theme);
-@import "tailwindcss/utilities" layer(utilities);
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 @property --iwag-visual-progress {
   syntax: "<number>";
   inherits: false;
