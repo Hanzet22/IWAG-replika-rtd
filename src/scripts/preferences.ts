@@ -9,7 +9,7 @@ root.dataset.js = "true";
 const validThemes = ["system", "light", "black", "super-black", "amoled-black", "dynamic"];
 const storageKey = "iwag-v2-theme";
 const accentStorageKey = "iwag-v2-accent";
-let selectedAccent = "#726550";
+let selectedAccent = "#135d78";
 
 function hexToRgb(hex: string) {
   const value = hex.replace("#", "");
@@ -133,7 +133,7 @@ resetButton?.addEventListener("click", () => {
   for (const key of [storageKey, accentStorageKey, "iwag-v2-text-scale", "iwag-v2-contrast", "iwag-v2-motion", "iwag-v2-density"]) {
     try { localStorage.removeItem(key); } catch { /* Preferences still reset for this page. */ }
   }
-  selectedAccent = "#726550";
+  selectedAccent = "#135d78";
   applyTheme("system");
   applyAccent(selectedAccent);
   root.dataset.textScale = "normal";
