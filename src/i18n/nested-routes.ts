@@ -2,6 +2,9 @@
 // These paths are preserved as route inventory only; V1 copy is not imported.
 export const nestedRoutes = [
   "international-travelers-guide",
+  "location/public-transit-guide",
+  "location/private-vehicles-guide",
+  "participate/t-shirt-guide",
   "participate/super-sponsor-ych",
   "join-iwag-team/roles/attendee-experience-design-staff",
   "join-iwag-team/roles/con-store-officer",
