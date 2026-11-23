@@ -23,6 +23,24 @@ const isVisitPath = ["/plan-your-visit", "/location", "/participate"].some((path
 const isCommunityPath = ["/community", "/about", "/join-iwag-team", "/dealers", "/links"].some((path) => currentPath === path || currentPath.startsWith(path + "/"));
 const isUpdatesPath = currentPath === "/updates" || currentPath.startsWith("/updates/");
 const hasMalayTranslation = ["/", "/events", "/events/", "/events/iwag-2027", "/events/iwag-2027/"].includes(pathWithoutLocale);
+const breadcrumbSegments = currentPath.split("/").filter(Boolean);
+const breadcrumbLabels: Record<string, string> = {
+  "plan-your-visit": lang === "id" ? "Rencanakan kunjungan" : "Plan your visit",
+  "community": lang === "id" ? "Komunitas" : "Community",
+  "events": lang === "id" || lang === "ms-my" ? "Acara" : "Events",
+  "updates": lang === "id" ? "Pembaruan" : "Updates",
+  "location": lang === "id" ? "Lokasi" : "Location",
+  "participate": lang === "id" ? "Partisipasi" : "Participate",
+  "join-iwag-team": lang === "id" ? "Bergabung dengan tim" : "Join the team",
+  "international-travelers-guide": lang === "id" ? "Panduan wisatawan internasional" : "International travelers guide",
+  "policy": lang === "id" ? "Dokumen kebijakan" : "Policy documents"
+};
+const breadcrumbName = (segment: string) => breadcrumbLabels[segment] ?? segment
+  .replace(/^\\d{4}-\\d{2}-\\d{2}-/, "")
+  .split("-")
+  .map((part) => part.length <= 3 ? part.toUpperCase() : part.charAt(0).toUpperCase() + part.slice(1))
+  .join(" ");
+
 ---
 <!doctype html>
 <html lang={htmlLang} data-theme="system">
