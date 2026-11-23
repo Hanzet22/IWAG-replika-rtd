@@ -12,7 +12,7 @@ Updated: 2026-11-23
 - [x] Theme tokens: System, Light, Black, Super Black, AMOLED Black, Dynamic Color
 - [x] Progressive theme preference with local-only storage
 - [x] Reduced-motion and forced-colors CSS handling
-- [x] Responsive layout with system fonts and no external font CDN
+- [x] Responsive layout with five self-hosted font families and no external font CDN
 - [x] Independent-project notice
 - [x] Independently authored Terms, Privacy, and Code of Conduct draft pages, with V1 rules and wording explicitly excluded; all three remain unpublished/unapproved pending operator and legal verification
 - [x] Reconstructed homepage, about, venue, participate, team, links, policy index and resources pages
@@ -43,7 +43,7 @@ Updated: 2026-11-23
 ## Engineering guardrails
 
 - WCAG 2.2 Level A is the declared target; do not describe the preview as conformant.
-- No external font CDNs or third-party scripts in the baseline.
+- No external font CDNs or third-party scripts in the baseline; five licensed font families are self-hosted.
 - No user-facing content may depend on JavaScript, WebGL, or WebGPU.
 - Do not fabricate event facts, policies, legal operator identity, or privacy commitments.
 - Keep V1 archived and unmodified; V2 source lives under `src/`.
