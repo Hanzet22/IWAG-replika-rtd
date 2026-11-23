@@ -6,17 +6,21 @@
 
 IWAG V2 is a fresh implementation. The archived V1 files are retained as a reference for structural research; they are not the V2 application source.
 
-The V2 foundation currently includes:
+The current V2 implementation includes:
 - Astro static output with TypeScript
 - Locale-prefixed routes for English, Indonesian, English (Singapore), and Bahasa Melayu (Malaysia)
 - Semantic HTML-first layouts and progressive enhancement
 - System, Light, Black, Super Black, AMOLED Black, and Dynamic Color themes
 - System fonts; no external font CDN
 - Reduced-motion and forced-colors styling
+- Reconstructed homepage, events, venue, participation, team, resources, and travel-guide pages
+- Historical update archive covering the discovered 2024–2026 update routes
+- Nine staff-role overview routes, clearly marked as non-official summaries where source pages are unavailable
+- Dated event and pass information snapshots; no live ticket sales, registration, accounts, or payments
 - Separate structural routes for Terms, Privacy, and Code of Conduct
-- WCAG 2.2 Level A as the stated target, without claiming conformance
+- WCAG 2.2 Level A as the engineering target only, without claiming conformance or pursuing certification
 
-Policy pages and event information remain placeholders until the responsible operator, content owners, facts, and legal review are confirmed. Do not treat preview copy as official event information or approved legal policy.
+Event details are independently rewritten source snapshots, not official IWAG information or guarantees. Volatile facts must be rechecked before publication. Terms, Privacy, and Code of Conduct are not copied from V1 and are not final public policies; they require a complete independent rewrite after the actual operator, data flows, responsibilities, and applicable jurisdictions are verified. Do not treat preview copy as an approved legal policy.
 
 ## Requirements
 
@@ -49,6 +53,7 @@ See:
 
 ## Guardrails
 
+- This is an independent V2 replica/re-engineering project, not a certification or accreditation project.
 - Do not bypass repository branch protection.
 - Do not copy V1 compiled bundles as the V2 implementation.
 - Do not add trackers, analytics, remote fonts, or social embeds by default.
