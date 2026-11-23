@@ -150,11 +150,13 @@ struct OutputStats {
     js: usize,
     images: usize,
     fonts: usize,
+    wasm: usize,
     total_bytes: u64,
     html_bytes: u64,
     css_bytes: u64,
     js_bytes: u64,
     media_bytes: u64,
+    wasm_bytes: u64,
 }
 
 fn scan_output(root: &Path) -> Result<OutputStats, String> {
@@ -187,6 +189,7 @@ fn scan_output(root: &Path) -> Result<OutputStats, String> {
                     stats.fonts += 1;
                     stats.media_bytes += bytes;
                 }
+                "wasm" => { stats.wasm += 1; stats.wasm_bytes += bytes; }
                 _ => {}
             }
         }
@@ -303,14 +306,14 @@ fn build(root: &Path, manifest: &str) -> Result<(), String> {
     let report_dir = root.join(".iwag-build");
     fs::create_dir_all(&report_dir).map_err(|e| format!("cannot create build report directory: {e}"))?;
     let report = format!(
-        "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"backend\": \"astro-vite\",\n  \"toolchain\": {{\"node\": \"{}\", \"npm\": \"{}\", \"cargo\": \"{}\"}},\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output\": {{\"files\": {}, \"html\": {}, \"css\": {}, \"javascript\": {}, \"images\": {}, \"fonts\": {}, \"total_bytes\": {}, \"html_bytes\": {}, \"css_bytes\": {}, \"javascript_bytes\": {}, \"media_bytes\": {}}},\n  \"required_routes_checked\": {},\n  \"build_duration_ms\": {},\n  \"status\": \"success\"\n}}\n",
+        "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"backend\": \"astro-vite\",\n  \"toolchain\": {{\"node\": \"{}\", \"npm\": \"{}\", \"cargo\": \"{}\"}},\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output\": {{\"files\": {}, \"html\": {}, \"css\": {}, \"javascript\": {}, \"images\": {}, \"fonts\": {}, \"wasm\": {}, \"total_bytes\": {}, \"html_bytes\": {}, \"css_bytes\": {}, \"javascript_bytes\": {}, \"media_bytes\": {}, \"wasm_bytes\": {}}},\n  \"required_routes_checked\": {},\n  \"build_duration_ms\": {},\n  \"status\": \"success\"\n}}\n",
         VERSION, json_escape(&toolchain.node), json_escape(&toolchain.npm), json_escape(&toolchain.cargo),
         json_escape(source_name), json_escape(archive_name), json_escape(output_name),
-        astro, ts, js, css, html, output_stats.files, output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts, output_stats.total_bytes, output_stats.html_bytes, output_stats.css_bytes, output_stats.js_bytes, output_stats.media_bytes, required_routes_checked, elapsed_ms
+        astro, ts, js, css, html, output_stats.files, output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts, output_stats.wasm, output_stats.total_bytes, output_stats.html_bytes, output_stats.css_bytes, output_stats.js_bytes, output_stats.media_bytes, output_stats.wasm_bytes, required_routes_checked, elapsed_ms
     );
     fs::write(report_dir.join("iwag-build-report.json"), report)
         .map_err(|e| format!("cannot write build report: {e}"))?;
-    println!("[iwagc] validated {} HTML files, {} CSS files, {} JS files, {} images and {} fonts", output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts);
+    println!("[iwagc] validated {} HTML files, {} CSS files, {} JS files, {} images, {} fonts and {} WASM modules", output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts, output_stats.wasm);
     println!("[iwagc] verified {required_routes_checked} required root and locale routes");
     println!("[iwagc] output footprint: {} bytes across {} files; build duration: {elapsed_ms} ms", output_stats.total_bytes, output_stats.files);
     println!("[iwagc] build report: .iwag-build/iwag-build-report.json");
