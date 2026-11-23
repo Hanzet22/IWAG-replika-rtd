@@ -96,3 +96,14 @@ A further empirical study, [Ekin25] (DOI: https://doi.org/10.1371/journal.pone.0
 - The 2025 web-accessibility study's participants did not have disabilities; it is not a substitute for co-design or testing with disabled participants.
 - The two mobile performance papers are dated and use older device cohorts. They justify the measurement strategy, not numerical budgets for current phones.
 - The source documentation and package integrations were reviewed; generated production CSS and the combined styling plugin output still require build-level verification.
+
+
+### Styling-pipeline compatibility notes
+
+- [StyleX CSS cascade layers](https://stylexjs.com/docs/learn/advanced/use-cases/css-layers/) documents the `useCSSLayers` object, including `before`, `after` and `prefix`. V2 places StyleX priority layers before Tailwind utilities.
+- [Tailwind CSS theme and utility imports](https://tailwindcss.com/docs/theme) supports importing theme and utilities separately; V2 intentionally omits preflight so it does not add a competing global reset.
+- [Panda CSS Vite integration](https://panda-css.com/docs/installation/vite) documents the Vite plugin and compile-time extraction workflow.
+
+The first CSS-minification failure in this branch was traced to a literal escaped newline at the end of the central CSS layer declaration. Replacing it with a real newline restored the build. That incident was a source-file formatting defect; it was not evidence of an incompatibility between the three styling tools.
+
+A successful production build on the then-current code revision generated 298 HTML pages and passed 7,111 local HTML/CSS reference checks. Later Rust/WASM integration and static accessibility checks are undergoing their own updated build verification.
