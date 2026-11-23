@@ -178,3 +178,29 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+@layer components {
+  .preference-reset {
+    grid-column: 1 / -1;
+    justify-self: start;
+    min-height: var(--control-min);
+    padding: .55rem .8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .preference-reset:hover {
+    text-decoration: underline;
+    text-underline-offset: .18em;
+  }
+
+  .preference-reset:focus-visible {
+    outline: var(--focus-width) solid var(--focus);
+    outline-offset: 3px;
+  }
+}
