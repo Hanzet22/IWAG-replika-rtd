@@ -15,12 +15,12 @@
   },
   "dependencies": {
     "astro": "^7.4.13",
-    "vue": "^3.5.25"
+    "vue": "^3.5.45"
   },
   "devDependencies": {
     "typescript": "^5.9.3",
     "@astrojs/vue": "^7.1.6",
-    "@tailwindcss/vite": "^4.1.17",
-    "tailwindcss": "^4.1.17"
+    "@tailwindcss/vite": "^4.3.5",
+    "tailwindcss": "^4.3.5"
   }
 }
