@@ -17,7 +17,7 @@ The route families include:
 - The nested V1 route inventory is represented by `src/i18n/nested-routes.ts` and generated for the archived EN/ID locales.
 - The international travel guide, transit and legacy private-vehicle guides, T-shirt guide, Super Sponsor YCH reference, role directory and nine role summaries, 29 historical update articles, and three pagination aliases have independently authored V2 content.
 - Historical update summaries are marked as archives; unavailable V1 role pages are represented by generic, non-official role descriptions rather than invented source copy.
-- The event collection publishes the announced 2027 edition in all four locale routes. The Malay homepage and event pages have copy; other Malay routes display an explicit English fallback notice.
+- The event collection publishes the announced 2027 edition in all four locale routes. The Malay homepage and event pages have copy; untranslated Malay routes and selected Indonesian information pages display an explicit English fallback notice.
 - Terms, Privacy and Code of Conduct are new independent working drafts. They do not adopt V1 wording or rules and remain unapproved until the real operator and legal requirements are verified.
 - Any remaining route without verified content renders an explicit migration-state notice rather than fabricated details.
 - Legacy aliases such as `/tnc/` and `/coc/` remain distinct routes; canonical policy navigation uses Terms, Privacy, and Code of Conduct.
