@@ -387,8 +387,6 @@ main#main {
 button:not(:disabled) { cursor: pointer; }
 button:disabled { cursor: not-allowed; opacity: .58; }
 .action-link { cursor: pointer; }
-.action-link, .primary-nav a, .site-footer nav a { transition-property: color, background-color, border-color; transition-duration: 140ms; }
-@media (prefers-reduced-motion: reduce) { .action-link, .primary-nav a, .site-footer nav a { transition: none; } }
 .graphics-status { font-weight: 750; }
 .graphics-stage { display: grid; place-items: center; margin-block: 1rem; padding: .8rem; border: 1px solid var(--border); border-radius: .8rem; background: var(--notice); }
 .graphics-stage svg, .graphics-canvas { width: 100%; height: auto; }
