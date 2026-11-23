@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 const props = defineProps<{ lang: string }>();
 const isId = props.lang === "id";
 
 const canvas = ref<HTMLCanvasElement | null>(null);
 const canvasEnabled = ref(false);
+const ready = ref(false);
+onMounted(() => { ready.value = true; });
 const status = ref(isId ? "Ilustrasi SVG statis tersedia. Aktifkan pratinjau Canvas opsional untuk memeriksa dukungan grafis browser." : "The static SVG illustration is available. Activate the optional Canvas preview to inspect browser graphics support.");
 
 function activateGraphics() {
@@ -64,7 +66,7 @@ function activateGraphics() {
       </svg>
       <canvas ref="canvas" v-show="canvasEnabled" class="graphics-canvas" width="640" height="240" aria-hidden="true"></canvas>
     </div>
-    <button type="button" class="rounded-lg px-4 py-3 font-semibold" @click="activateGraphics">
+    <button type="button" class="rounded-lg px-4 py-3 font-semibold" :disabled="!ready" @click="activateGraphics">
       {{ lang === "id" ? "Aktifkan pratinjau Canvas" : "Activate Canvas preview" }}
     </button>
     <p class="graphics-status" role="status" aria-live="polite">{{ status }}</p>
