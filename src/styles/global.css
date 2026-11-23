@@ -1,13 +1,13 @@
 @font-face {
   font-family: "Alan Sans";
-  src: url("/fonts/alan-sans/AlanSans[wght].woff2") format("woff2");
+  src: url("/fonts/alan-sans/AlanSans%5Bwght%5D.woff2") format("woff2");
   font-style: normal;
   font-weight: 300 900;
   font-display: swap;
 }
 @font-face {
   font-family: "Amarna";
-  src: url("/fonts/amarna/Amarna[ital,wght].woff2") format("woff2");
+  src: url("/fonts/amarna/Amarna%5Bital%2Cwght%5D.woff2") format("woff2");
   font-style: normal italic;
   font-weight: 100 700;
   font-display: swap;
