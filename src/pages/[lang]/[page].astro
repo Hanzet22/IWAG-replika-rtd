@@ -58,6 +58,10 @@ const isUpdates = page === "updates";
 const isConduct = page === "coc" || page === "code-of-conduct";
 const isBrand = page === "brand";
 const isDealers = page === "dealers";
+const isEvents = page === "events";
+const isJoinTeam = page === "join-iwag-team";
+const isLinks = page === "links";
+const isPolicy = page === "policy";
 const copy = isConduct
   ? (lang === "id" ? "Ringkasan referensi dari halaman Code of Conduct sumber. Ini bukan kebijakan V2 yang disahkan atau instruksi resmi untuk menghadiri acara." : "A reference summary of the source Code of Conduct page. This is not an approved V2 policy or official event-attendance instruction.")
   : isLegal ? t.legalDraft
@@ -72,6 +76,38 @@ const copy = isConduct
     <p class="eyebrow">IWAG V2 · Independent project</p>
     <h1>{title}</h1>
     <p class="lead">{copy}</p>
+    {isEvents && <section class="content-card">
+      <p class="eyebrow">IWAG 2027 · FANTASTIC ARCANA</p>
+      <h2>3–4 July 2027</h2>
+      <h3>Hotel Ciputra Jakarta</h3>
+      <p>{lang === "id" ? "Pengumuman publik yang diperiksa pada 23 November 2026 menempatkan IWAG 2027 di Hotel Ciputra Jakarta, Jakarta Barat. Informasi jadwal program, tiket, dan pendaftaran belum dianggap final oleh pratinjau independen ini." : "The public announcement reviewed on 23 November 2026 places IWAG 2027 at Hotel Ciputra Jakarta, West Jakarta. Programme schedules, passes, and registration details are not treated as final by this independent preview."}</p>
+      <p><a href="https://iwag.furries.id/en/" rel="external">{lang === "id" ? "Periksa situs acara sumber" : "Check the original event website"}</a></p>
+      <p class="muted">{lang === "id" ? "Informasi edisi 2026 tersedia sebagai arsip historis dan tidak boleh dianggap sebagai jadwal atau kebijakan 2027." : "The 2026 edition is available as a historical archive and must not be treated as the 2027 schedule or policy."}</p>
+    </section>}
+    {isJoinTeam && <section class="conduct-content">
+      <aside class="notice"><strong>{lang === "id" ? "Status pengumuman" : "Announcement status"}</strong><p>{lang === "id" ? "Halaman ini merangkum struktur kontribusi yang pernah diumumkan pada November 2026. Ini bukan formulir pendaftaran dan tidak mengonfirmasi bahwa lowongan masih tersedia." : "This page summarises contribution areas announced in November 2026. It is not an application form and does not confirm that vacancies remain open."}</p></aside>
+      <h2>{lang === "id" ? "Bidang kontribusi" : "Contribution areas"}</h2>
+      <ul><li><strong>Media</strong> — {lang === "id" ? "Fotografi, videografi, dokumentasi, dan koordinasi relawan media." : "Photography, videography, documentation, and media volunteer coordination."}</li><li><strong>Con Store and Dealers Den</strong> — {lang === "id" ? "Operasional toko acara dan dukungan hubungan dealer." : "Event-store operations and dealer relations support."}</li><li><strong>Logistics</strong> — {lang === "id" ? "Inventaris, perlengkapan, distribusi, dan dukungan lapangan." : "Inventory, equipment, distribution, and on-site support."}</li><li><strong>Attendee Services</strong> — {lang === "id" ? "Informasi dan dukungan peserta sebelum serta selama acara." : "Attendee information and support before and during the event."}</li><li><strong>Experience and Decoration</strong> — {lang === "id" ? "Pengalaman tematik, penataan ruang, dan dekorasi." : "Themed experiences, space planning, and decoration."}</li></ul>
+      <h2>{lang === "id" ? "Staff dan volunteer" : "Staff and volunteers"}</h2>
+      <p>{lang === "id" ? "Pengumuman sumber membedakan staff yang merencanakan dan bertanggung jawab atas hasil, dengan volunteer yang membantu pelaksanaan rencana saat acara. Persyaratan dan komitmen untuk setiap peran harus ditetapkan melalui pengumuman resmi yang masih berlaku." : "The source announcement distinguishes staff, who plan and own outcomes, from volunteers, who help execute plans during the event. Requirements and commitments for each role must be defined by a current official announcement."}</p>
+      <p><a href={`/${lang}/join-iwag-team/roles`}>{lang === "id" ? "Jelajahi direktori peran" : "Explore the role directory"}</a></p>
+      <p><a href="https://iwag.furries.id/en/updates/2026-11-08-staff-applications" rel="external">{lang === "id" ? "Buka pengumuman sumber" : "Open the original announcement"}</a></p>
+    </section>}
+    {isLinks && <section class="conduct-content">
+      <h2>{lang === "id" ? "Sumber perjalanan resmi" : "Official travel resources"}</h2>
+      <ul><li><a href="https://www.imigrasi.go.id/" rel="external">Directorate General of Immigration</a></li><li><a href="https://evisa.imigrasi.go.id/" rel="external">Official Indonesian e-Visa</a></li><li><a href="https://allindonesia.imigrasi.go.id/" rel="external">All Indonesia arrival portal</a></li><li><a href="https://www.kai.id/" rel="external">KAI passenger services</a></li><li><a href="https://www.jakarta.go.id/" rel="external">Jakarta Provincial Government</a></li></ul>
+      <h2>{lang === "id" ? "Sumber venue" : "Venue resources"}</h2>
+      <ul><li><a href="https://hotelciputra.com/jakarta/" rel="external">Hotel Ciputra Jakarta</a></li><li><a href="https://www.ciputramall.com/" rel="external">Mal Ciputra Jakarta</a></li></ul>
+      <h2>{lang === "id" ? "Sumber acara" : "Event resources"}</h2>
+      <ul><li><a href="https://iwag.furries.id/en/" rel="external">Original IWAG website</a></li><li><a href="https://iwag.furries.id/en/updates/" rel="external">Original IWAG updates</a></li><li><a href="https://iwag-archive.furries.id/en" rel="external">IWAG historical archive</a></li></ul>
+      <p class="muted">{lang === "id" ? "Tautan eksternal mengarah ke situs pihak lain. Pratinjau ini tidak mengendalikan ketersediaan, kebijakan privasi, atau keamanan layanan eksternal." : "External links lead to third-party websites. This preview does not control their availability, privacy policies, or service security."}</p>
+    </section>}
+    {isPolicy && <section class="content-card">
+      <h2>{lang === "id" ? "Dokumen tata kelola V2" : "V2 governance documents"}</h2>
+      <p>{lang === "id" ? "Dokumen kebijakan V2 akan ditulis ulang berdasarkan operasi nyata, tanggung jawab pihak terkait, dan aturan lintas yurisdiksi yang relevan. Arsip V1 bukan sumber otomatis untuk ketentuan V2." : "V2 policy documents will be rewritten around actual operations, stakeholder responsibilities, and relevant cross-jurisdictional rules. The V1 archive is not an automatic source for V2 terms."}</p>
+      <ul><li><a href={`/${lang}/terms/`}>{lang === "id" ? "Syarat dan Ketentuan" : "Terms and Conditions"}</a></li><li><a href={`/${lang}/code-of-conduct/`}>{lang === "id" ? "Kode Etik" : "Code of Conduct"}</a></li><li><a href={`/${lang}/privacy/`}>{lang === "id" ? "Kebijakan Privasi" : "Privacy Policy"}</a></li></ul>
+      <p class="muted">{lang === "id" ? "Belum ada dokumen yang disajikan sebagai kebijakan final atau nasihat hukum. Tidak ada identitas pengendali data, badan hukum, atau proses operasional yang akan dikarang." : "No document is presented as a final policy or legal advice. No data-controller identity, legal entity, or operational process will be invented."}</p>
+    </section>}
     {isAbout && <section class="history-section" aria-label={lang === "id" ? "Sejarah pertemuan" : "Gathering history"}>
       <div class="history-entry"><span>2017</span><div><h2>{lang === "id" ? "Awal komunitas" : "Community beginnings"}</h2><p>{lang === "id" ? "Pertemuan akhir tahun Indonesia Winter Furmeet menjadi awal tradisi berkumpul." : "The year-end Indonesia Winter Furmeet meetups began a recurring tradition of bringing the community together."}</p></div></div>
       <div class="history-entry"><span>2022</span><div><h2>{lang === "id" ? "Pertemuan kembali" : "A renewed gathering"}</h2><p>{lang === "id" ? "IWFM kembali digelar dengan kegiatan komunitas, seni, permainan, dan sesi foto bersama." : "IWFM returned with community activities, art, games, and a group photo gathering."}</p></div></div>
@@ -137,6 +173,6 @@ const copy = isConduct
       <p class="muted">{lang === "id" ? "Kanal kontak berbasis teks dan akomodasi acara akan diterbitkan setelah alamat kontak serta layanan pendukung diverifikasi." : "Text-based contact channels and event accommodations will be published after contact details and support services are verified."}</p>
     </section>}
     {isLegal && !isConduct && <aside class="notice"><h2>{lang === "id" ? "Belum disahkan" : "Not approved"}</h2><p>{copy}</p></aside>}
-    {!isLegal && !isAccessibility && !isLocation && !isParticipate && !isUpdates && <aside class="notice"><p>{lang === "id" ? "Informasi acara dan operasional akan diterbitkan setelah sumbernya diverifikasi. Arsip V1 tidak dianggap sebagai informasi terkini." : "Event and operational information will be published only after its source is verified. V1 archive material is not treated as current information."}</p></aside>}
+    {!isLegal && !isAccessibility && !isLocation && !isParticipate && !isUpdates && !isEvents && !isJoinTeam && !isLinks && !isPolicy && <aside class="notice"><p>{lang === "id" ? "Informasi acara dan operasional akan diterbitkan setelah sumbernya diverifikasi. Arsip V1 tidak dianggap sebagai informasi terkini." : "Event and operational information will be published only after its source is verified. V1 archive material is not treated as current information."}</p></aside>}
   </article>
 </BaseLayout>
