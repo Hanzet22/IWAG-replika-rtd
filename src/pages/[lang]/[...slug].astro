@@ -20,6 +20,8 @@ const title = lastSegment
   .map((part) => part.length <= 3 ? part.toUpperCase() : part.charAt(0).toUpperCase() + part.slice(1))
   .join(" ");
 const isUpdate = segments[0] === "updates";
+const isVenueArticle = slug === "updates/2026-11-15-venue-reveal";
+const isTeamArticle = slug === "updates/2026-11-08-staff-applications";
 const intro = lang === "id"
   ? "Rute ini dipertahankan dari inventaris arsip V1. Konten V2 sedang ditulis ulang dan belum diterbitkan pada pratinjau ini."
   : "This route is preserved from the V1 archive inventory. V2 content is being independently rewritten and is not published in this preview.";
@@ -32,10 +34,38 @@ const context = isUpdate
     <p class="eyebrow">IWAG V2 · {context}</p>
     <h1>{title}</h1>
     <p class="lead">{intro}</p>
-    <aside class="notice">
+    {isVenueArticle && <div class="article-body">
+      <p>{lang === "id" ? "Pengumuman 15 November 2026 menyebut Hotel Ciputra Jakarta sebagai lokasi baru untuk IWAG 2027." : "The 15 November 2026 announcement identifies Hotel Ciputra Jakarta as the new venue for IWAG 2027."}</p>
+      <h2>{lang === "id" ? "Ruang acara" : "Event spaces"}</h2>
+      <p>{lang === "id" ? "Informasi yang dipublikasikan menyebut penggunaan area konferensi dan acara di lantai enam, termasuk grand ballroom, ballroom kedua, dan enam ruang pertemuan." : "The published announcement describes the sixth-floor conference and event areas, including a grand ballroom, a second ballroom, and six meeting rooms."}</p>
+      <h2>{lang === "id" ? "Fasilitas hotel dan mal" : "Hotel and mall connection"}</h2>
+      <p>{lang === "id" ? "Sumber menyebut atrium lobi, kolam renang, pusat kebugaran, spa, restoran, serta akses langsung ke Mal Ciputra Jakarta. Fasilitas dan jam layanan tetap mengikuti ketentuan hotel." : "The source describes a lobby atrium, swimming pool, fitness centre, spa, restaurants, and direct access to Mal Ciputra Jakarta. Facilities and operating hours remain subject to the hotel's own terms."}</p>
+      <h2>{lang === "id" ? "Akses dan transportasi" : "Access and transport"}</h2>
+      <p>{lang === "id" ? "Pengumuman menyebut halte TransJakarta Grogol Reformasi dan Stasiun KRL Grogol sebagai koneksi transportasi di sekitar lokasi. Waktu tempuh kendaraan dapat berubah mengikuti lalu lintas." : "The announcement names the Grogol Reformasi TransJakarta stop and Grogol commuter rail station as nearby public-transport connections. Road travel times vary with traffic."}</p>
+      <h2>{lang === "id" ? "Pemesanan kamar" : "Hotel reservations"}</h2>
+      <p>{lang === "id" ? "Snapshot pengumuman menyebut harga mulai IDR 999.000 nett per malam termasuk sarapan untuk dua orang. Pemesanan melalui IWAG dijadwalkan dibuka pertengahan Januari 2027 menurut sumber pada tanggal publikasi." : "The announcement snapshot lists room rates from IDR 999,000 nett per night, including breakfast for two. At publication, bookings through IWAG were expected to open in mid-January 2027."}</p>
+      <p class="muted">{lang === "id" ? "Semua detail venue, tarif, transportasi, dan waktu pembukaan pemesanan dapat berubah. Periksa pengumuman resmi sebelum melakukan perjalanan atau reservasi." : "Venue details, rates, transport information, and booking dates may change. Check the official announcement before travelling or making a reservation."}</p>
+      <a href="https://iwag.furries.id/en/updates/2026-11-15-venue-reveal" rel="external">{lang === "id" ? "Baca pengumuman sumber" : "Read the original announcement"}</a>
+    </div>}
+    {isTeamArticle && <div class="article-body">
+      <p>{lang === "id" ? "Pengumuman 8 November 2026 membuka panggilan untuk anggota komunitas yang ingin membantu persiapan dan pelaksanaan acara." : "The 8 November 2026 announcement invited community members to help plan and deliver the gathering."}</p>
+      <h2>{lang === "id" ? "Bidang kontribusi" : "Areas of contribution"}</h2>
+      <ul>
+        <li><strong>Media:</strong> {lang === "id" ? "Fotografi, videografi, dan koordinasi tim dokumentasi." : "Photography, videography, and documentation-team coordination."}</li>
+        <li><strong>Con Store and Dealers Den:</strong> {lang === "id" ? "Dukungan operasional toko acara dan area dealer." : "Event-store and Dealers Den operations."}</li>
+        <li><strong>Logistics:</strong> {lang === "id" ? "Pengelolaan perlengkapan, alur barang, dan kebutuhan lapangan." : "Equipment, inventory movement, and on-site logistics."}</li>
+        <li><strong>Attendee Services:</strong> {lang === "id" ? "Bantuan informasi dan kebutuhan peserta sebelum dan saat acara." : "Information and attendee support before and during the event."}</li>
+        <li><strong>Experience and Decoration:</strong> {lang === "id" ? "Pengalaman tematik, dekorasi, dan suasana acara." : "Themed experiences, decoration, and event atmosphere."}</li>
+      </ul>
+      <h2>{lang === "id" ? "Staff dan volunteer" : "Staff and volunteers"}</h2>
+      <p>{lang === "id" ? "Pengumuman membedakan staff sebagai peran perencanaan dan tanggung jawab hasil, sedangkan volunteer membantu menjalankan rencana selama acara. Keduanya merupakan kontribusi sukarela." : "The announcement distinguishes staff roles, which carry planning and outcome responsibilities, from volunteers who help execute plans during the event. Both are voluntary contributions."}</p>
+      <p class="muted">{lang === "id" ? "Panggilan ini merupakan snapshot pengumuman 2026, bukan konfirmasi bahwa pendaftaran masih dibuka. Periksa kanal resmi untuk status terkini." : "This is a snapshot of the 2026 announcement, not confirmation that applications remain open. Check official channels for current status."}</p>
+      <a href="https://iwag.furries.id/en/updates/2026-11-08-staff-applications" rel="external">{lang === "id" ? "Baca pengumuman sumber" : "Read the original announcement"}</a>
+    </div>}
+    {!isVenueArticle && !isTeamArticle && <aside class="notice">
       <h2>{lang === "id" ? "Status migrasi" : "Migration status"}</h2>
-      <p>{lang === "id" ? "Tidak ada jadwal, syarat pendaftaran, harga, atau informasi operasional V1 yang dianggap masih berlaku. Setiap detail akan ditulis ulang setelah diverifikasi." : "No V1 schedule, registration requirement, price, or operational detail is assumed to remain current. Each detail will be rewritten after verification."}</p>
-    </aside>
+      <p>{lang === "id" ? "Rute ini dipertahankan dari inventaris arsip. Konten spesifiknya belum direkonstruksi dari sumber yang diverifikasi." : "This route is preserved from the archive inventory. Its specific content has not yet been reconstructed from a verified source."}</p>
+    </aside>}
     <p><a href={`/${lang}/updates/`}>{lang === "id" ? "Kembali ke pembaruan" : "Back to updates"}</a></p>
   </article>
 </BaseLayout>
