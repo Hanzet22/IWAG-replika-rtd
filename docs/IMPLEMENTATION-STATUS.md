@@ -24,7 +24,7 @@ Updated: 2026-11-23
 - [x] Historical update archive: all 34 nested update routes across the 2024–2026 inventory, including pagination
 - [x] Nine staff role overview routes; source pages were checked and found unavailable, so summaries are explicitly non-official
 - [x] Nested route generation for all four supported locales
-- [x] Correct document language metadata and an explicit Malay-to-English fallback notice on untranslated routes, including nested routes and top-level information pages
+- [x] Correct document language metadata and explicit English-fallback notices on untranslated Malay routes and selected Indonesian information pages, including nested routes and top-level information pages
 - [x] Base theme text, muted text, link, visited-link, and focus token contrast calculated across the available palettes; full component/state review remains outstanding
 - [x] Accessibility target statement with no premature conformance claim
 - [x] Architecture decision record
