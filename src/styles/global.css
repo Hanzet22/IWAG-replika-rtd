@@ -274,3 +274,22 @@
     .event-facts > div + div { border-left: 0; border-top: 1px solid var(--border); padding-left: 0; }
   }
 }
+
+
+@layer components {
+  .detail-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 1.5rem; align-items: center; }
+  .detail-wide { grid-column: 1 / -1; }
+  .venue-visual-detail { min-height: 18rem; border-radius: var(--radius); }
+  .pass-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; padding-block: 1rem 3rem; }
+  .pass-card { display: flex; flex-direction: column; align-items: flex-start; padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .pass-card h2 { margin: .2rem 0; font-size: 1.5rem; }
+  .pass-price { font-size: 1.45rem; font-weight: 850; letter-spacing: -.03em; }
+  .pass-card ul { padding-left: 1.2rem; }
+  .pass-status { display: inline-flex; margin-top: auto; padding: .35rem .65rem; border: 1px solid var(--border); border-radius: 99px; font-size: .8rem; font-weight: 750; }
+  .update-grid-page { padding-block: 1rem 3rem; }
+  .update-grid-page .update-card h2 { font-size: 1.35rem; margin: .75rem 0 .25rem; }
+  @media (max-width: 48rem) {
+    .detail-grid, .pass-grid { grid-template-columns: 1fr; }
+    .detail-wide { grid-column: auto; }
+  }
+}
