@@ -194,6 +194,35 @@ fn scan_output(root: &Path) -> Result<OutputStats, String> {
     Ok(stats)
 }
 
+fn validate_required_routes(output: &Path) -> Result<usize, String> {
+    let mut required = vec![
+        "index.html".to_string(),
+        "404.html".to_string(),
+    ];
+    for locale in ["en", "id", "en-sg", "ms-my"] {
+        for route in [
+            "index.html",
+            "events/index.html",
+            "plan-your-visit/index.html",
+            "community/index.html",
+            "updates/index.html",
+            "accessibility/index.html",
+            "policy/index.html",
+        ] {
+            required.push(format!("{locale}/{route}"));
+        }
+    }
+    for route in &required {
+        let path = output.join(route);
+        let metadata = fs::metadata(&path)
+            .map_err(|e| format!("required route missing: {route}: {e}"))?;
+        if !metadata.is_file() || metadata.len() == 0 {
+            return Err(format!("required route is not a non-empty file: {route}"));
+        }
+    }
+    Ok(required.len())
+}
+
 fn json_escape(value: &str) -> String {
     value.replace('\\', "\\\\").replace('"', "\\\"")
         .replace('\n', "\\n").replace('\r', "\\r")
@@ -258,20 +287,21 @@ fn build(root: &Path, manifest: &str) -> Result<(), String> {
     let output = canonical_inside_root(root, &output_path, "output_root")?;
     let output_stats = scan_output(&output)?;
     if output_stats.html == 0 { return Err("production output contains no HTML pages".into()); }
+    let required_routes_checked = validate_required_routes(&output)?;
     if css > 0 && output_stats.css == 0 { return Err("production output contains no CSS files although CSS source files exist".into()); }
 
     let elapsed_ms = started.elapsed().as_millis();
     let report_dir = root.join(".iwag-build");
     fs::create_dir_all(&report_dir).map_err(|e| format!("cannot create build report directory: {e}"))?;
     let report = format!(
-        "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"backend\": \"astro-vite\",\n  \"toolchain\": {{\"node\": \"{}\", \"npm\": \"{}\", \"cargo\": \"{}\"}},\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output\": {{\"files\": {}, \"html\": {}, \"css\": {}, \"javascript\": {}, \"images\": {}, \"fonts\": {}, \"total_bytes\": {}, \"html_bytes\": {}, \"css_bytes\": {}, \"javascript_bytes\": {}, \"media_bytes\": {}}},\n  \"build_duration_ms\": {},\n  \"status\": \"success\"\n}}\n",
+        "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"backend\": \"astro-vite\",\n  \"toolchain\": {{\"node\": \"{}\", \"npm\": \"{}\", \"cargo\": \"{}\"}},\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output\": {{\"files\": {}, \"html\": {}, \"css\": {}, \"javascript\": {}, \"images\": {}, \"fonts\": {}, \"total_bytes\": {}, \"html_bytes\": {}, \"css_bytes\": {}, \"javascript_bytes\": {}, \"media_bytes\": {}}},\n  \"required_routes_checked\": {},\n  \"build_duration_ms\": {},\n  \"status\": \"success\"\n}}\n",
         VERSION, json_escape(&toolchain.node), json_escape(&toolchain.npm), json_escape(&toolchain.cargo),
         json_escape(source_name), json_escape(archive_name), json_escape(output_name),
-        astro, ts, js, css, html, output_stats.files, output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts, output_stats.total_bytes, output_stats.html_bytes, output_stats.css_bytes, output_stats.js_bytes, output_stats.media_bytes, elapsed_ms
+        astro, ts, js, css, html, output_stats.files, output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts, output_stats.total_bytes, output_stats.html_bytes, output_stats.css_bytes, output_stats.js_bytes, output_stats.media_bytes, required_routes_checked, elapsed_ms
     );
     fs::write(report_dir.join("iwag-build-report.json"), report)
         .map_err(|e| format!("cannot write build report: {e}"))?;
-    println!("[iwagc] validated {} HTML files, {} CSS files, {} JS files, {} images and {} fonts", output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts);
+    println!("[iwagc] validated {} HTML files, {} CSS files, {} JS files, {} images and {} fonts", output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts);\n    println!("[iwagc] verified {required_routes_checked} required root and locale routes");
     println!("[iwagc] output footprint: {} bytes across {} files; build duration: {elapsed_ms} ms", output_stats.total_bytes, output_stats.files);
     println!("[iwagc] build report: .iwag-build/iwag-build-report.json");
     Ok(())
