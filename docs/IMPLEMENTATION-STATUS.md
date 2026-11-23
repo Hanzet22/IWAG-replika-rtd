@@ -149,7 +149,8 @@ CI runs are diagnostic evidence only. Cancelled or pending workflow runs do not 
 - [x] Reviewed full text of four accessibility papers in the existing Undermind workspace and documented study design, evidence limitations and practical implications.
 - [x] Added mobile performance evidence from real-user battery-saver research and underpowered-device research, with dated-device caveats.
 - [x] Expanded the Rust compiler build report to count output files, HTML/CSS/JS/images/fonts and their byte footprints; it rejects missing generated CSS when CSS source exists.
-- [ ] Commit a reproducible npm lockfile and verify transitive dependency provenance.
+- [x] Generated and committed `package-lock.json` through a branch-scoped lockfile bootstrap job; the production workflow now selects `npm ci` when the lockfile is present.
+- [ ] Review transitive dependency licenses and provenance.
 - [ ] Verify the combined Tailwind/Panda/StyleX production output and generated CSS cascade.
 - [ ] Complete page-template-specific visual and content reconstruction for every route.
 - [ ] Complete route/locale link integrity and missing-asset checks.
