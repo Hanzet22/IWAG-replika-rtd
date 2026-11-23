@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-defineProps<{ lang: string }>();
+const props = defineProps<{ lang: string }>();
+const isId = props.lang === "id";
 
 const canvas = ref<HTMLCanvasElement | null>(null);
 const canvasEnabled = ref(false);
-const status = ref("The static SVG illustration is available. Activate the optional Canvas preview to inspect browser graphics support.");
+const status = ref(isId ? "Ilustrasi SVG statis tersedia. Aktifkan pratinjau Canvas opsional untuk memeriksa dukungan grafis browser." : "The static SVG illustration is available. Activate the optional Canvas preview to inspect browser graphics support.");
 
 function activateGraphics() {
   const element = canvas.value;
@@ -43,7 +44,9 @@ function activateGraphics() {
 
   const webgpuAvailable = "gpu" in navigator;
   canvasEnabled.value = true;
-  status.value = `Canvas 2D: active. WebGL2: ${webglAvailable ? "available" : "unavailable"}. WebGPU API: ${webgpuAvailable ? "exposed by this browser (adapter not requested)" : "unavailable"}.`;
+  status.value = isId
+    ? `Canvas 2D: aktif. WebGL2: ${webglAvailable ? "tersedia" : "tidak tersedia"}. API WebGPU: ${webgpuAvailable ? "terdeteksi (adapter tidak diminta)" : "tidak tersedia"}.`
+    : `Canvas 2D: active. WebGL2: ${webglAvailable ? "available" : "unavailable"}. WebGPU API: ${webgpuAvailable ? "exposed by this browser (adapter not requested)" : "unavailable"}.`;
 }
 </script>
 
