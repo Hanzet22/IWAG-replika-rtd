@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { isLocale } from "../../../i18n/locales";
+
+export async function getStaticPaths() {
+  return (["en", "id", "en-sg", "ms-my"] as const).map((lang) => ({ params: { lang } }));
+}
+
+const langParam = Astro.params.lang;
+const lang = isLocale(langParam) ? langParam : "en";
+const events = (await getCollection("events", ({ data }) => data.locale === lang && data.status === "published"))
+  .sort((a, b) => (a.data.start?.getTime() ?? 0) - (b.data.start?.getTime() ?? 0));
+const isId = lang === "id";
+---
+<BaseLayout lang={lang} title={isId ? "Acara" : "Events"} description={isId ? "Daftar acara yang telah dikonfirmasi dan diterbitkan." : "Confirmed and published event information."}>
+  <section class="page-content">
+    <p class="eyebrow">IWAG V2 · {isId ? "Informasi acara" : "Event information"}</p>
+    <h1>{isId ? "Acara" : "Events"}</h1>
+    {events.length === 0 ? (
+      <aside class="notice">
+        <h2>{isId ? "Belum ada acara yang diterbitkan" : "No published events yet"}</h2>
+        <p>{isId ? "Informasi acara hanya akan ditampilkan setelah jadwal, lokasi, aksesibilitas, dan statusnya diverifikasi." : "Event information will appear only after its schedule, venue, accessibility details, and status have been verified."}</p>
+      </aside>
+    ) : (
+      <ul class="event-list">
+        {events.map((event) => (
+          <li class="content-card">
+            <h2><a href={`/${lang}/events/${event.id.split("/").slice(1).join("/")}/`}>{event.data.title}</a></h2>
+            <p>{event.data.summary}</p>
+            {event.data.start && <p>{event.data.start.toLocaleString(lang, { dateStyle: "long", timeStyle: "short", timeZone: event.data.timezone })}</p>}
+            {event.data.venue && <p>{event.data.venue}</p>}
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</BaseLayout>
