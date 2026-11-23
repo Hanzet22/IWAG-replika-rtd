@@ -60,7 +60,7 @@ const hasMalayTranslation = ["/", "/events", "/events/", "/events/iwag-2027", "/
       </div>
     </header>
     <main id="main" tabindex="-1" lang={htmlLang}>
-      {lang === "ms-my" && htmlLang === "en" && <p class="translation-note" lang="ms-MY">Halaman ini belum diterjemahkan ke Bahasa Melayu. Versi bahasa Inggeris dipaparkan.</p>}
+      {htmlLang === "en" && lang !== "en" && lang !== "en-sg" && <p class="translation-note" lang={locales[lang].htmlLang}>{lang === "id" ? "Halaman ini belum diterjemahkan sepenuhnya ke Bahasa Indonesia. Versi bahasa Inggris ditampilkan." : "Halaman ini belum diterjemahkan ke Bahasa Melayu. Versi bahasa Inggeris dipaparkan."}</p>}
       <slot />
     </main>
     <footer class="site-footer" lang={locales[lang].htmlLang}>
