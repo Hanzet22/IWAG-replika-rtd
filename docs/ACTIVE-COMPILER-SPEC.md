@@ -1,125 +1,108 @@
-# IWAG Active Compiler — Architecture Specification
+# IWAG Active Compiler — Current Implementation and Roadmap
 
-**Status:** Initial CLI implementation committed; architecture remains under active development  
-**Parent project:** IWAG V2 Greenfield Global Reconstruction  
+**Status:** Active Rust CLI implemented; project-specific validation is expanding  
 **Language:** Rust  
-**Role:** Active build orchestrator, project-specific compiler, validator and diagnostics engine
+**Role:** Build controller, source-boundary validator, route/output verifier and diagnostics reporter
 
-## 1. Purpose
+## 1. Purpose and honest compiler boundary
 
-The IWAG Active Compiler is the Rust-controlled entry point for development and production builds. It coordinates specialist compilers and build tools rather than reimplementing every language compiler.
+The Rust `iwagc` CLI is the required project-level entry point for normal development and production builds. It is the active build controller and validator.
 
-The compiler is active because the normal V2 build is invoked through it, it owns the deterministic stage graph, it validates project boundaries and manifests, and it decides whether production output is publishable.
+It does **not** independently parse or transpile Astro, HTML, CSS, JavaScript, TypeScript or Vue. Astro/Vite and their registered plugins remain the specialist frontend compiler backends. Rust owns the orchestration and project-specific validation around them.
 
-## 2. Responsibility split
+## 2. Current command interface
 
-### Rust compiler core owns
-- CLI and build-mode selection.
-- Source classification and archive-boundary enforcement.
-- Manifest parsing and validation.
-- Dependency and toolchain preflight.
-- Build-stage ordering and process orchestration.
-- Project-specific source checks and transformations.
-- WASM module registry and target selection.
-- Build diagnostics, timing and machine-readable reports.
-- Production output integrity checks.
+| Command | Current behavior |
+|---|---|
+| `iwagc inspect` | Inventory the declared source root and report the excluded V1 archive boundary |
+| `iwagc doctor` | Check the configured minimum Node.js version and availability of npm and Cargo |
+| `iwagc dev` | Launch Astro development server through npm |
+| `iwagc build` | Validate source/output paths, invoke Astro/Vite, inspect generated assets, verify required routes and write a build report |
+| `iwagc preview` | Launch Astro production preview through npm |
+| `iwagc wasm` | Explicitly build the Rust contrast-engine module using wasm-pack |
 
-### Specialist backends own
-- Astro page rendering and route generation.
-- Vite module graph, bundling and asset processing.
-- Vue SFC compilation.
-- TypeScript/JavaScript parsing and transformation.
-- CSS processing and minification.
-- Panda/StyleX/Tailwind code generation.
-- Rust-to-WASM compilation for registered modules.
+The normal npm scripts call these Rust commands. `build:astro` remains a diagnostic backend escape hatch, not the normal build entry point.
 
-Do not claim the Rust orchestrator directly compiles a language unless it invokes or contains a real compiler for that language.
+## 3. Current build stages
 
-## 3. Proposed command interface
+1. Resolve the Rust project root and read `iwag.compiler.toml`.
+2. Check Node.js, npm and Cargo availability.
+3. Resolve and canonicalize the declared V2 source path.
+4. Reject absolute, empty, traversal and out-of-repository source paths.
+5. Ensure the V1 archive and V2 source roots do not overlap.
+6. Inventory Astro, TypeScript, JavaScript, CSS and HTML source files.
+7. Verify the application configuration and package manifest exist.
+8. Invoke Astro/Vite through npm.
+9. Confirm generated output exists and contains HTML.
+10. Confirm generated CSS exists when CSS source files are present.
+11. Verify root homepage, 404 page and seven critical routes for each of four locales.
+12. Count generated HTML, CSS, JavaScript, images and fonts, plus byte footprints.
+13. Write `.iwag-build/iwag-build-report.json` outside the public `dist/` directory.
 
-```text
-iwagc inspect [--json]
-iwagc dev [--host <host>] [--port <port>]
-iwagc build [--mode production] [--report <path>]
-iwagc wasm [--module <name>|--all]
-iwagc doctor [--json]
-```
+## 4. Output report
 
-- `inspect`: inventory source files, dependencies and manifest entries.
-- `dev`: run development orchestration and delegate HMR to Vite/Astro.
-- `build`: run the production stage graph and validate output.
-- `wasm`: build explicitly registered Rust modules only.
-- `doctor`: report Rust, Node, npm, Astro and backend availability/version compatibility.
+The report records:
+- compiler and toolchain versions;
+- declared source, archive and output roots;
+- source language counts;
+- generated output file counts and byte totals by category;
+- required route count;
+- build duration and status.
 
-## 4. Production stage graph
+The report is diagnostic evidence. It does not prove that every link resolves, every image has appropriate alternative text, or every route has passed manual accessibility or device testing.
 
-1. Load and validate `iwag.compiler.toml`.
-2. Resolve project root and reject paths that escape the repository.
-3. Inventory source inputs; exclude `archive/**`, `dist/**`, `node_modules/**` and generated files.
-4. Validate locale, route, content and asset manifests.
-5. Validate dependency/license metadata and compiler version pins.
-6. Compile registered Rust/WASM modules if the manifest requires them.
-7. Invoke the Astro/Vite production build through the project package manager.
-8. Validate generated HTML, route completeness, local asset references and absence of archive paths.
-9. Emit `dist/iwag-build-report.json` with tool versions, stages, durations, warnings and artifact inventory.
+## 5. Specialist backend ownership
 
-A failed optional GPU capability or absent WebGPU API is not a build failure. A missing required compiler, invalid source manifest, broken route, or failed mandatory build stage is.
+| Stage | Owner |
+|---|---|
+| Rust CLI compilation | rustc / Cargo |
+| Static page rendering and route generation | Astro |
+| Frontend module graph and asset processing | Vite |
+| Vue single-file component compilation | Astro Vue integration / Vite |
+| TypeScript and JavaScript transforms | Vite toolchain |
+| Tailwind CSS utilities | Tailwind CSS 4 Vite plugin |
+| Typed design tokens and extracted utilities | Panda CSS Vite plugin |
+| Atomic component CSS extraction | StyleX Vite plugin |
+| Optional Rust-to-WASM module | wasm-pack / wasm-bindgen |
 
-## 5. Toolchain boundary
+## 6. Security and reproducibility
 
-The Rust Active Compiler itself is compiled by `rustc`/Cargo. It launches Node.js and the configured package manager to invoke Astro/Vite. This avoids writing custom parsers for HTML, JavaScript, TypeScript, CSS, Astro and Vue.
+Implemented:
+- path canonicalization for source, archive and output boundaries;
+- rejection of path traversal and paths outside the repository;
+- symlink exclusion during source and output scans;
+- argument-array process invocation rather than assembled shell commands;
+- build report written outside public output.
 
-Rust modules intended for browser execution use the `wasm32-unknown-unknown` target and an explicit JS/WASM binding strategy. Native Rust build utilities remain native executables and must not be shipped to the browser.
-
-## 6. Determinism and security
-
-- Pin Rust toolchain and Node engine ranges.
-- Use a lockfile and reproducible package-manager commands.
-- Never execute shell strings assembled from untrusted content; pass executable and argument arrays.
-- Canonicalize paths and reject traversal outside repository root.
-- Do not execute archive content.
-- Do not fetch or install dependencies from the compiler itself.
-- Record backend versions and inputs in the build report.
-- Keep secrets out of compiler logs and artifacts.
-- Build outputs are disposable and are not committed.
+Still required:
+- a committed npm lockfile and reproducible `npm ci` workflow;
+- transitive dependency and license inventory;
+- local-link and asset-reference validation;
+- content/locale manifest validation;
+- stable diagnostic codes and structured JSON output for all commands.
 
 ## 7. WASM policy
 
-WASM is not the default answer to every CPU task. A module must have a measurable need, stable interface, bounded memory behavior, and a JavaScript or static fallback. Small tasks should remain in native browser APIs when that is faster and simpler.
+The contrast-engine crate is optional and is not required for normal site rendering. The `wasm` command builds it only when explicitly requested. The browser-facing integration, startup cost and fallback path must be verified before it is used by a page.
 
-Each module entry records:
-- module name and source path;
-- target and output path;
-- build command/backend;
-- JS binding entrypoint;
-- fallback behavior;
-- memory and startup considerations;
-- license and dependency provenance.
+WebAssembly must not gate navigation, reading, forms or essential information. A JavaScript or static fallback remains mandatory.
 
-## 8. CSS compiler orchestration
+## 8. CSS integration contract
 
-The Active Compiler coordinates Vite plugins and generated CSS but does not replace their language semantics. Tailwind, Panda and StyleX are configured as distinct stages/plugins with pinned versions and an explicit CSS layer order. The output must be inspected for duplicated tokens, duplicate resets, specificity collisions, dead CSS and excess bytes.
+- Tailwind CSS 4 imports theme and utility layers without preflight.
+- Panda CSS supplies typed tokens and compile-time extracted utilities.
+- StyleX uses prefixed priority layers positioned before Tailwind utilities.
+- Plain semantic CSS remains the base and fallback.
+- The generated CSS cascade must be inspected in production because layered declarations lose to normal unlayered declarations in the CSS cascade.
 
-## 9. Diagnostics
+## 9. Remaining compiler roadmap
 
-Diagnostics should include:
-- stable error code;
-- severity;
-- file/path when applicable;
-- stage and backend;
-- human-readable explanation;
-- suggested remediation;
-- whether the failure is mandatory or optional.
+- full local-link and asset integrity scan;
+- locale and content-schema checks;
+- reproducible dependency lock and license report;
+- explicit diagnostics schema;
+- route manifest generated from Astro output rather than only a critical-route allowlist;
+- optional WASM module manifest and browser loader;
+- production CSS dead-code and size diagnostics.
 
-Build reports are useful engineering evidence, not a replacement for device testing, accessibility evaluation or human review.
-
-## 10. Implementation sequence
-
-1. Rust CLI skeleton and manifest schema.
-2. Source-boundary scanner and `doctor`.
-3. Astro/Vite process orchestration.
-4. Output and route validation.
-5. WASM module registry.
-6. CSS backend integration and generated-output inspection.
-7. Incremental development orchestration.
-8. Reproducibility, diagnostics and performance measurements.
+No CI status is used as the definition of project completion.
