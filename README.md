@@ -49,7 +49,7 @@ npm run build
 npm run preview
 ```
 
-`npm run build` invokes the Rust Active Compiler, which validates the V2 source boundary, orchestrates Astro/Vite, checks generated HTML/CSS, verifies the root/404 and critical localized routes, checks local HTML/CSS asset references, inventories generated asset bytes, and writes `.iwag-build/iwag-build-report.json`.
+`npm run build` invokes the Rust Active Compiler, which validates the V2 source boundary, orchestrates Astro/Vite, checks generated HTML/CSS, verifies the root/404 and critical localized routes, checks local HTML/CSS/srcset references and same-site fragments, emits a full generated-route manifest, inventories generated asset bytes, and writes `.iwag-build/iwag-build-report.json`.
 
 `npm run build:astro` is a diagnostic backend escape hatch; it is not the normal production build entry point.
 
