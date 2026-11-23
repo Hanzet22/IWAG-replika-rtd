@@ -286,6 +286,7 @@
   .pass-price { font-size: 1.45rem; font-weight: 850; letter-spacing: -.03em; }
   .pass-card ul { padding-left: 1.2rem; }
   .pass-status { display: inline-flex; margin-top: auto; padding: .35rem .65rem; border: 1px solid var(--border); border-radius: 99px; font-size: .8rem; font-weight: 750; }
+  .pass-tag { display: inline-flex; margin-block: .25rem; padding: .3rem .6rem; border: 1px solid var(--border); border-radius: 99px; font-size: .8rem; font-weight: 750; }
   .update-grid-page { padding-block: 1rem 3rem; }
   .update-grid-page .update-card h2 { font-size: 1.35rem; margin: .75rem 0 .25rem; }
   @media (max-width: 48rem) {
