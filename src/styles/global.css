@@ -139,6 +139,9 @@
   .preferences { display: none; flex-wrap: wrap; align-items: center; gap: .35rem .6rem; margin-left: auto; }
   :root[data-js="true"] .preferences { display: flex; }
   .preferences label { font-size: .85rem; font-weight: 650; }
+  .preferences input[type="color"] { width: 2.75rem; height: 2.75rem; padding: .2rem; border: 1px solid var(--border); border-radius: .45rem; background: var(--surface); }
+  :root:not([data-theme="dynamic"]) [data-accent-label],
+  :root:not([data-theme="dynamic"]) [data-accent-choice] { display: none; }
   select {
     min-height: 2.75rem; max-width: 12rem; padding: .35rem 2rem .35rem .6rem;
     border: 1px solid var(--border); border-radius: .45rem;
