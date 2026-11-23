@@ -22,6 +22,9 @@ const title = lastSegment
 const isUpdate = segments[0] === "updates";
 const isVenueArticle = slug === "updates/2026-11-15-venue-reveal";
 const isTeamArticle = slug === "updates/2026-11-08-staff-applications";
+const isTransitGuide = slug === "location/public-transit-guide";
+const isPrivateVehicleGuide = slug === "location/private-vehicles-guide";
+const isTshirtGuide = slug === "participate/t-shirt-guide";
 const intro = lang === "id"
   ? "Rute ini dipertahankan dari inventaris arsip V1. Konten V2 sedang ditulis ulang dan belum diterbitkan pada pratinjau ini."
   : "This route is preserved from the V1 archive inventory. V2 content is being independently rewritten and is not published in this preview.";
@@ -34,6 +37,28 @@ const context = isUpdate
     <p class="eyebrow">IWAG V2 · {context}</p>
     <h1>{title}</h1>
     <p class="lead">{intro}</p>
+    {isTransitGuide && <div class="article-body">
+      <aside class="notice"><strong>{lang === "id" ? "Panduan perlu pembaruan" : "Guide requires a current update"}</strong><p>{lang === "id" ? "Panduan transportasi lama dibuat untuk venue BSD City. Lokasi yang diumumkan untuk IWAG 2027 adalah Hotel Ciputra Jakarta, sehingga rute lama tidak boleh diikuti sebagai petunjuk perjalanan." : "The older transport guide was written for the BSD City venue. IWAG 2027 is announced for Hotel Ciputra Jakarta, so the old route instructions must not be used as current travel directions."}</p></aside>
+      <h2>{lang === "id" ? "Pilihan transportasi umum" : "Public transport options"}</h2>
+      <p>{lang === "id" ? "Sistem transportasi umum kawasan Jakarta mencakup KRL Commuter Line, TransJakarta, MRT Jakarta, LRT Jakarta, dan LRT Jabodebek. Rute yang paling sesuai bergantung pada titik keberangkatan dan kondisi layanan saat perjalanan." : "Greater Jakarta public transport includes KRL Commuter Line, TransJakarta, MRT Jakarta, LRT Jakarta, and LRT Jabodebek. The most suitable route depends on your starting point and service conditions on the day."}</p>
+      <h2>{lang === "id" ? "Rencanakan perjalanan" : "Plan your journey"}</h2>
+      <ul><li>{lang === "id" ? "Periksa rute dan gangguan layanan melalui kanal resmi operator." : "Check routes and service disruptions through official operator channels."}</li><li>{lang === "id" ? "Pastikan halte atau stasiun yang dipilih benar-benar melayani tujuan di sekitar venue." : "Confirm that your selected stop or station serves the venue area."}</li><li>{lang === "id" ? "Sisakan waktu tambahan untuk perpindahan moda dan kondisi lalu lintas." : "Allow extra time for transfers and road traffic."}</li></ul>
+      <p><a href="https://transportforjakarta.or.id/" rel="external">Transport for Jakarta</a></p>
+      <p class="muted">{lang === "id" ? "Tarif, jadwal, rute, dan metode pembayaran dapat berubah. Periksa operator sebelum berangkat." : "Fares, schedules, routes, and payment methods can change. Check the operators before departure."}</p>
+    </div>}
+    {isPrivateVehicleGuide && <div class="article-body">
+      <aside class="notice"><strong>{lang === "id" ? "Konten lama — jangan gunakan rute ini" : "Legacy content — do not use these directions"}</strong><p>{lang === "id" ? "Panduan kendaraan pribadi yang masih tersimpan di arsip mengarahkan pengunjung ke ibis Styles BSD City, venue lama. Lokasi IWAG 2027 yang diumumkan adalah Hotel Ciputra Jakarta. Informasi parkir, tarif, dan stasiun pengisian untuk venue baru belum dikonfirmasi dalam sumber yang diperiksa." : "The archived private-vehicle guide still directs visitors to ibis Styles BSD City, the previous venue. IWAG 2027 is announced for Hotel Ciputra Jakarta. Parking, rates, and charging information for the new venue were not confirmed in the sources reviewed."}</p></aside>
+      <h2>{lang === "id" ? "Sebelum berkendara" : "Before driving"}</h2>
+      <p>{lang === "id" ? "Gunakan alamat venue terbaru, periksa kondisi lalu lintas, kebijakan parkir hotel, serta pembatasan kendaraan yang berlaku pada hari perjalanan." : "Use the current venue address, check traffic conditions, the hotel's parking policy, and any vehicle restrictions in effect on your travel date."}</p>
+      <p><a href={`/${lang}/location/`}>{lang === "id" ? "Kembali ke informasi venue" : "Return to venue information"}</a></p>
+    </div>}
+    {isTshirtGuide && <div class="article-body">
+      <h2>{lang === "id" ? "Tabel ukuran kaus" : "T-shirt size chart"}</h2>
+      <p>{lang === "id" ? "Ukuran berikut berasal dari panduan ukuran yang tersedia pada sumber saat diperiksa. Konfirmasi kembali sebelum memilih ukuran." : "The measurements below are from the size guide available on the source when reviewed. Confirm again before selecting a size."}</p>
+      <table class="size-table"><thead><tr><th>{lang === "id" ? "Ukuran" : "Size"}</th><th>{lang === "id" ? "Panjang" : "Length"}</th><th>{lang === "id" ? "Lebar" : "Width"}</th></tr></thead><tbody>{[["S","67 cm","46 cm"],["M","69 cm","48 cm"],["L","71 cm","50 cm"],["XL","73 cm","52 cm"],["XXL","75 cm","54 cm"]].map(([size,length,width]) => <tr><td>{size}</td><td>{length}</td><td>{width}</td></tr>)}</tbody></table>
+      <p class="muted">{lang === "id" ? "Tabel ini merupakan snapshot sumber dan bukan jaminan ketersediaan atau ukuran produk saat ini." : "This is a source snapshot, not a guarantee of current product availability or sizing."}</p>
+      <a href="https://iwag.furries.id/en/participate/t-shirt-guide" rel="external">{lang === "id" ? "Buka panduan ukuran sumber" : "Open the original size guide"}</a>
+    </div>}
     {isVenueArticle && <div class="article-body">
       <p>{lang === "id" ? "Pengumuman 15 November 2026 menyebut Hotel Ciputra Jakarta sebagai lokasi baru untuk IWAG 2027." : "The 15 November 2026 announcement identifies Hotel Ciputra Jakarta as the new venue for IWAG 2027."}</p>
       <h2>{lang === "id" ? "Ruang acara" : "Event spaces"}</h2>
@@ -62,7 +87,7 @@ const context = isUpdate
       <p class="muted">{lang === "id" ? "Panggilan ini merupakan snapshot pengumuman 2026, bukan konfirmasi bahwa pendaftaran masih dibuka. Periksa kanal resmi untuk status terkini." : "This is a snapshot of the 2026 announcement, not confirmation that applications remain open. Check official channels for current status."}</p>
       <a href="https://iwag.furries.id/en/updates/2026-11-08-staff-applications" rel="external">{lang === "id" ? "Baca pengumuman sumber" : "Read the original announcement"}</a>
     </div>}
-    {!isVenueArticle && !isTeamArticle && <aside class="notice">
+    {!isVenueArticle && !isTeamArticle && !isTransitGuide && !isPrivateVehicleGuide && !isTshirtGuide && <aside class="notice">
       <h2>{lang === "id" ? "Status migrasi" : "Migration status"}</h2>
       <p>{lang === "id" ? "Rute ini dipertahankan dari inventaris arsip. Konten spesifiknya belum direkonstruksi dari sumber yang diverifikasi." : "This route is preserved from the archive inventory. Its specific content has not yet been reconstructed from a verified source."}</p>
     </aside>}
