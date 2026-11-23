@@ -1,57 +1,64 @@
-# ADR-0001: Static-first Astro architecture
+# ADR-0001: Static-first Astro architecture with progressive islands
 
-- Status: Accepted for the V2 foundation
+- Status: Accepted
 - Date: 2026-11-23
 - Decision owners: IWAG V2 project maintainers
 
 ## Context
 
-The archived V1 is a compiled static website with substantial generated CSS and JavaScript. V2 is a fresh implementation, not a continuation of the compiled output. Its primary content is informational: event details, community information, updates, accessibility information, and policy documents.
-
-The requirements prioritise WCAG 2.2 Level A as the stated conformance target, semantic HTML, keyboard operation, low-end device performance, multilingual routes, privacy minimisation, five user-selectable themes, and optional GPU enhancements that cannot become a core dependency.
+IWAG V2 is an independent, static-first recreation/re-engineering project. Its primary content is informational and multilingual. The project prioritises semantic HTML, keyboard access, low-end device performance, privacy minimisation, five self-hosted font families, and WCAG 2.2 Level A as the engineering target only.
 
 ## Decision
 
-Use Astro 7 with TypeScript and static output. Render public pages as HTML at build time. Use Astro components and plain CSS for the baseline. Add browser JavaScript only for explicit progressive enhancements such as theme preference and language selection. Do not add a client-side UI framework to the initial foundation.
+Keep **Astro 7 + TypeScript + Vite** as the single application, routing, and build foundation, with static output. Use Astro components and semantic HTML for all core content. Add **Vue 3** only for narrowly scoped interactive islands. Use **Tailwind CSS 4** through its official Vite plugin for utility styling while retaining the existing design-token and component CSS.
 
-Use locale-prefixed routes:
-- `/en/` — English
-- `/id/` — Bahasa Indonesia
-- `/en-sg/` — English (Singapore)
-- `/ms-my/` — Bahasa Melayu (Malaysia)
+This is one application and one build pipeline. Do not add a second Next.js application or run a second framework runtime.
 
-The locale route is an editorial identifier; each document declares its proper BCP 47 language tag. Add further locales only with reviewed translations and matching route coverage.
+### Next.js capability compatibility
+
+Adopt compatible architectural ideas where useful: file-oriented routes, server-side/build-time data preparation, static rendering, metadata discipline, component boundaries, and progressive client interactivity. These are implementation patterns, not a claim that Next.js App Router APIs run inside Astro. Next.js Server Actions, Next server runtime, middleware conventions, and framework-specific routing APIs remain unavailable unless separately reimplemented as explicit services.
+
+### Progressive graphics and WebAssembly
+
+- CSS Houdini typed custom properties may enhance visual tokens; CSS Paint Worklets remain optional and feature-detected.
+- SVG is the accessible static vector baseline.
+- Canvas 2D and WebGL2 are opt-in enhancements; no continuous render loop is allowed for decorative content.
+- WebGPU is optional and secure-context/browser/device dependent. It must never gate content or navigation.
+- Rust/WASM utilities are isolated and opt-in. The default website build must not require a Rust toolchain or a generated WASM binary.
+- Every enhancement must have a static HTML/SVG fallback, a user-initiated activation path where appropriate, cleanup, and a reduced-motion-safe implementation.
 
 ## Consequences
 
 ### Positive
-- Public content remains readable and navigable without client-side JavaScript.
-- Static output reduces runtime infrastructure and attack surface.
-- Locale routes and translated content remain explicit.
-- Theme selection can be progressively enhanced without a framework runtime.
-- WebGL/WebGPU can remain isolated optional enhancements.
+- One static site, one dependency graph, and one deployable output.
+- Core content remains readable without JavaScript or graphics APIs.
+- Vue hydration is limited to components that need it.
+- Vite remains the build pipeline managed by Astro.
+- Advanced rendering can be removed without breaking event information.
 
 ### Trade-offs
-- Account features, live registration, and dynamic attendee workflows require separately designed services.
-- Content updates require a rebuild and deployment.
-- Complex stateful UI may later justify a narrowly scoped island.
+- Next.js-only APIs cannot be imported as if Astro were a Next.js runtime.
+- Vue islands add client JavaScript and must be justified component by component.
+- Tailwind utilities must not replace semantic markup or design tokens.
+- Rust/WASM and GPU paths need separate device/browser evaluation before production use.
 
 ## Non-goals
 
-- Reproducing V1's compiled Astro output or copying its bundled dependencies.
-- Claiming WCAG conformance based only on the framework or automated checks.
-- Publishing invented event facts, legal terms, privacy promises, or organiser identities.
-- Adding analytics, trackers, remote font providers, social embeds, or GPU effects by default.
-- Using remote font requests; the selected five font families are self-hosted with their license notices retained.
-
-## Runtime baseline
-
-The package manifest requires Node.js 22.23.4 or later, matching the current Astro 7 runtime floor identified during implementation research. Dependencies are intentionally limited to Astro and TypeScript.
+- Running Astro and Next.js as two separate applications in one website deployment.
+- Recreating V1 compiled bundles or copying bundled dependencies.
+- Requiring Vue, Canvas, WebGL, WebGPU, or WASM to read or navigate core content.
+- Claiming WCAG conformance from framework choice or automated checks.
+- Claiming legal approval, organiser endorsement, or official status.
+- Adding remote fonts, trackers, analytics, or third-party scripts by default.
 
 ## References
 
+- Astro Vue integration: https://docs.astro.build/en/guides/integrations-guide/vue/
 - Astro islands: https://docs.astro.build/en/concepts/islands/
-- Astro internationalisation: https://docs.astro.build/en/guides/internationalization/
-- Astro content collections: https://docs.astro.build/en/guides/content-collections/
+- Astro framework components: https://docs.astro.build/en/guides/framework-components/
+- Tailwind CSS 4 with Astro: https://tailwindcss.com/docs/installation/framework-guides/astro
+- CSS Houdini Properties and Values API: https://developer.mozilla.org/en-US/docs/Web/API/CSS/registerProperty
+- WebGL: https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API
+- WebGPU: https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API
+- Rust WebAssembly: https://rustwasm.github.io/docs/book/
 - WCAG 2.2: https://www.w3.org/TR/WCAG22/
-- W3C accessibility principles: https://www.w3.org/WAI/fundamentals/accessibility-principles
