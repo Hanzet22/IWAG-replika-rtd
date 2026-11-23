@@ -8,7 +8,7 @@ root.dataset.js = "true";
 const validThemes = ["system", "light", "black", "super-black", "amoled-black", "dynamic"];
 const storageKey = "iwag-v2-theme";
 const accentStorageKey = "iwag-v2-accent";
-let selectedAccent = "#426b9b";
+let selectedAccent = "#726550";
 
 function hexToRgb(hex: string) {
   const value = hex.replace("#", "");
