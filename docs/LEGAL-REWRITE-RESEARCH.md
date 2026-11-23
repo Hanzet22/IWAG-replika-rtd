@@ -96,3 +96,61 @@ This is a jurisdictional screening list, not a claim that every listed law appli
 
 ## Screening outcome
 The additional regimes materially broaden the legal review but do not create a universal global policy. The project should maintain a legal register with jurisdiction, instrument, issuing authority, official URL, current status, effective date, territorial trigger, affected feature, evidence, reviewer and next review date. Add further jurisdictions when the operator deliberately targets them, processes identifiable local data, establishes operations there, or uses local providers.
+
+
+## Further jurisdiction screening — Asia, Europe, Africa and Latin America
+
+This screening does not make every listed law applicable. A public page being reachable is not, by itself, equivalent to local establishment, targeted offering, local processing, monitoring or an identifiable-data collection trigger.
+
+### Mainland China — PIPL
+- **PIPL Article 3** covers processing in China and certain offshore processing concerning people in China when offering goods/services, analysing behaviour, or another legal basis creates jurisdiction. Mere untargeted availability without collection/behavioural analysis is a weaker case.
+- If China-derived personal information is exported, assess Articles 38–40 and the CAC 2024 cross-border data provisions, including security assessment, standard contract/certification routes and exemptions. These exemptions do not erase baseline PIPL duties.
+- Official sources: https://www.npc.gov.cn/npc/c30834/202108/a8c4e3672c74491a80b53a172bb753fe.shtml ; https://www.cac.gov.cn/2024-03/22/c_1712776611775634.htm
+
+### Hong Kong — PDPO
+- Hong Kong's PDPO does not have a general GDPR-style extraterritorial offering/monitoring clause. The operational nexus generally concerns control of the data cycle in or from Hong Kong. Mere accessibility without Hong Kong operations or controlled processing is a weaker trigger.
+- Section 33's dedicated cross-border transfer restriction was still uncommenced in the official material reviewed; do not describe it as operative. Existing Data Protection Principles still matter for a Hong Kong data user.
+- Official sources: https://www.pcpd.org.hk/english/data_privacy_law/ordinance_at_a_Glance/ordinance.html ; https://www.cmab.gov.hk/en/press/press_3611.htm
+
+### Taiwan — PDPA
+- Article 51 includes government and non-government agencies outside Taiwan when they collect, process or use personal data of ROC nationals. Collection/use is therefore critical; a visitor merely reading a page without data processing is a weaker case.
+- Amendments promulgated 11 November 2025 have commencement details that must be checked separately; the official English database flagged provisions with a future effective date.
+- Official sources: https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?media=print&pcode=I0050021 ; https://www.pdpc.gov.tw/en/News_Content/165/790
+
+### Türkiye — KVKK
+- Law No. 6698 has no clean GDPR-style territorial article. Turkish establishment or actual processing involving people in Türkiye creates stronger exposure than mere access; the precise foreign-controller boundary remains fact-sensitive.
+- Non-essential analytics, advertising and profiling cookies generally require specific, informed consent. International transfers must follow amended Article 9 mechanisms.
+- Official sources: https://www.kvkk.gov.tr/Icerik/6649/Personal-Data-Protection-Law ; https://www.kvkk.gov.tr/Icerik/7408/Summary-of-the-Board-Decision-on-the-processing-of-personal-data-by-the-data-controller-operating-in-e-commerce-sector-through-cookies-used-by-the-websites-mobile-applications-
+
+### Switzerland — revised FADP
+- Article 3 uses an effects test for circumstances with effects in Switzerland even if initiated abroad. Targeting, Swiss users' data collection, monitoring or other appreciable effects are stronger than passive access.
+- Articles 16–17 govern international disclosures. The Swiss representative duty is narrower and depends on regular large-scale/high-risk processing connected with offering or monitoring in Switzerland.
+- Official source: https://fedlex.admin.ch/eli/cc/2022/491/en
+
+### Mexico — LFPDPPP
+- The replacement private-sector Federal Data Protection Law was published 20 March 2025 and took effect 21 March 2025; later amendment history must be checked against the current official consolidation.
+- The implementing regulation contains territorial rules tied to a Mexican establishment, processing for a Mexican-established controller, applicable international law or contractual submission. Because the regulation predates the 2025 replacement law, its continuing application and legacy cross-references require legal verification.
+- Official sources: https://www.diputados.gob.mx/LeyesBiblio/ref/lfpdppp.htm ; https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf
+
+### Argentina — Law 25,326
+- The law has no modern express GDPR-style offering/monitoring test. A local database, establishment, processing operation or commercially directed activity is a stronger nexus than mere accessibility.
+- Article 12 restricts transfers to jurisdictions lacking adequate protection, subject to exceptions and later regulatory mechanisms.
+- Official source: https://www.argentina.gob.ar/normativa/nacional/64790/actualizacion
+
+### Chile — Law 21,719
+- The new law adds express territorial tests including Chilean establishment, offering goods/services to people in Chile, or monitoring behaviour in Chile.
+- Official text states commencement on **1 December 2026**. It was not yet operative on the 23 November 2026 review date; Law 19,628 remained the immediate baseline during the final transition. Recheck for any deferral or transitional regulation.
+- Official source: https://www.bcn.cl/leychile/Navegar/imprimir?idNorma=1209272&idVersion=2026-12-01
+
+### Nigeria — NDPA 2023
+- Section 2 includes offshore processing of personal data of a data subject in Nigeria. Local establishment, infrastructure or commercial targeting is not required under that limb, but identifiable processing is still required; mere page reachability without data processing is not enough.
+- Official sources: https://ndpc.gov.ng/wp-content/uploads/2024/03/Nigeria_Data_Protection_Act_2023.pdf ; https://ndpc.gov.ng/faqs/
+
+### Kenya — Data Protection Act 2019
+- Section 4 includes offshore processing of personal data of data subjects located in Kenya. Collection of identifiable IP/log, cookie, form or analytics data may therefore trigger the Act even without Kenyan infrastructure or a local office.
+- Cross-border transfers require appropriate safeguards, adequacy/necessity routes and documentation under the Act and regulations.
+- Official sources: https://new.kenyalaw.org/akn/ke/act/2019/24 ; https://odpc.go.ke/wp-content/uploads/2026/09/ODPC-%E2%80%93-Guidance-Notes-for-Cross-border-Data-Transfers.pdf
+
+## Legal register and ongoing coverage
+
+Maintain a register for each country with: law, issuing authority, official URL, last verified version, effective date, territorial/material trigger, affected feature, operational evidence, unresolved assumptions, reviewer, and next review date. This research is a prioritized multi-jurisdiction screening, not an exhaustive statement of every law in every sovereign state or territory. Add a jurisdiction when the operator establishes there, deliberately targets it, processes identifiable local data, uses local infrastructure, or materially monitors users there.
