@@ -37,7 +37,7 @@ const pageTitles: Record<string, Record<string, string>> = {
 export function getStaticPaths() {
   const pageKeys = [
     "about", "accessibility", "brand", "coc", "code-of-conduct", "dealers",
-    "events", "join-iwag-team", "links", "location", "participate", "policy",
+    "join-iwag-team", "links", "location", "participate", "policy",
     "privacy", "terms", "tnc", "updates"
   ] as const;
   return localeKeys.flatMap((lang) => pageKeys.map((page) => ({ params: { lang, page } })));
