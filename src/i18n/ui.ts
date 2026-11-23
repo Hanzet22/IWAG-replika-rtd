@@ -15,7 +15,7 @@ const messages = {
     explore: "Explore the project", learn: "Read the accessibility approach",
     noticeTitle: "Independent project notice", notice: "This is an independent educational recreation. It is not affiliated with, endorsed by, or an official website of IWAG or its organizers.",
     notPublished: "This information has not been published in this preview.",
-    legalDraft: "This page is a structural placeholder. No legal terms or privacy commitments are being represented as approved policy.",
+    legalDraft: "This page is intentionally unpublished. Terms and Privacy will be rewritten from first principles after the real operator, service model, data flows, responsibilities and applicable jurisdictions are verified. V1 wording is not adopted, and this preview makes no official legal or privacy commitments.",
     level: "Accessibility target", levelText: "WCAG 2.2 Level A is the stated target. This preview is not a conformance claim or completed accessibility audit."
   },
   id: {
