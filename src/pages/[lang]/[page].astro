@@ -172,7 +172,11 @@ const copy = isConduct
         { date: "4 January 2025", title: "IWAG 2025 Registration Update", summary: "A revised pass release and hotel booking schedule.", href: "updates/2025-01-04-registration-update" },
         { date: "23 November 2024", title: "Five Tiers of Fun!", summary: "The first five-tier event-pass announcement for 2025.", href: "updates/2024-11-23-tier-reveal" },
         { date: "1 November 2024", title: "Welcome to Tangerang", summary: "The 2025 venue and date reveal.", href: "updates/2024-11-01-venue-reveal" },
-        { date: "31 August 2024", title: "Return of The Wild", summary: "The community-selected theme for the 2025 edition.", href: "updates/2024-08-31-theme-reveal" }
+        { date: "31 August 2024", title: "Return of The Wild", summary: "The community-selected theme for the 2025 edition.", href: "updates/2024-08-31-theme-reveal" },
+        { date: "29 December 2024", title: "IWAG 2025 Registration Opening", summary: "A pre-registration guide to the historical pass release schedule.", href: "updates/2024-12-29-registration-opening" },
+        { date: "5 January 2026", title: "Hotel Reservation Info for IWAG 2026", summary: "Historical accommodation information for the former BSD venue.", href: "updates/2026-01-05-hotel-information" },
+        { date: "7 February 2026", title: "Introducing Auveiss: IWAG 2026 Guest of Honor", summary: "The Guest of Honor announcement for the 2026 edition.", href: "updates/2026-02-07-goh-reveal" },
+        { date: "5 February 2026", title: "IWAG 2026 DJ Applications Now Open", summary: "A historical invitation for DJ mix submissions.", href: "updates/2026-02-05-dj" }
       ].map((item) => <article class="update-card"><span class="update-date">{item.date}</span><h2>{item.title}</h2><p>{item.summary}</p><a href={`/${lang}/${item.href}/`}>{lang === "id" ? "Baca arsip V2" : "Read V2 archive"}</a></article>)}
     </section>}
     {isAccessibility && <section class="content-card">
