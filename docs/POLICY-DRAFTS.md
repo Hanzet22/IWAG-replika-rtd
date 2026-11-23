@@ -1,33 +1,29 @@
-# Legal policy drafting and publication status
+# IWAG V2 — Legal and Governance Draft Pack
 
-Updated: 2026-11-23
+**Review date:** 23 November 2026 · **Version:** 1.0  
+**Status:** DRAFTING ONLY — NOT OFFICIAL — NOT VERIFIED — NOT APPROVED — NOT IN FORCE
 
-## Draft notice
-
-The Terms, Privacy, and Code of Conduct pages contain independently authored working drafts for an independent website recreation. They are not official IWAG policies, have not been verified or approved by IWAG or its event organiser, and are not in force. The on-page notice is at least 50 CSS pixels tall and is the first item inside each policy article, above the eyebrow and document title.
+All nine documents are independent drafting materials. They are not official IWAG policies, have not been verified or approved by IWAG or its organisers, and are not in force. No effective date is assigned. The status notice appears at the top of every legal page and is at least 50 CSS pixels high.
 
 ## Document inventory
+1. Code of Conduct.
+2. Terms and Conditions.
+3. Privacy Policy.
+4. Cookie Policy.
+5. Copyright & Intellectual Property Policy.
+6. Disclaimer.
+7. Accessibility Statement.
+8. Moderation & Reporting Policy.
+9. Data Retention Policy.
 
-| Document | Current content | Publication status |
-|---|---|---|
-| Terms and Conditions | Independent draft covering project status, information snapshots, permitted use, no ticketing/payment, age/safety, IP/links, availability, and unresolved governing-law/operator details | Draft only; not a contract |
-| Privacy Policy | Independent draft covering preview data, local preferences, possible infrastructure logs, future processing requirements, children/sensitive data, recipients/transfers, retention/rights, and unresolved controller details | Draft only; no controller/contact verified |
-| Code of Conduct | Independent draft covering scope, expected/prohibited conduct, consent/media/costumes, safeguarding, reporting, response/appeal, and publication gates | Draft only; not an event rulebook |
-| Cookie Policy | No separate policy is asserted as applicable yet. The preview's theme preference is stored in local storage, not intentionally set as a cookie by the application. Actual host/CDN cookies must be checked before release. | Needs technical provider verification |
+English and Bahasa Indonesia are authored in the application. English (Singapore) uses English. Bahasa Melayu (Malaysia) currently uses the English fallback with a visible language notice and is not represented as a reviewed Malay legal translation.
 
-## Required metadata before publication
+## Facts that must not be invented
+Operator/controller, legal form, address, contact, hosting/CDN/DNS/security providers, cookies, server logs, data locations, retention periods, backup cycles, moderation staff, response times, business status, ticketing, payments, revenue, official endorsement or asset permissions.
 
-- Verified legal operator and responsible policy owner.
-- Document version and revision date.
-- Actual effective date (leave blank until approved).
-- Approval record and approver authority.
-- Applicable jurisdiction and service scope.
-- Processor/vendor list, cookie/local-storage inventory, retention schedule, and data-rights contact.
-- Language/translation status and editorial review.
-- Change history and accessible notice of material changes.
+The application source currently has no accounts, attendee registration, ticketing, payments, contact forms, public comments or user uploads. Infrastructure-level processing still requires verification.
 
 ## Publication gate
+No document may be labelled official, binding, approved, certified or in force until the operator is identified; application/infrastructure flows are verified; vendors, cookies, storage, logs, retention and transfers are documented; jurisdictions and legal triggers are assessed; documents match the actual service; qualified legal review is completed; and the authorised operator approves publication.
 
-No draft may be labelled official, binding, certified, approved, or in force until the real operator has verified the factual assumptions and the appropriate legal/content review has been completed. A technical implementation or automated scan does not constitute legal approval.
-
-The project is an independent replica/re-engineering effort, not an accreditation or certification programme.
+Automated checks and successful builds are not legal approval or accessibility conformance evidence.
