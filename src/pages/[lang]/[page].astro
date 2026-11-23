@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import GraphicsCapabilityLab from "../../components/GraphicsCapabilityLab.vue";
+import { legalPolicies, legalPolicySlugs, legalPolicyLinks } from "../../data/legal";
 import { getMessages } from "../../i18n/ui";
 import { isLocale, localeKeys } from "../../i18n/locales";
 
@@ -8,14 +9,14 @@ const pageTitles: Record<string, Record<string, string>> = {
   en: {
     about: "About this project", accessibility: "Accessibility", brand: "Brand resources",
     coc: "Code of Conduct", "code-of-conduct": "Code of Conduct", dealers: "Dealers",
-    events: "Events", "join-iwag-team": "Join the team", links: "Links",
+    events: "Events", "join-iwag-team": "Join the team", links: "Links", cookies: "Cookie Policy", copyright: "Copyright & Intellectual Property", disclaimer: "Disclaimer", moderation: "Moderation & Reporting", retention: "Data Retention",
     location: "Location", participate: "Participate", policy: "Policies",
     privacy: "Privacy", terms: "Terms", tnc: "Terms and Conditions", updates: "Updates"
   },
   id: {
     about: "Tentang proyek ini", accessibility: "Aksesibilitas", brand: "Sumber daya merek",
     coc: "Kode Etik", "code-of-conduct": "Kode Etik", dealers: "Dealer",
-    events: "Acara", "join-iwag-team": "Bergabung dengan tim", links: "Tautan",
+    events: "Acara", "join-iwag-team": "Bergabung dengan tim", links: "Tautan", cookies: "Kebijakan Cookie", copyright: "Hak Cipta & Kekayaan Intelektual", disclaimer: "Penyangkalan", moderation: "Moderasi & Pelaporan", retention: "Retensi Data",
     location: "Lokasi", participate: "Partisipasi", policy: "Kebijakan",
     privacy: "Privasi", terms: "Ketentuan", tnc: "Syarat dan Ketentuan", updates: "Pembaruan"
   },
@@ -38,7 +39,7 @@ const pageTitles: Record<string, Record<string, string>> = {
 export function getStaticPaths() {
   const pageKeys = [
     "about", "accessibility", "brand", "coc", "code-of-conduct", "dealers",
-    "join-iwag-team", "links", "location", "participate", "policy",
+    "join-iwag-team", "links", "location", "participate", "policy", "cookies", "copyright", "disclaimer", "moderation", "retention",
     "privacy", "terms", "tnc", "updates"
   ] as const;
   return localeKeys.flatMap((lang) => pageKeys.map((page) => ({ params: { lang, page } })));
@@ -51,7 +52,9 @@ const t = getMessages(lang);
 const contentMessages = lang === "ms-my" ? getMessages("en") : t;
 const englishFallback = lang === "ms-my" || (lang === "id" && ["location", "participate", "updates"].includes(page));
 const title = englishFallback ? pageTitles.en[page] ?? "Information" : pageTitles[lang]?.[page] ?? pageTitles.en[page] ?? "Information";
-const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct"];
+const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct", ...legalPolicySlugs];
+const policySlug = page === "tnc" ? "terms" : page === "code-of-conduct" ? "coc" : page;
+const policy = legalPolicies[policySlug]?.[lang === "id" ? "id" : "en"];
 const isLegal = legalPages.includes(page);
 const isTerms = page === "terms" || page === "tnc";
 const isPrivacy = page === "privacy";
@@ -67,21 +70,21 @@ const isEvents = page === "events";
 const isJoinTeam = page === "join-iwag-team";
 const isLinks = page === "links";
 const isPolicy = page === "policy";
-const copy = isConduct
-  ? (lang === "id" ? "Kode Etik V2 belum diterbitkan. Ketentuan V1 tidak diadopsi sebagai kebijakan V2; halaman ini hanya menjelaskan ruang lingkup penulisan ulang yang akan dilakukan." : "The V2 Code of Conduct has not been published. V1 terms are not adopted as V2 policy; this page only outlines the scope of the future rewrite.")
+const copy = policy?.summary ?? (isConduct
+  ? (lang === "id" ? "Kode Etik V2 merupakan draf independen." : "The V2 Code of Conduct is an independent draft.")
   : isLegal ? contentMessages.legalDraft
   : isAccessibility ? contentMessages.levelText
   : isAbout ? (lang === "id"
       ? "IWAG V2 adalah rekayasa ulang independen dari arsip referensi. Proyek ini berfokus pada informasi yang mudah dibaca, navigasi konsisten, aksesibilitas, dan minimisasi data."
       : "IWAG V2 is an independent re-engineering project based on a separately archived reference. It focuses on readable information, predictable navigation, accessibility, and data minimisation.")
-  : contentMessages.notPublished;
+  : contentMessages.notPublished);
 ---
 <BaseLayout lang={lang} contentLang={englishFallback ? "en" : lang === "id" ? "id" : "en"} title={title} description={copy}>
   <article class="page-content">
     {isLegal && <aside class="legal-draft-banner" role="note" aria-label={lang === "id" ? "Status dokumen hukum" : "Legal document status"}>
-      <strong>{lang === "id" ? "DOKUMEN INI MERUPAKAN DRAF KERJA." : "THIS DOCUMENT IS A WORKING DRAFT."}</strong>
+      <strong>{lang === "id" ? "HANYA DRAFTING — BUKAN RESMI — BELUM DIVERIFIKASI — BELUM DISETUJUI — BELUM BERLAKU." : "DRAFTING ONLY — NOT OFFICIAL — NOT VERIFIED — NOT APPROVED — NOT IN FORCE."}</strong>
       <span>{lang === "id" ? "Bukan kebijakan resmi IWAG; belum diverifikasi atau disetujui penyelenggara dan belum berlaku." : "Not an official IWAG policy; not verified or approved by the organiser and not in force."}</span>
-      <small>{lang === "id" ? "Versi draf 0.2 · 23 November 2026 · Tidak memiliki tanggal berlaku" : "Draft version 0.2 · 23 November 2026 · No effective date"}</small>
+      <small>{lang === "id" ? "Draf v1.0 · 23 November 2026 · Tidak ada tanggal berlaku" : "Draft v1.0 · 23 November 2026 · No effective date"}</small>
     </aside>}
     <p class="eyebrow">IWAG V2 · Independent project</p>
     <h1>{title}</h1>
@@ -307,7 +310,13 @@ const copy = isConduct
       <p class="muted">{lang === "id" ? "Kanal kontak berbasis teks dan akomodasi acara akan diterbitkan setelah alamat kontak serta layanan pendukung diverifikasi." : "Text-based contact channels and event accommodations will be published after contact details and support services are verified."}</p>
     </section>}
     {isAccessibility && <GraphicsCapabilityLab client:visible lang={lang} />}
-    {isLegal && !isConduct && <aside class="notice"><h2>{lang === "id" ? "Belum disahkan" : "Not approved"}</h2><p>{copy}</p></aside>}
+    {isLegal && policy && <section class="policy-document" aria-label={policy.title}>
+      {policy.sections.map((section) => <section class="policy-section"><h2>{section.heading}</h2>{section.body.map((paragraph) => <p>{paragraph}</p>)}</section>)}
+      <p class="muted">{lang === "id" ? "Dokumen ini adalah bahan drafting independen, bukan nasihat hukum atau kebijakan resmi." : "This is independent drafting material, not legal advice or an official policy."}</p>
+    </section>}
+    {page === "policy" && <section class="policy-index" aria-label={lang === "id" ? "Daftar dokumen drafting" : "Draft policy index"}>
+      {legalPolicyLinks.map(([slug,enTitle,idTitle]) => <a class="policy-link" href={`/${lang}/${slug}/`}><strong>{lang === "id" ? idTitle : enTitle}</strong><p>{lang === "id" ? "Buka dokumen drafting independen" : "Open independent working draft"}</p></a>)}
+    </section>}
     {!isLegal && !isAccessibility && !isAbout && !isBrand && !isDealers && !isLocation && !isParticipate && !isUpdates && !isEvents && !isJoinTeam && !isLinks && !isPolicy && <aside class="notice"><p>{lang === "id" ? "Informasi acara dan operasional akan diterbitkan setelah sumbernya diverifikasi. Arsip V1 tidak dianggap sebagai informasi terkini." : "Event and operational information will be published only after its source is verified. V1 archive material is not treated as current information."}</p></aside>}
   </article>
 </BaseLayout>
