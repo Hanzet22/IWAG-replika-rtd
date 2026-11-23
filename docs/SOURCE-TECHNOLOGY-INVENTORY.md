@@ -50,7 +50,7 @@ The V2 application source remains under `src/`. The compiler manifest declares `
 | Node.js | Required | Package and frontend tooling runtime |
 | Rust | Active | IWAG Active Compiler CLI and WASM utility source |
 | WebAssembly | Optional | Explicit compute modules with JS/static fallback |
-| Tailwind CSS 4 | Active | Utility styling |
+| Tailwind CSS 4 | Active | Utility styling imported through the Vite plugin; theme and utilities layers, preflight intentionally excluded |
 | Panda CSS 2.6.0 | Integrated | Typed tokens/recipes and extracted utilities |
 | StyleX 0.19.2 | Integrated | Atomic component styling with build-time CSS extraction |
 | CSS Houdini | Existing progressive enhancement | Typed custom properties; never required |
