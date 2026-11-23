@@ -168,3 +168,6 @@ The latest implementation is a working reconstruction foundation and shared home
 
 - [x] Added a Rust-invoked Node validator for local HTML `href`/`src`/`poster` and CSS `url()` references in generated output.
 - [ ] Extend local-reference validation to `srcset`, fragment IDs, and a complete generated route manifest.
+
+- [x] Added basic generated-HTML invariants to the output validator: document language/title, main landmark, skip link, duplicate IDs, image alt presence, named SVGs/buttons/form controls, and no meta-refresh/legacy redirect interstitial/autoplay video.
+- [ ] Review validator findings and false-positive/false-negative boundaries; these static checks are not a WCAG conformance test.
