@@ -40,5 +40,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: iwag-build-report
-          path: dist/iwag-build-report.json
+          path: .iwag-build/iwag-build-report.json
           if-no-files-found: ignore
