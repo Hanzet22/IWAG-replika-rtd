@@ -33,6 +33,15 @@ fn safe_project_path(root: &Path, value: &str, label: &str) -> Result<PathBuf, S
     Ok(root.join(relative))
 }
 
+fn canonical_inside_root(root: &Path, path: &Path, label: &str) -> Result<PathBuf, String> {
+    let canonical = path.canonicalize()
+        .map_err(|e| format!("cannot resolve {label} {}: {e}", path.display()))?;
+    if !canonical.starts_with(root) {
+        return Err(format!("{label} resolves outside the repository root"));
+    }
+    Ok(canonical)
+}
+
 fn load_manifest(root: &Path) -> Result<String, String> {
     let path = root.join("iwag.compiler.toml");
     fs::read_to_string(&path).map_err(|e| format!("cannot read {}: {e}", path.display()))
@@ -46,15 +55,16 @@ fn count_files(root: &Path) -> Result<(usize, usize, usize, usize, usize), Strin
     let mut html = 0;
     let mut pending = vec![root.to_path_buf()];
     while let Some(dir) = pending.pop() {
-        let entries = fs::read_dir(&dir).map_err(|e| format!("cannot read {}: {e}", dir.display()))?;
-        for entry in entries {
+        for entry in fs::read_dir(&dir).map_err(|e| format!("cannot read {}: {e}", dir.display()))? {
             let entry = entry.map_err(|e| e.to_string())?;
+            let file_type = entry.file_type().map_err(|e| e.to_string())?;
+            if file_type.is_symlink() { continue; }
             let path = entry.path();
-            if path.is_dir() {
+            if file_type.is_dir() {
                 let name = path.file_name().and_then(|v| v.to_str()).unwrap_or("");
                 if matches!(name, ".git" | "node_modules" | "dist" | ".astro" | "target") { continue; }
                 pending.push(path);
-            } else {
+            } else if file_type.is_file() {
                 match path.extension().and_then(|v| v.to_str()).unwrap_or("") {
                     "astro" => astro += 1,
                     "ts" | "tsx" => ts += 1,
@@ -69,9 +79,34 @@ fn count_files(root: &Path) -> Result<(usize, usize, usize, usize, usize), Strin
     Ok((astro, ts, js, css, html))
 }
 
-fn tool_version(tool: &str) -> bool {
-    Command::new(tool).arg("--version").stdout(Stdio::null()).stderr(Stdio::null()).status()
-        .map(|status| status.success()).unwrap_or(false)
+fn command_version(tool: &str) -> Result<String, String> {
+    let output = Command::new(tool).arg("--version").output()
+        .map_err(|e| format!("required tool is unavailable: {tool}: {e}"))?;
+    if !output.status.success() {
+        return Err(format!("{tool} --version exited with status {}", output.status));
+    }
+    let value = String::from_utf8_lossy(&output.stdout).trim().to_string();
+    Ok(if value.is_empty() {
+        String::from_utf8_lossy(&output.stderr).trim().to_string()
+    } else { value })
+}
+
+fn version_tuple(value: &str) -> Option<(u64, u64, u64)> {
+    let clean = value.trim().trim_start_matches('v');
+    let mut parts = clean.split('.');
+    let major = parts.next()?.parse().ok()?;
+    let minor = parts.next()?.parse().ok()?;
+    let patch_text = parts.next()?;
+    let patch_digits: String = patch_text.chars().take_while(|c| c.is_ascii_digit()).collect();
+    let patch = patch_digits.parse().ok()?;
+    Some((major, minor, patch))
+}
+
+fn version_at_least(actual: &str, minimum: &str) -> bool {
+    match (version_tuple(actual), version_tuple(minimum)) {
+        (Some(a), Some(m)) => a >= m,
+        _ => false
+    }
 }
 
 fn run_backend(root: &Path, backend_args: &[String]) -> Result<(), String> {
@@ -92,9 +127,11 @@ fn walk_count_extension(root: &Path, extension: &str) -> Result<usize, String> {
     while let Some(dir) = pending.pop() {
         for entry in fs::read_dir(&dir).map_err(|e| e.to_string())? {
             let entry = entry.map_err(|e| e.to_string())?;
+            let file_type = entry.file_type().map_err(|e| e.to_string())?;
+            if file_type.is_symlink() { continue; }
             let path = entry.path();
-            if path.is_dir() { pending.push(path); }
-            else if path.extension().and_then(|v| v.to_str()) == Some(extension) { count += 1; }
+            if file_type.is_dir() { pending.push(path); }
+            else if file_type.is_file() && path.extension().and_then(|v| v.to_str()) == Some(extension) { count += 1; }
         }
     }
     Ok(count)
@@ -107,52 +144,74 @@ fn json_escape(value: &str) -> String {
 
 fn inspect(root: &Path, manifest: &str) -> Result<(), String> {
     let source_name = manifest_value(manifest, "source_root").unwrap_or("src");
+    let archive_name = manifest_value(manifest, "archive_root").unwrap_or("archive/v1-reference");
     let source_path = safe_project_path(root, source_name, "source_root")?;
-    if !source_path.is_dir() { return Err(format!("source root does not exist: {source_name}")); }
-    let (astro, ts, js, css, html) = count_files(&source_path)?;
+    let source = canonical_inside_root(root, &source_path, "source_root")?;
+    let archive_path = safe_project_path(root, archive_name, "archive_root")?;
+    if archive_path.exists() {
+        let archive = canonical_inside_root(root, &archive_path, "archive_root")?;
+        if source.starts_with(&archive) || archive.starts_with(&source) {
+            return Err("source_root and archive_root must be separate trees".into());
+        }
+    }
+    let (astro, ts, js, css, html) = count_files(&source)?;
     println!("IWAG Active Compiler {VERSION}");
     println!("source_root={source_name}");
     println!("astro={astro} typescript={ts} javascript={js} css={css} html={html}");
-    println!("archive_root={}", manifest_value(manifest, "archive_root").unwrap_or("archive/v1-reference"));
+    println!("archive_root={archive_name} (excluded)");
     println!("output_root={}", manifest_value(manifest, "output_root").unwrap_or("dist"));
     Ok(())
 }
 
-fn doctor() -> Result<(), String> {
-    for tool in ["node", "npm", "cargo"] {
-        let available = tool_version(tool);
-        println!("{tool}: {}", if available { "available" } else { "missing" });
-        if !available { return Err(format!("required tool is unavailable: {tool}")); }
+fn doctor(manifest: &str) -> Result<(), String> {
+    let minimum = manifest_value(manifest, "node_minimum").unwrap_or("22.23.4");
+    let node = command_version("node")?;
+    println!("node: {node}");
+    if !version_at_least(&node, minimum) {
+        return Err(format!("Node.js {minimum} or newer is required; found {node}"));
+    }
+    for tool in ["npm", "cargo"] {
+        let value = command_version(tool)?;
+        println!("{tool}: {value}");
     }
     Ok(())
 }
 
 fn build(root: &Path, manifest: &str) -> Result<(), String> {
-    doctor()?;
+    doctor(manifest)?;
     let source_name = manifest_value(manifest, "source_root").unwrap_or("src");
     let output_name = manifest_value(manifest, "output_root").unwrap_or("dist");
     let archive_name = manifest_value(manifest, "archive_root").unwrap_or("archive/v1-reference");
-    let source = safe_project_path(root, source_name, "source_root")?;
-    let output = safe_project_path(root, output_name, "output_root")?;
-    let _archive = safe_project_path(root, archive_name, "archive_root")?;
-
+    let source_path = safe_project_path(root, source_name, "source_root")?;
+    let output_path = safe_project_path(root, output_name, "output_root")?;
+    let archive_path = safe_project_path(root, archive_name, "archive_root")?;
+    let source = canonical_inside_root(root, &source_path, "source_root")?;
+    if archive_path.exists() {
+        let archive = canonical_inside_root(root, &archive_path, "archive_root")?;
+        if source.starts_with(&archive) || archive.starts_with(&source) {
+            return Err("source_root and archive_root must be separate trees".into());
+        }
+    }
     if !source.is_dir() { return Err(format!("missing V2 source root: {source_name}")); }
     if !root.join("astro.config.mjs").is_file() { return Err("missing astro.config.mjs".into()); }
     if !root.join("package.json").is_file() { return Err("missing package.json".into()); }
-    if source == output || source.starts_with(&output) || output.starts_with(&source) {
-        return Err("source_root and output_root must be separate directories".into());
-    }
 
     let (astro, ts, js, css, html) = count_files(&source)?;
     if astro + ts + js + css + html == 0 { return Err("V2 source root is empty".into()); }
+    if output_path.exists() {
+        let output = canonical_inside_root(root, &output_path, "output_root")?;
+        if output == source || output.starts_with(&source) || source.starts_with(&output) {
+            return Err("source_root and output_root must be separate directories".into());
+        }
+    }
 
     println!("[iwagc] preflight: source inventory complete");
     println!("[iwagc] source files: astro={astro}, ts={ts}, js={js}, css={css}, html={html}");
-    println!("[iwagc] archive boundary: {archive_name} is not a build input");
+    println!("[iwagc] archive boundary: {archive_name} is excluded from build inputs");
     println!("[iwagc] backend: Astro + Vite");
     run_backend(root, &["build".to_string()])?;
 
-    if !output.is_dir() { return Err(format!("backend did not create output directory: {output_name}")); }
+    let output = canonical_inside_root(root, &output_path, "output_root")?;
     let html_output = walk_count_extension(&output, "html")?;
     if html_output == 0 { return Err("production output contains no HTML pages".into()); }
 
@@ -177,18 +236,17 @@ fn main_result() -> Result<(), String> {
     let manifest = load_manifest(&root)?;
     match command.as_str() {
         "inspect" => inspect(&root, &manifest),
-        "doctor" => doctor(),
+        "doctor" => doctor(&manifest),
         "build" => build(&root, &manifest),
         "dev" | "preview" => {
-            doctor()?;
+            doctor(&manifest)?;
             let mut backend_args = vec![command];
             backend_args.extend(args);
             run_backend(&root, &backend_args)
         }
         "wasm" => {
-            if !tool_version("wasm-pack") {
-                return Err("wasm-pack is required for this optional module build".into());
-            }
+            command_version("wasm-pack")
+                .map_err(|_| "wasm-pack is required for this optional module build".to_string())?;
             let status = Command::new("wasm-pack")
                 .args(["build", "rust/contrast-engine", "--target", "web", "--out-dir", "../../public/wasm", "--release"])
                 .current_dir(&root).status()
