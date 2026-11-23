@@ -101,6 +101,7 @@ Updated: 2026-11-23
 
 - [x] Added global text-scale, high-contrast, reduced-motion and content-spacing controls with local-only preference storage.
 - [x] Added a single reset action that restores theme, accent, text scale, contrast, motion, and spacing preferences to their defaults.
+- [x] Reworked primary navigation around Home, Discover, Plan your visit, Community, and Updates; added dedicated Plan your visit and Community landing routes.
 - [x] Added nine separately addressable legal policy pages with English and Indonesian draft copy.
 - [x] Updated the legal banner to drafting-only, not official, not verified, not approved and not in force.
 - [x] Added a policy index linking all nine documents.
