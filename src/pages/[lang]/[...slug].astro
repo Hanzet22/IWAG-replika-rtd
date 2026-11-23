@@ -1,10 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { isLocale } from "../../i18n/locales";
+import { isLocale, localeKeys } from "../../i18n/locales";
 import { nestedRoutes } from "../../i18n/nested-routes";
 
 export function getStaticPaths() {
-  return (["en", "id"] as const).flatMap((lang) =>
+  return localeKeys.flatMap((lang) =>
     nestedRoutes.map((slug) => ({ params: { lang, slug }, props: { lang, slug } }))
   );
 }
