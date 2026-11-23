@@ -373,6 +373,11 @@ main#main {
 .size-table { width: 100%; border-collapse: collapse; }
 .size-table th, .size-table td { padding: .7rem; border: 1px solid var(--border); text-align: start; }
 .graphics-lab { margin-block: 2rem; }
+.graphics-controls { display: flex; flex-wrap: wrap; gap: .65rem; margin-block: 1rem; }
+button:not(:disabled) { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .58; }
+.action-link { cursor: pointer; }
+.graphics-status { font-weight: 750; }
 .graphics-stage { display: grid; place-items: center; margin-block: 1rem; padding: .8rem; border: 1px solid var(--border); border-radius: .8rem; background: var(--notice); }
 .graphics-stage svg, .graphics-canvas { width: 100%; height: auto; }
 .accessibility-controls :focus-visible, .preference-reset:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
