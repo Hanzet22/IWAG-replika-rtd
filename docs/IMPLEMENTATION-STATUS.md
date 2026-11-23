@@ -150,11 +150,13 @@ CI runs are diagnostic evidence only. Cancelled or pending workflow runs do not 
 - [x] Added mobile performance evidence from real-user battery-saver research and underpowered-device research, with dated-device caveats.
 - [x] Expanded the Rust compiler build report to count output files, HTML/CSS/JS/images/fonts and their byte footprints; it rejects missing generated CSS when CSS source exists.
 - [x] Generated and committed `package-lock.json` through a branch-scoped lockfile bootstrap job; the production workflow now selects `npm ci` when the lockfile is present.
-- [ ] Review transitive dependency licenses and provenance.
+- [x] Recorded license metadata for 530 locked npm package entries; all have a declared license field.
+- [ ] Review full license texts/notices and actual installed optional LGPL/MPL packages before distribution.
 - [ ] Verify the combined Tailwind/Panda/StyleX production output and generated CSS cascade.
 - [ ] Complete page-template-specific visual and content reconstruction for every route.
 - [ ] Complete route/locale link integrity and missing-asset checks.
 - [ ] Perform real keyboard, screen-reader, TalkBack, zoom/reflow and disabled-user evaluations.
+- [x] Captured first raw output baseline: 298 HTML, 1 CSS, 4 JS, 5 fonts, 2,460,461 bytes, 7,111 local refs checked.
 - [ ] Measure representative mid/low-end Android devices; do not set unmeasured budgets.
 - [ ] Review all public assets, licenses and translations before release.
 
