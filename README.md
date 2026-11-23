@@ -23,6 +23,7 @@ The current V2 implementation includes:
 - Nine staff-role overview routes, clearly marked as non-official summaries where source pages are unavailable
 - Dated event and pass information snapshots; no live ticket sales, registration, accounts, or payments
 - Nine independently drafted bilingual legal and governance documents, all explicitly marked drafting-only and not in force
+- An independent V2 design-system specification covering visual tokens, cognitive accessibility, motion, interaction, color, and alternative text
 - WCAG 2.2 Level A as the engineering target only, without claiming conformance or pursuing certification
 
 Event details are independently rewritten source snapshots, not official IWAG information or guarantees. Volatile facts must be rechecked before publication. Terms, Privacy, and Code of Conduct are independently written V2 working drafts, not copied from V1 and not final public policies. They must be reviewed and approved after the actual operator, data flows, responsibilities, and applicable jurisdictions are verified. Do not treat preview copy as an approved legal policy.
@@ -54,6 +55,7 @@ See:
 - [Original live-site reference review](docs/ORIGINAL-SITE-REFERENCE.md)
 - [Legal and regulatory compliance matrix](docs/LEGAL-COMPLIANCE-MATRIX.md)
 - [V2 requirements](docs/V2-REQUIREMENTS.md)
+- [V2 independent design system](docs/V2-DESIGN-SYSTEM.md)
 - [ADR-0001: static-first Astro architecture](docs/ADR-0001-architecture.md)
 - [Stack integration map](docs/STACK-INTEGRATION.md)
 - [Legal policy draft status](docs/POLICY-DRAFTS.md)
@@ -62,7 +64,8 @@ See:
 
 ## Guardrails
 
-- This is an independent V2 replica/re-engineering project, not a certification or accreditation project.
+- This is an independent V2 re-engineering project, not a certification or accreditation project.
+- V1 is a reference for research and content discovery, not a UI, UX, route, or page template.
 - Do not bypass repository branch protection.
 - Do not copy V1 compiled bundles as the V2 implementation.
 - Do not add trackers, analytics, remote fonts, or social embeds by default.
