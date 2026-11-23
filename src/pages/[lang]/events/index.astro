@@ -12,31 +12,49 @@ const lang = isLocale(langParam) ? langParam : "en";
 const events = (await getCollection("events", ({ data }) => data.locale === lang && data.status === "published"))
   .sort((a, b) => (a.data.start?.getTime() ?? 0) - (b.data.start?.getTime() ?? 0));
 const copy = {
-  en: { title: "Events", eyebrow: "Event information", empty: "No published events yet", message: "Event listings are independently written from dated public announcements. Check the organiser for the latest schedule, ticket and access updates." },
-  id: { title: "Acara", eyebrow: "Informasi acara", empty: "Belum ada acara yang diterbitkan", message: "Daftar acara ditulis secara independen berdasarkan pengumuman publik bertanggal. Periksa kanal penyelenggara untuk pembaruan jadwal, tiket, dan akses." },
-  "en-sg": { title: "Events", eyebrow: "Event information", empty: "No published events yet", message: "Event information will appear only after its schedule, venue, accessibility details, and status have been verified." },
-  "ms-my": { title: "Acara", eyebrow: "Maklumat acara", empty: "Belum ada acara diterbitkan", message: "Senarai acara ditulis secara bebas berdasarkan pengumuman awam bertarikh. Semak saluran penganjur untuk kemas kini jadual, tiket dan akses." }
+  en: { title: "Events", eyebrow: "Event information", intro: "Browse published event information, dates, venues and visitor details.", empty: "No published events yet", message: "Event listings are independently written from dated public announcements. Check the organiser for the latest schedule, ticket and access updates.", date: "Date", venue: "Venue", format: "Format", online: "Online", inPerson: "In person", details: "View event details", noDate: "To be announced", noVenue: "Venue information pending" },
+  id: { title: "Acara", eyebrow: "Informasi acara", intro: "Jelajahi informasi acara, tanggal, lokasi, dan detail pengunjung yang telah diterbitkan.", empty: "Belum ada acara yang diterbitkan", message: "Daftar acara ditulis secara independen berdasarkan pengumuman publik bertanggal. Periksa kanal penyelenggara untuk pembaruan jadwal, tiket, dan akses.", date: "Tanggal", venue: "Lokasi", format: "Format", online: "Daring", inPerson: "Tatap muka", details: "Lihat detail acara", noDate: "Akan diumumkan", noVenue: "Informasi lokasi belum tersedia" },
+  "en-sg": { title: "Events", eyebrow: "Event information", intro: "Browse published event information, dates, venues and visitor details.", empty: "No published events yet", message: "Event information will appear only after its schedule, venue, accessibility details, and status have been verified.", date: "Date", venue: "Venue", format: "Format", online: "Online", inPerson: "In person", details: "View event details", noDate: "To be announced", noVenue: "Venue information pending" },
+  "ms-my": { title: "Acara", eyebrow: "Maklumat acara", intro: "Terokai maklumat acara, tarikh, lokasi dan butiran pengunjung yang telah diterbitkan.", empty: "Belum ada acara diterbitkan", message: "Senarai acara ditulis secara bebas berdasarkan pengumuman awam bertarikh. Semak saluran penganjur untuk kemas kini jadual, tiket dan akses.", date: "Tarikh", venue: "Lokasi", format: "Format", online: "Dalam talian", inPerson: "Bersemuka", details: "Lihat butiran acara", noDate: "Akan diumumkan", noVenue: "Maklumat lokasi belum tersedia" }
 }[lang];
 ---
 <BaseLayout lang={lang} title={copy.title} description={copy.message}>
-  <section class="page-content">
-    <p class="eyebrow">IWAG V2 · {copy.eyebrow}</p>
-    <h1>{copy.title}</h1>
+  <section class="page-content event-index" aria-labelledby="events-title">
+    <header class="page-intro">
+      <p class="eyebrow">IWAG V2 · {copy.eyebrow}</p>
+      <h1 id="events-title">{copy.title}</h1>
+      <p class="lead">{copy.intro}</p>
+    </header>
     {events.length === 0 ? (
-      <aside class="notice">
+      <aside class="notice" role="status">
         <h2>{copy.empty}</h2>
         <p>{copy.message}</p>
       </aside>
     ) : (
       <ul class="event-list">
-        {events.map((event) => (
-          <li class="content-card">
-            <h2><a href={`/${lang}/events/${event.id.split("/").slice(1).join("/")}/`}>{event.data.title}</a></h2>
-            <p>{event.data.summary}</p>
-            {event.data.start && <p>{event.data.start.toLocaleDateString(lang, { dateStyle: "long", timeZone: event.data.timezone })}</p>}
-            {event.data.venue && <p>{event.data.venue}</p>}
-          </li>
-        ))}
+        {events.map((event) => {
+          const slug = event.id.split("/").slice(1).join("/");
+          const date = event.data.start
+            ? event.data.start.toLocaleDateString(lang, { dateStyle: "long", timeZone: event.data.timezone })
+            : copy.noDate;
+          return (
+            <li>
+              <article class="event-card event-list-card">
+                <div class="event-card-copy">
+                  <p class="eyebrow">{copy.eyebrow}</p>
+                  <h2><a href={`/${lang}/events/${slug}/`}>{event.data.title}</a></h2>
+                  <p>{event.data.summary}</p>
+                </div>
+                <dl class="event-meta">
+                  <div><dt>{copy.date}</dt><dd>{event.data.start ? <time datetime={event.data.start.toISOString()}>{date}</time> : date}</dd></div>
+                  <div><dt>{copy.venue}</dt><dd>{event.data.venue ?? copy.noVenue}</dd></div>
+                  <div><dt>{copy.format}</dt><dd>{event.data.online ? copy.online : copy.inPerson}</dd></div>
+                </dl>
+                <a class="action-link event-card-action" href={`/${lang}/events/${slug}/`}>{copy.details}</a>
+              </article>
+            </li>
+          );
+        })}
       </ul>
     )}
   </section>
