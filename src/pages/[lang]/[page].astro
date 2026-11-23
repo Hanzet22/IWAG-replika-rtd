@@ -67,6 +67,12 @@ const copy = isLegal ? t.legalDraft
     <p class="eyebrow">IWAG V2 · Independent project</p>
     <h1>{title}</h1>
     <p class="lead">{copy}</p>
+    {isAbout && <section class="history-section" aria-label={lang === "id" ? "Sejarah pertemuan" : "Gathering history"}>
+      <div class="history-entry"><span>2017</span><div><h2>{lang === "id" ? "Awal komunitas" : "Community beginnings"}</h2><p>{lang === "id" ? "Pertemuan akhir tahun Indonesia Winter Furmeet menjadi awal tradisi berkumpul." : "The year-end Indonesia Winter Furmeet meetups began a recurring tradition of bringing the community together."}</p></div></div>
+      <div class="history-entry"><span>2022</span><div><h2>{lang === "id" ? "Pertemuan kembali" : "A renewed gathering"}</h2><p>{lang === "id" ? "IWFM kembali digelar dengan kegiatan komunitas, seni, permainan, dan sesi foto bersama." : "IWFM returned with community activities, art, games, and a group photo gathering."}</p></div></div>
+      <div class="history-entry"><span>2023</span><div><h2>{lang === "id" ? "IWAG pertama" : "The first IWAG"}</h2><p>{lang === "id" ? "Format berkembang menjadi pertemuan akhir pekan dengan panggung, artist alley, panel, dan lounge." : "The format grew into a weekend gathering with a stage, artist alley, panels, and a casual lounge."}</p></div></div>
+      <div class="history-entry"><span>2024</span><div><h2>{lang === "id" ? "Akhir pekan penuh" : "A full weekend format"}</h2><p>{lang === "id" ? "Acara memperluas program dan memperkenalkan sistem pengelolaan acara Community." : "The event expanded its programme and introduced the Community event-management platform."}</p></div></div>
+    </section>}
     {isLocation && <section class="content-card detail-grid">
       <div><p class="eyebrow">IWAG 2027 · VENUE</p><h2>Hotel Ciputra Jakarta</h2><p>West Jakarta, Indonesia</p><p>The published venue announcement describes event spaces grouped on the sixth floor, with a connection to Mal Ciputra Jakarta.</p><p><strong>Address</strong><br />Jl. Letnan Jenderal S Parman, Tanjung Duren, Grogol Petamburan, Jakarta 11470, Indonesia</p><p><a href="https://hotelciputra.com/jakarta/" rel="external">Hotel website</a></p></div>
       <div class="venue-visual venue-visual-detail" aria-hidden="true"><span>HOTEL CIPUTRA</span><strong>JKT</strong><small>WEST JAKARTA</small></div>
