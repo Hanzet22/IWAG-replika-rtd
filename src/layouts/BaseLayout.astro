@@ -33,8 +33,10 @@ const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(
       <nav class="primary-nav" aria-label={t.primaryNavigation}>
         <a href={`/${lang}/`}>{t.home}</a>
         <a href={`/${lang}/about/`}>{t.about}</a>
-        <a href={`/${lang}/events/`}>{t.events}</a>
-        <a href={`/${lang}/accessibility/`}>{t.accessibility}</a>
+        <a href={`/${lang}/location/`}>{lang === "id" ? "Lokasi" : "Venue"}</a>
+        <a href={`/${lang}/participate/`}>{lang === "id" ? "Partisipasi" : "Participate"}</a>
+        <a href={`/${lang}/updates/`}>{lang === "id" ? "Pembaruan" : "Updates"}</a>
+        <a href={`/${lang}/about/`}>{t.about}</a>
       </nav>
       <div class="preferences">
         <label for="language-choice">{t.language}</label>
