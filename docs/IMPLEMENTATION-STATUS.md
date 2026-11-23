@@ -137,3 +137,24 @@ CI runs are diagnostic evidence only. Cancelled or pending workflow runs do not 
 - [x] Added a user-activated Canvas motion preview capped at 30 fps; it stops when the document is hidden, the lab leaves the viewport, or reduced-motion is enabled.
 - [x] Kept SVG as the static fallback; WebGL2 is probed with context release and WebGPU is detected without requesting an adapter/device.
 - [ ] Implement or adopt a real WebGL/WebGPU renderer only if a measured use case justifies its startup, memory and GPU costs.
+
+## Continued global reconstruction (24 November 2026)
+
+- [x] Consolidated root and localized homepages into one shared localized Astro component.
+- [x] Root `/` renders the actual English homepage directly; no language-choice interstitial or timed redirect.
+- [x] Added localized breadcrumb navigation across nested routes and explicit current-page semantics.
+- [x] Activated Tailwind CSS 4 theme and utility layers without importing its preflight reset.
+- [x] Kept Panda CSS tokens and StyleX compile-time classes in their separate styling responsibilities.
+- [x] Added architecture and global UX/UI system specifications.
+- [x] Reviewed full text of four accessibility papers in the existing Undermind workspace and documented study design, evidence limitations and practical implications.
+- [x] Added mobile performance evidence from real-user battery-saver research and underpowered-device research, with dated-device caveats.
+- [x] Expanded the Rust compiler build report to count output files, HTML/CSS/JS/images/fonts and their byte footprints; it rejects missing generated CSS when CSS source exists.
+- [ ] Commit a reproducible npm lockfile and verify transitive dependency provenance.
+- [ ] Verify the combined Tailwind/Panda/StyleX production output and generated CSS cascade.
+- [ ] Complete page-template-specific visual and content reconstruction for every route.
+- [ ] Complete route/locale link integrity and missing-asset checks.
+- [ ] Perform real keyboard, screen-reader, TalkBack, zoom/reflow and disabled-user evaluations.
+- [ ] Measure representative mid/low-end Android devices; do not set unmeasured budgets.
+- [ ] Review all public assets, licenses and translations before release.
+
+The latest implementation is a working reconstruction foundation and shared homepage/navigation system. It is not a claim that every route or accessibility criterion has been completed.
