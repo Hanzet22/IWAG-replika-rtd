@@ -11,7 +11,7 @@ The current V2 implementation includes:
 - Locale-prefixed routes for English, Indonesian, English (Singapore), and Bahasa Melayu (Malaysia); the homepage and event pages have Malay copy; untranslated Malay routes and selected Indonesian information pages display an explicit English-fallback notice until reviewed translations are ready
 - Semantic HTML-first layouts and progressive enhancement
 - System, Light, Black, Super Black, AMOLED Black, and Dynamic Color themes
-- System fonts; no external font CDN
+- Five locally hosted font families (Alan Sans, Amarna, Capo Sfogliato, Sekuya and Starveler); no external font CDN
 - Reduced-motion and forced-colors styling
 - Reconstructed homepage, localized event listings, venue, participation, team, resources, and travel-guide pages
 - Historical update archive covering the discovered 2024–2026 update routes
