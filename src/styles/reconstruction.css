@@ -423,3 +423,23 @@ button:disabled { cursor: not-allowed; opacity: .58; }
   :focus-visible { outline: 3px solid Highlight; outline-offset: 3px; }
   .action-link, button, select { forced-color-adjust: auto; }
 }
+
+/* Event index and detail templates */
+.page-intro { margin-block: .25rem 2rem; }
+.event-list { gap: 1rem; }
+.event-list-card { grid-template-columns: minmax(0, 1.2fr) minmax(13rem, .8fr); align-items: center; }
+.event-card-copy { min-width: 0; }
+.event-card-copy h2 { margin-block: .35rem .65rem; }
+.event-card-copy p:last-child { margin-bottom: 0; }
+.event-meta { display: grid; gap: .75rem; margin: 0; }
+.event-meta > div { display: grid; gap: .15rem; min-width: 0; }
+.event-meta dt { color: var(--muted); font-size: .76rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+.event-meta dd { margin: 0; overflow-wrap: anywhere; font-weight: 700; }
+.event-card-action { justify-self: start; }
+.event-details-card { display: grid; gap: 1rem; }
+.event-detail-meta { grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); padding-block: .5rem 1rem; border-bottom: 1px solid var(--border); }
+.event-access ul { padding-inline-start: 1.3rem; }
+.event-body { margin-block: 2rem; }
+@media (max-width: 48rem) {
+  .event-list-card { grid-template-columns: minmax(0, 1fr); }
+}
