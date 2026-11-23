@@ -49,7 +49,7 @@ The report records:
 - required route count;
 - build duration and status.
 
-The report is diagnostic evidence. It does not prove that every link resolves, every image has appropriate alternative text, or every route has passed manual accessibility or device testing.
+The report is diagnostic evidence. Static checks do not prove that alternative text is meaningful, that accessible names are understandable, or that every route passes keyboard, screen-reader, zoom, cognitive-accessibility or device testing.
 
 ## 5. Specialist backend ownership
 
