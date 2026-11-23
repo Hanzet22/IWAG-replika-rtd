@@ -60,6 +60,13 @@ const hasMalayTranslation = ["/", "/events", "/events/", "/events/iwag-2027", "/
         <label for="accent-choice" data-accent-label>{t.accent}</label>
         <input id="accent-choice" type="color" value="#726550" data-accent-choice aria-label={t.accent} />
       </div>
+      <details class="accessibility-preferences"><summary>{lang === "id" ? "Pengaturan aksesibilitas" : "Accessibility settings"}</summary>
+        <div class="accessibility-controls">
+          <label for="text-scale">Text size</label><select id="text-scale" data-text-scale><option value="normal">Default</option><option value="large">Large</option><option value="larger">Larger</option></select>
+          <label for="contrast-mode">Contrast</label><select id="contrast-mode" data-contrast-mode><option value="normal">Standard</option><option value="high">High contrast</option></select>
+          <label for="motion-mode">Motion</label><select id="motion-mode" data-motion-mode><option value="system">Use device setting</option><option value="reduce">Reduce motion</option></select>
+        </div>
+      </details>
     </header>
     <main id="main" tabindex="-1" lang={htmlLang}>
       {htmlLang === "en" && lang !== "en" && lang !== "en-sg" && <p class="translation-note" lang={locales[lang].htmlLang}>{lang === "id" ? "Halaman ini belum diterjemahkan sepenuhnya ke Bahasa Indonesia. Versi bahasa Inggris ditampilkan." : "Halaman ini belum diterjemahkan ke Bahasa Melayu. Versi bahasa Inggeris dipaparkan."}</p>}
@@ -78,6 +85,7 @@ const hasMalayTranslation = ["/", "/events", "/events/", "/events/iwag-2027", "/
         <a href={`/${lang}/terms/`}>{t.terms}</a>
         <a href={`/${lang}/privacy/`}>{t.privacy}</a>
         <a href={`/${lang}/code-of-conduct/`}>{t.conduct}</a>
+        <a href={`/${lang}/policy/`}>{lang === "id" ? "Semua dokumen drafting" : "All policy drafts"}</a>
       </nav>
       <p class="footer-note">{t.footerNote}</p>
     </footer>
