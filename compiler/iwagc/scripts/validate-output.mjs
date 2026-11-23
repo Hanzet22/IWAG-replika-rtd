@@ -71,6 +71,67 @@ async function resolveLocalReference(raw, base, owner, kind) {
   checked += 1;
 }
 
+function validateHtmlBasics(html, owner) {
+  if (!/<html\b[^>]*\blang\s*=\s*["'][^"']+["']/i.test(html)) {
+    errors.push(owner + ": root html element is missing a language attribute");
+  }
+  if (!/<title\b[^>]*>[\s\S]*?\S[\s\S]*?<\/title>/i.test(html)) {
+    errors.push(owner + ": document title is missing or empty");
+  }
+  if (!/<main\b[^>]*\bid\s*=\s*["']main["']/i.test(html)) {
+    errors.push(owner + ": main landmark with id=main is missing");
+  }
+  if (!/<a\b[^>]*class\s*=\s*["'][^"']*\bskip-link\b[^"']*["'][^>]*href\s*=\s*["']#main["']/i.test(html)
+      && !/<a\b[^>]*href\s*=\s*["']#main["'][^>]*class\s*=\s*["'][^"']*\bskip-link\b/i.test(html)) {
+    errors.push(owner + ": skip link to main content is missing");
+  }
+  if (/<meta\b[^>]*http-equiv\s*=\s*["']refresh["']/i.test(html)) {
+    errors.push(owner + ": meta refresh redirect is prohibited");
+  }
+  if (/redirecting to website|click here if not redirected/i.test(html)) {
+    errors.push(owner + ": legacy redirect interstitial text is prohibited");
+  }
+  if (/<video\b[^>]*\bautoplay\b/i.test(html)) {
+    errors.push(owner + ": autoplay video is prohibited");
+  }
+
+  const ids = [...html.matchAll(/\bid\s*=\s*["']([^"']+)["']/gi)].map((match) => match[1]);
+  const seen = new Set();
+  for (const id of ids) {
+    if (seen.has(id)) errors.push(owner + ': duplicate id "' + id + '"');
+    seen.add(id);
+  }
+
+  for (const match of html.matchAll(/<img\b([^>]*)>/gi)) {
+    if (!/\balt\s*=\s*["'][^"']*["']/i.test(match[1])) {
+      errors.push(owner + ": image is missing an alt attribute");
+    }
+  }
+  for (const match of html.matchAll(/<svg\b([^>]*)>/gi)) {
+    const attrs = match[1];
+    if (/\brole\s*=\s*["']img["']/i.test(attrs)
+        && !/\baria-label(?:ledby)?\s*=/i.test(attrs)) {
+      errors.push(owner + ": meaningful SVG image is missing an accessible name");
+    }
+  }
+  for (const match of html.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/gi)) {
+    const attrs = match[1];
+    const content = match[2].replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").trim();
+    if (!content && !/\baria-label(?:ledby)?\s*=/i.test(attrs)) {
+      errors.push(owner + ": button is missing an accessible name");
+    }
+  }
+  const labels = new Set([...html.matchAll(/<label\b[^>]*\bfor\s*=\s*["']([^"']+)["']/gi)].map((match) => match[1]));
+  for (const match of html.matchAll(/<(input|select|textarea)\b([^>]*)>/gi)) {
+    const attrs = match[2];
+    if (match[1].toLowerCase() === "input" && /\btype\s*=\s*["']hidden["']/i.test(attrs)) continue;
+    const id = attrs.match(/\bid\s*=\s*["']([^"']+)["']/i)?.[1];
+    if (!/\baria-label(?:ledby)?\s*=/.test(attrs) && !(id && labels.has(id))) {
+      errors.push(owner + ": " + match[1].toLowerCase() + " control is missing a programmatic label");
+    }
+  }
+}
+
 async function main() {
   const allFiles = await walk(outputRoot);
   const htmlFiles = allFiles.filter((file) => file.endsWith(".html"));
@@ -78,8 +139,9 @@ async function main() {
 
   for (const file of htmlFiles) {
     const html = await readFile(file, "utf8");
-    const base = publicUrlForFile(file);
     const relative = path.relative(outputRoot, file);
+    validateHtmlBasics(html, relative);
+    const base = publicUrlForFile(file);
     const attrs = /\b(href|src|poster)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi;
     for (const match of html.matchAll(attrs)) {
       await resolveLocalReference(match[2] ?? match[3] ?? "", base, relative, match[1].toLowerCase());
@@ -96,7 +158,7 @@ async function main() {
     }
   }
 
-  console.log("[iwagc:routes] scanned " + htmlFiles.length + " HTML and " + cssFiles.length + " CSS files; checked " + checked + " local references");
+  console.log("[iwagc:routes] scanned " + htmlFiles.length + " HTML and " + cssFiles.length + " CSS files; checked " + checked + " local references and basic accessibility invariants");
   if (errors.length) {
     for (const error of errors.slice(0, 60)) console.error("[iwagc:routes] " + error);
     if (errors.length > 60) console.error("[iwagc:routes] " + (errors.length - 60) + " additional issues omitted");
