@@ -167,3 +167,18 @@ Do not treat CI/CD status as the project completion criterion. Use CI as one sou
 - [ ] New V2 design system and page implementation.
 - [ ] Manual accessibility and device evaluation.
 - [ ] Full performance evidence and release review.
+
+## 12. Execution update — 23 November 2026
+
+- [x] Dedicated greenfield branch created.
+- [x] Rust Active Compiler specification and initial CLI committed.
+- [x] Normal npm dev/build/preview commands routed through Rust.
+- [x] Build workflow updated to provision stable Rust and invoke the Active Compiler.
+- [x] 120 legacy HTML snapshots, five compiled Astro assets and one CDN helper moved to `archive/v1-reference/site/`.
+- [x] Archive README added; active V2 source root remains `src/`.
+- [x] Panda CSS 2.6.0 and StyleX 0.19.2 integrated alongside Tailwind CSS 4 in the Astro/Vite pipeline.
+- [x] Central CSS layer declaration added; Panda and Tailwind preflight resets are not enabled.
+- [ ] Validate all CSS plugins and compiler output together.
+- [ ] Replace the remaining page templates and global UI with the new V2 identity.
+- [ ] Complete route-by-route localization, content and accessibility reconstruction.
+- [ ] Measure bundle, CPU, memory and battery behavior on mid/low-end devices.
