@@ -39,7 +39,7 @@ The dedicated reconstruction plan, source inventory and compiler contract are ma
 ## Commands
 
 ```sh
-npm install
+npm ci
 npm run compiler:doctor
 npm run compiler:inspect
 npm run dev
