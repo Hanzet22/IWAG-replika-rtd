@@ -18,6 +18,10 @@ const t = getMessages(lang);
 const htmlLang = contentLang ?? locales[lang].htmlLang;
 const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(?=/|$)"), "");
 const currentPath = pathWithoutLocale.replace(/\/$/, "") || "/";
+const isEventsPath = currentPath === "/events" || currentPath.startsWith("/events/");
+const isVisitPath = ["/plan-your-visit", "/location", "/participate"].some((path) => currentPath === path || currentPath.startsWith(path + "/"));
+const isCommunityPath = ["/community", "/about", "/join-iwag-team", "/dealers", "/links"].some((path) => currentPath === path || currentPath.startsWith(path + "/"));
+const isUpdatesPath = currentPath === "/updates" || currentPath.startsWith("/updates/");
 const hasMalayTranslation = ["/", "/events", "/events/", "/events/iwag-2027", "/events/iwag-2027/"].includes(pathWithoutLocale);
 ---
 <!doctype html>
@@ -40,12 +44,12 @@ const hasMalayTranslation = ["/", "/events", "/events/", "/events/iwag-2027", "/
       <a class={brandClass} href={`/${lang}/`} aria-label="IWAG V2 independent project home">IWAG<span>V2</span></a>
       <nav class="primary-nav" aria-label={t.primaryNavigation}>
         <a href={`/${lang}/`} aria-current={currentPath === "/" ? "page" : undefined}>{t.home}</a>
-        <a href={`/${lang}/events/`} aria-current={currentPath === "/events" ? "page" : undefined}>{lang === "id" || lang === "ms-my" ? "Acara" : "Discover"}</a>
-        <a href={`/${lang}/plan-your-visit/`} aria-current={currentPath === "/plan-your-visit" ? "page" : undefined}>{lang === "id" ? "Rencanakan kunjungan" : lang === "ms-my" ? "Rancang lawatan" : "Plan your visit"}</a>
-        <a href={`/${lang}/community/`} aria-current={currentPath === "/community" ? "page" : undefined}>{lang === "id" ? "Komunitas" : lang === "ms-my" ? "Komuniti" : "Community"}</a>
-        <a href={`/${lang}/updates/`} aria-current={currentPath === "/updates" ? "page" : undefined}>{lang === "id" ? "Pembaruan" : lang === "ms-my" ? "Kemas kini" : "Updates"}</a>
+        <a href={`/${lang}/events/`} aria-current={isEventsPath ? "page" : undefined}>{lang === "id" || lang === "ms-my" ? "Acara" : "Discover"}</a>
+        <a href={`/${lang}/plan-your-visit/`} aria-current={isVisitPath ? "page" : undefined}>{lang === "id" ? "Rencanakan kunjungan" : lang === "ms-my" ? "Rancang lawatan" : "Plan your visit"}</a>
+        <a href={`/${lang}/community/`} aria-current={isCommunityPath ? "page" : undefined}>{lang === "id" ? "Komunitas" : lang === "ms-my" ? "Komuniti" : "Community"}</a>
+        <a href={`/${lang}/updates/`} aria-current={isUpdatesPath ? "page" : undefined}>{lang === "id" ? "Pembaruan" : lang === "ms-my" ? "Kemas kini" : "Updates"}</a>
       </nav>
-      <div class="preferences">
+      <div class="preferences" role="group" aria-label={lang === "id" ? "Preferensi situs" : "Site preferences"}>
         <label for="language-choice">{t.language}</label>
         <select id="language-choice" name="language" data-language-choice>
           {localeKeys.map((locale) => <option value={locale} selected={locale === lang}>{locales[locale].nativeName}</option>)}
