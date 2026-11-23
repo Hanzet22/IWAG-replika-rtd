@@ -109,3 +109,15 @@ languageSelect?.addEventListener("change", () => {
     window.location.assign(`/${selected}${path || "/"}`);
   }
 });
+
+const preferenceSelects = [
+ {key:"iwag-v2-text-scale",selector:"[data-text-scale]",attribute:"textScale",allowed:["normal","large","larger"],fallback:"normal"},
+ {key:"iwag-v2-contrast",selector:"[data-contrast-mode]",attribute:"contrast",allowed:["normal","high"],fallback:"normal"},
+ {key:"iwag-v2-motion",selector:"[data-motion-mode]",attribute:"motion",allowed:["system","reduce"],fallback:"system"}
+] as const;
+for(const item of preferenceSelects){
+ const select=document.querySelector<HTMLSelectElement>(item.selector);let value:string=item.fallback;
+ try{const saved=localStorage.getItem(item.key);if(saved&&(item.allowed as readonly string[]).includes(saved))value=saved;}catch{}
+ root.dataset[item.attribute]=value;
+ if(select){select.value=value;select.addEventListener("change",()=>{const next=select.value;if(!(item.allowed as readonly string[]).includes(next))return;root.dataset[item.attribute]=next;try{if(next===item.fallback)localStorage.removeItem(item.key);else localStorage.setItem(item.key,next);}catch{}});}
+}
