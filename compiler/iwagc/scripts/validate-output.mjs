@@ -202,6 +202,7 @@ async function main() {
     JSON.stringify({ generatedAt: new Date().toISOString(), routeCount: routes.length, routes }, null, 2) + "\n",
     "utf8"
   );
+  await writeFile(path.join(manifestDirectory, "route-count.txt"), String(routes.length), "utf8");
 
   for (const file of cssFiles) {
     const css = await readFile(file, "utf8");
