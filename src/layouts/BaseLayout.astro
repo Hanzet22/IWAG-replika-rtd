@@ -30,7 +30,7 @@ const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(
     <a class="skip-link" href="#main">{t.skip}</a>
     <header class="site-header">
       <a class="wordmark" href={`/${lang}/`} aria-label="IWAG V2 independent project home">IWAG<span>V2</span></a>
-      <nav class="primary-nav" aria-label="Primary navigation">
+      <nav class="primary-nav" aria-label={t.primaryNavigation}>
         <a href={`/${lang}/`}>{t.home}</a>
         <a href={`/${lang}/about/`}>{t.about}</a>
         <a href={`/${lang}/events/`}>{t.events}</a>
@@ -57,12 +57,12 @@ const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(
     </main>
     <footer class="site-footer">
       <p>{t.footer}</p>
-      <nav aria-label="Legal information">
+      <nav aria-label={t.legalNavigation}>
         <a href={`/${lang}/terms/`}>{t.terms}</a>
         <a href={`/${lang}/privacy/`}>{t.privacy}</a>
         <a href={`/${lang}/code-of-conduct/`}>{t.conduct}</a>
       </nav>
-      <p class="footer-note">V2 preview · Content and policies are subject to review.</p>
+      <p class="footer-note">{t.footerNote}</p>
     </footer>
     <script>
       import "../scripts/preferences.ts";
