@@ -181,3 +181,5 @@ The latest implementation is a working reconstruction foundation and shared home
 - [x] Committed Cargo lockfiles for both the Rust compiler and contrast-engine crate.
 - [x] Added a pinned Rust 1.100.0 toolchain manifest including the WASM target.
 - [x] Pinned wasm-pack to 0.13.1 in the production workflow.
+
+- [x] Investigated the yanked `spin 0.9.8` warning from wasm-pack 0.13.1 and moved the CI pin to wasm-pack 0.15.0; the next build log must confirm the warning is gone.
