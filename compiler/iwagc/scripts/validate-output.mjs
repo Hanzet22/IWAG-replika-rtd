@@ -1,4 +1,4 @@
-import { readdir, readFile, stat } from "node:fs/promises";
+import { mkdir, readdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 
@@ -68,7 +68,44 @@ async function resolveLocalReference(raw, base, owner, kind) {
     return;
   }
 
+  if (kind === "href" && url.hash && target.toLowerCase().endsWith(".html")) {
+    let fragment;
+    try { fragment = decodeURIComponent(url.hash.slice(1)); }
+    catch {
+      errors.push(owner + ': malformed fragment in "' + value + '"');
+      return;
+    }
+    if (fragment) {
+      const targetHtml = await readFile(target, "utf8");
+      const targetIds = new Set([
+        ...[...targetHtml.matchAll(/\bid\s*=\s*["']([^"']+)["']/gi)].map((match) => match[1]),
+        ...[...targetHtml.matchAll(/<a\b[^>]*\bname\s*=\s*["']([^"']+)["']/gi)].map((match) => match[1])
+      ]);
+      if (!targetIds.has(fragment)) {
+        errors.push(owner + ': missing fragment target "' + value + '"');
+        return;
+      }
+    }
+  }
+
   checked += 1;
+}
+
+function parseSrcset(value) {
+  const candidates = [];
+  let index = 0;
+  while (index < value.length) {
+    while (index < value.length && /[\s,]/.test(value[index])) index += 1;
+    if (index >= value.length) break;
+    const start = index;
+    const isData = value.slice(index, index + 5).toLowerCase() === "data:";
+    while (index < value.length && !/\s/.test(value[index]) && (isData || value[index] !== ",")) index += 1;
+    const url = value.slice(start, index).trim();
+    if (url) candidates.push(url);
+    while (index < value.length && value[index] !== ",") index += 1;
+    if (value[index] === ",") index += 1;
+  }
+  return candidates;
 }
 
 function validateHtmlBasics(html, owner) {
@@ -142,11 +179,29 @@ async function main() {
     const relative = path.relative(outputRoot, file);
     validateHtmlBasics(html, relative);
     const base = publicUrlForFile(file);
-    const attrs = /\b(href|src|poster)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi;
+    const attrs = /\b(href|src|poster|srcset)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi;
     for (const match of html.matchAll(attrs)) {
-      await resolveLocalReference(match[2] ?? match[3] ?? "", base, relative, match[1].toLowerCase());
+      const rawValue = match[2] ?? match[3] ?? "";
+      if (match[1].toLowerCase() === "srcset") {
+        for (const candidate of parseSrcset(rawValue)) {
+          await resolveLocalReference(candidate, base, relative, "srcset");
+        }
+      } else {
+        await resolveLocalReference(rawValue, base, relative, match[1].toLowerCase());
+      }
     }
   }
+
+  const routes = htmlFiles
+    .map((file) => publicUrlForFile(file).pathname)
+    .sort((a, b) => a.localeCompare(b));
+  const manifestDirectory = path.resolve(process.cwd(), ".iwag-build");
+  await mkdir(manifestDirectory, { recursive: true });
+  await writeFile(
+    path.join(manifestDirectory, "route-manifest.json"),
+    JSON.stringify({ generatedAt: new Date().toISOString(), routeCount: routes.length, routes }, null, 2) + "\n",
+    "utf8"
+  );
 
   for (const file of cssFiles) {
     const css = await readFile(file, "utf8");
@@ -158,7 +213,7 @@ async function main() {
     }
   }
 
-  console.log("[iwagc:routes] scanned " + htmlFiles.length + " HTML and " + cssFiles.length + " CSS files; checked " + checked + " local references and basic accessibility invariants");
+  console.log("[iwagc:routes] scanned " + htmlFiles.length + " HTML and " + cssFiles.length + " CSS files; checked " + checked + " local references and basic accessibility invariants; route manifest: .iwag-build/route-manifest.json (" + routes.length + " routes)");
   if (errors.length) {
     for (const error of errors.slice(0, 60)) console.error("[iwagc:routes] " + error);
     if (errors.length > 60) console.error("[iwagc:routes] " + (errors.length - 60) + " additional issues omitted");
