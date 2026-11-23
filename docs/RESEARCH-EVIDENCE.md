@@ -61,3 +61,38 @@ Official documentation and package metadata reviewed:
 - Device-level performance must be measured on the actual target matrix.
 - WCAG guidance is necessary but does not prove cognitive accessibility or universal usability.
 - Research findings inform hypotheses and design decisions; they do not replace participatory evaluation.
+
+
+## 5. Additional full-text and current research review (24 November 2026)
+
+### Human-computer interaction and accessibility
+
+Four papers already present in the IWAG V2 Undermind workspace were examined in full text during this continuation:
+
+- [Ray19] (DOI: https://doi.org/10.1089/aut.2018.0020) — AASPIRE used community-based participatory research, including autistic team members across design and evaluation. Its practical guidance supports predictable navigation, clear labels, concise but precise language, low-clutter layouts and selectable palettes. The authors explicitly describe conflicting preferences; no one palette or interface is universal. Its sample and U.S. healthcare-site context limit direct transfer to this event-information site.
+- [Gar22] (DOI: https://doi.org/10.3390/bs12020026) — rapid evidence assessment of 45 studies. The authors found recurring barriers in text-heavy content, information seeking, navigation, excessive scrolling and interaction. The evidence was heterogeneous; only a few studies convincingly tested intervention success. Use the review to identify design risks, not to claim guaranteed outcome improvements.
+- [Alz22] (DOI: https://doi.org/10.1145/3510458.3513007) — small online usability experiment with 38 follow-up participants (12 autistic, 26 non-autistic). The study reported longer task duration with animation overall (146.82 vs 107.13 seconds) and higher workload, but some reported statistics are internally inconsistent and the sample was a convenience sample. It tested a rotating logo, not every animation type. This supports a conservative no-autoplay default and user control, not a claim that all animation harms all autistic people.
+- [Jor24] (DOI: https://doi.org/10.1145/3694790) — comparative analysis of five photosensitive-epilepsy guidance sources, not a new clinical experiment. It documents differing thresholds and unresolved issues in high-frame-rate, multi-frame and modern-display contexts. The paper's proposed 66 ms and 20 ms values are working proposals, not experimentally established web-safe cutoffs. The implementation therefore avoids flashing effects rather than attempting to use custom animation thresholds as a safety guarantee.
+
+A further empirical study, [Ekin25] (DOI: https://doi.org/10.1371/journal.pone.0328552), tested cognitive and low-vision accessibility enhancements with 20 university participants without disabilities. It reported higher cognitive engagement and improved perceived readability, but no significant reading-comprehension difference; the small non-disabled student sample limits generalization to disabled users.
+
+### Low-end mobile performance
+
+- [Goel20] (https://arxiv.org/abs/2003.06477) analyzed a real-user dataset covering 10 million page loads across 300 smartphone models, 81 cellular ISPs and 39 countries (2017–2018). It found that Android battery-saver behavior degraded selected performance metrics on some phone models, not universally. This supports testing CPU-throttled and battery-saver conditions, while the data age means it is not a current device benchmark.
+- [Glass15] (https://arxiv.org/abs/1507.01677) studied Google Glass and a Nexus 5-era smartphone. It identified JavaScript complexity, page objects, server count and image weight as performance factors on an underpowered wearable. Its device context is dated; use it only as directional evidence for minimizing unnecessary work, not as a modern Android benchmark.
+
+### Platform documentation reviewed
+
+- [Astro Islands](https://docs.astro.build/en/concepts/islands/) — static HTML by default, with JavaScript only for explicitly hydrated components.
+- [Tailwind CSS 4 with Astro](https://tailwindcss.com/docs/installation/framework-guides/astro) — supported Vite plugin integration; V2 imports theme and utility layers without the preflight reset.
+- [Panda CSS Astro integration](https://panda-css.com/docs/installation/astro) — Vite plugin and code generation.
+- [StyleX Vite integration](https://stylexjs.com/docs/learn/installation/vite) — compile-time CSS extraction.
+- [MDN CSS Painting API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Painting_API) — limited availability; never a required rendering path.
+- [MDN WebGPU API](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API) — limited availability and secure-context requirement; no device is requested on initial load.
+
+### Evidence limits
+
+- Full text was reviewed for four accessibility papers, not all 322 candidates in the existing literature search.
+- The 2025 web-accessibility study's participants did not have disabilities; it is not a substitute for co-design or testing with disabled participants.
+- The two mobile performance papers are dated and use older device cohorts. They justify the measurement strategy, not numerical budgets for current phones.
+- The source documentation and package integrations were reviewed; generated production CSS and the combined styling plugin output still require build-level verification.
