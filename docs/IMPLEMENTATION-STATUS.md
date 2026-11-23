@@ -194,3 +194,5 @@ The latest implementation is a working reconstruction foundation and shared home
 
 - [x] Removed the one-time lockfile bootstrap job after npm and both Cargo lockfiles were committed; the workflow now installs deterministically with npm ci.
 - [x] Rust Active Compiler now reconciles the generated route manifest count with the complete HTML file count and records generated_routes in its machine-readable report.
+
+- [x] Marked the homepage event date range and recent update dates with semantic time elements and machine-readable datetime values.
