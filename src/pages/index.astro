@@ -1,5 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { css } from "../../styled-system/css";
+
+const eventFactsClass = css({ display: "grid", gap: "1rem" });
 ---
 <BaseLayout lang="en" title="IWAG 2027: Fantastic Arcana" description="Independent IWAG V2 information preview.">
   <section class="home-hero" aria-labelledby="home-title">
@@ -16,7 +19,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <span class="arcana-orbit orbit-one"></span><span class="arcana-orbit orbit-two"></span>
       <span class="arcana-core" aria-hidden="true">✧</span><span class="arcana-caption" aria-hidden="true">AETHER · LEY LINES · DISCOVERY</span>
     </div>
-    <div class="event-facts">
+    <div class={`event-facts ${eventFactsClass}`}>
       <div><span>WHEN</span><strong>3–4 July 2027</strong></div>
       <div><span>WHERE</span><strong>Hotel Ciputra Jakarta</strong></div>
     </div>
