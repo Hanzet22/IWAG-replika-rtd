@@ -127,6 +127,20 @@ const intro = lang === "id"
 const context = isUpdate
   ? (lang === "id" ? "Arsip rute pembaruan" : "Update route archive")
   : (lang === "id" ? "Arsip struktur peran tim" : "Team role route archive");
+const backHref = isUpdate ? `/${lang}/updates/`
+  : slug.startsWith("participate/") ? `/${lang}/participate/`
+  : slug.startsWith("location/") ? `/${lang}/location/`
+  : slug.startsWith("join-iwag-team/") ? `/${lang}/join-iwag-team/`
+  : `/${lang}/`;
+const backLabel = isUpdate
+  ? (lang === "id" ? "Kembali ke arsip pembaruan" : "Back to updates")
+  : slug.startsWith("participate/")
+    ? (lang === "id" ? "Kembali ke partisipasi" : "Back to participation")
+    : slug.startsWith("location/")
+      ? (lang === "id" ? "Kembali ke lokasi" : "Back to location")
+      : slug.startsWith("join-iwag-team/")
+        ? (lang === "id" ? "Kembali ke tim" : "Back to team")
+        : (lang === "id" ? "Kembali ke beranda" : "Back to home");
 ---
 <BaseLayout lang={lang} contentLang={lang === "id" ? "id" : "en"} title={title} description={intro}>
   <article class="page-content">
@@ -281,6 +295,6 @@ const context = isUpdate
       <h2>{lang === "id" ? "Status migrasi" : "Migration status"}</h2>
       <p>{lang === "id" ? "Rute ini dipertahankan dari inventaris arsip. Konten spesifiknya belum direkonstruksi dari sumber yang diverifikasi." : "This route is preserved from the archive inventory. Its specific content has not yet been reconstructed from a verified source."}</p>
     </aside>}
-    <p><a href={`/${lang}/updates/`}>{lang === "id" ? "Kembali ke pembaruan" : "Back to updates"}</a></p>
+    <p><a href={backHref}>{backLabel}</a></p>
   </article>
 </BaseLayout>
