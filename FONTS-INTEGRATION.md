@@ -13,8 +13,7 @@ The `Ads-the-New-Font` branch replaces the archived site's typography system wit
 ## Required web assets
 Place the supplied files at these exact paths:
 - `fonts/alan-sans/AlanSans[wght].woff2`
-- `fonts/amarna/Amarna[wght].woff2`
-- `fonts/amarna/Amarna-Italic[wght].woff2`
+- `fonts/amarna/Amarna[ital,wght].woff2`
 - `fonts/capo-sfogliato/Capo_Sfogliato.woff2`
 - `fonts/sekuya/Sekuya-Regular.woff2`
 - `fonts/love-malia/Love Malia.ttf`
