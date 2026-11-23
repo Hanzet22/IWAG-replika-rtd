@@ -1,6 +1,6 @@
 use std::env;
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::{Component, Path, PathBuf};
 use std::process::{Command, ExitCode, Stdio};
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -20,6 +20,17 @@ fn manifest_value<'a>(text: &'a str, key: &str) -> Option<&'a str> {
         if name.trim() != key { return None; }
         Some(value.trim().trim_matches('"'))
     })
+}
+
+fn safe_project_path(root: &Path, value: &str, label: &str) -> Result<PathBuf, String> {
+    let relative = Path::new(value);
+    if relative.as_os_str().is_empty()
+        || relative.is_absolute()
+        || relative.components().any(|part| !matches!(part, Component::Normal(_)))
+    {
+        return Err(format!("{label} must be a non-empty repository-relative path: {value}"));
+    }
+    Ok(root.join(relative))
 }
 
 fn load_manifest(root: &Path) -> Result<String, String> {
@@ -60,7 +71,7 @@ fn count_files(root: &Path) -> Result<(usize, usize, usize, usize, usize), Strin
 
 fn tool_version(tool: &str) -> bool {
     Command::new(tool).arg("--version").stdout(Stdio::null()).stderr(Stdio::null()).status()
-        .map(|s| s.success()).unwrap_or(false)
+        .map(|status| status.success()).unwrap_or(false)
 }
 
 fn run_backend(root: &Path, backend_args: &[String]) -> Result<(), String> {
@@ -95,12 +106,12 @@ fn json_escape(value: &str) -> String {
 }
 
 fn inspect(root: &Path, manifest: &str) -> Result<(), String> {
-    let source = manifest_value(manifest, "source_root").unwrap_or("src");
-    let source_path = root.join(source);
-    if !source_path.is_dir() { return Err(format!("source root does not exist: {source}")); }
+    let source_name = manifest_value(manifest, "source_root").unwrap_or("src");
+    let source_path = safe_project_path(root, source_name, "source_root")?;
+    if !source_path.is_dir() { return Err(format!("source root does not exist: {source_name}")); }
     let (astro, ts, js, css, html) = count_files(&source_path)?;
     println!("IWAG Active Compiler {VERSION}");
-    println!("source_root={source}");
+    println!("source_root={source_name}");
     println!("astro={astro} typescript={ts} javascript={js} css={css} html={html}");
     println!("archive_root={}", manifest_value(manifest, "archive_root").unwrap_or("archive/v1-reference"));
     println!("output_root={}", manifest_value(manifest, "output_root").unwrap_or("dist"));
@@ -121,33 +132,41 @@ fn build(root: &Path, manifest: &str) -> Result<(), String> {
     let source_name = manifest_value(manifest, "source_root").unwrap_or("src");
     let output_name = manifest_value(manifest, "output_root").unwrap_or("dist");
     let archive_name = manifest_value(manifest, "archive_root").unwrap_or("archive/v1-reference");
-    let source = root.join(source_name);
+    let source = safe_project_path(root, source_name, "source_root")?;
+    let output = safe_project_path(root, output_name, "output_root")?;
+    let _archive = safe_project_path(root, archive_name, "archive_root")?;
+
     if !source.is_dir() { return Err(format!("missing V2 source root: {source_name}")); }
     if !root.join("astro.config.mjs").is_file() { return Err("missing astro.config.mjs".into()); }
     if !root.join("package.json").is_file() { return Err("missing package.json".into()); }
+    if source == output || source.starts_with(&output) || output.starts_with(&source) {
+        return Err("source_root and output_root must be separate directories".into());
+    }
+
     let (astro, ts, js, css, html) = count_files(&source)?;
     if astro + ts + js + css + html == 0 { return Err("V2 source root is empty".into()); }
 
     println!("[iwagc] preflight: source inventory complete");
     println!("[iwagc] source files: astro={astro}, ts={ts}, js={js}, css={css}, html={html}");
-    println!("[iwagc] archive boundary: {archive_name} is excluded from application source");
+    println!("[iwagc] archive boundary: {archive_name} is not a build input");
     println!("[iwagc] backend: Astro + Vite");
     run_backend(root, &["build".to_string()])?;
 
-    let output = root.join(output_name);
     if !output.is_dir() { return Err(format!("backend did not create output directory: {output_name}")); }
     let html_output = walk_count_extension(&output, "html")?;
     if html_output == 0 { return Err("production output contains no HTML pages".into()); }
 
+    let report_dir = root.join(".iwag-build");
+    fs::create_dir_all(&report_dir).map_err(|e| format!("cannot create build report directory: {e}"))?;
     let report = format!(
         "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"backend\": \"astro-vite\",\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output_html_files\": {},\n  \"status\": \"success\"\n}}\n",
         VERSION, json_escape(source_name), json_escape(archive_name), json_escape(output_name),
         astro, ts, js, css, html, html_output
     );
-    fs::write(output.join("iwag-build-report.json"), report)
+    fs::write(report_dir.join("iwag-build-report.json"), report)
         .map_err(|e| format!("cannot write build report: {e}"))?;
     println!("[iwagc] validated {html_output} generated HTML files");
-    println!("[iwagc] build report: {output_name}/iwag-build-report.json");
+    println!("[iwagc] build report: .iwag-build/iwag-build-report.json");
     Ok(())
 }
 
@@ -167,6 +186,9 @@ fn main_result() -> Result<(), String> {
             run_backend(&root, &backend_args)
         }
         "wasm" => {
+            if !tool_version("wasm-pack") {
+                return Err("wasm-pack is required for this optional module build".into());
+            }
             let status = Command::new("wasm-pack")
                 .args(["build", "rust/contrast-engine", "--target", "web", "--out-dir", "../../public/wasm", "--release"])
                 .current_dir(&root).status()
