@@ -30,7 +30,7 @@ const hasMalayTranslation = pathWithoutLocale === "/" || pathWithoutLocale === "
   </head>
   <body>
     <a class="skip-link" href="#main">{t.skip}</a>
-    <header class="site-header" lang={lang === "id" ? "id" : "en"}>
+    <header class="site-header" lang={locales[lang].htmlLang}>
       <a class="wordmark" href={`/${lang}/`} aria-label="IWAG V2 independent project home">IWAG<span>V2</span></a>
       <nav class="primary-nav" aria-label={t.primaryNavigation}>
         <a href={`/${lang}/`}>{t.home}</a>
@@ -61,7 +61,7 @@ const hasMalayTranslation = pathWithoutLocale === "/" || pathWithoutLocale === "
     <main id="main" tabindex="-1">
       <slot />
     </main>
-    <footer class="site-footer" lang={lang === "id" ? "id" : "en"}>
+    <footer class="site-footer" lang={locales[lang].htmlLang}>
       <p>{t.footer}</p>
       <nav aria-label={lang === "id" ? "Informasi lainnya" : "More information"}>
         <a href={`/${lang}/events/`}>{lang === "id" ? "Acara" : "Events"}</a>
