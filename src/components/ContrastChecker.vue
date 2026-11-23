@@ -72,16 +72,16 @@ async function calculate() {
     <h2 id="contrast-checker-title">{{ isId ? "Pemeriksa kontras warna" : "Colour contrast checker" }}</h2>
     <p>{{ isId ? "Hitung rasio kontras dua warna sRGB. Jika modul Rust/WASM tersedia, pemeriksaan memakainya; jika tidak, perhitungan JavaScript lokal menjadi fallback." : "Calculate the contrast ratio between two sRGB colours. When the Rust/WASM module is available it is used; otherwise a local JavaScript calculation is the fallback." }}</p>
     <div class="contrast-inputs">
-      <label>
-        <span>{{ isId ? "Warna teks" : "Text colour" }}</span>
-        <input v-model="foreground" type="color" />
+      <div>
+        <label for="contrast-foreground">{{ isId ? "Warna teks" : "Text colour" }}</label>
+        <input id="contrast-foreground" v-model="foreground" type="color" />
         <code>{{ foreground.toUpperCase() }}</code>
-      </label>
-      <label>
-        <span>{{ isId ? "Warna latar" : "Background colour" }}</span>
-        <input v-model="background" type="color" />
+      </div>
+      <div>
+        <label for="contrast-background">{{ isId ? "Warna latar" : "Background colour" }}</label>
+        <input id="contrast-background" v-model="background" type="color" />
         <code>{{ background.toUpperCase() }}</code>
-      </label>
+      </div>
     </div>
     <div class="contrast-preview" :style="{ color: foreground, backgroundColor: background }">
       <strong>{{ isId ? "Contoh teks" : "Sample text" }}</strong>
