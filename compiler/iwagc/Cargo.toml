@@ -1,0 +1,10 @@
+[package]
+name = "iwag-active-compiler"
+version = "0.1.0"
+edition = "2021"
+description = "Rust-controlled build orchestrator and source validator for IWAG V2"
+license = "MIT"
+
+[[bin]]
+name = "iwagc"
+path = "src/main.rs"
