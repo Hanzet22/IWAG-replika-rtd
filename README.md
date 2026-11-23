@@ -35,7 +35,7 @@ The dedicated reconstruction plan, source inventory and compiler contract are ma
 - Node.js 22.23.4 or newer
 - npm
 - Rust stable toolchain and Cargo (required by the Active Compiler)
-- Optional WASM build: `wasm-pack` and `wasm32-unknown-unknown`
+- Optional local WASM build: `wasm-pack` and `wasm32-unknown-unknown` (the production workflow builds the contrast module)
 
 ## Commands
 
@@ -44,9 +44,9 @@ npm ci
 npm run compiler:doctor
 npm run compiler:inspect
 npm run dev
+npm run wasm:build
 npm run build
 npm run preview
-npm run wasm:build
 ```
 
 `npm run build` invokes the Rust Active Compiler, which validates the V2 source boundary, orchestrates Astro/Vite, checks generated HTML/CSS, verifies the root/404 and critical localized routes, checks local HTML/CSS asset references, inventories generated asset bytes, and writes `.iwag-build/iwag-build-report.json`.
