@@ -154,3 +154,18 @@ The original privacy document also defines the Platform, Event, Service, Staff, 
 The reviewed V2 preference script uses seven localStorage keys: `iwag-v2-theme`, `iwag-v2-accent`, `iwag-v2-text-scale`, `iwag-v2-text-spacing`, `iwag-v2-contrast`, `iwag-v2-motion` and `iwag-v2-density`. The script does not transmit these preference values to the application server or analytics. This does not verify infrastructure logs, host/CDN/DNS/security-provider cookies, retention or subprocessors.
 
 The public CoC route was also rewritten so its actual rendered content matches the independent website scope described in this reconstruction document.
+
+
+### Indonesian original-page verification — 25 November 2026
+
+The Indonesian original pages were also fetched directly:
+
+- [Syarat dan Ketentuan](https://iwag.furries.id/id/tnc/)
+- [Pedoman Perilaku](https://iwag.furries.id/id/coc/)
+- [Kebijakan Lainnya](https://iwag.furries.id/id/policy/)
+- [Kebijakan Privasi](https://iwag.furries.id/id/privacy/)
+
+The Indonesian CoC confirms the organiser-specific **14+ event rating**, parental/guardian permission for attendees aged 14–16, and continuous guardian accompaniment for under-14 attendees. It also contains venue-specific requirements on badges, public-area content, smoking/vaping, outside food, pool/fursuit safety, photography-free rooms, media use, props and contraband. The original TnC links attendance to acceptance of event CoC and Privacy Policy, paid invitations/passes, payment-provider arrangements, badge identification and organiser revocation powers.
+
+These provisions are relevant to the comparison because they demonstrate that the original documents regulate **physical event admission and event operations**, not merely website use. V2's public CoC and Ruleset must not reproduce them as if V2 controlled those operations. The event's 14+ rating is not the website's legal age classification.
+
