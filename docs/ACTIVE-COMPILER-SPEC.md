@@ -37,7 +37,7 @@ The normal npm scripts call these Rust commands. `build:astro` remains a diagnos
 10. Confirm generated CSS exists when CSS source files are present.
 11. Verify root homepage, 404 page and seven critical routes for each of four locales.
 12. Count generated HTML, CSS, JavaScript, images and fonts, plus byte footprints.
-13. Write `.iwag-build/iwag-build-report.json` outside the public `dist/` directory.
+13. Run generated-output accessibility diagnostics and write JSON/SARIF reports.\n14. Write `.iwag-build/iwag-build-report.json` outside the public `dist/` directory.
 
 When a real Next.js module is later declared, the compiler may add a separate backend stage for that module. It must not silently merge Next.js output into Astro's route tree or make the Next.js toolchain mandatory for builds that do not declare the module.
 
