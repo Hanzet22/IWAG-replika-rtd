@@ -1,8 +1,10 @@
-# Global legal register research — Parallel
+# Global legal register research — 25 November 2026
 
-As-of: 24 November 2026
+As-of: 25 November 2026
 
-## Global legal register — status at 24 November 2026
+## Global legal register — status at 25 November 2026
+
+> **Priority update — 25 November 2026:** The corrections and commencement clarifications in the final section of this register supersede any inconsistent older summary below. This is a selected-jurisdiction legal map, not an exhaustive survey of every country or a conclusion that every listed law applies to V2. Applicability always depends on the operator, territorial nexus, data processing and feature triggers.
 
 ### 1. Scope and operating assumptions
 
@@ -226,3 +228,105 @@ Federal and state laws are threshold- and activity-specific; there is no single 
 7. **Accessibility:** WCAG 2.2 AA is a defensible engineering baseline, not a statement that one identical legal standard binds the site in every country.
 
 This is a legal-register and issue-spotting document, not a conclusion that all listed instruments presently apply. Before enabling community, child-directed, ticketing or vendor functions, obtain local advice for the countries deliberately targeted and recheck commencement orders, regulator rules and factual thresholds.
+
+
+---
+
+## 16. Precision addendum — verified changes and corrections as of 25 November 2026
+
+This addendum controls where an earlier summary is incomplete or inconsistent.
+
+### 16.1 Indonesia — child-access scope is not limited to accounts
+
+**PP 17/2025** is an in-force Government Regulation, not a draft:
+
+- **Peraturan Pemerintah No. 17 Tahun 2025**, *Tata Kelola Penyelenggaraan Sistem Elektronik dalam Pelindungan Anak*; promulgated and effective 27 March 2025; LN 2025 No. 36, TLN No. 7105.
+- Official record: https://peraturan.bpk.go.id/Details/316698/pp-no-17-tahun-2025
+- Official text: https://jdih.komdigi.go.id/produk_hukum/unduh/id/965/t/peraturan+pemerintah+nomor+17+tahun+2025
+
+Key provisions: **Pasal 3 ayat (3); Pasal 4 ayat (1)–(3); Pasal 5 ayat (1)–(9); Pasal 7 ayat (1)–(3); Pasal 8; Pasal 9; Pasal 10–11; Pasal 19–23; and Pasal 49**. The decisive point is that private PSE scope includes products/services/features specifically designed for children or that may be used/accessed by children. Pasal 4 ayat (2) huruf a–e lists the indicators: published/internal terms and policies, strong evidence of routine child users, child-directed advertising, child-attractive design, and substantial similarity to services proven to be used by children. Pasal 5 requires risk assessment across contact, harmful content, consumer exploitation, child-data security, addiction, psychological health and physiological health. Pasal 49 provides a maximum two-year adjustment period from 27 March 2025, ending 27 March 2027.
+
+**Correction:** “No accounts or comments” is not a complete scope defence. It reduces contact, UGC and transaction risks, but the operator must still assess Pasal 3–5 indicators. Conversely, the Regulation does not mean every public page automatically requires an intrusive age gate: the service's actual scope and risk must be assessed first.
+
+### 16.2 Indonesia — Permenkomdigi 9/2026 source-integrity conflict
+
+The JDIH Kemkomdigi metadata page records **Peraturan Menteri Komunikasi dan Digital No. 9 Tahun 2026**, dated 6 March 2026, source BN 2026 No. 163 (29 pages), status “Berlaku”:
+
+- Metadata: https://jdih.komdigi.go.id/produk_hukum/view/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026
+- BPK record: https://peraturan.bpk.go.id/Details/346040/permenkomdigi-no-9-tahun-2026
+
+However, the linked JDIH download currently begins with **“RANCANGAN”** and contains blank/placeholder promulgation details. The metadata and the linked document therefore conflict. Until the final gazetted copy is obtained, do not rely on article-level wording, risk categories, age-assurance methods, reporting deadlines or exact Pasal citations copied from that draft. Record the discrepancy as unresolved rather than silently treating the draft as the final law.
+
+### 16.3 Indonesia — PP 33/2026 remains unverified in primary repositories
+
+Earlier research notes reported a **PP No. 33 Tahun 2026** implementing UU 27/2022, with a reported six-month commencement provision and a reported future date of 16 January 2027. The reported copy and Gazette identifiers have not been confirmed in the central BPK/Setneg official repositories during this review. Search results surfaced secondary legal sites and a local-government-hosted PDF, not a verified central official promulgation record.
+
+Accordingly:
+- do not cite **LN 2026 No. 88 / TLN No. 7190**, **Pasal 225**, or any other PP 33/2026 pinpoint as independently verified in this register;
+- do not describe it as a current in-force rule on 25 November 2026;
+- keep it in an “unverified reported future instrument” watchlist until the official Gazette or central JDIH record is obtained;
+- continue to apply the already verified UU 27/2022 and other currently in-force instruments.
+
+### 16.4 EU/EEA — GDPR and DSA service-provider roles must be separated
+
+- **GDPR, Regulation (EU) 2016/679**, Articles 3, 4(1), 5, 6, 12–13, 24–25, 28, 30, 32 and 44–49, applies to personal-data processing within its territorial scope. IP addresses and request logs require an identifiability assessment; do not assume every IP address is personal data in every holder's hands or that no personal data exist merely because the site has no forms.
+- **ePrivacy Directive 2002/58/EC, Article 5(3)**, as implemented nationally, covers storing information or accessing information on terminal equipment, including technologies beyond HTTP cookies. User-requested local preferences may qualify for the strictly-necessary exception, but the purpose and implementation must be checked.
+- **Digital Services Act, Regulation (EU) 2022/2065, Articles 2–3 and 14–16**: a publisher of its own static editorial pages is not automatically an intermediary/hosting provider merely because a third-party host serves the pages. The hosting provider and the publisher have different roles. User comments, uploads, message boards or other storage/dissemination of recipient-provided content can change the analysis.
+
+Official texts: https://eur-lex.europa.eu/eli/reg/2016/679 and https://eur-lex.europa.eu/eli/reg/2022/2065.
+
+### 16.5 United Kingdom — Children's Code may reach some content sites, separately from OSA
+
+- **Data Protection Act 2018, section 123** authorises the Age Appropriate Design Code for relevant information-society services likely to be accessed by children and involving personal-data processing.
+- ICO guidance expressly lists news, educational and other content websites among possible covered services. The question is whether the service is an information-society service (normally provided for remuneration, at a distance, electronically and at the recipient's individual request), is likely to be accessed by children, and processes personal data. A free non-commercial independent project requires a fact-specific assessment; it must not be assumed in or out of scope.
+- **Online Safety Act 2023, sections 3–4** define user-to-user and search services. Section 3(1) requires user-generated, uploaded or shared content to be encountered by another user. A static publisher with no user-posting or search function is not automatically a user-to-user or search service.
+
+Official sources: https://www.legislation.gov.uk/ukpga/2018/12/section/123 and https://www.legislation.gov.uk/ukpga/2023/50/section/3. ICO scope guidance: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/childrens-information/childrens-code-guidance-and-resources/age-appropriate-design-a-code-of-practice-for-online-services/services-covered-by-this-code/.
+
+### 16.6 United States — COPPA's amended Rule expressly includes passive tracking
+
+- **Children's Online Privacy Protection Act**, 15 U.S.C. §§6501–6506, and **FTC Rule**, 16 C.F.R. Part 312.
+- Current rule source: https://www.ecfr.gov/current/title-16/chapter-I/subchapter-C/part-312
+- **16 C.F.R. §312.2** currently defines “collection” to include passive tracking of a child online and personal information to include persistent identifiers such as IP addresses. These definitions are in the current Rule; do not imply they were newly introduced by the 2025 amendments. “Child” means under 13.
+- **16 C.F.R. §§312.3–312.5** govern scope, notice and parental consent; **§312.5(c)(7)** contains a limited internal-operations exception; **§312.8** addresses security and **§312.10** retention.
+- The amended Rule was published at **90 Fed. Reg. 16918 (22 April 2025)**; general compliance was required by **22 April 2026**. A general-audience service is not covered solely because a child can visit it; child-directed status or actual knowledge of collection from a child is the key trigger. A child-directed service may still collect persistent identifiers passively, subject to the Rule and any exception.
+
+### 16.7 Singapore — PDPA consolidation and children's guidance
+
+- **Personal Data Protection Act 2012, Act 26 of 2012**, current consolidation includes amendments effective **16 October 2026** by Act 2 of 2026. Relevant provisions include sections **13–20** (consent/purpose/notification), **24–26** (protection, retention and transfer limitation) and **26C–26D** (assessment and notification of notifiable breaches). Section 20(1) requires the purpose to be communicated on or before collection, subject to statutory exceptions. Section 26D(1) requires Commission notification as soon as practicable and no later than three calendar days after the organisation assesses a breach as notifiable.
+- Official current Act: https://sso.agc.gov.sg/Act/PDPA2012
+- The PDPC's **Advisory Guidelines on the PDPA for Children's Personal Data in the Digital Environment**, issued **28 March 2024**, state that they cover online products/services likely to be accessed by children, including services not specifically designed for children. These are regulator guidelines interpreting the PDPA, not a separate statute or an automatic age-verification mandate. Source: https://www.pdpc.gov.sg/-/media/files/pdpc/pdf-files/advisory-guidelines/advisory-guidelines-on-the-pdpa-for-children%27s-personal-data-in-the-digital-environment_mar24.pdf
+- **Online Safety (Relief and Accountability) Act 2025, No. 23 of 2025**, commenced in phases from **29 June 2026**. It addresses specified online harmful activities, remedies and defined online-service-provider duties. Apply its statutory definitions and commencement table; do not treat every static information page as a social-media service. Official text: https://sso.agc.gov.sg/Act/OSRAA2025
+
+### 16.8 Malaysia — staged PDPA amendments and Online Safety Act
+
+- **Personal Data Protection Act 2010, Act 709**, applies to processing personal data in respect of commercial transactions (section 2), subject to the Act's territorial and other limits. Use the official 2026 reprint (as at 15 September 2026): https://lom.agc.gov.my/ilims/upload/portal/akta/outputaktap/3301061_BI/Act%20709%20%28Reprint%202026%29.pdf
+- **Personal Data Protection (Amendment) Act 2024, Act A1727** commencement is staged under **P.U. (B) 522/2024**: 1 January 2025 (Amendment Act sections 7, 11, 13, 14); 1 April 2025 (sections 2, 3, 4, 5, 8, 10, 12); and 1 June 2025 (sections 6, 9). Official Gazette: https://lom.agc.gov.my/ilims/upload/portal/akta/outputp/2587515/PUB%20522_2024.pdf
+- **Online Safety Act 2025, Act 866**, commenced **1 January 2026** under the commencement notice recorded by the Federal Legislation portal. It regulates licensed applications-service and content-applications-service providers and the statutory service categories; a static foreign informational site is not automatically in scope merely because it is reachable in Malaysia. Official record: https://lom.agc.gov.my/act-detail.php?act=866&language=BI. Online Safety (Period) Regulations 2025, P.U. (A) 465/2025, also commenced 1 January 2026.
+
+### 16.9 India — DPDP Act 2023 has phased commencement
+
+- **Digital Personal Data Protection Act 2023, Act No. 22 of 2023**, and **Digital Personal Data Protection Rules 2025**.
+- The commencement notification **G.S.R. 843(E), 13 November 2025** phases the Act:
+  - effective 13 November 2025: section 1(2), section 2, sections 18–26, 35, 38–43 and section 44(1), (3);
+  - effective 13 November 2026: section 6(9) and section 27(1)(d);
+  - scheduled for 13 May 2027 (18 months after notification): sections 3–5, section 6(1)–(8) and (10), sections 7–17, section 27 except clause (d), sections 28–34, 36–37 and section 44(2).
+- Therefore, as at **25 November 2026**, the core operational notice, consent, data-fiduciary, child-data and rights duties in sections 3–17, including **section 9**, are enacted but not yet commenced. Do not label section 9 as an already operative duty on this date. Prepare for its scheduled commencement.
+- Official Gazette notification: https://www.meity.gov.in/static/uploads/2025/11/c56ceae6c383460ca69577428d36828b.pdf
+- MeitY Rules 2025 and timeline: https://www.meity.gov.in/documents/act-and-policies/digital-personal-data-protection-rules-2025-gDOxUjMtQWa
+
+### 16.10 Brazil — use current LGPD amendment status
+
+- **Lei No. 13.709, de 14 de agosto de 2018 (LGPD)** remains the core data-protection statute. Article 3 sets territorial scope; Article 6 principles; Article 7 legal bases; Article 14 child/adolescent data; Articles 18–22 rights; Articles 33–36 transfers; Articles 46–49 security and incident response.
+- **Law No. 15,352 of 25 February 2026** transformed the ANPD into a regulatory agency and amended institutional/definition provisions. ANPD's legislation register identifies the law and publishes a current English reference translation, but that translation's cover note is inconsistent about the amendment history. Use the Portuguese enacted text as authoritative and do not infer that all LGPD provisions were substantively rewritten.
+- Official ANPD legislation register: https://www.gov.br/anpd/pt-br/centrais-de-conteudo/legislacao
+- Official current English reference (informative translation only): https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais/lei-lgpd-em-ingles-atualizada-pos-lei-no-15-352-2026.pdf/@@display-file/file
+
+### 16.11 South Korea and Taiwan — current versions and uncommenced amendments
+
+- **South Korea Personal Information Protection Act**, Act No. 10465 of 2011, as amended by **Act No. 20897 (1 April 2025)**, effective **2 October 2025** in the official English database. Pinpoints include Articles 3–4 (principles/rights), 15–18 (collection/use/provision), 20 (notice), 22-2 (children under 14), 29 (security), 30 (privacy policy), 34 (breach) and applicable cross-border provisions. Official source: https://www.law.go.kr/LSW/eng/engLsInfoR.do?lsiSeq=270351. Korean text controls.
+- **Taiwan Personal Data Protection Act** was amended on **11 November 2025**, but the official national law database states that the amendments to Articles 1-1, 12, 18, 21–26, 41, 47–49, 52–53 and 55, new Articles 1-2, 20-1, 21-1–21-5, 51-1 and 53-1, and deletion of Article 27 have a commencement date still to be appointed. The pre-amendment operative text must be used until the commencement notice is issued. Official status: https://law.moj.gov.tw/LawClass/LawContent.aspx?PCODE=I0050021
+
+### 16.12 Evidence and locator standard
+
+Academic research and regulator guidance can inform proportionate design but do not create statutory obligations. Statutes should be cited by article/section/subsection/paragraph; Indonesian law by Pasal/ayat/huruf/angka. PDF page numbers may be added only where checked against the exact official PDF. Statutory line numbers generally do not exist; do not fabricate “baris” references. For V2, a static-page review is not a substitute for a real infrastructure audit, operator identification or local legal review.

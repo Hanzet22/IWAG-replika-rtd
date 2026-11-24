@@ -1,9 +1,9 @@
 # IWAG V2 — Legal Rewrite Research & Jurisdictional Applicability
 
-**As of:** 24 November 2026. **Purpose:** research for nonbinding drafts, not legal advice.
+**As of:** 25 November 2026. **Purpose:** research for nonbinding drafts, not legal advice.
 
 ## Method and known service facts
-The application is a static informational preview without attendee accounts, registration, ticketing, payments, contact forms, public comments, user uploads or intentional analytics. It stores theme and accent preferences in browser local storage. Hosting, CDN, DNS, security logs, provider cookies, deployment telemetry, operator identity and retention settings are unverified. Global accessibility alone does not automatically trigger every country's laws; assess establishment, territorial processing, targeted offering, monitoring, commercial activity, child access and service classification.
+The application is a static informational preview without attendee accounts, registration, ticketing, payments, contact forms, public comments, user uploads or intentional analytics. It stores seven display/accessibility preferences in browser local storage: iwag-v2-theme, iwag-v2-accent, iwag-v2-text-scale, iwag-v2-text-spacing, iwag-v2-contrast, iwag-v2-motion and iwag-v2-density. Hosting, CDN, DNS, security logs, provider cookies, deployment telemetry, operator identity and retention settings are unverified. Global accessibility alone does not automatically trigger every country's laws; assess establishment, territorial processing, targeted offering, monitoring, commercial activity, child access and service classification.
 
 ## Indonesia — baseline
 - **UU 27/2022 Pelindungan Data Pribadi:** assess controller/processor roles, lawful basis, transparency, purpose limitation, rights, security, retention, breach response, child data and cross-border transfers. Include infrastructure logs if processed. https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
@@ -159,3 +159,7 @@ Maintain a register for each country with: law, issuing authority, official URL,
 ## 2026-11-24 source and policy reconstruction addendum
 
 The live original-site comparison and the V2 policy reconstruction are documented in [TnC, CoC and Ruleset reconstruction](TNC-COC-RULESET-RECONSTRUCTION.md). The updated global register is in [LEGAL-RESEARCH-2026-11-24.md](LEGAL-RESEARCH-2026-11-24.md), and Indonesian pinpoint citations and commencement status are in [INDONESIA-PINPOINT-LEGAL-REGISTER.md](INDONESIA-PINPOINT-LEGAL-REGISTER.md). Scholarly evidence for moderation, appeals, child safety and accessibility is kept separately in [MODERATION-RESEARCH-EVIDENCE.md](MODERATION-RESEARCH-EVIDENCE.md).
+
+## 25 November 2026 correction note
+
+The controlling child-access analysis is [CHILD-ACCESS-PP17-SCOPE-ASSESSMENT.md](CHILD-ACCESS-PP17-SCOPE-ASSESSMENT.md). PP 17/2025 scope must be assessed even without accounts because Pasal 3 ayat (3) and Pasal 4 ayat (1)–(2) include products/services/features that may be accessed by children. The absence of UGC reduces some risk categories but does not decide scope. The PP 33/2026 report remains unverified against official central BPK/Setneg sources and must not be treated as an in-force rule. Permenkomdigi 9/2026 metadata and its JDIH PDF conflict: the linked file is marked RANCANGAN, so article-level claims from it remain provisional pending the final gazetted text. See the [Indonesia pinpoint legal register](INDONESIA-PINPOINT-LEGAL-REGISTER.md) and [global legal research register](LEGAL-RESEARCH-2026-11-24.md).

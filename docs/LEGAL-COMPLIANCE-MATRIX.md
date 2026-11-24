@@ -1,6 +1,6 @@
 # IWAG V2 — Legal, Regulatory & Trust Requirements
 
-**Review date:** 2026-11-24  
+**Review date:** 2026-11-25  
 **Jurisdictional baseline:** Indonesia  
 **Accessibility target:** WCAG 2.2 Level A only (A, not AA)  
 **Status:** Engineering compliance requirements and legal-review checklist; not approved legal advice or final public policy.
@@ -13,7 +13,7 @@ Legal duties depend on facts that are not yet established: the operator's legal 
 
 **Release blockers:** do not enable registration, ticket sales, payment, account creation, analytics, sponsor lead forms or collection of sensitive/child data until the actual operator, purpose, lawful basis, service model, notices, vendor contracts, retention and complaint channel are documented and reviewed.
 
-Use a legal register with: instrument, issuing authority, jurisdiction, official URL, status, effective date, applicable trigger, affected feature, implementation evidence, reviewer and next review date. Recheck amendments before every material release.
+Use a legal register with: instrument, issuing authority, jurisdiction, official URL, status, effective date, applicable trigger, affected feature, implementation evidence, reviewer and next review date. Recheck amendments before every material release. Cite Indonesian law by Pasal/ayat/huruf/angka; do not invent statutory line numbers or unverified PDF pages.
 
 ## 2. Indonesia — binding baseline when the relevant trigger applies
 
@@ -37,36 +37,40 @@ V2 requirements:
 
 Official text: https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
 
-### 2.2 PDP implementing regulation — prepare ahead of commencement
+**Browser storage facts:** source review identified seven localStorage keys: iwag-v2-theme, iwag-v2-accent, iwag-v2-text-scale, iwag-v2-text-spacing, iwag-v2-contrast, iwag-v2-motion and iwag-v2-density. The reviewed preference script does not transmit these values to the application server or analytics. Local storage is not an HTTP cookie and is not automatically included in requests. This does not verify host/CDN/DNS/security-provider logs, cookies or retention.
 
-**Government Regulation No. 33 of 2026**, implementing UU PDP, was promulgated on 16 July 2026 and is scheduled to enter into force six months later, on **16 January 2027**. It is not yet in force on this document's review date (23 November 2026). The underlying UU PDP duties already apply.
+### 2.2 Reported PP 33/2026 — not verified in official central repository
+
+Earlier research reported a PP 33/2026 implementing regulation with a future commencement date. However, as of 25 November 2026, this review has not located a verified BPK/Setneg central record or official final Gazette PDF. Search results surfaced secondary legal sources and a local-government-hosted copy only. Therefore V2 must not cite reported Gazette identifiers, Pasal 225 or article-level requirements as verified law, and must not treat the reported instrument as currently in force.
+
+The operative PDP baseline remains **UU No. 27 Tahun 2022**. Track the PP 33/2026 report as an unresolved source-verification item and update this matrix only when the final official Gazette/central JDIH record is available.
+
+### 2.3 Children and online services — PP 17/2025
+
+**PP No. 17 Tahun 2025** on governance of electronic systems for child protection is in force from 27 March 2025 (LN 2025 No. 36; TLN No. 7105). It covers private PSEs whose products, services or features are designed for, or may be used/accessed by, children. The assessment is not limited to account creation or user-generated content.
+
+Key pinpoint provisions:
+- **Pasal 3 ayat (3):** private-PSE scope.
+- **Pasal 4 ayat (1)–(3):** designed-for-child and may-be-accessed-by-child categories; indicators in ayat (2) huruf a–e include terms/policies, evidence of routine child users, child-directed advertising, design and similarity to services proven to be used by children.
+- **Pasal 5 ayat (1)–(9):** child-risk classification and self-assessment; ayat (3) huruf a–g covers stranger contact, harmful content, child-consumer exploitation, child-data security, addiction and psychological/physiological effects.
+- **Pasal 7 ayat (1)–(3), Pasal 8–11, Pasal 19–23:** duties, prohibitions, privacy defaults, information, parental authorisation, age-related safeguards, child profiling, reporting and follow-up.
+- **Pasal 49:** maximum two-year adjustment period from promulgation; the outer date is 27 March 2027.
 
 V2 requirements:
-- Track the commencement date and prepare a separate gap assessment against the final official text.
-- Do not describe PP 33/2026 as already effective before 16 January 2027.
-- Review implementing detail on data-subject rights, processing, DPIA, DPO, cross-border transfer and sanctions with Indonesian counsel before launch or continued processing after commencement.
+- Complete and document the PP 17/2025 scope assessment **now**, not only before accounts are added. No accounts/comments reduces contact and UGC risks but does not decide the “may be accessed by children” question.
+- Review the five Pasal 4 ayat (2) indicators against V2's published terms, audience evidence, advertising, design and similar services. Audience composition is currently unverified.
+- Complete the Pasal 5 self-assessment if the website or a feature is within scope. Do not claim a low-risk classification without evidence or a ministerial determination where required.
+- If in scope, map the applicable duties in Pasal 7–11 and Pasal 19–23 to the actual service and final implementing text.
+- Do not add an intrusive age gate, identity check or parental-consent collection without a documented legal trigger, proportionality review and data-minimisation plan.
+- Keep website access separate from event admission eligibility; an event age rating does not determine website scope.
+- Do not collect precise child geolocation or profile children where prohibited.
+- Keep the current site read-only until any required child-protection, reporting and privacy controls are implemented.
 
-Signed-text mirror (third-party host; not an official repository): https://legaltrans.id/downloads/pp-33-tahun-2026-pelindungan-data-pribadi.pdf
-Secondary commencement analysis (not a substitute for the official text): https://www.deloitte.com/content/dam/assets-zone1/southeast-asia/en/docs/services/legal/2026/sea-id-legal-client-alert-oct2026-en.pdf
-**Source limitation:** an official BPK/peraturan.go.id listing for PP 33/2026 was not located during this review on 23 November 2026. Verify the signed regulation against the official State Gazette and authoritative government repository before relying on article-level requirements or publishing a legal conclusion.
+Official PP 17/2025 record/text: https://peraturan.bpk.go.id/Details/316698/pp-no-17-tahun-2025 and https://jdih.komdigi.go.id/produk_hukum/unduh/id/965/t/peraturan+pemerintah+nomor+17+tahun+2025.
 
-### 2.3 Children and online services
+**Permenkomdigi No. 9 Tahun 2026 source conflict:** JDIH metadata lists the regulation as effective from 6 March 2026 and BN 2026 No. 163, but the linked official download is visibly headed “RANCANGAN” and contains blank promulgation details. Until the final gazetted PDF is obtained, do not rely on article-level requirements, age-assurance methods or reporting deadlines from that file. Metadata: https://jdih.komdigi.go.id/produk_hukum/view/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026. Draft download: https://jdih.komdigi.go.id/produk_hukum/unduh/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026.
 
-**PP No. 17 of 2025** on Governance of Electronic System Implementation for Child Protection is in force (promulgated 27 March 2025). **Permenkomdigi No. 9 of 2026**, its implementing regulation, is also in force (6 March 2026). PP 17/2025 covers private electronic-system providers whose products/services/features are specifically designed for, or may be accessed by, children. A public event website may be accessible to minors even where the physical event has an age rating.
-
-V2 requirements:
-- Complete a child-access/risk applicability assessment before accounts, registration, profiling, messaging, user-generated content, location functions or personalised recommendations are added.
-- Clearly state minimum age and explain age-related rules in plain language.
-- Where the rules apply, implement the required parent/guardian consent, age assurance, child-friendly information, high-privacy defaults, child-rights reporting and other controls in the final applicable regulations.
-- Do not collect precise geolocation from children or profile children where prohibited.
-- Do not use behavioural advertising or manipulative engagement patterns directed at children.
-- Separate website access from event attendance eligibility; an event's 14+ rule does not automatically remove child-protection duties for a website that children may access.
-- Minimise parental-consent evidence and avoid retaining identity documents unless necessary and legally justified.
-- Provide a child-rights/safety reporting path and an escalation process before enabling interactive features.
-
-Official sources:
-- PP 17/2025: https://peraturan.bpk.go.id/Details/316698/pp-no-17-tahun-2025
-- Permenkomdigi 9/2026: https://peraturan.bpk.go.id/Details/346040/permenkomdigi-no-9-tahun-2026
+See [V2 child-access and PP 17/2025 scope assessment](CHILD-ACCESS-PP17-SCOPE-ASSESSMENT.md) and the [Indonesia pinpoint legal register](INDONESIA-PINPOINT-LEGAL-REGISTER.md).
 
 ### 2.4 Electronic systems and information disclosure
 
@@ -192,7 +196,7 @@ Official regulator sources:
 
 ### 3.5 United Kingdom — UK GDPR and Children's Code
 
-UK GDPR applies to processing in the context of a UK establishment and can also apply to an organisation outside the UK that offers goods or services to people in the UK or monitors their behaviour there. The ICO's Children's Code applies to online services likely to be accessed by children, subject to its territorial and service-scope rules; it is not limited to services marketed exclusively to children. A simple information-only site may not qualify as an information society service, but online registration, booking, accounts or other interactive services can change the assessment.
+UK GDPR applies to processing in the context of a UK establishment and can also apply to an organisation outside the UK that offers goods or services to people in the UK or monitors their behaviour there. The ICO's Children's Code applies to online services likely to be accessed by children, subject to its territorial and service-scope rules; it is not limited to services marketed exclusively to children. The ICO's scope guidance expressly includes many news, educational and other content websites. Coverage depends on whether the service is an information-society service (normally provided for remuneration, at a distance, electronically and at the recipient's individual request), is likely to be accessed by children, and processes personal data. A free non-commercial independent project is fact-specific and must not be assumed automatically in or out of scope.
 
 V2 requirements:
 - Assess UK targeting/monitoring and the service's actual functionality before deciding whether UK GDPR applies.
@@ -205,7 +209,7 @@ Official ICO sources:
 
 ### 3.6 United States — COPPA and California CCPA
 
-COPPA applies to operators of child-directed websites/services and general-audience operators with actual knowledge that they collect personal information online from a child under 13. The FTC's 2025 Rule amendments add requirements concerning separate parental consent for certain third-party disclosures, data retention/deletion and security; the compliance deadline for the amended Rule was in April 2026. COPPA is not a general privacy law for every teen or adult visitor.
+COPPA applies to operators of child-directed websites/services and general-audience operators with actual knowledge that they collect personal information online from a child under 13. The current Rule already defines collection to include passive tracking and personal information to include persistent identifiers such as IP addresses (16 C.F.R. §312.2); do not attribute those definitions to the 2025 amendment. The 2025 amendments, published at 90 Fed. Reg. 16918, took effect 23 June 2025, with most compliance required by 22 April 2026, and update parental-consent, security, retention and biometric-identifier provisions. The internal-operations exception in §312.5(c)(7) is narrow. COPPA is not a general privacy law for every teen or adult visitor.
 
 The California CCPA applies to qualifying for-profit businesses doing business in California that determine the purposes and means of processing California residents' personal information and meet statutory thresholds. As of 1 January 2025, the revenue threshold is USD 26.625 million; alternative thresholds include processing the personal information of 100,000 or more California residents/households or deriving at least 50% of annual revenue from selling or sharing that information. Nonprofits and government agencies are generally outside the CCPA's business definition.
 
@@ -273,8 +277,8 @@ A Code of Conduct draft should cover harassment/discrimination, consent and phot
 - [ ] Service/business model and PMSE/PSE applicability assessed.
 - [ ] Data inventory, lawful basis, privacy notice, retention and rights workflow approved.
 - [ ] Processor/vendor agreements and international data transfers reviewed.
-- [ ] PP 33/2026 readiness reviewed before 16 January 2027.
-- [ ] PP 17/2025 and Permenkomdigi 9/2026 child-service applicability assessed.
+- [ ] PP 33/2026 source verified against the official Gazette/central JDIH before any article-level claim; until then, keep its reported status unverified.
+- [ ] PP 17/2025 scope assessed now against Pasal 3(3) and Pasal 4(1)–(2), even without accounts; final Permenkomdigi 9/2026 text verified before article-level reliance.
 - [ ] Age/guardian process and child-safety reporting ready where applicable.
 - [ ] Consumer disclosures, checkout, refund/cancellation and complaint process reviewed before any payment feature.
 - [ ] Copyright, brand, photography and third-party content rights documented.
@@ -298,9 +302,9 @@ A Code of Conduct draft should cover harassment/discrimination, consent and phot
 The following links are starting points to official or primary repositories. Verify the consolidated text, amendments, status and effective date at the time of implementation:
 
 - UU 27/2022 PDP: https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
-- PP 33/2026 PDP implementing regulation: signed-text mirror (third-party host; not an official repository): https://legaltrans.id/downloads/pp-33-tahun-2026-pelindungan-data-pribadi.pdf — official BPK/peraturan.go.id listing was not located on 23 November 2026; verify against the official Gazette before relying on article-level details.
+- PP 33/2026 PDP implementing regulation: reported by secondary sources, but no verified official central BPK/Setneg record or final Gazette PDF was located by 25 November 2026; do not cite reported Gazette identifiers or article-level provisions.
 - PP 17/2025 child online protection: https://peraturan.bpk.go.id/Details/316698/pp-no-17-tahun-2025
-- Permenkomdigi 9/2026: https://peraturan.bpk.go.id/Details/346040/permenkomdigi-no-9-tahun-2026
+- Permenkomdigi 9/2026 metadata: https://jdih.komdigi.go.id/produk_hukum/view/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026 — linked PDF is marked RANCANGAN; final gazetted text required before article-level reliance.
 - PP 71/2019 electronic systems: https://peraturan.bpk.go.id/Details/122030/pp-no-71-tahun-2019
 - UU 1/2024 ITE amendment: https://peraturan.bpk.go.id/Details/274494/uu-no-1-tahun-2024
 - UU 8/1999 consumer protection: https://peraturan.bpk.go.id/Details/45288/uu-no-8-tahun-1999
@@ -322,3 +326,24 @@ The following links are starting points to official or primary repositories. Ver
 ## 2026-11-24 legal research addenda
 
 This matrix must be read together with the updated [global legal research register](LEGAL-RESEARCH-2026-11-24.md) and the [Indonesia pinpoint legal register](INDONESIA-PINPOINT-LEGAL-REGISTER.md). These addenda distinguish in-force rules from future commencement, identify exact article/section locators where verified, and state when line or page locators are unavailable. The [TnC, CoC and Ruleset reconstruction](TNC-COC-RULESET-RECONSTRUCTION.md) maps each legal and operational finding to the V2 document architecture. The scholarly evidence register is separate from binding law: [MODERATION-RESEARCH-EVIDENCE.md](MODERATION-RESEARCH-EVIDENCE.md).
+
+## 7. Policy-to-law crosswalk for V2
+
+This crosswalk maps the ten V2 draft documents to legal triggers. It is not a claim that every listed law applies to the current site.
+
+| V2 document | Current baseline / legal anchors | Feature or trigger that changes the analysis |
+|---|---|---|
+| **Terms and Conditions** | Indonesian Civil Code contract principles; UU 8/1999 consumer protection where consumer transactions exist; PP 71/2019 and UU 1/2024 electronic-system duties. EU/UK/other consumer rules only where territorial and commercial triggers apply. | A contract, paid pass, booking, payment, seller, marketplace or subscription. Current V2 has no transaction or attendee contract. |
+| **Code of Conduct** | Policy rules must stay within the operator's actual authority. PP 17/2025 child-safety obligations if the website/feature is within child-access scope. Applicable anti-harassment, privacy, criminal and civil laws remain separate. | Public comments, chat, messaging, community events or any controlled space where V2 can actually enforce conduct. Current site has no UGC or staffed moderation. |
+| **Website Ruleset** | PP 71/2019 and UU 1/2024 where the system/operator is in scope; UU 28/2014 copyright; applicable computer-misuse and access laws. DSA/UK OSA only if the relevant intermediary, hosting, user-to-user or search definitions are met. | User accounts, uploads, comments, hosting of user content, messaging, automated scraping or commercial reuse. |
+| **Privacy Policy** | UU 27/2022 (including Articles 20, 25, 34, 46, 53–56 where triggered); GDPR Arts 3, 5–6, 12–14, 24–25, 28, 32, 44–49; UK GDPR/DPA 2018; Singapore PDPA; Malaysia Act 709; other laws in the global register. | Any processing of personal data, including server logs, identifiers, forms, analytics, accounts, attendee identity, child data, image releases or cross-border transfers. |
+| **Cookie & Browser Storage** | EU ePrivacy Directive Art 5(3) as nationally implemented; UK PECR Regulation 6; other local device-storage rules. Local storage is distinct from HTTP cookies. | Non-essential analytics, advertising, profiling, embedded third-party tools or new storage/access technologies. Current seven preference keys are local display/accessibility settings. |
+| **Copyright & IP** | UU 28/2014; Berne Convention; applicable national copyright/trademark laws; licence terms and moral rights. | Reuse of event marks, artwork, photos, fonts, video, music, code, maps, vendor logos or user-submitted materials. |
+| **Disclaimer** | Mandatory consumer rights and non-excludable liability remain controlling; no disclaimer can waive statutory rights. | Any paid service, advice-like feature, user reliance or third-party commercial relationship. |
+| **Accessibility Statement** | UU 8/2016 and PP 42/2020 where their scope applies; WCAG 2.2 is a technical standard, not itself a statute in every country. EU/UK accessibility rules may apply to covered services. | Public-sector services, e-commerce, covered consumer services, or any accessibility claims made by the operator. |
+| **Moderation & Reporting** | PP 17/2025 if child-access scope applies; DSA/UK OSA/other online-safety laws only where service definitions and territorial triggers are met; procedural-fairness research informs voluntary design. | User-generated content, user-to-user services, child-facing features, public reports or staffed enforcement. |
+| **Data Retention** | UU 27/2022; GDPR storage-limitation principle (Art 5(1)(e)); Singapore PDPA s25; Malaysia Act 709 s10; applicable sectoral and tax retention rules if transactions are introduced. | Server logs, accounts, forms, user reports, transaction evidence, backups, legal holds and third-party processors. |
+
+### Current policy drafting rule
+
+Do not insert every law into the public-facing TnC, CoC or Ruleset as if it directly governs every visitor. Keep the public policies readable and operationally true. Put detailed statutory locators, applicability analysis, source status and unresolved issues in the internal legal registers. Public policies should cite a statute only where it materially explains a right, duty or process that the verified operator actually performs.
