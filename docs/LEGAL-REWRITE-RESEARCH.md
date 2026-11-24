@@ -1,6 +1,6 @@
 # IWAG V2 — Legal Rewrite Research & Jurisdictional Applicability
 
-**As of:** 23 November 2026. **Purpose:** research for nonbinding drafts, not legal advice.
+**As of:** 24 November 2026. **Purpose:** research for nonbinding drafts, not legal advice.
 
 ## Method and known service facts
 The application is a static informational preview without attendee accounts, registration, ticketing, payments, contact forms, public comments, user uploads or intentional analytics. It stores theme and accent preferences in browser local storage. Hosting, CDN, DNS, security logs, provider cookies, deployment telemetry, operator identity and retention settings are unverified. Global accessibility alone does not automatically trigger every country's laws; assess establishment, territorial processing, targeted offering, monitoring, commercial activity, child access and service classification.
@@ -154,3 +154,8 @@ This screening does not make every listed law applicable. A public page being re
 ## Legal register and ongoing coverage
 
 Maintain a register for each country with: law, issuing authority, official URL, last verified version, effective date, territorial/material trigger, affected feature, operational evidence, unresolved assumptions, reviewer, and next review date. This research is a prioritized multi-jurisdiction screening, not an exhaustive statement of every law in every sovereign state or territory. Add a jurisdiction when the operator establishes there, deliberately targets it, processes identifiable local data, uses local infrastructure, or materially monitors users there.
+
+
+## 2026-11-24 source and policy reconstruction addendum
+
+The live original-site comparison and the V2 policy reconstruction are documented in [TnC, CoC and Ruleset reconstruction](TNC-COC-RULESET-RECONSTRUCTION.md). The updated global register is in [LEGAL-RESEARCH-2026-11-24.md](LEGAL-RESEARCH-2026-11-24.md), and Indonesian pinpoint citations and commencement status are in [INDONESIA-PINPOINT-LEGAL-REGISTER.md](INDONESIA-PINPOINT-LEGAL-REGISTER.md). Scholarly evidence for moderation, appeals, child safety and accessibility is kept separately in [MODERATION-RESEARCH-EVIDENCE.md](MODERATION-RESEARCH-EVIDENCE.md).

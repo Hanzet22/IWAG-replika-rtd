@@ -8,14 +8,14 @@ import { isLocale, localeKeys } from "../../i18n/locales";
 
 const pageTitles: Record<string, Record<string, string>> = {
   en: {
-    about: "About this project", community: "Community", "plan-your-visit": "Plan your visit", accessibility: "Accessibility", brand: "Brand resources",
+    about: "About this project", community: "Community", "plan-your-visit": "Plan your visit", accessibility: "Accessibility", brand: "Brand resources", ruleset: "Website Ruleset",
     coc: "Code of Conduct", "code-of-conduct": "Code of Conduct", dealers: "Dealers",
     events: "Events", "join-iwag-team": "Join the team", links: "Links", cookies: "Cookie Policy", copyright: "Copyright & Intellectual Property", disclaimer: "Disclaimer", moderation: "Moderation & Reporting", retention: "Data Retention",
     location: "Location", participate: "Participate", policy: "Policies",
     privacy: "Privacy", terms: "Terms", tnc: "Terms and Conditions", updates: "Updates"
   },
   id: {
-    about: "Tentang proyek ini", community: "Komunitas", "plan-your-visit": "Rencanakan kunjungan", accessibility: "Aksesibilitas", brand: "Sumber daya merek",
+    about: "Tentang proyek ini", community: "Komunitas", "plan-your-visit": "Rencanakan kunjungan", accessibility: "Aksesibilitas", brand: "Sumber daya merek", ruleset: "Aturan Penggunaan Situs",
     coc: "Kode Etik", "code-of-conduct": "Kode Etik", dealers: "Dealer",
     events: "Acara", "join-iwag-team": "Bergabung dengan tim", links: "Tautan", cookies: "Kebijakan Cookie", copyright: "Hak Cipta & Kekayaan Intelektual", disclaimer: "Penyangkalan", moderation: "Moderasi & Pelaporan", retention: "Retensi Data",
     location: "Lokasi", participate: "Partisipasi", policy: "Kebijakan",
@@ -41,7 +41,7 @@ export function getStaticPaths() {
   const pageKeys = [
     "about", "community", "plan-your-visit", "accessibility", "brand", "coc", "code-of-conduct", "dealers",
     "join-iwag-team", "links", "location", "participate", "policy", "cookies", "copyright", "disclaimer", "moderation", "retention",
-    "privacy", "terms", "tnc", "updates"
+    "privacy", "terms", "tnc", "ruleset", "updates"
   ] as const;
   return localeKeys.flatMap((lang) => pageKeys.map((page) => ({ params: { lang, page } })));
 }
