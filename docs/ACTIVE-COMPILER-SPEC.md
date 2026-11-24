@@ -17,8 +17,8 @@ It does **not** independently parse or transpile Astro, HTML, CSS, JavaScript, T
 | `iwagc inspect` | Inventory the declared source root and report the excluded V1 archive boundary |
 | `iwagc doctor` | Check the configured minimum Node.js version and availability of npm and Cargo |
 | `iwagc dev` | Launch Astro development server through npm |
-| `iwagc build` | Validate source/output paths, invoke Astro/Vite, inspect generated assets, verify required routes and write a build report |
-| `iwagc preview` | Launch Astro production preview through npm |
+| `iwagc build` | Validate source/output paths, invoke Astro/Vite, inspect generated assets, verify required routes, run generated-output accessibility diagnostics and write reports |
+| `iwagc accessibility` | Scan the existing generated output and write JSON/SARIF diagnostics |\n| `iwagc preview` | Launch Astro production preview through npm |
 | `iwagc wasm` | Explicitly build the Rust contrast-engine module using wasm-pack |
 
 The normal npm scripts call these Rust commands. `build:astro` remains a diagnostic backend escape hatch, not the normal build entry point. Next.js orchestration is a future conditional capability, not a current command.
