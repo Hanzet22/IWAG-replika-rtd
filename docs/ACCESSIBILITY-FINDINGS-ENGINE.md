@@ -40,7 +40,7 @@ The scanner is diagnostic and does not independently fail the build. Existing ou
 
 The scan discovers every generated `.html` file beneath the configured output directory, including static paths expanded from dynamic Astro routes and localized route variants. It reports per-locale page counts for `en`, `id`, `en-sg` and `ms-my`, plus each generated route and its generated file path.
 
-The scanner compares the discovered output against `compiler/iwagc/config/expected-routes.json`, a 30-route required baseline aligned with Rust `validate_required_routes`. Missing expected routes and unexpected generated routes are reported separately from accessibility findings. Unexpected routes are informational until reviewed and intentionally added to the baseline.
+The scanner compares the discovered output against `compiler/iwagc/config/expected-routes.json`, a 30-route required baseline aligned with Rust `validate_required_routes`. Missing expected routes and additional generated routes are reported separately from accessibility findings. Additional routes are not failures; they are routes outside the required baseline.
 
 ## 4. Evidence model
 
