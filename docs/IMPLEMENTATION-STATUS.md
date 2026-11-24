@@ -198,3 +198,17 @@ The latest implementation is a working reconstruction foundation and shared home
 - [x] Marked the homepage event date range and recent update dates with semantic time elements and machine-readable datetime values.
 
 - [x] Wired the existing dynamic link/visited-link tokens into global anchor styles and added distinct high-contrast default pairs for light and dark themes.
+
+
+## Accessibility implementation pass — 24 November 2026
+
+- [x] Reconciled the new engineering specification with the existing project decision: WCAG 2.2 Level A remains the formal target; Level AA is tracked as a voluntary enhancement, not an implicit target change.
+- [x] Added a source-based accessibility implementation matrix separating inspected foundations from unverified behavior.
+- [x] Restored the complete architecture decision map and linked accessibility, compiler, stack and evidence documents.
+- [x] Added a user-controlled expanded text-spacing preference with local persistence and reset support.
+- [x] Kept core navigation and content independent of the new preference script; the added control is progressive enhancement.
+- [ ] Complete generated-route Level A mapping and route-by-route content review.
+- [ ] Perform keyboard, screen-reader, Android TalkBack, zoom/reflow, forced-colors and human-participant validation.
+- [ ] Reconcile any remaining stale accessibility target wording across all archived and active documents before publication.
+
+This pass is source implementation evidence only. It is not a WCAG conformance claim. CI/CD is not a completion criterion.
