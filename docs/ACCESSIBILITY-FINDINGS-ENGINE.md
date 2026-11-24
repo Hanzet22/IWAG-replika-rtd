@@ -1,6 +1,6 @@
 # IWAG Accessibility Findings Engine
 
-**Status:** Initial generated-output diagnostics implemented  
+**Status:** Generated-output HTML5 diagnostics and expected-route coverage implemented  
 **Owner:** Rust `iwagc` build orchestration with a Node.js scanning helper  
 **Formal target:** WCAG 2.2 Level A  
 **Level AA:** Optional engineering enhancements only
@@ -40,7 +40,7 @@ The scanner is diagnostic and does not independently fail the build. Existing ou
 
 The scan discovers every generated `.html` file beneath the configured output directory, including static paths expanded from dynamic Astro routes and localized route variants. It reports per-locale page counts for `en`, `id`, `en-sg` and `ms-my`, plus each generated route and its generated file path.
 
-This is output coverage, not proof that every intended source route was expected to exist. A future manifest stage should compare generated routes against an explicit route/locale expectation manifest and report missing expected pages separately from accessibility findings.
+The scanner compares the discovered output against `compiler/iwagc/config/expected-routes.json`, a 30-route required baseline aligned with Rust `validate_required_routes`. Missing expected routes and unexpected generated routes are reported separately from accessibility findings. Unexpected routes are informational until reviewed and intentionally added to the baseline.
 
 ## 4. Evidence model
 
@@ -50,7 +50,7 @@ Each finding records:
 - generated route, locale and element hint;
 - WCAG success criterion and level where applicable;
 - severity separate from confidence;
-- evaluation source (`automated-generated-html`);
+- evaluation source (`parse5-generated-html`);
 - line and column in the generated HTML;
 - stable fingerprint;
 - concise remediation guidance.
@@ -59,7 +59,7 @@ The report separates confirmed structural observations from heuristic candidates
 
 ## 5. Known limitations
 
-The initial scanner uses bounded HTML source inspection and is not a WHATWG-compliant parser. It does not construct the browser accessibility tree or calculate computed accessible names. Its heuristics can miss malformed or complex markup and can produce false positives.
+The scanner uses parse5 8.1.1 to construct a WHATWG HTML5 DOM, apply browser-like tree correction, report parser errors and retain generated-source locations. It still does not construct the browser accessibility tree or implement the full Accessible Name and Description Computation algorithm. Its accessible-name checks remain conservative heuristics and can produce false positives or miss browser/runtime behavior.
 
 It does not establish:
 
@@ -72,7 +72,7 @@ It does not establish:
 - whether content language is semantically correct;
 - usability or neuroinclusive quality.
 
-Parser research compared Rust html5ever/scraper with Node parse5. The scanner now uses the pinned parse5 8.1.1 parser, which follows the WHATWG HTML Living Standard and can attach source-code locations to parsed nodes. Its entities 9 dependency is isolated beneath parse5 in the lockfile so existing Vue and dom-serializer consumers retain their compatible entities 7 and 4 branches.
+Parser research compared Rust html5ever/scraper with Node parse5. The scanner uses pinned parse5 8.1.1. Its entities 9 dependency is isolated beneath parse5 in the lockfile so existing Vue and dom-serializer consumers retain their compatible entities 7 and 4 branches.
 
 ## 6. Conformance and human evaluation
 
