@@ -31,6 +31,8 @@ jobs:
         uses: dtolnay/rust-toolchain@1.100.0
       - name: Install frontend dependencies
         run: npm ci --no-audit --no-fund
+      - name: Run compiler manifest regression tests
+        run: npm run test:compiler
       - name: Inspect compiler source manifest
         run: npm run compiler:inspect
       - name: Build optional Rust/WASM contrast engine
