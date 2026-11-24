@@ -253,3 +253,10 @@ The Vercel production deployment remains untouched by this branch. Workflow resu
 - [x] Corrected the initial audit's false-positive claims about generic unpublished placeholders on Updates, Participate and Location; the actual route template and rendered preview contain page-specific content. “Coming Soon” on pass cards is a dated source-snapshot status, not an unpublished-page error.
 - [x] Confirmed the /coc/ and /tnc/ aliases emit canonical links to /code-of-conduct/ and /terms/ respectively.
 - [x] Verified the final preview returns HTTP 200 on the homepage and the main EN/ID/EN-SG/MS-MY legal routes, with baseline security headers present.
+
+
+- [x] Inventoried 532 locked npm packages; all declare licence metadata. Direct packages are MIT except TypeScript (Apache-2.0).
+- [x] Reviewed recent Astro and Vite advisories against exact locked versions; both are outside the cited affected ranges.
+- [x] Assessed the conditional Vue 3.5.45 SSR advisory against the current static Astro/no-user-content architecture; no current trigger identified.
+- [ ] Third-party notice review remains for 31 transitive packages with LGPL/MPL/CC-BY/BlueOak licences and for actual Sharp/libvips binary distribution.
+- [ ] Repository dependency alerts/SBOM automation still require owner-side setup; connected alert endpoints were unavailable in this session.

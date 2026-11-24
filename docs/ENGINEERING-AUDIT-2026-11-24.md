@@ -98,3 +98,12 @@ CI status is evidence, not a stop signal. Continue investigating and fixing conc
 The Vercel preview for commit 19bb29fd1253c749e61eae2ceb11a9ce7dab447b completed successfully: Rust iwagc ran the AOT static build under Node 22.23.5, Astro generated 298 pages, 298 HTML files and one CSS file were inspected, 8,596 local references were checked, 298 routes were emitted, and 78 required root/locale routes were verified. The automated diagnostic reported zero findings; it explicitly does not establish WCAG conformance.
 
 The first preview used Node 26.13.1 and exposed npm 11 environment/install-script warnings. The Vercel project is now pinned to Node 22.x and the package engine range is constrained to >=22.23.4 <23. The follow-up preview used Node 22.23.5 with npm 10.9.9 and no longer emitted those npm warnings. Rust 1.100.0 was installed by rustup during the build from the pinned toolchain declaration.
+
+
+## 9. Dependency and supply-chain review
+
+A separate [dependency licence and security review](DEPENDENCY-LICENSE-SECURITY-REVIEW.md) inventories all 532 locked npm packages. Every lockfile entry declares a licence field; 31 transitive entries require specific review for LGPL, MPL, CC-BY or BlueOak terms. Direct dependencies are MIT except TypeScript (Apache-2.0).
+
+The exact Astro 7.4.13 and Vite 8.3.8 versions fall outside the reviewed recent affected ranges. Vue 3.5.45 is associated with a conditional Nuxt UI + Comark/MDC + untrusted-Markdown SSR chain; the current project is static Astro, has no such dependencies or user-content pipeline, and no current trigger was identified. Reassess if the architecture changes.
+
+Vercel Security Review findings could not be queried because the endpoint returned HTTP 404. GitHub alert endpoints were not available through the connected fetch interface. No alert list is treated as proof of zero vulnerabilities. Licence texts and actual Sharp/libvips and Lightning CSS binary distribution still require review.
