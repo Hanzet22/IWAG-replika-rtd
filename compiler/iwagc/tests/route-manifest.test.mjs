@@ -1,5 +1,5 @@
 import { parse } from "parse5";
-import { matchesLocaleLanguage } from "../scripts/accessibility-report.mjs";
+import { isValidLanguageTag } from "../scripts/accessibility-report.mjs";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -66,10 +66,19 @@ test("parse5 lockfile isolates entities major versions without breaking existing
   assert.equal(lock.packages["node_modules/dom-serializer/node_modules/entities"].version, "4.5.0");
 });
 
-test("locale comparison accepts equivalent primary language subtags", () => {
-  assert.equal(matchesLocaleLanguage("en", "en-SG"), true);
-  assert.equal(matchesLocaleLanguage("en-SG", "en-SG"), true);
-  assert.equal(matchesLocaleLanguage("ms", "ms-MY"), true);
-  assert.equal(matchesLocaleLanguage("id-ID", "id"), true);
-  assert.equal(matchesLocaleLanguage("fr", "en-SG"), false);
+test("document language validation accepts BCP 47 tags and rejects malformed values", () => {
+  assert.equal(isValidLanguageTag("en"), true);
+  assert.equal(isValidLanguageTag("en-SG"), true);
+  assert.equal(isValidLanguageTag("ms-MY"), true);
+  assert.equal(isValidLanguageTag("id-ID"), true);
+  assert.equal(isValidLanguageTag("en-US-u-ca-gregory"), true);
+  assert.equal(isValidLanguageTag(""), false);
+  assert.equal(isValidLanguageTag("en_US"), false);
+  assert.equal(isValidLanguageTag("not a language"), false);
+});
+
+test("document language is not inferred from the URL locale prefix", async () => {
+  const scanner = await read("compiler/iwagc/scripts/accessibility-report.mjs");
+  assert.match(scanner, /isValidLanguageTag\(lang\)/);
+  assert.doesNotMatch(scanner, /matchesLocaleLanguage|primary language subtag differs from the locale route prefix/);
 });
