@@ -45,5 +45,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: iwag-build-report
-          path: .iwag-build/iwag-build-report.json
+          path: |
+            .iwag-build/iwag-build-report.json
+            .iwag-build/accessibility-report.json
+            .iwag-build/accessibility.sarif
+            .iwag-build/route-manifest.json
           if-no-files-found: ignore
