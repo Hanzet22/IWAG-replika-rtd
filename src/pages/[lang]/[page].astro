@@ -9,28 +9,28 @@ import { isLocale, localeKeys } from "../../i18n/locales";
 const pageTitles: Record<string, Record<string, string>> = {
   en: {
     about: "About this project", community: "Community", "plan-your-visit": "Plan your visit", accessibility: "Accessibility", brand: "Brand resources",
-    coc: "Code of Conduct", "code-of-conduct": "Code of Conduct", dealers: "Dealers",
+    coc: "Code of Conduct", "code-of-conduct": "Code of Conduct", "child-safety": "Child Safety & Protection", dealers: "Dealers",
     events: "Events", "join-iwag-team": "Join the team", links: "Links", cookies: "Cookie Policy", copyright: "Copyright & Intellectual Property", disclaimer: "Disclaimer", moderation: "Moderation & Reporting", retention: "Data Retention",
     location: "Location", participate: "Participate", policy: "Policies",
     privacy: "Privacy", terms: "Terms", tnc: "Terms and Conditions", updates: "Updates"
   },
   id: {
     about: "Tentang proyek ini", community: "Komunitas", "plan-your-visit": "Rencanakan kunjungan", accessibility: "Aksesibilitas", brand: "Sumber daya merek",
-    coc: "Kode Etik", "code-of-conduct": "Kode Etik", dealers: "Dealer",
+    coc: "Kode Etik", "code-of-conduct": "Kode Etik", "child-safety": "Perlindungan Anak", dealers: "Dealer",
     events: "Acara", "join-iwag-team": "Bergabung dengan tim", links: "Tautan", cookies: "Kebijakan Cookie", copyright: "Hak Cipta & Kekayaan Intelektual", disclaimer: "Penyangkalan", moderation: "Moderasi & Pelaporan", retention: "Retensi Data",
     location: "Lokasi", participate: "Partisipasi", policy: "Kebijakan",
     privacy: "Privasi", terms: "Ketentuan", tnc: "Syarat dan Ketentuan", updates: "Pembaruan"
   },
   "en-sg": {
     about: "About this project", community: "Community", "plan-your-visit": "Plan your visit", accessibility: "Accessibility", brand: "Brand resources",
-    coc: "Code of Conduct", "code-of-conduct": "Code of Conduct", dealers: "Dealers",
+    coc: "Code of Conduct", "code-of-conduct": "Code of Conduct", "child-safety": "Child Safety & Protection", dealers: "Dealers",
     events: "Events", "join-iwag-team": "Join the team", links: "Links",
     location: "Location", participate: "Participate", policy: "Policies",
     privacy: "Privacy", terms: "Terms", tnc: "Terms and Conditions", updates: "Updates"
   },
   "ms-my": {
     about: "Perihal projek ini", community: "Komuniti", "plan-your-visit": "Rancang lawatan", accessibility: "Kebolehcapaian", brand: "Sumber jenama",
-    coc: "Kod Tatakelakuan", "code-of-conduct": "Kod Tatakelakuan", dealers: "Peniaga",
+    coc: "Kod Tatakelakuan", "code-of-conduct": "Kod Tatakelakuan", "child-safety": "Perlindungan Kanak-kanak", dealers: "Peniaga",
     events: "Acara", "join-iwag-team": "Sertai pasukan", links: "Pautan",
     location: "Lokasi", participate: "Penyertaan", policy: "Dasar",
     privacy: "Privasi", terms: "Terma", tnc: "Terma dan Syarat", updates: "Kemas kini"
@@ -40,7 +40,7 @@ const pageTitles: Record<string, Record<string, string>> = {
 export function getStaticPaths() {
   const pageKeys = [
     "about", "community", "plan-your-visit", "accessibility", "brand", "coc", "code-of-conduct", "dealers",
-    "join-iwag-team", "links", "location", "participate", "policy", "cookies", "copyright", "disclaimer", "moderation", "retention",
+    "join-iwag-team", "links", "location", "participate", "policy", "cookies", "copyright", "disclaimer", "moderation", "retention", "child-safety",
     "privacy", "terms", "tnc", "updates"
   ] as const;
   return localeKeys.flatMap((lang) => pageKeys.map((page) => ({ params: { lang, page } })));
@@ -51,14 +51,14 @@ const page = Astro.params.page ?? "about";
 const lang = isLocale(langParam) ? langParam : "en";
 const t = getMessages(lang);
 const contentMessages = lang === "ms-my" ? getMessages("en") : t;
-const englishFallback = lang === "ms-my" || (lang === "id" && ["location", "participate", "updates"].includes(page));
+const englishFallback = (lang === "ms-my" && page !== "child-safety") || (lang === "id" && ["location", "participate", "updates"].includes(page));
 const title = englishFallback ? pageTitles.en[page] ?? "Information" : pageTitles[lang]?.[page] ?? pageTitles.en[page] ?? "Information";
 const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct", ...legalPolicySlugs];
 const policySlug = page === "tnc" ? "terms" : page === "code-of-conduct" ? "coc" : page;
-const policy = legalPolicies[policySlug]?.[lang === "id" ? "id" : "en"];
+const policy = legalPolicies[policySlug]?.[lang] ?? legalPolicies[policySlug]?.en;
 const isLegal = legalPages.includes(page);
-const isTerms = page === "terms" || page === "tnc";
-const isPrivacy = page === "privacy";
+const isTerms = false;
+const isPrivacy = false;
 const isAccessibility = page === "accessibility";
 const isAbout = page === "about";
 const isPlan = page === "plan-your-visit";
@@ -66,14 +66,47 @@ const isCommunity = page === "community";
 const isLocation = page === "location";
 const isParticipate = page === "participate";
 const isUpdates = page === "updates";
-const isConduct = page === "coc" || page === "code-of-conduct";
+// legalPolicies in src/data/legal.ts is the single canonical source for legal copy.
+ // Keep legacy hand-written template blocks disabled to prevent duplicate sections.
+const isConduct = false;
 const isBrand = page === "brand";
 const isDealers = page === "dealers";
 const isEvents = page === "events";
 const isJoinTeam = page === "join-iwag-team";
 const isLinks = page === "links";
 const isPolicy = page === "policy";
-const copy = policy?.summary ?? (isConduct
+const pageSummaries: Record<string, Record<string, string>> = {
+  en: {
+    updates: "Dated announcements and historical archive entries. Each item should be checked against its original publication and current organiser updates.",
+    participate: "A dated snapshot of publicly announced participation tiers. This preview does not sell passes, accept registrations or take payments.",
+    location: "Venue details from a dated public announcement. Confirm transport, facilities and accessibility arrangements with the venue and event organiser.",
+    links: "A curated directory of official travel, venue and event references. External websites have their own operators and privacy practices.",
+    policy: "Independent working drafts for this project. None is an official IWAG policy, approved rule or operative contract.",
+    "join-iwag-team": "A historical summary of contribution areas. This page is not an application form and does not confirm current vacancies."
+  },
+  id: {
+    links: "Direktori referensi perjalanan, lokasi, dan acara. Situs eksternal memiliki operator serta praktik privasinya sendiri.",
+    policy: "Kumpulan draf kerja independen untuk proyek ini. Tidak ada dokumen yang merupakan kebijakan resmi IWAG, aturan yang disahkan, atau kontrak yang berlaku.",
+    "join-iwag-team": "Ringkasan historis bidang kontribusi. Halaman ini bukan formulir pendaftaran dan tidak mengonfirmasi lowongan aktif."
+  },
+  "en-sg": {
+    updates: "Dated announcements and historical archive entries. Check the original publication and organiser channels for current information.",
+    participate: "A dated snapshot of publicly announced participation tiers. This preview does not sell passes, accept registrations or take payments.",
+    location: "Venue details from a dated public announcement. Confirm transport, facilities and accessibility arrangements with the venue and organiser.",
+    links: "A curated directory of official travel, venue and event references. External websites have their own operators and privacy practices.",
+    policy: "Independent working drafts for this project. None is an official IWAG policy, approved rule or operative contract.",
+    "join-iwag-team": "A historical summary of contribution areas. This page is not an application form and does not confirm current vacancies."
+  },
+  "ms-my": {
+    updates: "Dated announcements and historical archive entries. Check the original publication and organiser channels for current information.",
+    participate: "A dated snapshot of publicly announced participation tiers. This preview does not sell passes, accept registrations or take payments.",
+    location: "Venue details from a dated public announcement. Confirm transport, facilities and accessibility arrangements with the venue and organiser.",
+    links: "A curated directory of official travel, venue and event references. External websites have their own operators and privacy practices.",
+    policy: "Independent working drafts for this project. None is an official IWAG policy, approved rule or operative contract.",
+    "join-iwag-team": "A historical summary of contribution areas. This page is not an application form and does not confirm current vacancies."
+  }
+};
+const copy = policy?.summary ?? pageSummaries[englishFallback ? "en" : lang]?.[page] ?? (isConduct
   ? (lang === "id" ? "Kode Etik V2 merupakan draf independen." : "The V2 Code of Conduct is an independent draft.")
   : isLegal ? contentMessages.legalDraft
   : isAccessibility ? contentMessages.levelText
@@ -89,7 +122,7 @@ const copy = policy?.summary ?? (isConduct
     {isLegal && <aside class="legal-draft-banner" role="note" aria-label={lang === "id" ? "Status dokumen hukum" : "Legal document status"}>
       <strong>{lang === "id" ? "HANYA DRAFTING — BUKAN RESMI — BELUM DIVERIFIKASI — BELUM DISETUJUI — BELUM BERLAKU." : "DRAFTING ONLY — NOT OFFICIAL — NOT VERIFIED — NOT APPROVED — NOT IN FORCE."}</strong>
       <span>{lang === "id" ? "Bukan kebijakan resmi IWAG; belum diverifikasi atau disetujui penyelenggara dan belum berlaku." : "Not an official IWAG policy; not verified or approved by the organiser and not in force."}</span>
-      <small>{lang === "id" ? "Draf v1.0 · 23 November 2026 · Tidak ada tanggal berlaku" : "Draft v1.0 · 23 November 2026 · No effective date"}</small>
+      <small>{lang === "id" ? "Draf v1.1 · 24 November 2026 · Tidak ada tanggal berlaku" : "Draft v1.1 · 24 November 2026 · No effective date"}</small>
     </aside>}
     <header class="page-intro">
       <p class="eyebrow">IWAG V2 · Independent project</p>
@@ -330,7 +363,7 @@ const copy = policy?.summary ?? (isConduct
     </section>}
     {isAccessibility && <ContrastChecker client:visible lang={lang} />}
     {isAccessibility && <GraphicsCapabilityLab client:visible lang={lang} />}
-    {isLegal && policy && <section class="policy-document" aria-label={policy.title}>
+    {isLegal && policy && !isAccessibility && <section class="policy-document" aria-label={policy.title}>
       {policy.sections.map((section) => <section class="policy-section"><h2>{section.heading}</h2>{section.body.map((paragraph) => <p>{paragraph}</p>)}</section>)}
       <p class="muted">{lang === "id" ? "Dokumen ini adalah bahan drafting independen, bukan nasihat hukum atau kebijakan resmi." : "This is independent drafting material, not legal advice or an official policy."}</p>
     </section>}

@@ -225,3 +225,58 @@ This pass is source implementation evidence only. It is not a WCAG conformance c
 - [ ] Add source-map resolution for originating Astro/Markdown source locations.
 - [ ] Complete keyboard, screen-reader/TalkBack, zoom/reflow, forced-colors and human evaluation.
 
+
+
+## Full engineering audit and policy consolidation — 24 November 2026
+
+- [x] Created isolated work branch `v2/full-audit-aot-compliance`; production and `main` remain unchanged.
+- [x] Reviewed the current Rust compiler controller, generated-output validator, route renderer, legal policy data, layout, preference script, CSS baseline, architecture and legal research documents.
+- [x] Consolidated Terms, Privacy and Code of Conduct rendering on the canonical `src/data/legal.ts` policy model to prevent duplicate sections.
+- [x] Kept the Accessibility Statement's dedicated engineering page as the primary presentation while suppressing duplicate generic legal-policy rendering.
+- [x] Expanded the Rust required-route contract to cover all core pages, legal policy pages and aliases in each configured locale.
+- [x] Hardened generated-output validation against `javascript:` URLs, `data:` navigation, and unsafe new-tab links.
+- [x] Added baseline HTTP security headers for the static Vercel deployment.
+- [x] Added a dated engineering audit and legal-policy release-gate register.
+- [ ] Browser visual QA, full production build, and assistive-technology testing remain to be performed on the branch before merge.
+- [ ] Actual operator identity, data controller, infrastructure logging/retention and vendor transfers remain unverified.
+- [ ] Qualified legal review and operator approval remain mandatory before any draft is treated as official or operative.
+
+The Vercel production deployment remains untouched by this branch. Workflow results are diagnostic evidence, not the sole definition of engineering completion.
+
+
+- [x] High-contrast mode now maps link and visited-link colours to system `LinkText` and `VisitedText` tokens.
+- [x] Constrained Node engine compatibility to the Node 22 major and set the Vercel project runtime to 22.x after the first preview build showed Node 26.13.1 auto-selection.
+- [x] First preview build completed: 298 generated HTML routes, 8,596 local references checked, 78 required routes verified, and zero automated accessibility diagnostic findings (not a conformance claim).
+- [x] Follow-up preview completed after Node 22 pin and high-contrast CSS change: Node 22.23.5, Rust 1.100.0, 298 routes, 8,596 local references checked, zero automated accessibility diagnostic findings.
+
+
+- [x] Corrected the initial audit's false-positive claims about generic unpublished placeholders on Updates, Participate and Location; the actual route template and rendered preview contain page-specific content. “Coming Soon” on pass cards is a dated source-snapshot status, not an unpublished-page error.
+- [x] Confirmed the /coc/ and /tnc/ aliases emit canonical links to /code-of-conduct/ and /terms/ respectively.
+- [x] Verified the final preview returns HTTP 200 on the homepage and the main EN/ID/EN-SG/MS-MY legal routes, with baseline security headers present.
+
+
+- [x] Inventoried 532 locked npm packages; all declare licence metadata. Direct packages are MIT except TypeScript (Apache-2.0).
+- [x] Reviewed recent Astro and Vite advisories against exact locked versions; both are outside the cited affected ranges.
+- [x] Assessed the conditional Vue 3.5.45 SSR advisory against the current static Astro/no-user-content architecture; no current trigger identified.
+- [ ] Third-party notice review remains for 31 transitive packages with LGPL/MPL/CC-BY/BlueOak licences and for actual Sharp/libvips binary distribution.
+- [ ] Repository dependency alerts/SBOM automation still require owner-side setup; connected alert endpoints were unavailable in this session.
+
+
+- [x] Node LTS upper bound enforced in Rust compiler doctor; regression tests added.
+- [x] Cargo commands use --locked to prevent dependency resolution drift.
+- [x] Added Child Safety & Protection draft in English and Indonesian, and registered its static route in all four locale builds.
+- [x] Added PP 17/2025 and Permenkomdigi 9/2026 feature-level scope assessment; no blanket age gate is assumed.
+- [x] Added HSTS to the Vercel security-header baseline; preview verification pending.
+
+- [x] Recorded a primary-source integrity discrepancy: the official Permenkomdigi 9/2026 catalogue says in force, but the linked PDF is labelled “RANCANGAN”; clause-level interpretation is held pending a verified Gazette copy.
+- [x] Corrected the quoted hyphenated child-safety object key after the preview build exposed a TypeScript parse error.
+- [ ] Rebuild and verify the child-safety route and HSTS response header after the syntax fix.
+
+
+- [x] Final preview commit cc4a1ea1a2ea60e84e132e422cd902549c3a57f0 reached READY.
+- [x] Final preview generated 302 HTML routes, checked 8,708 local references, verified 82 required routes, and reported zero automated diagnostic findings (not a WCAG conformance claim).
+- [x] Child Safety & Protection page returns HTTP 200 in EN, ID, EN-SG and MS-MY; Malay title and content verified.
+- [x] HSTS, X-Frame-Options DENY and X-Content-Type-Options nosniff verified on the legal preview routes.
+- [ ] CSP remains a follow-up: inline scripts/styles on the accessibility page require a full CSP design, hashes/nonces or refactor before enforcement.
+- [ ] Manual assistive-technology, keyboard, zoom/reflow and user evaluation remain open.
+- [ ] Verify final signed Gazette text for Permenkomdigi 9/2026; linked official PDFs were labelled RANCANGAN despite catalogue metadata showing in force.

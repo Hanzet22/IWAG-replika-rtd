@@ -7,10 +7,10 @@ import assert from "node:assert/strict";
 const root = new URL("../../../", import.meta.url);
 const read = (relative) => readFile(new URL(relative, root), "utf8");
 
-test("expected route baseline is unique and has 30 entries", async () => {
+test("expected route baseline is unique and has 82 entries", async () => {
   const manifest = JSON.parse(await read("compiler/iwagc/config/expected-routes.json"));
   assert.equal(manifest.version, 1);
-  assert.equal(manifest.routes.length, 30);
+  assert.equal(manifest.routes.length, 82);
   assert.equal(new Set(manifest.routes).size, manifest.routes.length);
   assert.ok(manifest.routes.includes("/"));
   assert.ok(manifest.routes.includes("/404.html"));
@@ -20,7 +20,7 @@ test("expected route baseline matches Rust required-route validation", async () 
   const manifest = JSON.parse(await read("compiler/iwagc/config/expected-routes.json"));
   const rust = await read("compiler/iwagc/src/main.rs");
   const rootBlock = rust.match(/let mut required = vec!\[([\s\S]*?)\];/);
-  const localeBlock = rust.match(/for locale in \[([\s\S]*?)\] \{\s*for route in \[([\s\S]*?)\]/);
+  const localeBlock = rust.match(/for locale in \[([\s\S]*?)\]\s*\{\s*for route in \[([\s\S]*?)\]/);
   assert.ok(rootBlock, "Rust root route list must exist");
   assert.ok(localeBlock, "Rust locale and route lists must exist");
   const quoted = (value) => [...value.matchAll(/"([^"]+)"/g)].map((match) => match[1]);

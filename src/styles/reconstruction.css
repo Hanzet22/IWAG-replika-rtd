@@ -114,6 +114,8 @@
   --border: CanvasText;
   --accent: Highlight;
   --accent-contrast: HighlightText;
+  --link: LinkText;
+  --link-visited: VisitedText;
   --focus: Highlight;
   --notice: Canvas;
 }
@@ -515,4 +517,61 @@ button:disabled { cursor: not-allowed; opacity: .58; }
 }
 :root[data-text-spacing="expanded"] :where(li) {
   margin-block-end: .5em;
+}
+
+/* V2 regression hardening: preserve legible action links and narrow-screen reflow. */
+a.action-link:visited,
+a.action-link:hover,
+a.action-link:focus-visible {
+  color: var(--accent-contrast);
+}
+:where(pre, code, kbd, samp) {
+  max-inline-size: 100%;
+  overflow-wrap: anywhere;
+}
+:where(table) {
+  max-inline-size: 100%;
+  border-collapse: collapse;
+}
+:where(th, td) {
+  overflow-wrap: anywhere;
+}
+:where(.content-card, .event-card, .pass-card, .policy-link, .home-hero, .detail-grid) {
+  min-inline-size: 0;
+}
+@media (max-width: 30rem) {
+  .home-hero {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+  .hero-actions > a,
+  .hero-actions > button,
+  .action-link {
+    max-inline-size: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+  .accessibility-controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .accessibility-controls select {
+    grid-column: 1;
+    inline-size: 100%;
+  }
+  .preferences {
+    align-items: flex-start;
+  }
+}
+@media (forced-colors: active) {
+  a.action-link:visited,
+  a.action-link:hover,
+  a.action-link:focus-visible {
+    color: LinkText;
+  }
+  .primary-nav a[aria-current="page"],
+  .mobile-nav-links a[aria-current="page"] {
+    outline: 1px solid Highlight;
+    outline-offset: -1px;
+  }
 }

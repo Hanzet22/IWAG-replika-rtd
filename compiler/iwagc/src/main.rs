@@ -139,11 +139,19 @@ fn version_at_least(actual: &str, minimum: &str) -> bool {
     }
 }
 
+fn version_below(actual: &str, exclusive_maximum: &str) -> bool {
+    match (version_tuple(actual), version_tuple(exclusive_maximum)) {
+        (Some(a), Some(maximum)) => a < maximum,
+        _ => false
+    }
+}
+
 fn doctor(manifest: &str) -> Result<Toolchain, String> {
     let minimum = manifest_value(manifest, "node_minimum").unwrap_or("22.23.4");
+    let maximum = manifest_value(manifest, "node_maximum_exclusive").unwrap_or("23.0.0");
     let node = command_version("node")?;
-    if !version_at_least(&node, minimum) {
-        return Err(format!("Node.js {minimum} or newer is required; found {node}"));
+    if !version_at_least(&node, minimum) || !version_below(&node, maximum) {
+        return Err(format!("Node.js >= {minimum} and < {maximum} is required; found {node}"));
     }
     let npm = command_version("npm")?;
     let cargo = command_version("cargo")?;
@@ -232,8 +240,21 @@ fn validate_required_routes(output: &Path) -> Result<usize, String> {
             "plan-your-visit/index.html",
             "community/index.html",
             "updates/index.html",
+            "location/index.html",
+            "participate/index.html",
             "accessibility/index.html",
             "policy/index.html",
+            "terms/index.html",
+            "tnc/index.html",
+            "privacy/index.html",
+            "coc/index.html",
+            "code-of-conduct/index.html",
+            "cookies/index.html",
+            "copyright/index.html",
+            "disclaimer/index.html",
+            "moderation/index.html",
+            "retention/index.html",
+            "child-safety/index.html",
         ] {
             required.push(format!("{locale}/{route}"));
         }
@@ -308,7 +329,8 @@ fn build(root: &Path, manifest: &str) -> Result<(), String> {
     println!("[iwagc] preflight: source inventory complete");
     println!("[iwagc] source files: astro={astro}, ts={ts}, js={js}, css={css}, html={html}");
     println!("[iwagc] archive boundary: {archive_name} is excluded from build inputs");
-    println!("[iwagc] backend: Astro + Vite");
+    println!("[iwagc] mode: ahead-of-time static production compilation");
+    println!("[iwagc] controller: Rust iwagc; specialist frontend backend: Astro + Vite");
     run_backend(root, &["build".to_string()])?;
 
     let validation = Command::new("node")
@@ -336,7 +358,7 @@ fn build(root: &Path, manifest: &str) -> Result<(), String> {
     let report_dir = root.join(".iwag-build");
     fs::create_dir_all(&report_dir).map_err(|e| format!("cannot create build report directory: {e}"))?;
     let report = format!(
-        "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"backend\": \"astro-vite\",\n  \"toolchain\": {{\"node\": \"{}\", \"npm\": \"{}\", \"cargo\": \"{}\"}},\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output\": {{\"files\": {}, \"html\": {}, \"css\": {}, \"javascript\": {}, \"images\": {}, \"fonts\": {}, \"wasm\": {}, \"total_bytes\": {}, \"html_bytes\": {}, \"css_bytes\": {}, \"javascript_bytes\": {}, \"media_bytes\": {}, \"wasm_bytes\": {}}},\n  \"generated_routes\": {},\n  \"required_routes_checked\": {},\n  \"build_duration_ms\": {},\n  \"status\": \"success\"\n}}\n",
+        "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"build_mode\": \"ahead-of-time-static\",\n  \"rust_role\": \"active-build-controller-and-validator\",\n  \"specialist_backend\": \"astro-vite\",\n  \"backend\": \"astro-vite\",\n  \"toolchain\": {{\"node\": \"{}\", \"npm\": \"{}\", \"cargo\": \"{}\"}},\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output\": {{\"files\": {}, \"html\": {}, \"css\": {}, \"javascript\": {}, \"images\": {}, \"fonts\": {}, \"wasm\": {}, \"total_bytes\": {}, \"html_bytes\": {}, \"css_bytes\": {}, \"javascript_bytes\": {}, \"media_bytes\": {}, \"wasm_bytes\": {}}},\n  \"generated_routes\": {},\n  \"required_routes_checked\": {},\n  \"build_duration_ms\": {},\n  \"status\": \"success\"\n}}\n",
         VERSION, json_escape(&toolchain.node), json_escape(&toolchain.npm), json_escape(&toolchain.cargo),
         json_escape(source_name), json_escape(archive_name), json_escape(output_name),
         astro, ts, js, css, html, output_stats.files, output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts, output_stats.wasm, output_stats.total_bytes, output_stats.html_bytes, output_stats.css_bytes, output_stats.js_bytes, output_stats.media_bytes, output_stats.wasm_bytes, generated_routes, required_routes_checked, elapsed_ms
@@ -457,6 +479,9 @@ mod tests {
         assert_eq!(version_tuple("22.23.5-nightly"), Some((22, 23, 5)));
         assert!(version_at_least("v22.23.5", "22.23.4"));
         assert!(!version_at_least("v22.23.3", "22.23.4"));
+        assert!(version_below("v22.23.5", "23.0.0"));
+        assert!(!version_below("v23.0.0", "23.0.0"));
+        assert!(!version_below("v26.13.1", "23.0.0"));
     }
 
     #[cfg(unix)]
