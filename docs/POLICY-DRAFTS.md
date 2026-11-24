@@ -1,6 +1,6 @@
 # IWAG V2 — Legal and Governance Draft Pack
 
-**Review date:** 24 November 2026  
+**Review date:** 25 November 2026  
 **Version:** 2.0 reconstruction draft  
 **Status:** DRAFTING ONLY — INDEPENDENT PROJECT — NOT OFFICIAL IWAG POLICY — NOT APPROVED — NOT IN FORCE
 
@@ -27,7 +27,7 @@ English is authored for English locales; Bahasa Indonesia is authored for Indone
 
 ## Verified current application facts
 
-The application source currently has no attendee accounts, registration, ticketing, payments, booking, contact forms, public comments, user uploads or intentional analytics. It stores theme/accent display preferences in browser local storage. Hosting, deployment, CDN, DNS, security-provider logs, cookies, subprocessor locations, retention periods and backup schedules still require verification.
+The application source currently has no attendee accounts, registration, ticketing, payments, booking, contact forms, public comments, user uploads or intentional analytics. It stores seven display/accessibility preferences in browser local storage: iwag-v2-theme, iwag-v2-accent, iwag-v2-text-scale, iwag-v2-text-spacing, iwag-v2-contrast, iwag-v2-motion and iwag-v2-density. The reviewed preference script does not send these values to the application server or analytics. Hosting, deployment, CDN, DNS, security-provider logs, cookies, subprocessor locations, retention periods and backup schedules still require verification.
 
 ## Unverified facts that must not be invented
 
@@ -37,6 +37,10 @@ The application source currently has no attendee accounts, registration, ticketi
 - staffed moderation, report inbox, emergency contact, response SLA or appeal reviewer;
 - ticketing, payment, event registration, seller/merchant status, revenue or official endorsement;
 - asset licences, event-mark permissions, image releases or third-party rights.
+
+## Child-access assessment
+
+The current site has no accounts, comments, messaging or user uploads, but that does not automatically exclude PP 17/2025. The operator must assess the five indicators in Pasal 4 ayat (2) and document whether the website or any feature may be accessed by children. See [CHILD-ACCESS-PP17-SCOPE-ASSESSMENT.md](CHILD-ACCESS-PP17-SCOPE-ASSESSMENT.md). The official JDIH PDF linked for Permenkomdigi 9/2026 is currently marked “RANCANGAN”; article-level requirements from that file remain unverified until a final gazetted copy is obtained.
 
 ## Adoption and publication gate
 
