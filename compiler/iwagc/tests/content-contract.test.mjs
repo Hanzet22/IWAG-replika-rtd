@@ -10,13 +10,16 @@ test("populated information pages have explicit non-placeholder summaries", () =
   for (const route of ["updates", "participate", "location", "links", "policy", "join-iwag-team"]) {
     assert.ok(page.includes(route + ":") || page.includes('"'+route+'":'), "missing page summary: " + route);
   }
-  assert.match(page, /pageSummaries\[englishFallback \? "en" : lang\]/);
+  assert.match(page, /pageSummaries\\[englishFallback \\? "en" : lang\\]/);
 });
 
 test("policy drafts preserve explicit non-operative status", () => {
   const legal = read("../../../src/data/legal.ts");
   assert.match(legal, /DRAFTING ONLY — NOT OFFICIAL — NOT VERIFIED — NOT APPROVED — NOT IN FORCE/);
-  assert.match(legal, /HANYA DRAFTING — BUKAN RESMI — BELUM DIVERIFIKASI — BELUM DISETUJUI — BELUM BERLAKU/);\n  assert.match(legal, /PP 17 of 2025/);\n  assert.match(legal, /Permenkomdigi No. 9 of 2026/);\n  assert.match(legal, /Child Safety & Protection/);
+  assert.match(legal, /HANYA DRAFTING — BUKAN RESMI — BELUM DIVERIFIKASI — BELUM DISETUJUI — BELUM BERLAKU/);
+  assert.match(legal, /PP 17 of 2025/);
+  assert.match(legal, /Permenkomdigi No. 9 of 2026/);
+  assert.match(legal, /Child Safety & Protection/);
 });
 
 test("policy drafts include both English and Indonesian operational safeguards", () => {
@@ -41,9 +44,9 @@ test("Rust build report identifies the actual AOT controller/backend boundary", 
 
 test("CSS keeps visited action links legible and supports narrow reflow", () => {
   const css = read("../../../src/styles/reconstruction.css");
-  assert.match(css, /a\.action-link:visited/);
-  assert.match(css, /@media \(max-width: 30rem\)/);
-  assert.match(css, /@media \(forced-colors: active\)/);
+  assert.match(css, /a\\.action-link:visited/);
+  assert.match(css, /@media \\(max-width: 30rem\\)/);
+  assert.match(css, /@media \\(forced-colors: active\\)/);
 });
 
 test("shared layout emits canonical and social metadata", () => {
@@ -51,7 +54,7 @@ test("shared layout emits canonical and social metadata", () => {
   assert.match(layout, /<link rel="canonical"/);
   assert.match(layout, /property="og:title"/);
   assert.match(layout, /property="og:url"/);
-  assert.match(layout, /canonicalPath = currentPath === "\/coc"/);
+  assert.match(layout, /canonicalPath = currentPath === "\\/coc"/);
 });
 
 test("Vercel baseline response headers are configured", () => {
@@ -61,13 +64,12 @@ test("Vercel baseline response headers are configured", () => {
   }
 });
 
-
 test("Active Compiler enforces the supported Node LTS range and locked Cargo resolution", () => {
   const rust = read("../src/main.rs");
   const manifest = read("../../../iwag.compiler.toml");
   const pkg = JSON.parse(read("../../../package.json"));
-  assert.match(manifest, /node_minimum = "22\.23\.4"/);
-  assert.match(manifest, /node_maximum_exclusive = "23\.0\.0"/);
+  assert.match(manifest, /node_minimum = "22\\.23\\.4"/);
+  assert.match(manifest, /node_maximum_exclusive = "23\\.0\\.0"/);
   assert.match(rust, /node_maximum_exclusive/);
   assert.match(rust, /version_below/);
   for (const [name, command] of Object.entries(pkg.scripts)) {
@@ -82,12 +84,13 @@ test("Child Safety & Protection draft is routed and remains non-operative", () =
   assert.match(legal, /child-safety/);
   assert.match(legal, /DRAFTING ONLY — NOT OFFICIAL — NOT VERIFIED — NOT APPROVED — NOT IN FORCE/);
   assert.match(page, /"child-safety"/);
-  assert.match(rust, /child-safety\/index\.html/);
+  assert.match(rust, /child-safety\\/index\\.html/);
 });
-
 
 test("Child Safety & Protection has a Malay translation", () => {
   const legal = read("../../../src/data/legal.ts");
   assert.match(legal, /Perlindungan Kanak-kanak/);
-  assert.match(legal, /saluran laporan keselamatan kanak-kanak/);\n  const page = read("../../../src/pages/[lang]/[page].astro");\n  assert.match(page, /lang === "ms-my" && page !== "child-safety"/);
+  assert.match(legal, /saluran laporan keselamatan kanak-kanak/);
+  const page = read("../../../src/pages/[lang]/[page].astro");
+  assert.match(page, /lang === "ms-my" && page !== "child-safety"/);
 });
