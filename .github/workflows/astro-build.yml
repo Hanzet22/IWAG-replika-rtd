@@ -29,6 +29,10 @@ jobs:
           node-version: "22.23.4"
       - name: Set up Rust toolchain
         uses: dtolnay/rust-toolchain@1.100.0
+      - name: Run Rust Active Compiler and contrast-engine tests
+        run: |
+          cargo test --locked --manifest-path compiler/iwagc/Cargo.toml
+          cargo test --locked --manifest-path rust/contrast-engine/Cargo.toml
       - name: Install frontend dependencies
         run: npm ci --no-audit --no-fund
       - name: Run compiler manifest regression tests
