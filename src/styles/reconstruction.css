@@ -114,6 +114,8 @@
   --border: CanvasText;
   --accent: Highlight;
   --accent-contrast: HighlightText;
+  --link: LinkText;
+  --link-visited: VisitedText;
   --focus: Highlight;
   --notice: Canvas;
 }

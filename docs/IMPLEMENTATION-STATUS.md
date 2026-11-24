@@ -242,3 +242,9 @@ This pass is source implementation evidence only. It is not a WCAG conformance c
 - [ ] Qualified legal review and operator approval remain mandatory before any draft is treated as official or operative.
 
 The Vercel production deployment remains untouched by this branch. Workflow results are diagnostic evidence, not the sole definition of engineering completion.
+
+
+- [x] High-contrast mode now maps link and visited-link colours to system `LinkText` and `VisitedText` tokens.
+- [x] Constrained Node engine compatibility to the Node 22 major and set the Vercel project runtime to 22.x after the first preview build showed Node 26.13.1 auto-selection.
+- [x] First preview build completed: 298 generated HTML routes, 8,596 local references checked, 78 required routes verified, and zero automated accessibility diagnostic findings (not a conformance claim).
+- [ ] Follow-up preview still required after Node 22 pin and final CSS change.

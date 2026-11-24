@@ -21,10 +21,11 @@ V1 is retained as a read-only reference archive. It is not a source tree to be c
 | ENG-04 | Medium | New-tab links were not checked for opener isolation. | Require `noopener` or `noreferrer` on `target="_blank"` anchors. |
 | ENG-05 | Medium | Static deployment did not declare a project-level baseline security-header set. | Add Vercel headers for MIME sniffing, framing, referrer, cross-domain policy, browser capabilities and opener isolation. |
 | ENG-06 | Informational | Rust is an active AOT build controller, not a universal language transpiler. | Keep the architecture explicit: Rust orchestrates; Astro/Vite and specialist tools compile their respective languages. |
+| ENG-07 | Medium | User-selected high-contrast mode changed canvas/text system tokens but left link and visited-link colours on the normal theme palette. | Map links to the system `LinkText` and `VisitedText` colours in high-contrast mode. |
 
 ## 3. CSS and interaction review
 
-The existing CSS already contains a semantic reset, responsive breakpoints, visible focus, text scaling, expanded text spacing, high-contrast mode, reduced-motion support, forced-colors handling, local font faces and narrow-screen layout rules. The preference script stores appearance choices locally and has no account or server submission flow.
+The existing CSS already contains a semantic reset, responsive breakpoints, visible focus, text scaling, expanded text spacing, high-contrast mode, reduced-motion support, forced-colors handling, local font faces and narrow-screen layout rules. The high-contrast link and visited-link tokens were additionally aligned to system colours in this branch. The preference script stores appearance choices locally and has no account or server submission flow.
 
 This source inspection is not a visual browser test. Remaining review areas include:
 - Actual contrast of every foreground/background combination and interactive state.
@@ -90,3 +91,12 @@ Additional instruments already tracked in `docs/LEGAL-COMPLIANCE-MATRIX.md` incl
 7. Merge and deploy only after the actual operator/project owner accepts the result.
 
 CI status is evidence, not a stop signal. Continue investigating and fixing concrete defects from the last known-good commit; do not bypass a genuine safety or integrity failure merely to obtain a green badge.
+
+
+## 8. Build and preview evidence
+
+The Vercel preview for commit `f081a1639a41ead6d2bf1aefcae043d63c796d92` completed successfully: Rust `iwagc` ran the AOT static build, Astro generated 298 pages, 298 HTML files and one CSS file were inspected, 8,596 local references were checked, 298 routes were emitted, and 78 required root/locale routes were verified. The automated diagnostic reported zero findings; it explicitly does not establish WCAG conformance.
+
+The build emitted two environment/dependency warnings: an npm `cache-dir` environment setting is unknown to npm 11, and the optional `@parcel/watcher` install script is not on npm's install-script allowlist. These did not prevent the build. Do not approve arbitrary install scripts just to silence the warning; confirm whether the package is required and review its provenance first.
+
+The first preview used Node 26.13.1 while the project declared only a lower-bound engine range. To reduce major-version drift, the project runtime is now pinned to Vercel Node 22.x and the package engine range is constrained to `>=22.23.4 <23`. A follow-up preview is required to verify the pin.
