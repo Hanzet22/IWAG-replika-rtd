@@ -308,7 +308,8 @@ fn build(root: &Path, manifest: &str) -> Result<(), String> {
     println!("[iwagc] preflight: source inventory complete");
     println!("[iwagc] source files: astro={astro}, ts={ts}, js={js}, css={css}, html={html}");
     println!("[iwagc] archive boundary: {archive_name} is excluded from build inputs");
-    println!("[iwagc] backend: Astro + Vite");
+    println!("[iwagc] mode: ahead-of-time static production compilation");
+    println!("[iwagc] controller: Rust iwagc; specialist frontend backend: Astro + Vite");
     run_backend(root, &["build".to_string()])?;
 
     let validation = Command::new("node")
@@ -336,7 +337,7 @@ fn build(root: &Path, manifest: &str) -> Result<(), String> {
     let report_dir = root.join(".iwag-build");
     fs::create_dir_all(&report_dir).map_err(|e| format!("cannot create build report directory: {e}"))?;
     let report = format!(
-        "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"backend\": \"astro-vite\",\n  \"toolchain\": {{\"node\": \"{}\", \"npm\": \"{}\", \"cargo\": \"{}\"}},\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output\": {{\"files\": {}, \"html\": {}, \"css\": {}, \"javascript\": {}, \"images\": {}, \"fonts\": {}, \"wasm\": {}, \"total_bytes\": {}, \"html_bytes\": {}, \"css_bytes\": {}, \"javascript_bytes\": {}, \"media_bytes\": {}, \"wasm_bytes\": {}}},\n  \"generated_routes\": {},\n  \"required_routes_checked\": {},\n  \"build_duration_ms\": {},\n  \"status\": \"success\"\n}}\n",
+        "{{\n  \"compiler\": \"iwagc\",\n  \"compiler_version\": \"{}\",\n  \"build_mode\": \"ahead-of-time-static\",\n  \"rust_role\": \"active-build-controller-and-validator\",\n  \"specialist_backend\": \"astro-vite\",\n  \"backend\": \"astro-vite\",\n  \"toolchain\": {{\"node\": \"{}\", \"npm\": \"{}\", \"cargo\": \"{}\"}},\n  \"source_root\": \"{}\",\n  \"archive_root_excluded\": \"{}\",\n  \"output_root\": \"{}\",\n  \"source_counts\": {{\"astro\": {}, \"typescript\": {}, \"javascript\": {}, \"css\": {}, \"html\": {}}},\n  \"output\": {{\"files\": {}, \"html\": {}, \"css\": {}, \"javascript\": {}, \"images\": {}, \"fonts\": {}, \"wasm\": {}, \"total_bytes\": {}, \"html_bytes\": {}, \"css_bytes\": {}, \"javascript_bytes\": {}, \"media_bytes\": {}, \"wasm_bytes\": {}}},\n  \"generated_routes\": {},\n  \"required_routes_checked\": {},\n  \"build_duration_ms\": {},\n  \"status\": \"success\"\n}}\n",
         VERSION, json_escape(&toolchain.node), json_escape(&toolchain.npm), json_escape(&toolchain.cargo),
         json_escape(source_name), json_escape(archive_name), json_escape(output_name),
         astro, ts, js, css, html, output_stats.files, output_stats.html, output_stats.css, output_stats.js, output_stats.images, output_stats.fonts, output_stats.wasm, output_stats.total_bytes, output_stats.html_bytes, output_stats.css_bytes, output_stats.js_bytes, output_stats.media_bytes, output_stats.wasm_bytes, generated_routes, required_routes_checked, elapsed_ms
