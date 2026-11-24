@@ -1,7 +1,7 @@
 import { mkdir, readdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
-import "./accessibility-report.mjs";
+import { runAccessibilityReport } from "./accessibility-report.mjs";
 
 const outputRoot = path.resolve(process.cwd(), process.argv[2] ?? "dist");
 const origin = "https://iwag-v2.invalid";
@@ -214,6 +214,8 @@ async function main() {
       await resolveLocalReference(match[1] ?? match[2] ?? match[3] ?? "", base, relative, "css-url");
     }
   }
+
+  await runAccessibilityReport();
 
   console.log("[iwagc:routes] scanned " + htmlFiles.length + " HTML and " + cssFiles.length + " CSS files; checked " + checked + " local references and basic accessibility invariants; route manifest: .iwag-build/route-manifest.json (" + routes.length + " routes)");
   if (errors.length) {
