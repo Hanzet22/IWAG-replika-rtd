@@ -1,6 +1,7 @@
 import { mkdir, readdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
+import "./accessibility-report.mjs";
 
 const outputRoot = path.resolve(process.cwd(), process.argv[2] ?? "dist");
 const origin = "https://iwag-v2.invalid";
