@@ -1,6 +1,6 @@
 # Global legal register research — 25 November 2026
 
-As-of: 24 November 2026
+As-of: 25 November 2026
 
 ## Global legal register — status at 25 November 2026
 
