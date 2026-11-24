@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-const root = new URL("../../../../", import.meta.url);
+const root = new URL("../../../", import.meta.url);
 const read = (relative) => readFile(new URL(relative, root), "utf8");
 
 test("expected route baseline is unique and has 30 entries", async () => {
@@ -22,9 +22,9 @@ test("expected route baseline matches Rust required-route validation", async () 
   assert.ok(rootBlock, "Rust root route list must exist");
   assert.ok(localeBlock, "Rust locale and route lists must exist");
   const quoted = (value) => [...value.matchAll(/"([^"]+)"/g)].map((match) => match[1]);
-  const expected = quoted(rootBlock[1]).map((route) => "/" + route);
+  const expected = quoted(rootBlock[1]).map((route) => route === "index.html" ? "/" : "/" + route);
   for (const locale of quoted(localeBlock[1])) {
-    for (const route of quoted(localeBlock[2])) expected.push("/" + locale + "/" + route);
+    for (const route of quoted(localeBlock[2])) expected.push(route === "index.html" ? "/" + locale + "/" : "/" + locale + "/" + route);
   }
   assert.deepEqual([...manifest.routes].sort(), expected.sort());
 });
