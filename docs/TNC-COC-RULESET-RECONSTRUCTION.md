@@ -130,3 +130,27 @@ A successful build, CI check or deployment is not legal approval, regulatory cer
 The public CoC route in `src/pages/[lang]/[page].astro` has been rewritten to cover only the V2 website and digital interactions V2 directly controls. Event attendance, venue access, badge/ticket powers, organiser staff instructions and physical event sanctions are expressly excluded. The V2 privacy text now identifies all seven localStorage preference keys and explains that the absence of accounts does not decide PP 17/2025 scope. See [CHILD-ACCESS-PP17-SCOPE-ASSESSMENT.md](CHILD-ACCESS-PP17-SCOPE-ASSESSMENT.md).
 
 The Indonesia register now treats PP 17/2025 as in force and records its child-access indicators. It also downgrades the reported PP 33/2026 to an unverified watch item and flags the discrepancy between Permenkomdigi 9/2026 JDIH metadata and its linked PDF marked “RANCANGAN”. Do not cite article-level provisions from that draft until the final gazetted copy is obtained.
+
+
+## 10. Original-site source observations — English and Indonesian pages
+
+The following source pages were re-opened on 25 November 2026. They are comparison sources only; the V2 project does not become their operator by reviewing or linking them.
+
+| Original source | Observed policy content | V2 reconstruction consequence |
+|---|---|---|
+| [English TnC](https://iwag.furries.id/en/tnc/) and [Indonesian TnC](https://iwag.furries.id/id/tnc/) | Event/Platform service relationship, attendance, passes, payments, badges, event access and organiser powers. | V2 terms must describe the independent information website and not create an event contract, ticket sale, refund promise or organiser relationship. |
+| [English CoC](https://iwag.furries.id/en/coc/) and [Indonesian CoC](https://iwag.furries.id/id/coc/) | Event conduct, physical spaces, attendee behaviour, age/access expectations, staff and venue directions, event-specific restrictions. | V2 CoC is restricted to website use and future V2-controlled digital interactions. No venue, badge, attendee or organiser-staff authority is carried over. |
+| [English Other Policies](https://iwag.furries.id/en/policy/) and [Indonesian Kebijakan Lainnya](https://iwag.furries.id/id/policy/) | Anti-harassment, vendor/exhibitor expectations, badge removal, event eviction, future-event bans, event operations reporting, and broad harmful-behaviour exclusion criteria. The exclusion language includes categories such as prior convention bans, investigations, alleged promotion/support and reputational statements. | V2 must not create an event-attendee blacklist or adopt broad exclusion criteria. Any future digital moderation must define evidence standards, scope, proportionality, notice, opportunity to respond, review, privacy limits and anti-retaliation safeguards. |
+| [English Privacy Policy](https://iwag.furries.id/en/privacy/) and [Indonesian Kebijakan Privasi](https://iwag.furries.id/id/privacy/) | Event attendee data includes official name, date of birth, email, payment-linked reconciliation data, optional phone and third-party details, ID cross-checking, pass/badge management, and optional health/emergency information. It describes payment-partner logs and other derived data, manual review, and disclosure to authorities. | V2 currently has no attendee registry, ID verification, payment processor or event registration. None of these data categories or purposes may be represented as V2 processing unless actually introduced and separately assessed. |
+
+### Original Privacy Policy consistency issue
+
+The original Privacy Policy describes sharing and receiving payment-provider-derived information for reconciliation, including payment IDs, payment method/status, timestamps and system logs, and also describes identity cross-checking and authority requests. Elsewhere it states broadly that attendee PII will not be sold, transferred or shared except for legitimate legal requests. Those statements need to be read together with the actual processor disclosures and may be broader than the literal “not shared” summary suggests. This is a source-document consistency observation, not a finding of unlawful processing.
+
+The original privacy document also defines the Platform, Event, Service, Staff, Attendee and Event Venue around the event's non-corporate organiser and paid attendee services. Those definitions are not suitable for V2's unverified independent operator and static informational service.
+
+### V2 source facts corrected during this pass
+
+The reviewed V2 preference script uses seven localStorage keys: `iwag-v2-theme`, `iwag-v2-accent`, `iwag-v2-text-scale`, `iwag-v2-text-spacing`, `iwag-v2-contrast`, `iwag-v2-motion` and `iwag-v2-density`. The script does not transmit these preference values to the application server or analytics. This does not verify infrastructure logs, host/CDN/DNS/security-provider cookies, retention or subprocessors.
+
+The public CoC route was also rewritten so its actual rendered content matches the independent website scope described in this reconstruction document.
