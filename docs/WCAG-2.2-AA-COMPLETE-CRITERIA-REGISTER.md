@@ -1,6 +1,6 @@
 # WCAG 2.2 Level A/AA Complete Criteria Register — IWAG V2
 
-**Purpose:** Supplemental completeness register for [ACCESSIBILITY-ENGINEERING-SPEC.md](./ACCESSIBILITY-ENGINEERING-SPEC.md). This file explicitly lists all WCAG 2.2 Level A and Level AA success criteria by number and name. The implementation specification explains the engineering response; this register prevents omissions during coverage mapping.
+**Purpose:** Supplemental completeness register for [ACCESSIBILITY-ENGINEERING-SPEC.md](./ACCESSIBILITY-ENGINEERING-SPEC.md). This file explicitly lists WCAG 2.2 Level A and Level AA success criteria by number and name. The implementation specification explains the engineering response; this register prevents omissions during coverage mapping.
 
 **Conformance rule:** WCAG 2.2 Level AA requires every Level A and every Level AA success criterion to be met. Do not use a selected subset as an AA claim.
 
@@ -81,11 +81,19 @@
 
 ## Additional criteria that are not part of A/AA
 
-These can be adopted as stronger IWAG targets, but must not be described as WCAG 2.2 A/AA requirements:
-- 1.3.6 Identify Purpose — AAA
+These can be adopted as stronger IWAG targets, but must not be described as WCAG 2.2 A/AA requirements.
+
+### Principle 1 — Perceivable
+- 1.2.6 Sign Language (Prerecorded) — AAA
+- 1.2.7 Extended Audio Description (Prerecorded) — AAA
+- 1.2.8 Media Alternative (Prerecorded) — AAA
+- 1.2.9 Audio-only (Live) — AAA
 - 1.4.6 Contrast (Enhanced) — AAA
+- 1.4.7 Low or No Background Audio — AAA
 - 1.4.8 Visual Presentation — AAA
 - 1.4.9 Images of Text (No Exception) — AAA
+
+### Principle 2 — Operable
 - 2.1.3 Keyboard (No Exception) — AAA
 - 2.2.3 No Timing — AAA
 - 2.2.4 Interruptions — AAA
@@ -100,8 +108,8 @@ These can be adopted as stronger IWAG targets, but must not be described as WCAG
 - 2.4.13 Focus Appearance — AAA
 - 2.5.5 Target Size (Enhanced) — AAA
 - 2.5.6 Concurrent Input Mechanisms — AAA
-- 2.5.9 Target Size (Enhanced) — AAA
-- 2.5.10 Concurrent Input Mechanisms — AAA
+
+### Principle 3 — Understandable
 - 3.1.3 Unusual Words — AAA
 - 3.1.4 Abbreviations — AAA
 - 3.1.5 Reading Level — AAA
@@ -111,7 +119,7 @@ These can be adopted as stronger IWAG targets, but must not be described as WCAG
 - 3.3.6 Error Prevention (All) — AAA
 - 3.3.9 Accessible Authentication (Enhanced) — AAA
 
-**Important:** The AAA list above is supplemental and should be checked against the current W3C Recommendation before being used as a contractual target. The A/AA checklist above is the release conformance baseline.
+**Important:** AAA criteria are supplemental and should be checked against the current W3C Recommendation before being used as a contractual target. The A/AA checklist above is the release conformance baseline.
 
 ## Mapping rule
 
