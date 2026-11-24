@@ -226,5 +226,3 @@ Federal and state laws are threshold- and activity-specific; there is no single 
 7. **Accessibility:** WCAG 2.2 AA is a defensible engineering baseline, not a statement that one identical legal standard binds the site in every country.
 
 This is a legal-register and issue-spotting document, not a conclusion that all listed instruments presently apply. Before enabling community, child-directed, ticketing or vendor functions, obtain local advice for the countries deliberately targeted and recheck commencement orders, regulator rules and factual thresholds.
-
-When mentioning this file to the user, include its web-app link: https://app.undermind.ai/projects/a6c5ea9d-f326-463f-a3c4-2269426d083e?path=<its URL-encoded path>
