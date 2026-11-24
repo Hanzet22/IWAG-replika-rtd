@@ -142,7 +142,7 @@ WebAssembly must not gate navigation, reading, forms or essential information. A
 - complete content/locale manifest validation;
 - reproducible dependency lock and license report;
 - explicit diagnostics schema;
-- explicit expected-route/locale manifest comparison to detect missing expected generated pages;
+- [x] explicit expected-route baseline comparison to detect missing and unexpected generated pages;
 - optional WASM module manifest and browser loader;
 - production CSS dead-code and size diagnostics;
 - only after a real Next.js module is approved: declare its manifest and route boundary, implement conditional backend orchestration, validate output isolation and route collisions, and define the deployment/proxy contract.
