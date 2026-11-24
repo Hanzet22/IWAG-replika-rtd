@@ -1,6 +1,6 @@
 # IWAG V2 — Legal, Regulatory & Trust Requirements
 
-**Review date:** 2026-11-23  
+**Review date:** 2026-11-24  
 **Jurisdictional baseline:** Indonesia  
 **Accessibility target:** WCAG 2.2 Level A only (A, not AA)  
 **Status:** Engineering compliance requirements and legal-review checklist; not approved legal advice or final public policy.
