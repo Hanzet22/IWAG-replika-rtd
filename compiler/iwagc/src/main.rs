@@ -335,6 +335,23 @@ fn main_result() -> Result<(), String> {
         "inspect" => inspect(&root, &manifest),
         "doctor" => { doctor(&manifest)?; Ok(()) },
         "build" => build(&root, &manifest),
+        "accessibility" => {
+            let output_name = manifest_value(&manifest, "output_root").unwrap_or("dist");
+            let output_path = safe_project_path(&root, output_name, "output_root")?;
+            let output = canonical_inside_root(&root, &output_path, "output_root")?;
+            if !output.is_dir() {
+                return Err(format!("generated output directory does not exist: {}", output.display()));
+            }
+            let status = Command::new("node")
+                .args(["compiler/iwagc/scripts/run-accessibility.mjs"])
+                .arg(&output)
+                .current_dir(&root)
+                .status()
+                .map_err(|e| format!("failed to launch accessibility diagnostics: {e}"))?;
+            if status.success() { Ok(()) } else {
+                Err(format!("accessibility diagnostics exited with status {status}"))
+            }
+        }
         "dev" | "preview" => {
             doctor(&manifest)?;
             let mut backend_args = vec![command];
