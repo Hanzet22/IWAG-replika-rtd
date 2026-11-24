@@ -179,3 +179,32 @@ The cited review and empirical studies inform policy design only. Abstract-level
 - OECD (2024), *Towards digital safety by design for children*, OECD Digital Economy Papers. DOI: https://doi.org/10.1787/c167b650-en. The report synthesises safety-by-design approaches and highlights accessible reporting, transparent service design and proportionate harm mitigation.
 
 These studies and policy reports are evidence for design choices, not binding legal authority. Their methods, samples, publication status and transferability must be considered. They do not establish a legal duty or a legal conclusion for V2.
+
+
+## Child digital-wellbeing evidence — additional review (25 November 2026)
+
+### Holly et al. (2026): scoping review
+
+Louise Holly, Padmini Vishwanath, Cassie Redlich, Ledia Lazëri and Natasha Azzopardi-Muscat, *Informing Policy Responses to Digital Technology Use and Youth Mental Health and Well-Being: Scoping Review*, Journal of Medical Internet Research (2026). DOI: https://doi.org/10.2196/90160. Full text: https://pmc.ncbi.nlm.nih.gov/articles/PMC13735201/
+
+The review screened 7,420 records and included 226 publications (63 reviews and 163 individual studies) concerning young people up to age 24, with a focus on studies from 2020–2024. It reports mixed and context-dependent findings: outcomes vary with the type and quality of technology use, platform design, individual vulnerability, and social/environmental conditions. The authors discuss risks associated with addictive design, cyberbullying, harmful content, appearance pressure, and other online experiences, while also recognising benefits such as information access, support and social connection.
+
+**Important methodological limitations:** this is a rapid scoping review, not a formal umbrella review. The authors did not formally appraise or weight all included reviews by quality; some primary studies may appear both directly and within included reviews; the evidence base contains many cross-sectional and self-reported studies; causal direction is often unclear; and the English-language/geographic scope limits global generalisability. The review therefore supports risk-aware, proportionate design, not a blanket causal claim that internet use itself causes harm.
+
+### Transferability to this V2 website
+
+The findings about persistent messaging, stranger contact, notifications, streaks, likes/followers, recommendation feeds, algorithmic amplification, user-generated content and social comparison are principally relevant to interactive or engagement-driven platform features.
+
+The current V2 source is documented as a static informational site without accounts, messaging, comments, user uploads, recommendation feeds, engagement ranking, or deliberately configured notification/streak loops. Those absent features reduce the direct transferability of many social-platform findings. They do not establish zero risk: the site's own published content, external links, accessibility, child-access likelihood, and infrastructure-level data processing still require review.
+
+Do not use this literature to justify intrusive universal age gates on a read-only site. Equally, do not use the static-site distinction to bypass the legal child-access assessment required by the applicable jurisdiction. The evidence supports feature-specific and proportionate risk analysis.
+
+### Design implications recorded
+
+- Keep the service informational and avoid adding engagement mechanics without a separate child-risk and privacy review.
+- Review outbound links and content context; a static page can still expose visitors to unsuitable third-party material.
+- Preserve user control and avoid unnecessary profiling, behavioural analytics, or personal-data collection.
+- If interactive features are later added, reassess messaging, strangers, notifications, feeds, user-generated content, reporting, moderation, and age-assurance risks individually.
+- Prefer balanced, person-centred safeguards over blanket restrictions that may unnecessarily block access to beneficial information.
+
+This paper informs risk assessment and design choices only. It is not a legal authority, does not determine PP 17/2025 scope, and does not establish that this particular website causes or prevents health outcomes.
