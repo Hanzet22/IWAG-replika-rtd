@@ -15,7 +15,8 @@
     "preview": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- preview",
     "compiler:inspect": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- inspect",
     "compiler:doctor": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- doctor",
-    "wasm:build": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- wasm"
+    "wasm:build": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- wasm",
+    "accessibility": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- accessibility"
   },
   "dependencies": {
     "@stylexjs/stylex": "0.19.2",
