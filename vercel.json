@@ -1,3 +1,6 @@
-wajib pasang ini cok
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "git": {
     "deploymentEnabled": false
+  }
+}
