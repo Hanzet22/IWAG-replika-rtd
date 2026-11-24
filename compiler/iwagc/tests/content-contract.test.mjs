@@ -45,3 +45,18 @@ test("CSS keeps visited action links legible and supports narrow reflow", () => 
   assert.match(css, /@media \(max-width: 30rem\)/);
   assert.match(css, /@media \(forced-colors: active\)/);
 });
+
+test("shared layout emits canonical and social metadata", () => {
+  const layout = read("../../../src/layouts/BaseLayout.astro");
+  assert.match(layout, /<link rel="canonical"/);
+  assert.match(layout, /property="og:title"/);
+  assert.match(layout, /property="og:url"/);
+  assert.match(layout, /canonicalPath = currentPath === "\/coc"/);
+});
+
+test("Vercel baseline response headers are configured", () => {
+  const config = read("../../../vercel.json");
+  for (const header of ["X-Content-Type-Options", "Referrer-Policy", "X-Frame-Options", "Permissions-Policy", "Strict-Transport-Security"]) {
+    assert.ok(config.includes(header), "missing response header: " + header);
+  }
+});
