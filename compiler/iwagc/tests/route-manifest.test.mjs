@@ -40,7 +40,7 @@ test("accessibility report exposes expected-route coverage separately", async ()
 
 test("parse5 corrects malformed HTML and preserves source locations", () => {
   const parseErrors = [];
-  const document = parse("<!doctype html><p id=first>Alpha<p id=second>Beta", {
+  const document = parse("<!doctype html><p id=first>Alpha<p id=second>Beta</div>", {
     sourceCodeLocationInfo: true,
     onParseError(error) { parseErrors.push(error); }
   });
