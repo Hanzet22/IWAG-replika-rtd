@@ -220,8 +220,8 @@ This pass is source implementation evidence only. It is not a WCAG conformance c
 - [x] Emit stable accessibility diagnostic IDs and confidence-separated findings.
 - [x] Emit machine-readable JSON and SARIF 2.1.0 reports outside the public output directory.
 - [x] Keep heuristic findings review-required and explicitly disclaim automated conformance.
-- [ ] Compare generated routes/locales against a separate expected-route manifest.
-- [ ] Upgrade from lightweight source scanning to a browser-compatible HTML5 parser after dependency/licensing review.
+- [x] Compare generated routes against a checked-in 30-route expected baseline; report missing and unexpected routes separately.
+- [ ] Replace regex scanning with parse5 after updating package.json and package-lock.json reproducibly; preserve source offsets and parser-error reporting.
 - [ ] Add source-map resolution for originating Astro/Markdown source locations.
 - [ ] Complete keyboard, screen-reader/TalkBack, zoom/reflow, forced-colors and human evaluation.
 
