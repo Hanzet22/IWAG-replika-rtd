@@ -51,7 +51,7 @@ const page = Astro.params.page ?? "about";
 const lang = isLocale(langParam) ? langParam : "en";
 const t = getMessages(lang);
 const contentMessages = lang === "ms-my" ? getMessages("en") : t;
-const englishFallback = lang === "ms-my" || (lang === "id" && ["location", "participate", "updates"].includes(page));
+const englishFallback = (lang === "ms-my" && page !== "child-safety") || (lang === "id" && ["location", "participate", "updates"].includes(page));
 const title = englishFallback ? pageTitles.en[page] ?? "Information" : pageTitles[lang]?.[page] ?? pageTitles.en[page] ?? "Information";
 const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct", ...legalPolicySlugs];
 const policySlug = page === "tnc" ? "terms" : page === "code-of-conduct" ? "coc" : page;
