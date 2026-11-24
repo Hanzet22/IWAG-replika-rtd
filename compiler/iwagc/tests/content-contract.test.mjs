@@ -8,7 +8,7 @@ const read = (relative) => readFileSync(fileURLToPath(new URL(relative, import.m
 test("populated information pages have explicit non-placeholder summaries", () => {
   const page = read("../../../src/pages/[lang]/[page].astro");
   for (const route of ["updates", "participate", "location", "links", "policy", "join-iwag-team"]) {
-    assert.match(page, new RegExp(route.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ":"));
+    assert.ok(page.includes(route + ":") || page.includes('"'+route+'":'), "missing page summary: " + route);
   }
   assert.match(page, /pageSummaries\[englishFallback \? "en" : lang\]/);
 });
