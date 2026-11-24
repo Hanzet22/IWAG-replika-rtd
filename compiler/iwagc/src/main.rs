@@ -377,7 +377,7 @@ fn main_result() -> Result<(), String> {
             Ok(())
         }
         "help" | "--help" | "-h" => {
-            println!("IWAG Active Compiler {VERSION}\n\nCommands:\n  inspect   Inventory V2 source and manifest\n  doctor    Check required build tools\n  dev       Start Astro development server through the compiler\n  build     Run production compilation and validate output\n  preview   Preview the production build\n  wasm      Build the registered contrast-engine WASM module");
+            println!("IWAG Active Compiler {VERSION}\n\nCommands:\n  inspect   Inventory V2 source and manifest\n  doctor    Check required build tools\n  dev       Start Astro development server through the compiler\n  build     Run production compilation and validate output\n  accessibility  Scan generated HTML and write JSON/SARIF findings\\n  preview   Preview the production build\n  wasm      Build the registered contrast-engine WASM module");
             Ok(())
         }
         other => Err(format!("unknown command: {other}; run iwagc --help")),
