@@ -139,11 +139,19 @@ fn version_at_least(actual: &str, minimum: &str) -> bool {
     }
 }
 
+fn version_below(actual: &str, exclusive_maximum: &str) -> bool {
+    match (version_tuple(actual), version_tuple(exclusive_maximum)) {
+        (Some(a), Some(maximum)) => a < maximum,
+        _ => false
+    }
+}
+
 fn doctor(manifest: &str) -> Result<Toolchain, String> {
     let minimum = manifest_value(manifest, "node_minimum").unwrap_or("22.23.4");
+    let maximum = manifest_value(manifest, "node_maximum_exclusive").unwrap_or("23.0.0");
     let node = command_version("node")?;
-    if !version_at_least(&node, minimum) {
-        return Err(format!("Node.js {minimum} or newer is required; found {node}"));
+    if !version_at_least(&node, minimum) || !version_below(&node, maximum) {
+        return Err(format!("Node.js >= {minimum} and < {maximum} is required; found {node}"));
     }
     let npm = command_version("npm")?;
     let cargo = command_version("cargo")?;
@@ -470,6 +478,9 @@ mod tests {
         assert_eq!(version_tuple("22.23.5-nightly"), Some((22, 23, 5)));
         assert!(version_at_least("v22.23.5", "22.23.4"));
         assert!(!version_at_least("v22.23.3", "22.23.4"));
+        assert!(version_below("v22.23.5", "23.0.0"));
+        assert!(!version_below("v23.0.0", "23.0.0"));
+        assert!(!version_below("v26.13.1", "23.0.0"));
     }
 
     #[cfg(unix)]

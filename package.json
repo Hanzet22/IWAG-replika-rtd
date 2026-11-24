@@ -9,14 +9,14 @@
   },
   "scripts": {
     "prepare": "panda codegen",
-    "dev": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- dev",
-    "build": "cargo run --quiet --release --manifest-path compiler/iwagc/Cargo.toml -- build",
+    "dev": "cargo run --locked --quiet --manifest-path compiler/iwagc/Cargo.toml -- dev",
+    "build": "cargo run --locked --quiet --release --manifest-path compiler/iwagc/Cargo.toml -- build",
     "build:astro": "astro build",
-    "preview": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- preview",
-    "compiler:inspect": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- inspect",
-    "compiler:doctor": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- doctor",
-    "wasm:build": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- wasm",
-    "accessibility": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- accessibility",
+    "preview": "cargo run --locked --quiet --manifest-path compiler/iwagc/Cargo.toml -- preview",
+    "compiler:inspect": "cargo run --locked --quiet --manifest-path compiler/iwagc/Cargo.toml -- inspect",
+    "compiler:doctor": "cargo run --locked --quiet --manifest-path compiler/iwagc/Cargo.toml -- doctor",
+    "wasm:build": "cargo run --locked --quiet --manifest-path compiler/iwagc/Cargo.toml -- wasm",
+    "accessibility": "cargo run --locked --quiet --manifest-path compiler/iwagc/Cargo.toml -- accessibility",
     "test:compiler": "node --test compiler/iwagc/tests/*.test.mjs"
   },
   "dependencies": {
