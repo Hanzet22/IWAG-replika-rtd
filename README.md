@@ -15,7 +15,7 @@ The dedicated reconstruction plan, source inventory and compiler contract are ma
 - [Rust Active Compiler specification](docs/ACTIVE-COMPILER-SPEC.md)
 - [Research evidence](docs/RESEARCH-EVIDENCE.md)
 - [Accessibility engineering specification](docs/ACCESSIBILITY-ENGINEERING-SPEC.md)
-- [Accessibility implementation matrix](docs/ACCESSIBILITY-IMPLEMENTATION-MATRIX.md)
+- [Accessibility implementation matrix](docs/ACCESSIBILITY-IMPLEMENTATION-MATRIX.md)\n- [Accessibility findings engine](docs/ACCESSIBILITY-FINDINGS-ENGINE.md)
 - [WCAG 2.2 criteria register](docs/WCAG-2.2-AA-COMPLETE-CRITERIA-REGISTER.md)
 - [Graphics and motion policy](docs/GRAPHICS-AND-MOTION-POLICY.md)
 - [Performance measurement plan](docs/PERFORMANCE-MEASUREMENT-PLAN.md)
