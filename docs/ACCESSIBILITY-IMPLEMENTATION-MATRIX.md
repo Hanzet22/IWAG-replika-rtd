@@ -32,6 +32,8 @@ This matrix separates implemented source-level foundations from verified outcome
 
 The contrast calculator is a two-color calculation aid, not a site-wide WCAG audit or certification tool.
 
+A source-template scan of the shared homepage, generic page, nested article and 404 templates found one authored `h1` in each template. The generic and nested content templates contain no inline `img` or `form` elements; links are authored with visible or data-driven text, and the inspected templates do not open external links in new tabs. This is a source-level finding only: inspect generated DOM output and every route for actual rendered names, heading order and content-specific media.
+
 ## 3. Generated output and compiler checks
 
 The existing implementation status records a previous raw output baseline of 298 HTML files, one CSS file, four JavaScript files, five fonts, 2,460,461 total bytes and 7,111 local references checked. This is a historical baseline, not a fresh build result for this snapshot.
