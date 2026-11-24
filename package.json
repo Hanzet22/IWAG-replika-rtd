@@ -22,7 +22,8 @@
   "dependencies": {
     "@stylexjs/stylex": "0.19.2",
     "astro": "7.4.13",
-    "vue": "3.5.45"
+    "vue": "3.5.45",
+    "parse5": "8.1.1"
   },
   "devDependencies": {
     "@astrojs/vue": "7.1.6",
