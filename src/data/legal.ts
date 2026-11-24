@@ -1,9 +1,8 @@
 export const legalPolicySlugs = ["coc","ruleset","terms","privacy","cookies","copyright","disclaimer","accessibility","moderation","retention"] as const;
 
-export const legalPolicyLinks = [["coc","Code of Conduct","Kode Etik"],["ruleset","Website Ruleset","Aturan Penggunaan Situs"],["terms","Terms and Conditions","Syarat dan Ketentuan"],["privacy","Privacy Policy","Kebijakan Privasi"],["cookies","Cookie & Browser Storage Policy","Kebijakan Cookie & Penyimpanan Browser"],["copyright","Copyright & Intellectual Property","Hak Cipta & Kekayaan Intelektual"],["disclaimer","Information Notice","Pemberitahuan Informasi"],["accessibility","Accessibility Statement","Pernyataan Aksesibilitas"],["moderation","Moderation & Reporting","Moderasi & Pelaporan"],["retention","Data Retention","Retensi Data"]] as const;
+export const legalPolicyLinks = [["coc","Code of Conduct","Kode Etik"],["ruleset","Website Ruleset","Aturan Penggunaan Situs"],["terms","Terms and Conditions","Syarat dan Ketentuan"],["privacy","Privacy Policy","Kebijakan Privasi"],["policy","Other Policies","Kebijakan Lainnya"],["cookies","Cookie & Browser Storage Policy","Kebijakan Cookie & Penyimpanan Browser"],["copyright","Copyright & Intellectual Property","Hak Cipta & Kekayaan Intelektual"],["disclaimer","Information Notice","Pemberitahuan Informasi"],["accessibility","Accessibility Statement","Pernyataan Aksesibilitas"],["moderation","Moderation & Reporting","Moderasi & Pelaporan"],["retention","Data Retention","Retensi Data"]] as const;
 
 type Policy = { title: string; summary: string; sections: { heading: string; body: string[] }[] };
-const policy = (title: string, summary: string, sections: [string, string[]][]): Policy => ({ title, summary, sections: sections.map(([heading, body]) => ({ heading, body })) });
 
 export const legalPolicies: Record<string, { en: Policy; id: Policy }> = {
   "coc": {
@@ -1003,6 +1002,86 @@ export const legalPolicies: Record<string, { en: Policy; id: Policy }> = {
           "heading": "4. Transparansi dan peninjauan",
           "body": [
             "Terbitkan periode retensi aktual atau kriteria yang jelas untuk setiap kategori utama dalam pemberitahuan privasi. Jangan menyatakan periode pasti sebelum sistem, vendor, dan kewajiban hukum diverifikasi. Tinjau jadwal sebelum setiap edisi acara, setelah perubahan vendor, dan setelah insiden data atau perubahan hukum."
+          ]
+        }
+      ]
+    }
+  },
+  "ruleset": {
+    "en": {
+      "title": "Website Ruleset",
+      "summary": "Rules for lawful, secure and respectful use of the V2 information website.",
+      "sections": [
+        {
+          "heading": "1. Access and permitted use",
+          "body": [
+            "Visitors may read, cite and link to public pages for lawful personal, educational and informational purposes. Do not misrepresent the site, its operator or the origin of material. Respect copyright, licence notices and attribution requirements.",
+            "Use the site through ordinary browser access. Do not bypass access controls, attempt to obtain credentials, exploit vulnerabilities, interfere with service availability, inject malicious code, impersonate another person, harvest personal data, or use the site to threaten, harass or defraud others."
+          ]
+        },
+        {
+          "heading": "2. Automated access and technical limits",
+          "body": [
+            "Automated collection, indexing or reuse must comply with applicable law, published technical restrictions, reasonable rate limits and third-party rights. Do not overload the service, evade rate limits, create artificial traffic or use automated methods to access restricted areas.",
+            "Public availability does not grant a licence to reproduce protected writing, photographs, illustrations, logos, fonts, video, audio or other creative material. Any permitted reuse must follow the applicable licence or legal exception."
+          ]
+        },
+        {
+          "heading": "3. Security reports and responsible disclosure",
+          "body": [
+            "If you identify a security weakness, report it through the published security contact with enough detail to reproduce the issue safely. Do not access, alter, download or disclose other people's data; do not disrupt service; and do not continue testing beyond the minimum necessary to demonstrate the issue.",
+            "The operator should acknowledge a credible report, restrict access to the details, coordinate a reasonable remediation period and avoid retaliating against good-faith reports made within these limits."
+          ]
+        },
+        {
+          "heading": "4. External services and event rules",
+          "body": [
+            "External links lead to services operated by third parties. Their terms, privacy notices, age restrictions and security practices apply independently. This Website Ruleset does not replace the event's admission, venue, dealer, panel, performer or attendee rules; those must be obtained from the responsible event operator."
+          ]
+        },
+        {
+          "heading": "5. Enforcement and review",
+          "body": [
+            "A suspected breach may result in temporary rate limiting, blocking of abusive requests or restriction of a compromised feature where necessary to protect the service. Measures should be proportionate, logged and limited to the affected activity. Where an identifiable user account or interactive feature is later introduced, the operator must publish notice, reasons and a review route before applying account-level sanctions."
+          ]
+        }
+      ]
+    },
+    "id": {
+      "title": "Aturan Penggunaan Situs",
+      "summary": "Aturan penggunaan situs informasi V2 secara sah, aman, dan saling menghormati.",
+      "sections": [
+        {
+          "heading": "1. Akses dan penggunaan yang diizinkan",
+          "body": [
+            "Pengunjung boleh membaca, mengutip, dan menautkan halaman publik untuk tujuan pribadi, pendidikan, dan informasi yang sah. Jangan menyamarkan situs, operator, atau asal materi. Hormati hak cipta, pemberitahuan lisensi, dan persyaratan atribusi.",
+            "Gunakan situs melalui akses browser biasa. Jangan melewati kontrol akses, mencoba memperoleh kredensial, mengeksploitasi kerentanan, mengganggu ketersediaan layanan, menyisipkan kode berbahaya, menyamar sebagai orang lain, mengumpulkan data pribadi, atau menggunakan situs untuk mengancam, melecehkan, atau menipu orang lain."
+          ]
+        },
+        {
+          "heading": "2. Akses otomatis dan batas teknis",
+          "body": [
+            "Pengumpulan, pengindeksan, atau penggunaan ulang secara otomatis harus mematuhi hukum yang berlaku, pembatasan teknis yang diumumkan, batas permintaan yang wajar, dan hak pihak ketiga. Jangan membebani layanan, menghindari batas permintaan, membuat lalu lintas buatan, atau mengakses area terbatas melalui otomasi.",
+            "Ketersediaan publik tidak memberikan lisensi untuk memperbanyak tulisan, foto, ilustrasi, logo, font, video, audio, atau materi kreatif terlindungi lainnya. Penggunaan ulang yang diizinkan harus mengikuti lisensi atau pengecualian hukum terkait."
+          ]
+        },
+        {
+          "heading": "3. Laporan keamanan dan pengungkapan bertanggung jawab",
+          "body": [
+            "Jika menemukan kelemahan keamanan, laporkan melalui kontak keamanan yang diterbitkan dengan detail secukupnya agar masalah dapat direproduksi secara aman. Jangan mengakses, mengubah, mengunduh, atau mengungkap data orang lain; jangan mengganggu layanan; dan jangan melanjutkan pengujian melebihi kebutuhan minimum untuk menunjukkan masalah.",
+            "Operator sebaiknya mengakui laporan kredibel, membatasi akses ke detailnya, mengoordinasikan waktu perbaikan yang wajar, dan tidak membalas laporan beritikad baik yang dibuat dalam batas ini."
+          ]
+        },
+        {
+          "heading": "4. Layanan eksternal dan aturan acara",
+          "body": [
+            "Tautan eksternal mengarah ke layanan yang dioperasikan pihak ketiga. Ketentuan, pemberitahuan privasi, batas usia, dan praktik keamanannya berlaku secara terpisah. Aturan Penggunaan Situs ini tidak menggantikan aturan penerimaan acara, venue, dealer, panel, performer, atau peserta; aturan tersebut harus diperoleh dari operator acara yang bertanggung jawab."
+          ]
+        },
+        {
+          "heading": "5. Penegakan dan peninjauan",
+          "body": [
+            "Dugaan pelanggaran dapat mengakibatkan pembatasan laju sementara, pemblokiran permintaan abusif, atau pembatasan fitur yang disalahgunakan jika diperlukan untuk melindungi layanan. Tindakan harus proporsional, dicatat, dan dibatasi pada aktivitas terkait. Jika akun pengguna atau fitur interaktif ditambahkan kelak, operator harus menerbitkan pemberitahuan, alasan, dan jalur peninjauan sebelum menerapkan sanksi tingkat akun."
           ]
         }
       ]
