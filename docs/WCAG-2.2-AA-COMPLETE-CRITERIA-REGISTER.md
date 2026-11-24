@@ -2,6 +2,8 @@
 
 **Purpose:** Supplemental completeness register for [ACCESSIBILITY-ENGINEERING-SPEC.md](./ACCESSIBILITY-ENGINEERING-SPEC.md). This file explicitly lists WCAG 2.2 Level A and Level AA success criteria by number and name. The implementation specification explains the engineering response; this register prevents omissions during coverage mapping.
 
+**Project target:** WCAG 2.2 Level A only. Every applicable Level A criterion is part of the formal project acceptance scope. The Level AA list is retained as a voluntary enhancement tracker, not as a silently adopted conformance target.
+
 **Conformance rule:** WCAG 2.2 Level AA requires every Level A and every Level AA success criterion to be met. Do not use a selected subset as an AA claim.
 
 ## Level A
@@ -119,11 +121,11 @@ These can be adopted as stronger IWAG targets, but must not be described as WCAG
 - 3.3.6 Error Prevention (All) — AAA
 - 3.3.9 Accessible Authentication (Enhanced) — AAA
 
-**Important:** AAA criteria are supplemental and should be checked against the current W3C Recommendation before being used as a contractual target. The A/AA checklist above is the release conformance baseline.
+**Important:** AAA criteria are supplemental. The Level A checklist is the formal project release baseline; Level AA items are voluntary enhancements. Neither checklist alone proves conformance.
 
 ## Mapping rule
 
-For each checkbox, IWAG's implementation matrix must record:
+For each applicable Level A criterion, and for every Level AA enhancement selected for implementation, IWAG's implementation matrix must record:
 1. applicable page templates and components;
 2. owner and implementation evidence;
 3. automated/static check, if one exists;
