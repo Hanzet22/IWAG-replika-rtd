@@ -133,7 +133,7 @@ root.dataset.density=density;
 if(densitySelect){densitySelect.value=density;densitySelect.addEventListener("change",()=>{const next=densitySelect.value==="spacious"?"spacious":"normal";root.dataset.density=next;try{if(next==="normal")localStorage.removeItem("iwag-v2-density");else localStorage.setItem("iwag-v2-density",next);}catch{}});}
 
 resetButton?.addEventListener("click", () => {
-  for (const key of [storageKey, accentStorageKey, "iwag-v2-text-scale", "iwag-v2-contrast", "iwag-v2-motion", "iwag-v2-density"]) {
+  for (const key of [storageKey, accentStorageKey, "iwag-v2-text-scale", "iwag-v2-text-spacing", "iwag-v2-contrast", "iwag-v2-motion", "iwag-v2-density"]) {
     try { localStorage.removeItem(key); } catch { /* Preferences still reset for this page. */ }
   }
   selectedAccent = "#135d78";
