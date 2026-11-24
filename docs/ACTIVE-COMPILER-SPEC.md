@@ -22,7 +22,7 @@ It does **not** independently parse or transpile Astro, HTML, CSS, JavaScript, T
 | `iwagc preview` | Launch Astro production preview through npm |
 | `iwagc wasm` | Explicitly build the Rust contrast-engine module using wasm-pack |
 
-The normal npm scripts call these Rust commands. `build:astro` remains a diagnostic backend escape hatch, not the normal build entry point. Next.js orchestration is a future conditional capability, not a current command.
+The normal npm scripts call these Rust commands. Run `npm run accessibility` to re-scan an existing `dist/` output without rebuilding. `build:astro` remains a diagnostic backend escape hatch, not the normal build entry point. Next.js orchestration is a future conditional capability, not a current command.
 
 ## 3. Current build stages
 
