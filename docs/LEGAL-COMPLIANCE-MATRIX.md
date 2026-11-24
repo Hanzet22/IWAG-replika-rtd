@@ -37,6 +37,8 @@ V2 requirements:
 
 Official text: https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
 
+**Browser storage facts:** source review identified seven localStorage keys: iwag-v2-theme, iwag-v2-accent, iwag-v2-text-scale, iwag-v2-text-spacing, iwag-v2-contrast, iwag-v2-motion and iwag-v2-density. The reviewed preference script does not transmit these values to the application server or analytics. Local storage is not an HTTP cookie and is not automatically included in requests. This does not verify host/CDN/DNS/security-provider logs, cookies or retention.
+
 ### 2.2 Reported PP 33/2026 — not verified in official central repository
 
 Earlier research reported a PP 33/2026 implementing regulation with a future commencement date. However, as of 25 November 2026, this review has not located a verified BPK/Setneg central record or official final Gazette PDF. Search results surfaced secondary legal sources and a local-government-hosted copy only. Therefore V2 must not cite reported Gazette identifiers, Pasal 225 or article-level requirements as verified law, and must not treat the reported instrument as currently in force.
@@ -194,7 +196,7 @@ Official regulator sources:
 
 ### 3.5 United Kingdom — UK GDPR and Children's Code
 
-UK GDPR applies to processing in the context of a UK establishment and can also apply to an organisation outside the UK that offers goods or services to people in the UK or monitors their behaviour there. The ICO's Children's Code applies to online services likely to be accessed by children, subject to its territorial and service-scope rules; it is not limited to services marketed exclusively to children. A simple information-only site may not qualify as an information society service, but online registration, booking, accounts or other interactive services can change the assessment.
+UK GDPR applies to processing in the context of a UK establishment and can also apply to an organisation outside the UK that offers goods or services to people in the UK or monitors their behaviour there. The ICO's Children's Code applies to online services likely to be accessed by children, subject to its territorial and service-scope rules; it is not limited to services marketed exclusively to children. The ICO's scope guidance expressly includes many news, educational and other content websites. Coverage depends on whether the service is an information-society service (normally provided for remuneration, at a distance, electronically and at the recipient's individual request), is likely to be accessed by children, and processes personal data. A free non-commercial independent project is fact-specific and must not be assumed automatically in or out of scope.
 
 V2 requirements:
 - Assess UK targeting/monitoring and the service's actual functionality before deciding whether UK GDPR applies.
@@ -207,7 +209,7 @@ Official ICO sources:
 
 ### 3.6 United States — COPPA and California CCPA
 
-COPPA applies to operators of child-directed websites/services and general-audience operators with actual knowledge that they collect personal information online from a child under 13. The FTC's 2025 Rule amendments add requirements concerning separate parental consent for certain third-party disclosures, data retention/deletion and security; the compliance deadline for the amended Rule was in April 2026. COPPA is not a general privacy law for every teen or adult visitor.
+COPPA applies to operators of child-directed websites/services and general-audience operators with actual knowledge that they collect personal information online from a child under 13. The 2025 Rule amendments, with a 22 April 2026 compliance deadline, expressly include passive tracking and persistent identifiers such as IP addresses within the relevant collection/personal-information analysis, subject to the narrow internal-operations exception in 16 C.F.R. §312.5(c)(7). COPPA is not a general privacy law for every teen or adult visitor.
 
 The California CCPA applies to qualifying for-profit businesses doing business in California that determine the purposes and means of processing California residents' personal information and meet statutory thresholds. As of 1 January 2025, the revenue threshold is USD 26.625 million; alternative thresholds include processing the personal information of 100,000 or more California residents/households or deriving at least 50% of annual revenue from selling or sharing that information. Nonprofits and government agencies are generally outside the CCPA's business definition.
 
@@ -275,8 +277,8 @@ A Code of Conduct draft should cover harassment/discrimination, consent and phot
 - [ ] Service/business model and PMSE/PSE applicability assessed.
 - [ ] Data inventory, lawful basis, privacy notice, retention and rights workflow approved.
 - [ ] Processor/vendor agreements and international data transfers reviewed.
-- [ ] PP 33/2026 readiness reviewed before 16 January 2027.
-- [ ] PP 17/2025 and Permenkomdigi 9/2026 child-service applicability assessed.
+- [ ] PP 33/2026 source verified against the official Gazette/central JDIH before any article-level claim; until then, keep its reported status unverified.
+- [ ] PP 17/2025 scope assessed now against Pasal 3(3) and Pasal 4(1)–(2), even without accounts; final Permenkomdigi 9/2026 text verified before article-level reliance.
 - [ ] Age/guardian process and child-safety reporting ready where applicable.
 - [ ] Consumer disclosures, checkout, refund/cancellation and complaint process reviewed before any payment feature.
 - [ ] Copyright, brand, photography and third-party content rights documented.
@@ -300,9 +302,9 @@ A Code of Conduct draft should cover harassment/discrimination, consent and phot
 The following links are starting points to official or primary repositories. Verify the consolidated text, amendments, status and effective date at the time of implementation:
 
 - UU 27/2022 PDP: https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
-- PP 33/2026 PDP implementing regulation: signed-text mirror (third-party host; not an official repository): https://legaltrans.id/downloads/pp-33-tahun-2026-pelindungan-data-pribadi.pdf — official BPK/peraturan.go.id listing was not located on 23 November 2026; verify against the official Gazette before relying on article-level details.
+- PP 33/2026 PDP implementing regulation: reported by secondary sources, but no verified official central BPK/Setneg record or final Gazette PDF was located by 25 November 2026; do not cite reported Gazette identifiers or article-level provisions.
 - PP 17/2025 child online protection: https://peraturan.bpk.go.id/Details/316698/pp-no-17-tahun-2025
-- Permenkomdigi 9/2026: https://peraturan.bpk.go.id/Details/346040/permenkomdigi-no-9-tahun-2026
+- Permenkomdigi 9/2026 metadata: https://jdih.komdigi.go.id/produk_hukum/view/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026 — linked PDF is marked RANCANGAN; final gazetted text required before article-level reliance.
 - PP 71/2019 electronic systems: https://peraturan.bpk.go.id/Details/122030/pp-no-71-tahun-2019
 - UU 1/2024 ITE amendment: https://peraturan.bpk.go.id/Details/274494/uu-no-1-tahun-2024
 - UU 8/1999 consumer protection: https://peraturan.bpk.go.id/Details/45288/uu-no-8-tahun-1999
