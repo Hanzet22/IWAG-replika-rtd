@@ -72,7 +72,7 @@ It does not establish:
 - whether content language is semantically correct;
 - usability or neuroinclusive quality.
 
-A future parser upgrade should use a browser-compatible HTML5 parsing model and retain source/generated location mapping. It should not be added until the dependency and licensing implications are reviewed.
+Parser research compared Rust html5ever/scraper with Node parse5. The selected candidate is parse5 because it follows the WHATWG HTML Living Standard and can attach source-code locations to parsed nodes. The current scanner remains regex-based until parse5 and its entities dependency are added with a reproducible lockfile update; do not import an undeclared transitive dependency or bypass npm ci.
 
 ## 6. Conformance and human evaluation
 
@@ -87,5 +87,7 @@ The formal target remains WCAG 2.2 Level A. Level AA findings may be tracked as 
 - [W3C WCAG-EM 2.0](https://www.w3.org/TR/wcag-em/)
 - [OASIS SARIF 2.1.0 plus Errata 01](https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html)
 - [Astro Integration API](https://docs.astro.build/en/reference/integrations-reference/)
+- [parse5 parser options and source locations](https://parse5.js.org/interfaces/parse5.ParserOptions.html)
+- [parse5 project and WHATWG HTML parser implementation](https://github.com/inikulin/parse5)
 
 Astro's `astro:build:done` integration hook exposes generated page pathnames, the output directory and emitted assets. This is the preferred future integration boundary if the scanner is moved from the current post-build helper into an Astro integration.
