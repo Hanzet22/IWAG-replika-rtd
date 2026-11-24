@@ -158,7 +158,7 @@ PDF symbols - ✓ PDF available; X No PDF available; … PDF download attempt in
 When presenting papers in your reply, fetch their DOIs with get_paper_info (show_doi=true) and present cite keys as [[cite_key]](https://doi.org/<DOI>). Use the Link returned by get_paper_info for papers without a DOI.
 
 
-## Selected research references
+## Selected research references — updated 25 November 2026
 
 - Matias, J. N. (2019), *Preventing harassment and increasing group participation through social norms in 2,190 online science discussions*, PNAS. https://doi.org/10.1073/pnas.1813486116
 - Ribeiro et al. (2024), *Post Guidance for Online Communities*, Proceedings of the ACM on Human-Computer Interaction. https://doi.org/10.1145/3711046
@@ -168,3 +168,15 @@ When presenting papers in your reply, fetch their DOIs with get_paper_info (show
 - Lyu et al. (2024), *A Study of Blind TikTokers’ Content Moderation Experiences*, Proceedings of the CHI Conference on Human Factors in Computing Systems. https://doi.org/10.1145/3613904.3642148
 
 The cited review and empirical studies inform policy design only. Abstract-level evidence, sample limits and study context must be considered; none of these papers is a legal authority.
+
+## Additional research references checked on 25 November 2026
+
+- Katsaros, Kim & Tyler (2023), *Online Content Moderation: Does Justice Need a Human Face?*, International Journal of Human–Computer Interaction. DOI: https://doi.org/10.1080/10447318.2023.2210879. The review supports procedural-justice design: meaningful voice, explanations and respectful treatment can improve perceptions of fairness; it does not justify arbitrary sanctions.
+- Shim & Jhaver (2024), *Incorporating Procedural Fairness in Flag Submissions on Social Media Platforms*, ACM Transactions on Social Computing. DOI: https://doi.org/10.1145/3797820. A survey experiment (N=2,936) found that visible community guidelines supported perceived transparency and open-ended feedback supported perceived voice; the paper also notes accessibility, reporting education and false-flag protections.
+- Zhao, Naaman & Wu (2026), *Rule Development in Online Communities Amidst Growth and Generative AI*, Proceedings of the ACM on Human-Computer Interaction. DOI: https://doi.org/10.1145/3816993. A study of over 5,000 Reddit communities shows rules evolve with community size, growth and topic; policy sets should be versioned and reviewed rather than treated as static boilerplate.
+- Stoilova, Nandagiri & Livingstone (2019), *Children’s understanding of personal data and privacy online – a systematic evidence mapping*, Information, Communication & Society. DOI: https://doi.org/10.1080/1369118X.2019.1657164. The review highlights the importance of data traces and inferred information, not only information children deliberately submit.
+- Hosamane et al. (2025), *“I thought it was my mistake, but it's really the design”: A Critical Examination of the Accessibility of User-Enacted Moderation Tools on Facebook and X*, arXiv. DOI: https://doi.org/10.48550/arXiv.2509.10789. Interviews and walkthroughs with 15 people with vision impairments identify learning, compliance and psychological burdens in reporting/blocking/filtering tools.
+- Lyu et al. (2024), *A Study of Blind TikTokers’ Content Moderation Experiences*, CHI 2024. DOI: https://doi.org/10.1145/3613904.3642148. Interviews with 20 blind users identify accessibility barriers and moderation risks affecting disabled users.
+- OECD (2024), *Towards digital safety by design for children*, OECD Digital Economy Papers. DOI: https://doi.org/10.1787/c167b650-en. The report synthesises safety-by-design approaches and highlights accessible reporting, transparent service design and proportionate harm mitigation.
+
+These studies and policy reports are evidence for design choices, not binding legal authority. Their methods, samples, publication status and transferability must be considered. They do not establish a legal duty or a legal conclusion for V2.
