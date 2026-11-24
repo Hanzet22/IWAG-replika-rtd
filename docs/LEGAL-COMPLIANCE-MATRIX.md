@@ -317,3 +317,8 @@ The following links are starting points to official or primary repositories. Ver
 - US COPPA Rule: https://www.ecfr.gov/current/title-16/chapter-I/subchapter-C/part-312
 - California CCPA: https://cppa.ca.gov/faq
 - WCAG 2.2: https://www.w3.org/TR/WCAG22/
+
+
+## 2026-11-24 legal research addenda
+
+This matrix must be read together with the updated [global legal research register](LEGAL-RESEARCH-2026-11-24.md) and the [Indonesia pinpoint legal register](INDONESIA-PINPOINT-LEGAL-REGISTER.md). These addenda distinguish in-force rules from future commencement, identify exact article/section locators where verified, and state when line or page locators are unavailable. The [TnC, CoC and Ruleset reconstruction](TNC-COC-RULESET-RECONSTRUCTION.md) maps each legal and operational finding to the V2 document architecture. The scholarly evidence register is separate from binding law: [MODERATION-RESEARCH-EVIDENCE.md](MODERATION-RESEARCH-EVIDENCE.md).
