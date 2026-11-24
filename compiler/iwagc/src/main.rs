@@ -49,6 +49,18 @@ fn canonical_inside_root(root: &Path, path: &Path, label: &str) -> Result<PathBu
     Ok(canonical)
 }
 
+fn ensure_existing_ancestor_inside_root(root: &Path, path: &Path, label: &str) -> Result<(), String> {
+    let mut ancestor = path;
+    loop {
+        if ancestor.exists() {
+            canonical_inside_root(root, ancestor, label)?;
+            return Ok(());
+        }
+        ancestor = ancestor.parent()
+            .ok_or_else(|| format!("cannot resolve an existing parent for {label}"))?;
+    }
+}
+
 fn load_manifest(root: &Path) -> Result<String, String> {
     let path = root.join("iwag.compiler.toml");
     fs::read_to_string(&path).map_err(|e| format!("cannot read {}: {e}", path.display()))
@@ -262,6 +274,7 @@ fn build(root: &Path, manifest: &str) -> Result<(), String> {
     let output_path = safe_project_path(root, output_name, "output_root")?;
     let archive_path = safe_project_path(root, archive_name, "archive_root")?;
     let source = canonical_inside_root(root, &source_path, "source_root")?;
+    ensure_existing_ancestor_inside_root(root, &output_path, "output_root")?;
     if archive_path.exists() {
         let archive = canonical_inside_root(root, &archive_path, "archive_root")?;
         if source.starts_with(&archive) || archive.starts_with(&source) {
@@ -391,5 +404,61 @@ fn main() -> ExitCode {
             eprintln!("[iwagc:error] {error}");
             ExitCode::FAILURE
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::time::{SystemTime, UNIX_EPOCH};
+
+    fn temporary_directory(label: &str) -> PathBuf {
+        let nonce = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("system clock must be after UNIX epoch")
+            .as_nanos();
+        let path = env::temp_dir().join(format!("iwagc-{label}-{}-{nonce}", std::process::id()));
+        fs::create_dir_all(&path).expect("temporary directory should be created");
+        path
+    }
+
+    #[test]
+    fn project_paths_reject_absolute_and_traversal_inputs() {
+        let root = temporary_directory("path-validation");
+        assert!(safe_project_path(&root, "", "test").is_err());
+        assert!(safe_project_path(&root, "../outside", "test").is_err());
+        assert!(safe_project_path(&root, "/tmp/outside", "test").is_err());
+        assert!(safe_project_path(&root, "src/pages", "test").is_ok());
+        fs::remove_dir_all(root).expect("temporary directory should be removed");
+    }
+
+    #[test]
+    fn manifest_reader_ignores_full_line_comments_and_reads_simple_values() {
+        let manifest = "# comment\nsource_root = \"src\"\nnode_minimum = \"22.23.4\"\n";
+        assert_eq!(manifest_value(manifest, "source_root"), Some("src"));
+        assert_eq!(manifest_value(manifest, "node_minimum"), Some("22.23.4"));
+        assert_eq!(manifest_value(manifest, "missing"), None);
+    }
+
+    #[test]
+    fn semantic_version_comparison_handles_patch_and_prerelease_suffixes() {
+        assert_eq!(version_tuple("v22.23.4"), Some((22, 23, 4)));
+        assert_eq!(version_tuple("22.23.5-nightly"), Some((22, 23, 5)));
+        assert!(version_at_least("v22.23.5", "22.23.4"));
+        assert!(!version_at_least("v22.23.3", "22.23.4"));
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn output_path_rejects_existing_symlink_parent_outside_repository() {
+        use std::os::unix::fs::symlink;
+
+        let root = temporary_directory("symlink-root");
+        let outside = temporary_directory("symlink-outside");
+        symlink(&outside, root.join("external")).expect("symlink should be created");
+        let output = root.join("external").join("dist");
+        assert!(ensure_existing_ancestor_inside_root(&root, &output, "output_root").is_err());
+        fs::remove_dir_all(root).expect("temporary root should be removed");
+        fs::remove_dir_all(outside).expect("temporary outside directory should be removed");
     }
 }
