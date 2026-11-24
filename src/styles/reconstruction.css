@@ -214,6 +214,7 @@ input[type="color"] { width: 2.75rem; padding: .2rem; }
 :root:not([data-theme="dynamic"]) [data-accent-label],
 :root:not([data-theme="dynamic"]) [data-accent-choice] { display: none; }
 .accessibility-preferences { position: relative; }
+:root:not([data-js="true"]) .accessibility-preferences { display: none; }
 .accessibility-preferences summary {
   display: inline-flex; align-items: center; cursor: pointer;
   padding: .35rem .7rem; border: 1px solid var(--border);
