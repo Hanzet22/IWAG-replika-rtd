@@ -38,7 +38,7 @@ The scanner is diagnostic and does not independently fail the build. Existing ou
 
 ## 3. Route and locale coverage
 
-The scan discovers every generated `.html` file beneath the configured output directory, including static paths expanded from dynamic Astro routes and localized route variants. It reports per-locale page counts for `en`, `id`, `en-sg` and `ms-my`, plus each generated route and its generated file path.
+The scan discovers every generated `.html` file beneath the configured output directory, including static paths expanded from dynamic Astro routes and localized route variants. It reports per-route locale buckets for `en`, `id`, `en-sg` and `ms-my`, plus each generated route and its generated file path. The route prefix is not treated as proof of the page's human language: fallback pages may legitimately declare `lang="en"` under an `/id/` or `/ms-my/` path. The scanner validates that the root `html[lang]` value is present and syntactically valid as a BCP 47 language tag; determining whether it accurately describes the predominant page language still requires content review.
 
 The scanner compares the discovered output against `compiler/iwagc/config/expected-routes.json`, a 30-route required baseline aligned with Rust `validate_required_routes`. Missing expected routes and additional generated routes are reported separately from accessibility findings. Additional routes are not failures; they are routes outside the required baseline.
 
