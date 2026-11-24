@@ -21,6 +21,7 @@ The dedicated reconstruction plan, source inventory and compiler contract are ma
 - [Indonesia pinpoint legal register](docs/INDONESIA-PINPOINT-LEGAL-REGISTER.md)
 - [V2 child-access and PP 17/2025 scope assessment](docs/CHILD-ACCESS-PP17-SCOPE-ASSESSMENT.md)
 - [Global legal research register — updated 25 November 2026](docs/LEGAL-RESEARCH-2026-11-24.md)
+- [Infrastructure and data-flow verification — 25 November 2026](docs/INFRASTRUCTURE-DATA-FLOW-VERIFICATION-2026-11-25.md)
 - [Moderation and child-safety research evidence](docs/MODERATION-RESEARCH-EVIDENCE.md)
 - [WCAG 2.2 criteria register](docs/WCAG-2.2-AA-COMPLETE-CRITERIA-REGISTER.md)
 - [Graphics and motion policy](docs/GRAPHICS-AND-MOTION-POLICY.md)
