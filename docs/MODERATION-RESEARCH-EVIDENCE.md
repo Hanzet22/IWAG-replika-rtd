@@ -151,11 +151,10 @@ As of 24 November 2026. Scholarly research informs product design and governance
     
     Online harm is a prevalent issue in adolescents’ online lives. Restorative justice teaches us to focus on those who have been harmed, ask what their needs are, and engage in the offending party and community members to collectively address the harm. In this research, we conducted interviews and design activities with harmed adolescents to understand their needs to address online harm. They also identified the key stakeholders relevant to their needs, the desired outcomes, and the preferred timing to achieve them. We identified five central needs of harmed adolescents: sensemaking, emotional support and validation, safety, retribution, and transformation. We find that addressing the needs of those who are harmed online usually requires concerted efforts from multiple stakeholders online and offline. We conclude by discussing how platforms can implement design interventions to meet some of these needs.
 
-Scores (r): r=1 is the 'precisely relevant' threshold — a paper that just barely meets the search goal. Everything else is relative importance: r=2 is 2× as relevant, r=0.5 is half as relevant.
 
-PDF symbols - ✓ PDF available; X No PDF available; … PDF download attempt in progress
 
-When presenting papers in your reply, fetch their DOIs with get_paper_info (show_doi=true) and present cite keys as [[cite_key]](https://doi.org/<DOI>). Use the Link returned by get_paper_info for papers without a DOI.
+
+
 
 
 ## Selected research references — updated 25 November 2026
