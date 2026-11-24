@@ -53,6 +53,20 @@ The report records:
 
 The report is diagnostic evidence. Static checks do not prove that alternative text is meaningful, that accessible names are understandable, or that every route passes keyboard, screen-reader, zoom, cognitive-accessibility or device testing.
 
+## 4A. Generated-output accessibility findings
+
+The Rust-controlled build now invokes a dedicated generated-HTML diagnostics helper after route and asset validation:
+
+- `compiler/iwagc/scripts/accessibility-report.mjs`
+- `.iwag-build/accessibility-report.json`
+- `.iwag-build/accessibility.sarif` (SARIF 2.1.0)
+
+The scanner enumerates generated HTML files, records route/locale coverage, and emits stable diagnostic IDs for document language, page title, missing image-alt attributes, link/button/form naming candidates, broken ARIA ID references, and duplicate IDs. Confirmed structural observations are separated from review-required heuristics. Severity and confidence are separate fields.
+
+This first implementation is a lightweight Node.js source scanner orchestrated by Rust, not a Rust-native parser and not a browser accessibility-tree evaluator. It does not prove meaningful names, keyboard operation, screen-reader behavior, contrast, reflow, captions, or WCAG conformance. The scanner report is diagnostic only and does not independently fail the build; existing output validation retains its current enforcement behavior.
+
+The formal target remains WCAG 2.2 Level A. Level AA remains an optional enhancement track. A green CI run or an empty automated report is never a conformance claim. See [Accessibility Findings Engine](ACCESSIBILITY-FINDINGS-ENGINE.md) for the rule inventory, evidence model, limitations and research references.
+
 ## 5. Specialist backend ownership
 
 | Stage | Owner |
@@ -103,7 +117,7 @@ Implemented:
 Still required:
 - full license-text and notice review for the 530-package dependency graph;
 - complete content/locale manifest validation;
-- stable diagnostic codes and structured JSON output for all commands;
+- extend stable diagnostic codes and structured JSON output across all commands;
 - if Next.js is adopted, isolated dependency lock, build output, runtime configuration and security review for that application module.
 
 ## 8. WASM policy
@@ -126,7 +140,7 @@ WebAssembly must not gate navigation, reading, forms or essential information. A
 - complete content/locale manifest validation;
 - reproducible dependency lock and license report;
 - explicit diagnostics schema;
-- route manifest generated from Astro output rather than only a critical-route allowlist;
+- explicit expected-route/locale manifest comparison to detect missing expected generated pages;
 - optional WASM module manifest and browser loader;
 - production CSS dead-code and size diagnostics;
 - only after a real Next.js module is approved: declare its manifest and route boundary, implement conditional backend orchestration, validate output isolation and route collisions, and define the deployment/proxy contract.
