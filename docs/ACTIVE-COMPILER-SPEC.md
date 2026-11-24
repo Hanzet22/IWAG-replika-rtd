@@ -8,7 +8,7 @@
 
 The Rust `iwagc` CLI is the required project-level entry point for normal development and production builds. It is the active build controller and validator.
 
-It does **not** independently parse or transpile Astro, HTML, CSS, JavaScript, TypeScript or Vue. Astro/Vite and their registered plugins remain the specialist frontend compiler backends. Rust owns the orchestration and project-specific validation around them.
+It does **not** independently parse or transpile Astro, HTML, CSS, JavaScript, TypeScript, Vue or Next.js. Astro/Vite and any declared specialist application toolchains remain the specialist compiler backends. Rust owns orchestration and project-specific validation around them.
 
 ## 2. Current command interface
 
@@ -21,7 +21,7 @@ It does **not** independently parse or transpile Astro, HTML, CSS, JavaScript, T
 | `iwagc preview` | Launch Astro production preview through npm |
 | `iwagc wasm` | Explicitly build the Rust contrast-engine module using wasm-pack |
 
-The normal npm scripts call these Rust commands. `build:astro` remains a diagnostic backend escape hatch, not the normal build entry point.
+The normal npm scripts call these Rust commands. `build:astro` remains a diagnostic backend escape hatch, not the normal build entry point. Next.js orchestration is a future conditional capability, not a current command.
 
 ## 3. Current build stages
 
@@ -38,6 +38,8 @@ The normal npm scripts call these Rust commands. `build:astro` remains a diagnos
 11. Verify root homepage, 404 page and seven critical routes for each of four locales.
 12. Count generated HTML, CSS, JavaScript, images and fonts, plus byte footprints.
 13. Write `.iwag-build/iwag-build-report.json` outside the public `dist/` directory.
+
+When a real Next.js module is later declared, the compiler may add a separate backend stage for that module. It must not silently merge Next.js output into Astro's route tree or make the Next.js toolchain mandatory for builds that do not declare the module.
 
 ## 4. Output report
 
@@ -63,9 +65,27 @@ The report is diagnostic evidence. Static checks do not prove that alternative t
 | Tailwind CSS utilities | Tailwind CSS 4 Vite plugin |
 | Typed design tokens and extracted utilities | Panda CSS Vite plugin |
 | Atomic component CSS extraction | StyleX Vite plugin |
+| Optional React component islands, if explicitly adopted | Astro React integration |
+| Specialized React application module, only when declared | Next.js build/runtime |
 | Optional Rust-to-WASM module | wasm-pack / wasm-bindgen |
 
-## 6. Security and reproducibility
+## 6. Next.js specialist backend contract
+
+Next.js is accepted as a **Specialized Application Framework**, not the primary website framework.
+
+- Astro remains the owner of public content routes and the shared website shell.
+- Next.js owns only a separately bounded application module that qualifies under `docs/ADR-NEXTJS-SPECIALIZED-APPLICATION-FRAMEWORK.md`.
+- Next.js is a separately deployed application, not an Astro component or an Astro React island.
+- A path mount requires a capable edge/reverse proxy and a build-time Next.js `basePath`; otherwise use a dedicated subdomain.
+- The application module must define its own route manifest, asset base path, runtime requirements, environment contract, authentication/session boundaries, security headers, cache behavior and deployment target.
+- The public Astro build must remain buildable and navigable without installing or starting Next.js when no module is declared.
+- The Active Compiler should detect the declared module from an explicit manifest entry, invoke the Next.js backend only for that module, and report its build result separately from Astro output.
+- The compiler must validate route ownership and reject collisions between Astro public routes and Next.js delegated routes.
+- Do not introduce a permanent Next.js dependency or backend adapter before an actual module exists.
+
+This is an architecture contract, not an implementation claim. Next.js is not yet installed and no Next.js application module exists.
+
+## 7. Security and reproducibility
 
 Implemented:
 - path canonicalization for source, archive and output boundaries;
@@ -82,32 +102,33 @@ Implemented:
 
 Still required:
 - full license-text and notice review for the 530-package dependency graph;
-- `srcset` and fragment-target validation;
 - complete content/locale manifest validation;
-- stable diagnostic codes and structured JSON output for all commands.
+- stable diagnostic codes and structured JSON output for all commands;
+- if Next.js is adopted, isolated dependency lock, build output, runtime configuration and security review for that application module.
 
-## 7. WASM policy
+## 8. WASM policy
 
 The contrast-engine crate powers the optional accessibility-page contrast calculator. The production workflow builds it through `wasm-pack`; the browser loads the module only after a user requests a calculation. The component falls back to a local JavaScript implementation if the generated module is absent or fails to initialize.
 
 WebAssembly must not gate navigation, reading, forms or essential information. A JavaScript or static fallback remains mandatory.
 
-## 8. CSS integration contract
+## 9. CSS integration contract
 
 - Tailwind CSS 4 imports theme and utility layers without preflight.
 - Panda CSS supplies typed tokens and compile-time extracted utilities.
 - StyleX uses prefixed priority layers positioned before Tailwind utilities.
 - Plain semantic CSS remains the base and fallback.
 - The generated CSS cascade must be inspected in production because layered declarations lose to normal unlayered declarations in the CSS cascade.
+- A future Next.js application consumes the shared framework-neutral design-token contract and must not introduce a competing reset.
 
-## 9. Remaining compiler roadmap
+## 10. Remaining compiler roadmap
 
-- full local-link and asset integrity scan;
-- locale and content-schema checks;
+- complete content/locale manifest validation;
 - reproducible dependency lock and license report;
 - explicit diagnostics schema;
 - route manifest generated from Astro output rather than only a critical-route allowlist;
 - optional WASM module manifest and browser loader;
-- production CSS dead-code and size diagnostics.
+- production CSS dead-code and size diagnostics;
+- only after a real Next.js module is approved: declare its manifest and route boundary, implement conditional backend orchestration, validate output isolation and route collisions, and define the deployment/proxy contract.
 
 No CI status is used as the definition of project completion.
