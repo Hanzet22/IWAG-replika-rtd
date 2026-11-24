@@ -73,7 +73,38 @@ const isEvents = page === "events";
 const isJoinTeam = page === "join-iwag-team";
 const isLinks = page === "links";
 const isPolicy = page === "policy";
-const copy = policy?.summary ?? (isConduct
+const pageSummaries: Record<string, Record<string, string>> = {
+  en: {
+    updates: "Dated announcements and historical archive entries. Each item should be checked against its original publication and current organiser updates.",
+    participate: "A dated snapshot of publicly announced participation tiers. This preview does not sell passes, accept registrations or take payments.",
+    location: "Venue details from a dated public announcement. Confirm transport, facilities and accessibility arrangements with the venue and event organiser.",
+    links: "A curated directory of official travel, venue and event references. External websites have their own operators and privacy practices.",
+    policy: "Independent working drafts for this project. None is an official IWAG policy, approved rule or operative contract.",
+    "join-iwag-team": "A historical summary of contribution areas. This page is not an application form and does not confirm current vacancies."
+  },
+  id: {
+    links: "Direktori referensi perjalanan, lokasi, dan acara. Situs eksternal memiliki operator serta praktik privasinya sendiri.",
+    policy: "Kumpulan draf kerja independen untuk proyek ini. Tidak ada dokumen yang merupakan kebijakan resmi IWAG, aturan yang disahkan, atau kontrak yang berlaku.",
+    "join-iwag-team": "Ringkasan historis bidang kontribusi. Halaman ini bukan formulir pendaftaran dan tidak mengonfirmasi lowongan aktif."
+  },
+  "en-sg": {
+    updates: "Dated announcements and historical archive entries. Check the original publication and organiser channels for current information.",
+    participate: "A dated snapshot of publicly announced participation tiers. This preview does not sell passes, accept registrations or take payments.",
+    location: "Venue details from a dated public announcement. Confirm transport, facilities and accessibility arrangements with the venue and organiser.",
+    links: "A curated directory of official travel, venue and event references. External websites have their own operators and privacy practices.",
+    policy: "Independent working drafts for this project. None is an official IWAG policy, approved rule or operative contract.",
+    "join-iwag-team": "A historical summary of contribution areas. This page is not an application form and does not confirm current vacancies."
+  },
+  "ms-my": {
+    updates: "Dated announcements and historical archive entries. Check the original publication and organiser channels for current information.",
+    participate: "A dated snapshot of publicly announced participation tiers. This preview does not sell passes, accept registrations or take payments.",
+    location: "Venue details from a dated public announcement. Confirm transport, facilities and accessibility arrangements with the venue and organiser.",
+    links: "A curated directory of official travel, venue and event references. External websites have their own operators and privacy practices.",
+    policy: "Independent working drafts for this project. None is an official IWAG policy, approved rule or operative contract.",
+    "join-iwag-team": "A historical summary of contribution areas. This page is not an application form and does not confirm current vacancies."
+  }
+};
+const copy = policy?.summary ?? pageSummaries[englishFallback ? "en" : lang]?.[page] ?? (isConduct
   ? (lang === "id" ? "Kode Etik V2 merupakan draf independen." : "The V2 Code of Conduct is an independent draft.")
   : isLegal ? contentMessages.legalDraft
   : isAccessibility ? contentMessages.levelText
