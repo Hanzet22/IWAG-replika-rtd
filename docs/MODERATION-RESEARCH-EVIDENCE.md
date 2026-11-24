@@ -157,4 +157,14 @@ PDF symbols - ✓ PDF available; X No PDF available; … PDF download attempt in
 
 When presenting papers in your reply, fetch their DOIs with get_paper_info (show_doi=true) and present cite keys as [[cite_key]](https://doi.org/<DOI>). Use the Link returned by get_paper_info for papers without a DOI.
 
-When mentioning this deep search to the user, include its web-app link: https://app.undermind.ai/projects/a6c5ea9d-f326-463f-a3c4-2269426d083e?path=<its URL-encoded path>
+
+## Selected research references
+
+- Matias, J. N. (2019), *Preventing harassment and increasing group participation through social norms in 2,190 online science discussions*, PNAS. https://doi.org/10.1073/pnas.1813486116
+- Ribeiro et al. (2024), *Post Guidance for Online Communities*, Proceedings of the ACM on Human-Computer Interaction. https://doi.org/10.1145/3711046
+- Lee et al. (2025), *Mapping Community Appeals Systems: Lessons for Community-led Moderation in Multi-Level Governance*, Proceedings of the ACM on Human-Computer Interaction. https://doi.org/10.1145/3757627
+- Fry et al. (2025), *Prevalence estimates and nature of online child sexual exploitation and abuse: a systematic review and meta-analysis*, The Lancet Child & Adolescent Health. https://doi.org/10.1016/S2352-4642(24)00329-8
+- Shim & Jhaver (2024), *Incorporating Procedural Fairness in Flag Submissions on Social Media Platforms*, ACM Transactions on Social Computing. https://doi.org/10.1145/3797820
+- Lyu et al. (2024), *A Study of Blind TikTokers’ Content Moderation Experiences*, Proceedings of the CHI Conference on Human Factors in Computing Systems. https://doi.org/10.1145/3613904.3642148
+
+The cited review and empirical studies inform policy design only. Abstract-level evidence, sample limits and study context must be considered; none of these papers is a legal authority.
