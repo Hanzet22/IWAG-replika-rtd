@@ -1,6 +1,6 @@
 # IWAG V2 — Legal, Regulatory & Trust Requirements
 
-**Review date:** 2026-11-24  
+**Review date:** 2026-11-25  
 **Jurisdictional baseline:** Indonesia  
 **Accessibility target:** WCAG 2.2 Level A only (A, not AA)  
 **Status:** Engineering compliance requirements and legal-review checklist; not approved legal advice or final public policy.
@@ -13,7 +13,7 @@ Legal duties depend on facts that are not yet established: the operator's legal 
 
 **Release blockers:** do not enable registration, ticket sales, payment, account creation, analytics, sponsor lead forms or collection of sensitive/child data until the actual operator, purpose, lawful basis, service model, notices, vendor contracts, retention and complaint channel are documented and reviewed.
 
-Use a legal register with: instrument, issuing authority, jurisdiction, official URL, status, effective date, applicable trigger, affected feature, implementation evidence, reviewer and next review date. Recheck amendments before every material release.
+Use a legal register with: instrument, issuing authority, jurisdiction, official URL, status, effective date, applicable trigger, affected feature, implementation evidence, reviewer and next review date. Recheck amendments before every material release. Cite Indonesian law by Pasal/ayat/huruf/angka; do not invent statutory line numbers or unverified PDF pages.
 
 ## 2. Indonesia — binding baseline when the relevant trigger applies
 
@@ -37,36 +37,38 @@ V2 requirements:
 
 Official text: https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
 
-### 2.2 PDP implementing regulation — prepare ahead of commencement
+### 2.2 Reported PP 33/2026 — not verified in official central repository
 
-**Government Regulation No. 33 of 2026**, implementing UU PDP, was promulgated on 16 July 2026 and is scheduled to enter into force six months later, on **16 January 2027**. It is not yet in force on this document's review date (23 November 2026). The underlying UU PDP duties already apply.
+Earlier research reported a PP 33/2026 implementing regulation with a future commencement date. However, as of 25 November 2026, this review has not located a verified BPK/Setneg central record or official final Gazette PDF. Search results surfaced secondary legal sources and a local-government-hosted copy only. Therefore V2 must not cite reported Gazette identifiers, Pasal 225 or article-level requirements as verified law, and must not treat the reported instrument as currently in force.
+
+The operative PDP baseline remains **UU No. 27 Tahun 2022**. Track the PP 33/2026 report as an unresolved source-verification item and update this matrix only when the final official Gazette/central JDIH record is available.
+
+### 2.3 Children and online services — PP 17/2025
+
+**PP No. 17 Tahun 2025** on governance of electronic systems for child protection is in force from 27 March 2025 (LN 2025 No. 36; TLN No. 7105). It covers private PSEs whose products, services or features are designed for, or may be used/accessed by, children. The assessment is not limited to account creation or user-generated content.
+
+Key pinpoint provisions:
+- **Pasal 3 ayat (3):** private-PSE scope.
+- **Pasal 4 ayat (1)–(3):** designed-for-child and may-be-accessed-by-child categories; indicators in ayat (2) huruf a–e include terms/policies, evidence of routine child users, child-directed advertising, design and similarity to services proven to be used by children.
+- **Pasal 5 ayat (1)–(9):** child-risk classification and self-assessment; ayat (3) huruf a–g covers stranger contact, harmful content, child-consumer exploitation, child-data security, addiction and psychological/physiological effects.
+- **Pasal 7 ayat (1)–(3), Pasal 8–11, Pasal 19–23:** duties, prohibitions, privacy defaults, information, parental authorisation, age-related safeguards, child profiling, reporting and follow-up.
+- **Pasal 49:** maximum two-year adjustment period from promulgation; the outer date is 27 March 2027.
 
 V2 requirements:
-- Track the commencement date and prepare a separate gap assessment against the final official text.
-- Do not describe PP 33/2026 as already effective before 16 January 2027.
-- Review implementing detail on data-subject rights, processing, DPIA, DPO, cross-border transfer and sanctions with Indonesian counsel before launch or continued processing after commencement.
+- Complete and document the PP 17/2025 scope assessment **now**, not only before accounts are added. No accounts/comments reduces contact and UGC risks but does not decide the “may be accessed by children” question.
+- Review the five Pasal 4 ayat (2) indicators against V2's published terms, audience evidence, advertising, design and similar services. Audience composition is currently unverified.
+- Complete the Pasal 5 self-assessment if the website or a feature is within scope. Do not claim a low-risk classification without evidence or a ministerial determination where required.
+- If in scope, map the applicable duties in Pasal 7–11 and Pasal 19–23 to the actual service and final implementing text.
+- Do not add an intrusive age gate, identity check or parental-consent collection without a documented legal trigger, proportionality review and data-minimisation plan.
+- Keep website access separate from event admission eligibility; an event age rating does not determine website scope.
+- Do not collect precise child geolocation or profile children where prohibited.
+- Keep the current site read-only until any required child-protection, reporting and privacy controls are implemented.
 
-Signed-text mirror (third-party host; not an official repository): https://legaltrans.id/downloads/pp-33-tahun-2026-pelindungan-data-pribadi.pdf
-Secondary commencement analysis (not a substitute for the official text): https://www.deloitte.com/content/dam/assets-zone1/southeast-asia/en/docs/services/legal/2026/sea-id-legal-client-alert-oct2026-en.pdf
-**Source limitation:** an official BPK/peraturan.go.id listing for PP 33/2026 was not located during this review on 23 November 2026. Verify the signed regulation against the official State Gazette and authoritative government repository before relying on article-level requirements or publishing a legal conclusion.
+Official PP 17/2025 record/text: https://peraturan.bpk.go.id/Details/316698/pp-no-17-tahun-2025 and https://jdih.komdigi.go.id/produk_hukum/unduh/id/965/t/peraturan+pemerintah+nomor+17+tahun+2025.
 
-### 2.3 Children and online services
+**Permenkomdigi No. 9 Tahun 2026 source conflict:** JDIH metadata lists the regulation as effective from 6 March 2026 and BN 2026 No. 163, but the linked official download is visibly headed “RANCANGAN” and contains blank promulgation details. Until the final gazetted PDF is obtained, do not rely on article-level requirements, age-assurance methods or reporting deadlines from that file. Metadata: https://jdih.komdigi.go.id/produk_hukum/view/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026. Draft download: https://jdih.komdigi.go.id/produk_hukum/unduh/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026.
 
-**PP No. 17 of 2025** on Governance of Electronic System Implementation for Child Protection is in force (promulgated 27 March 2025). **Permenkomdigi No. 9 of 2026**, its implementing regulation, is also in force (6 March 2026). PP 17/2025 covers private electronic-system providers whose products/services/features are specifically designed for, or may be accessed by, children. A public event website may be accessible to minors even where the physical event has an age rating.
-
-V2 requirements:
-- Complete a child-access/risk applicability assessment before accounts, registration, profiling, messaging, user-generated content, location functions or personalised recommendations are added.
-- Clearly state minimum age and explain age-related rules in plain language.
-- Where the rules apply, implement the required parent/guardian consent, age assurance, child-friendly information, high-privacy defaults, child-rights reporting and other controls in the final applicable regulations.
-- Do not collect precise geolocation from children or profile children where prohibited.
-- Do not use behavioural advertising or manipulative engagement patterns directed at children.
-- Separate website access from event attendance eligibility; an event's 14+ rule does not automatically remove child-protection duties for a website that children may access.
-- Minimise parental-consent evidence and avoid retaining identity documents unless necessary and legally justified.
-- Provide a child-rights/safety reporting path and an escalation process before enabling interactive features.
-
-Official sources:
-- PP 17/2025: https://peraturan.bpk.go.id/Details/316698/pp-no-17-tahun-2025
-- Permenkomdigi 9/2026: https://peraturan.bpk.go.id/Details/346040/permenkomdigi-no-9-tahun-2026
+See [V2 child-access and PP 17/2025 scope assessment](CHILD-ACCESS-PP17-SCOPE-ASSESSMENT.md) and the [Indonesia pinpoint legal register](INDONESIA-PINPOINT-LEGAL-REGISTER.md).
 
 ### 2.4 Electronic systems and information disclosure
 
