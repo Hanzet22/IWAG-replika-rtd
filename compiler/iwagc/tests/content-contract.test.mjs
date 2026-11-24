@@ -84,3 +84,10 @@ test("Child Safety & Protection draft is routed and remains non-operative", () =
   assert.match(page, /"child-safety"/);
   assert.match(rust, /child-safety\/index\.html/);
 });
+
+
+test("Child Safety & Protection has a Malay translation", () => {
+  const legal = read("../../../src/data/legal.ts");
+  assert.match(legal, /Perlindungan Kanak-kanak/);
+  assert.match(legal, /saluran laporan keselamatan kanak-kanak/);
+});

@@ -55,7 +55,7 @@ const englishFallback = lang === "ms-my" || (lang === "id" && ["location", "part
 const title = englishFallback ? pageTitles.en[page] ?? "Information" : pageTitles[lang]?.[page] ?? pageTitles.en[page] ?? "Information";
 const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct", ...legalPolicySlugs];
 const policySlug = page === "tnc" ? "terms" : page === "code-of-conduct" ? "coc" : page;
-const policy = legalPolicies[policySlug]?.[lang === "id" ? "id" : "en"];
+const policy = legalPolicies[policySlug]?.[lang] ?? legalPolicies[policySlug]?.en;
 const isLegal = legalPages.includes(page);
 const isTerms = false;
 const isPrivacy = false;
