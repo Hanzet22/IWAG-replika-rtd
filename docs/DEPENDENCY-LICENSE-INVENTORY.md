@@ -6,9 +6,9 @@
 
 ## 1. Snapshot
 
-- 12 direct dependencies are pinned to exact versions.
-- 530 transitive/direct package entries are recorded in the lockfile.
-- All 530 entries have a declared `license` metadata field in the lockfile.
+- 13 direct dependencies are pinned to exact versions.
+- 532 transitive/direct package entries are recorded in the lockfile.
+- All 532 entries have a declared `license` metadata field in the lockfile.
 - Direct dependencies declare MIT or Apache-2.0.
 - The lockfile is a dependency-resolution record, not proof that every package's full license text, notice, patent terms, or source-distribution obligations have been satisfied.
 
@@ -19,6 +19,7 @@
 | `@stylexjs/stylex` | 0.19.2 | MIT |
 | `astro` | 7.4.13 | MIT |
 | `vue` | 3.5.45 | MIT |
+| `parse5` | 8.1.1 | MIT |
 | `@astrojs/vue` | 7.1.6 | MIT |
 | `@pandacss/dev` | 2.6.0 | MIT |
 | `@pandacss/preset-base` | 2.6.0 | MIT |
@@ -71,3 +72,10 @@ This is a technical metadata inventory, not legal advice or a declaration that a
 - `wasm-pack` is installed in CI at version 0.15.0 and declares `MIT OR Apache-2.0`.
 - The earlier 0.13.1 pin produced a Cargo warning for yanked `spin 0.9.8`. It was replaced with 0.15.0, whose published dependency metadata is current as of May 2026.
 - Recheck the actual install log and generated lockfile whenever this tool version changes. A yanked warning is not automatically a security advisory, but it should not be silently ignored.
+
+
+## 6. HTML parser dependency isolation
+
+- `parse5` 8.1.1 is a direct MIT dependency for WHATWG HTML parsing and source-location diagnostics.
+- `parse5` uses `entities` 9.0.0 (BSD-2-Clause), nested under `node_modules/parse5` to avoid overriding existing `entities` 7.0.1 and `dom-serializer`'s nested 4.5.0.
+- The lockfile was updated with exact registry tarballs and integrity hashes; run `npm ci` to validate the resolution on the target runner.
