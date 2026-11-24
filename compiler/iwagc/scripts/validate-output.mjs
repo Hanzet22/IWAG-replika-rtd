@@ -1,4 +1,4 @@
-import { mkdir, readdir, readFile, stat, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, realpath, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { runAccessibilityReport } from "./accessibility-report.mjs";
@@ -62,8 +62,15 @@ async function resolveLocalReference(raw, base, owner, kind) {
   }
 
   try {
-    const metadata = await stat(target);
+    const canonicalRoot = await realpath(outputRoot);
+    const canonicalTarget = await realpath(target);
+    if (canonicalTarget !== canonicalRoot && !canonicalTarget.startsWith(canonicalRoot + path.sep)) {
+      errors.push(owner + ': local ' + kind + ' target resolves outside output root "' + value + '"');
+      return;
+    }
+    const metadata = await stat(canonicalTarget);
     if (!metadata.isFile()) throw new Error("not a file");
+    target = canonicalTarget;
   } catch {
     errors.push(owner + ': missing local ' + kind + ' target "' + value + '"');
     return;
