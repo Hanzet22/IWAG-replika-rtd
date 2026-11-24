@@ -13,7 +13,6 @@ Requirement labels:
 - **MUST — formal target:** required by an applicable WCAG 2.2 Level A success criterion.
 - **SHOULD — enhancement:** Level AA criteria and evidence-informed project recommendations beyond the declared Level A target.
 - **MAY — implementation option:** one possible technique; equivalent methods are acceptable if the outcome conforms and is validated.
-- **MAY — implementation option:** one possible technique; equivalent methods are acceptable if the outcome conforms and is validated.
 
 WCAG 2.2 Level AA means meeting **all Level A and all Level AA success criteria**. Do not claim AA based on a subset, automated score, or one tested template. Consider every page, state, responsive presentation, and complete process in the declared scope.
 
