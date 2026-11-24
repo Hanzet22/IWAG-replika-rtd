@@ -212,3 +212,16 @@ The latest implementation is a working reconstruction foundation and shared home
 - [ ] Reconcile any remaining stale accessibility target wording across all archived and active documents before publication.
 
 This pass is source implementation evidence only. It is not a WCAG conformance claim. CI/CD is not a completion criterion.
+
+
+## Generated-output accessibility diagnostics
+
+- [x] Add generated HTML route/locale enumeration to the post-build diagnostic pass.
+- [x] Emit stable accessibility diagnostic IDs and confidence-separated findings.
+- [x] Emit machine-readable JSON and SARIF 2.1.0 reports outside the public output directory.
+- [x] Keep heuristic findings review-required and explicitly disclaim automated conformance.
+- [ ] Compare generated routes/locales against a separate expected-route manifest.
+- [ ] Upgrade from lightweight source scanning to a browser-compatible HTML5 parser after dependency/licensing review.
+- [ ] Add source-map resolution for originating Astro/Markdown source locations.
+- [ ] Complete keyboard, screen-reader/TalkBack, zoom/reflow, forced-colors and human evaluation.
+
