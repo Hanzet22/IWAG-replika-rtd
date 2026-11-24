@@ -52,9 +52,20 @@ fn canonical_inside_root(root: &Path, path: &Path, label: &str) -> Result<PathBu
 fn ensure_existing_ancestor_inside_root(root: &Path, path: &Path, label: &str) -> Result<(), String> {
     let mut ancestor = path;
     loop {
-        if ancestor.exists() {
-            canonical_inside_root(root, ancestor, label)?;
-            return Ok(());
+        match fs::symlink_metadata(ancestor) {
+            Ok(_) => {
+                // symlink_metadata also detects dangling symlinks; canonicalize then
+                // rejects unresolved targets instead of silently walking past them.
+                canonical_inside_root(root, ancestor, label)?;
+                return Ok(());
+            }
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound => {}
+            Err(error) => {
+                return Err(format!(
+                    "cannot inspect {label} ancestor {}: {error}",
+                    ancestor.display()
+                ));
+            }
         }
         ancestor = ancestor.parent()
             .ok_or_else(|| format!("cannot resolve an existing parent for {label}"))?;
@@ -460,5 +471,22 @@ mod tests {
         assert!(ensure_existing_ancestor_inside_root(&root, &output, "output_root").is_err());
         fs::remove_dir_all(root).expect("temporary root should be removed");
         fs::remove_dir_all(outside).expect("temporary outside directory should be removed");
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn output_path_rejects_dangling_symlink_ancestor() {
+        use std::os::unix::fs::symlink;
+
+        let root = temporary_directory("dangling-symlink-root");
+        let outside = env::temp_dir().join(format!(
+            "iwagc-dangling-target-{}-{}",
+            std::process::id(),
+            SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos()
+        ));
+        symlink(&outside, root.join("external")).expect("dangling symlink should be created");
+        let output = root.join("external").join("dist");
+        assert!(ensure_existing_ancestor_inside_root(&root, &output, "output_root").is_err());
+        fs::remove_dir_all(root).expect("temporary root should be removed");
     }
 }
