@@ -1,16 +1,18 @@
 # IWAG V2 Accessibility Engineering Specification
 
 **Status:** Research-backed engineering baseline  
-**Target:** WCAG 2.2 Level AA (all applicable Level A and AA success criteria)  
+**Formal project target:** WCAG 2.2 Level A (all applicable Level A success criteria)  
+**Additional engineering ambition:** Track Level AA criteria as voluntary improvements; do not claim Level AA conformance.  
 **Snapshot:** 2026-11-24
 
 ## 1. Purpose and conformance model
 
-IWAG V2 treats accessibility as a system property, not a cosmetic feature or diagnosis-specific mode. This document translates WCAG 2.2 A/AA into implementation and validation requirements, then adds evidence-informed cognitive accessibility, neuroinclusive interaction, and disability-inclusive co-design recommendations.
+IWAG V2 treats accessibility as a system property, not a cosmetic feature or diagnosis-specific mode. This document translates all applicable WCAG 2.2 Level A criteria into implementation and validation requirements. It also tracks Level AA criteria as voluntary engineering improvements, then adds evidence-informed cognitive accessibility, neuroinclusive interaction, and disability-inclusive co-design recommendations.
 
 Requirement labels:
-- **MUST — normative:** required by an applicable WCAG 2.2 A or AA success criterion.
-- **SHOULD — IWAG inclusion baseline:** evidence-informed project recommendation beyond WCAG's minimum.
+- **MUST — formal target:** required by an applicable WCAG 2.2 Level A success criterion.
+- **SHOULD — enhancement:** Level AA criteria and evidence-informed project recommendations beyond the declared Level A target.
+- **MAY — implementation option:** one possible technique; equivalent methods are acceptable if the outcome conforms and is validated.
 - **MAY — implementation option:** one possible technique; equivalent methods are acceptable if the outcome conforms and is validated.
 
 WCAG 2.2 Level AA means meeting **all Level A and all Level AA success criteria**. Do not claim AA based on a subset, automated score, or one tested template. Consider every page, state, responsive presentation, and complete process in the declared scope.
@@ -19,7 +21,7 @@ The W3C WCAG Recommendation is normative. W3C Understanding documents and techni
 
 ## 2. WCAG 2.2 A/AA coverage register
 
-This register is the minimum scope. Each applicable criterion must have implementation evidence and a repeatable test.
+The Level A rows are the formal release scope and each applicable criterion must have implementation evidence and a repeatable test. Level AA rows are tracked as enhancements and must not silently change the formal target.
 
 ### 2.1 Perceivable
 
@@ -196,8 +198,9 @@ Recruit participants with access needs relevant to each critical journey. Provid
 ## 8. Release acceptance gate
 
 A release is eligible for accessibility acceptance only when:
-- [ ] Every applicable WCAG 2.2 A/AA criterion maps to affected templates/components and evidence.
-- [ ] No known A/AA failure remains in a critical journey.
+- [ ] Every applicable WCAG 2.2 Level A criterion maps to affected templates/components and evidence.
+- [ ] No known Level A failure remains in a critical journey.
+- [ ] Level AA findings are recorded as voluntary enhancements with priority and owner; they are not used to imply an AA conformance claim.
 - [ ] Automated findings are manually triaged.
 - [ ] Keyboard-only and screen-reader journeys are completed.
 - [ ] Reflow, zoom, contrast, focus, pointer, motion, forms and authentication are manually checked where applicable.
@@ -250,4 +253,4 @@ When WCAG, browser/assistive-technology behavior or research changes:
 4. Record source, date, scope and uncertainty.
 5. Review implementation impact before changing conformance claims.
 
-**Core principle:** WCAG establishes the technical conformance floor; lived-experience evidence helps IWAG V2 build beyond that floor in ways that are understandable, usable and respectful.
+**Core principle:** WCAG 2.2 Level A is the declared conformance target for this project. Level AA and AAA criteria may be adopted as stronger engineering improvements, but are not the formal target unless a later project decision explicitly changes it. Lived-experience evidence helps IWAG V2 build beyond the technical floor in ways that are understandable, usable and respectful.
