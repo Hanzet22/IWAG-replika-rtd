@@ -17,7 +17,7 @@ test("policy drafts preserve explicit non-operative status", () => {
   const legal = read("../../../src/data/legal.ts");
   assert.ok(legal.includes("DRAFTING ONLY — NOT OFFICIAL — NOT VERIFIED — NOT APPROVED — NOT IN FORCE"));
   assert.ok(legal.includes("HANYA DRAFTING — BUKAN RESMI — BELUM DIVERIFIKASI — BELUM DISETUJUI — BELUM BERLAKU"));
-  assert.ok(legal.includes("PP 17 of 2025"));
+  assert.ok(legal.includes("PP 17/2025"));
   assert.ok(legal.includes("Permenkomdigi No. 9 of 2026"));
   assert.ok(legal.includes("Child Safety & Protection"));
 });
@@ -90,7 +90,7 @@ test("Child Safety & Protection draft is routed and remains non-operative", () =
 test("Child Safety & Protection has a Malay translation", () => {
   const legal = read("../../../src/data/legal.ts");
   assert.ok(legal.includes("Perlindungan Kanak-kanak"));
-  assert.ok(legal.includes("saluran laporan keselamatan kanak-kanak"));
+  assert.ok(legal.includes("Saluran laporan keselamatan kanak-kanak"));
   const page = read("../../../src/pages/[lang]/[page].astro");
   assert.ok(page.includes('lang === "ms-my" && page !== "child-safety"'));
 });
