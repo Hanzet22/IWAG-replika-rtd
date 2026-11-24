@@ -95,8 +95,6 @@ CI status is evidence, not a stop signal. Continue investigating and fixing conc
 
 ## 8. Build and preview evidence
 
-The Vercel preview for commit `f081a1639a41ead6d2bf1aefcae043d63c796d92` completed successfully: Rust `iwagc` ran the AOT static build, Astro generated 298 pages, 298 HTML files and one CSS file were inspected, 8,596 local references were checked, 298 routes were emitted, and 78 required root/locale routes were verified. The automated diagnostic reported zero findings; it explicitly does not establish WCAG conformance.
+The Vercel preview for commit 19bb29fd1253c749e61eae2ceb11a9ce7dab447b completed successfully: Rust iwagc ran the AOT static build under Node 22.23.5, Astro generated 298 pages, 298 HTML files and one CSS file were inspected, 8,596 local references were checked, 298 routes were emitted, and 78 required root/locale routes were verified. The automated diagnostic reported zero findings; it explicitly does not establish WCAG conformance.
 
-The build emitted two environment/dependency warnings: an npm `cache-dir` environment setting is unknown to npm 11, and the optional `@parcel/watcher` install script is not on npm's install-script allowlist. These did not prevent the build. Do not approve arbitrary install scripts just to silence the warning; confirm whether the package is required and review its provenance first.
-
-The first preview used Node 26.13.1 while the project declared only a lower-bound engine range. To reduce major-version drift, the project runtime is now pinned to Vercel Node 22.x and the package engine range is constrained to `>=22.23.4 <23`. A follow-up preview is required to verify the pin.
+The first preview used Node 26.13.1 and exposed npm 11 environment/install-script warnings. The Vercel project is now pinned to Node 22.x and the package engine range is constrained to >=22.23.4 <23. The follow-up preview used Node 22.23.5 with npm 10.9.9 and no longer emitted those npm warnings. Rust 1.100.0 was installed by rustup during the build from the pinned toolchain declaration.
