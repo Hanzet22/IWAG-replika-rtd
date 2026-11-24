@@ -1,13 +1,14 @@
-# Indonesia pinpoint legal update — 24 November 2026
+# Indonesia pinpoint legal register — 25 November 2026
 
-**Position at 24 November 2026 — not legal advice.** No statutory line numbers are used below, and I do not cite PDF page numbers where the pagination was not independently confirmed.
+**Position at 25 November 2026 — not legal advice.** No statutory line numbers are used below, and I do not cite PDF page numbers where the pagination was not independently confirmed.
 
 ## 1. Commencement and official-source table
 
 | Instrument | Exact title and status on 24 Nov 2026 | Gazette details | Primary source |
 |---|---|---|---|
-| **PP 33/2026** | *Peraturan Pemerintah Nomor 33 Tahun 2026 tentang Peraturan Pelaksanaan Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi*. Enacted and promulgated **16 July 2026**, but **not yet in force**: Pasal 225 provides commencement six months after promulgation, i.e. **16 January 2027**. UU 27/2022 itself remains operative during that interval. | **LN 2026 No. 88; TLN No. 7190** | Government-hosted copy: http://ppid.purbalinggakab.go.id/wp-content/uploads/2026/09/peraturan_pemerintah_no._33_tahun_2026_100926115902.pdf . The previously supplied docs.paralegal.id file is a copy, not the preferred official host.
-| **Permenkomdigi 9/2026** | *Peraturan Menteri Komunikasi dan Digital Nomor 9 Tahun 2026 tentang Peraturan Pelaksanaan Peraturan Pemerintah Nomor 17 Tahun 2025 tentang Tata Kelola Penyelenggaraan Sistem Elektronik dalam Pelindungan Anak*. Promulgated and effective **6 March 2026**. | **BN 2026 No. 163** | Official BPK record/PDF: https://peraturan.bpk.go.id/Details/346040/permenkomdigi-no-9-tahun-2026 and https://peraturan.bpk.go.id/Download/409395/Permenkomdigi-no-9-tahun-2026.pdf . Caveat: the downloadable file’s cover says **“RANCANGAN”**, although the official metadata identifies it as the final promulgated regulation. That source anomaly should be recorded rather than silently ignored.
+| **PP 33/2026 (reported; unverified)** | Secondary sources report a PP 33/2026 PDP implementing regulation, but no verified central BPK/Setneg record or official final Gazette PDF was located in this review. Do not treat it as operative or cite reported Pasal 225/commencement until verified. | **Do not assert LN/TLN identifiers yet.** | Secondary copies/mirrors only; not sufficient to verify promulgation.
+| **PP 17/2025** | *Peraturan Pemerintah Nomor 17 Tahun 2025 tentang Tata Kelola Penyelenggaraan Sistem Elektronik dalam Pelindungan Anak*. In force from 27 March 2025. | **LN 2025 No. 36; TLN No. 7105** | https://peraturan.bpk.go.id/Details/316698/pp-no-17-tahun-2025 and https://jdih.komdigi.go.id/produk_hukum/unduh/id/965/t/peraturan+pemerintah+nomor+17+tahun+2025 .
+| **Permenkomdigi 9/2026** | JDIH metadata records this as promulgated/effective 6 March 2026, BN 2026 No. 163 (29 pages), status Berlaku. However, the linked JDIH PDF is headed “RANCANGAN” and has blank/placeholder promulgation details. | Metadata states **BN 2026 No. 163**; final gazetted PDF not yet verified. | Official JDIH metadata: https://jdih.komdigi.go.id/produk_hukum/view/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026 . Linked draft: https://jdih.komdigi.go.id/produk_hukum/unduh/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026 .
 | **Permendag 19/2026** | *Peraturan Menteri Perdagangan Nomor 19 Tahun 2026 tentang Penyelenggaraan Usaha Perdagangan Melalui Sistem Elektronik*. Enacted **4 June 2026**, promulgated/effective **8 June 2026**. | **BN 2026 No. 367** | https://peraturan.bpk.go.id/Details/351720/permendag-no-19-tahun-2026 and official PDF: https://peraturan.bpk.go.id/Download/415514/permendag-no-19-tahun-2026.pdf .
 | **PP 71/2019** | *Peraturan Pemerintah Nomor 71 Tahun 2019 tentang Penyelenggaraan Sistem dan Transaksi Elektronik*. Promulgated/effective **10 October 2019**; in force. | **LN 2019 No. 185; TLN No. 6400** | https://peraturan.bpk.go.id/Details/122030/pp-no-71-tahun-2019 and https://jdih.kemenkeu.go.id/api/download/fulltext/2019/71TAHUN2019PP.pdf .
 | **UU 1/2024** | *Undang-Undang Nomor 1 Tahun 2024 tentang Perubahan Kedua atas Undang-Undang Nomor 11 Tahun 2008 tentang Informasi dan Transaksi Elektronik*. Promulgated/effective **2 January 2024**; in force. | **LN 2024 No. 1; TLN No. 6905** | https://peraturan.bpk.go.id/Details/274494/uu-no-1-tahun-2024 and https://peraturan.bpk.go.id/Download/332870/UU%20Nomor%201%20Tahun%202024.pdf .
@@ -17,38 +18,67 @@
 | **UU 8/2016** | *Undang-Undang Nomor 8 Tahun 2016 tentang Penyandang Disabilitas*. Promulgated/effective **15 April 2016**; in force. | **LN 2016 No. 69; TLN No. 5871** | https://peraturan.bpk.go.id/Download/26352/UU%20Nomor%208%20Tahun%202016.pdf .
 | **PP 42/2020** | *Peraturan Pemerintah Nomor 42 Tahun 2020 tentang Aksesibilitas terhadap Permukiman, Pelayanan Publik, dan Pelindungan dari Bencana bagi Penyandang Disabilitas*. Promulgated/effective **27 July 2020**; in force. | **LN 2020 No. 182; TLN No. 6540** | https://peraturan.bpk.go.id/Details/142301/pp-no-42-tahun-2020 and https://peraturan.bpk.go.id/Download/133719/PP%20Nomor%2042%20Tahun%202020.pdf .
 
-## 2. PP 33/2026: future implementing rules, not current law yet
+## 2. Reported PP 33/2026 — primary-source verification unresolved
 
-The operative provisions on **24 November 2026** remain those of UU 27/2022. In particular: child data, **Pasal 25 ayat (1)–(2)**; data-subject rights, **Pasal 5–13**, with implementation under **Pasal 14–15**; high-risk impact assessment, **Pasal 34 ayat (1)–(3)**; breach notification, **Pasal 46 ayat (1)–(4)**; DPO/PPDP, **Pasal 53–54**; and overseas transfers, **Pasal 56 ayat (1)–(5)**.
+Earlier research surfaced secondary-source reports of **Peraturan Pemerintah Nomor 33 Tahun 2026 tentang Peraturan Pelaksanaan Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi**. Those sources report promulgation on 16 July 2026, a six-month commencement period under Pasal 225, and a future commencement date of 16 January 2027.
 
-The following PP 33 provisions were confirmed from the promulgated text, but they become legally operative only on **16 January 2027**:
+**That report is not verified against an official central promulgation record.** The BPK and Setneg official searches conducted for this review did not return a verified central record or an official final Gazette PDF. Search results surfaced legal-information sites and a PDF mirrored on a local-government host. Those are not sufficient to certify the exact Gazette/TLN identifiers or article-level wording.
 
-* **Child consent:** the provision implementing a contract/lawful basis involving a child requires the consent of the child’s parent and/or guardian. The available copy confirms that requirement, but its OCR did not reliably preserve the article heading; I therefore do **not** assign an unverified Pasal number to it. PP 33 must not be cited as already operative.
-* **Rights handling:** requests must be verified using technology, methods and time proportionate to the request; access includes the processed data, processing records, retention information and correction access. The text also uses a **3 × 24-hour** response period for identified rights-handling steps. Again, the supplied scan did not preserve every controlling article number reliably enough to reproduce them without risk.
-* **DPIA:** **Pasal 120 ayat (1)** defines the assessment as evaluating processing risks and required mitigation, including risks to data-subject rights and compliance with the PDP Law. **Pasal 120 ayat (2)** identifies high-risk processing, including: **huruf a**, automated decisions producing legal or similarly significant effects; **huruf c**, large-scale processing; and **huruf f**, use of new technologies such as AI, machine learning, smart technology and IoT.
-* **Cross-border transfers:** the transfer chapter beginning at **Pasal 160** requires mapping and recording the transfer cycle and consequences, data minimisation, identification and assessment of the applicable legal instrument, supplementary contractual/technical/organisational measures where needed, procedures for those measures, and periodic reassessment. **Pasal 169 ayat (1) huruf b** concerns standard PDP contractual clauses, to be set by the supervisory institution. This supplements—not replaces before 16 January 2027—the adequacy/safeguard/consent hierarchy in UU 27/2022 Pasal 56.
-* **Breach notifications:** the currently binding rule is still UU 27/2022 **Pasal 46 ayat (1)**: written notification to the data subject and institution no later than **3 × 24 hours**, containing at least the disclosed data, when/how it was disclosed and remediation; **ayat (3)** adds public notification in specified circumstances. I could not reliably recover the corresponding PP 33 article headings from the OCR and will not invent them.
-* **DPO/PPDP:** until PP 33 commences, use UU 27/2022 **Pasal 53 ayat (1) huruf a–c** for appointment triggers and **Pasal 54 ayat (1) huruf a–d and ayat (2)** for advice, compliance monitoring, DPIA advice, incident contact and professional qualifications. The PP 33 scan confirmed the defined PPDP function, but not all article headings sufficiently reliably for exact reproduction.
+Accordingly, as at **25 November 2026**:
+- do not treat PP 33/2026 as an in-force regulation;
+- do not cite **LN 2026 No. 88**, **TLN No. 7190**, **Pasal 225**, or any other PP 33/2026 locator as verified law in a public V2 policy;
+- do not rely on secondary summaries of its DPIA, DPO, transfer, breach or sanction details as binding provisions;
+- retain the report only as an unverified future-instrument watch item until the official Gazette/central JDIH text is located.
 
-That is a deliberate limitation: attaching guessed Pasal numbers to the PP would be less reliable than identifying the controlling UU provisions and the PP provisions that could be confirmed.
+The already verified **UU 27/2022** and other currently in-force instruments remain the legal baseline.
 
-## 3. Permenkomdigi 9/2026 and child-facing systems
+## 3. Child online safety — PP 17/2025 scope and source status of Permenkomdigi 9/2026
 
-This regulation applies to PSE products, services and features within PP 17/2025’s child-protection regime—not merely because a conventional page can technically be viewed by a minor.
+### PP 17/2025 — verified in force
 
-Confirmed provisions include:
+**Peraturan Pemerintah Republik Indonesia Nomor 17 Tahun 2025 tentang Tata Kelola Penyelenggaraan Sistem Elektronik dalam Pelindungan Anak** is in force from **27 March 2025**.
 
-* **Pasal 7 ayat (1)–(7):** child-user verification/age-assurance mechanisms, including technology-law compliance and periodic evaluation.
-* **Pasal 8 ayat (1)–(6), Pasal 9, Pasal 10 ayat (1)–(3), Pasal 11 ayat (1)–(2), Pasal 12 ayat (1)–(3), and Pasal 13 ayat (1) huruf a–e:** risk assessment for products, services and features, including contact with others, profiling/advertising and exposure to harmful content.
-* **Pasal 25 ayat (2) huruf a–c and ayat (3)–(4):** risk-profile consequences for account-based products/services/features.
-* **Pasal 26 ayat (1)–(8), especially ayat (4) huruf a–o:** reassessment and child-safe controls, including safety by design, privacy by design, parental controls, personal-data protection, content moderation/curation, periodic auditing, transaction/use restrictions, user and age verification and risk reporting.
-* **Pasal 29 ayat (1)–(4):** parental-consent arrangements where registration or an account is required.
-* **Pasal 30 ayat (1)–(4):** social-network/social-media services are treated as high-risk products/services/features.
-* **Pasal 31 ayat (1)–(3):** ministerial supervision; **Pasal 33 ayat (1)–(4):** handling suspected provider violations and associated enforcement.
+- Type/number/year: Peraturan Pemerintah No. 17 Tahun 2025.
+- Gazette: LN 2025 No. 36; TLN No. 7105.
+- Official BPK record: https://peraturan.bpk.go.id/Details/316698/pp-no-17-tahun-2025
+- Official text: https://jdih.komdigi.go.id/produk_hukum/unduh/id/965/t/peraturan+pemerintah+nomor+17+tahun+2025
 
-For a genuinely **read-only, non-account, non-interactive informational site**, the account-consent and social-network rules normally are not triggered. Reassess if the site adds accounts, age-gated areas, profiling, behavioural advertising, chat, comments, uploads, direct messaging, purchases or other features through which children interact or supply data.
+Pinpoint provisions relevant to a website:
+
+- **Pasal 1 angka 1–7:** definitions of Anak, Sistem Elektronik, PSE, Produk/Layanan/Fitur, Data Pribadi and child-data impact assessment.
+- **Pasal 2 ayat (1)–(4):** child-protection duties for electronic systems and minimum-age information, child-user verification and reporting mechanism within the stated scope.
+- **Pasal 3 ayat (3):** private PSE scope includes products, services and features specifically designed for, or that may be used or accessed by, children.
+- **Pasal 4 ayat (1) huruf a–b and ayat (2) huruf a–e:** indicators include published/internal terms and policies, strong evidence of routine child users, advertising directed to children, child-attractive design and substantial similarity to services proven to be used by children.
+- **Pasal 4 ayat (3):** further indicators are to be determined by Ministerial Decision.
+- **Pasal 5 ayat (1)–(9):** risk classification and self-assessment. Pasal 5 ayat (3) huruf a–g lists contact with strangers, harmful content, child-consumer exploitation, child-data security, addiction, psychological-health impact and physiological-health impact.
+- **Pasal 7 ayat (1) huruf a–j, ayat (2) huruf a–c and ayat (3):** child-protection duties and prohibitions, including parental/guardian authorisation, child-data impact assessment, high-privacy defaults, clear information, age-appropriate functions, partner safeguards and restrictions on covert practices, precise child geolocation and child profiling.
+- **Pasal 8:** best interests of the child and priority for child rights/protection over commercial interests.
+- **Pasal 9 ayat (1)–(5):** parental/guardian authorisation before a child may use an in-scope product, service or feature, subject to the provision's specific arrangements.
+- **Pasal 10–11:** high-privacy defaults and information for users.
+- **Pasal 19:** restrictions on child profiling, with stated exceptions.
+- **Pasal 20–22:** age limits, age ranges, account age rules and age-verification safeguards.
+- **Pasal 23 ayat (1)–(2):** accessible reporting tools and operational follow-up for child-rights problems.
+- **Pasal 49:** maximum two-year adjustment period from promulgation. With promulgation on 27 March 2025, the outer adjustment date is **27 March 2027**.
+
+**Application to V2:** The absence of accounts, comments, chat or uploads lowers contact and UGC risks but does not automatically exclude the website. V2 must document whether the website or any feature is designed for, or may be accessed by, children under Pasal 3 ayat (3) and Pasal 4 ayat (1)–(2). Audience composition is not currently verified. See `docs/CHILD-ACCESS-PP17-SCOPE-ASSESSMENT.md`.
+
+**Locator standard:** no statutory line numbers are published. Use Pasal/ayat/huruf/angka; do not invent “baris” numbers.
+
+### Permenkomdigi 9/2026 — metadata/document discrepancy
+
+JDIH Kemkomdigi metadata records **Peraturan Menteri Komunikasi dan Digital Nomor 9 Tahun 2026**, dated and promulgated **6 March 2026**, source **Berita Negara 2026 No. 163 (29 pages)** and status **Berlaku**:
+
+- Official JDIH metadata: https://jdih.komdigi.go.id/produk_hukum/view/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026
+- BPK record: https://peraturan.bpk.go.id/Details/346040/permenkomdigi-no-9-tahun-2026
+
+However, the linked JDIH download begins with **“RANCANGAN”** and has blank/placeholder promulgation details and Gazette number:
+https://jdih.komdigi.go.id/produk_hukum/unduh/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026
+
+This is a material source-integrity conflict. All article-level claims previously copied from that PDF remain provisional and must not be presented as verified final law until the final gazetted PDF is obtained.
 
 ## 4. PP 71/2019 and UU 1/2024
+
+
 
 ### PP 71/2019
 
@@ -131,7 +161,7 @@ A separate read-only publisher is not automatically responsible for the venue’
 
 **Applies to the present read-only informational site:** PP 71’s baseline system-security duties; UU ITE rules on lawful content and governmental access orders; UU 28/2014 copyright; UU 27/2022 if server logs, analytics identifiers, cookies, emails or other personal data are processed; and accurate presentation of any consumer/event information.
 
-**Triggered or substantially expanded by accounts or child data:** UU 27/2022 Pasal 25 and rights/security duties; PP 17/2025 and Permenkomdigi 9/2026 age assurance, child-risk assessment, consent and safe-design controls; UU ITE Pasal 16A–16B; and, from **16 January 2027**, PP 33/2026’s implementing procedures.
+**Triggered by child-access scope:** PP 17/2025 must be assessed even where there are no accounts; the key threshold is whether the website/product/service/feature is designed for or may be accessed by children under Pasal 3 ayat (3) and Pasal 4 ayat (1)–(2). If in scope, complete the risk assessment and address applicable safeguards, including Pasal 5, Pasal 7–11 and related provisions. Account age bands, account verification and any final Permenkomdigi 9/2026 procedures must be checked separately against the final gazetted text. The reported PP 33/2026 remains unverified and is not cited as current law.
 
 **Triggered by transactions:** UU 8/1999, PP 80/2019, Permendag 19/2026, PP 71/2019 electronic-contract provisions and UU ITE Pasal 18/18A. Ticketing, payment, checkout, paid subscriptions, merchandise and booking functions are the main triggers.
 
