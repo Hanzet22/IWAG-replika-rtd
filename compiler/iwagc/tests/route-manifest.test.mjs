@@ -19,8 +19,8 @@ test("expected route baseline is unique and has 82 entries", async () => {
 test("expected route baseline matches Rust required-route validation", async () => {
   const manifest = JSON.parse(await read("compiler/iwagc/config/expected-routes.json"));
   const rust = await read("compiler/iwagc/src/main.rs");
-  const rootBlock = rust.match(/let mut required = vec!\\[([\\s\\S]*?)\\];/);
-  const localeBlock = rust.match(/for locale in \\[([\\s\\S]*?)\\] \\{\\s*for route in \\[([\\s\\S]*?)\\]/);
+  const rootBlock = rust.match(/let mut required = vec!\[([\s\S]*?)\];/);
+  const localeBlock = rust.match(/for locale in \[([\s\S]*?)\]\s*\{\s*for route in \[([\s\S]*?)\]/);
   assert.ok(rootBlock, "Rust root route list must exist");
   assert.ok(localeBlock, "Rust locale and route lists must exist");
   const quoted = (value) => [...value.matchAll(/"([^"]+)"/g)].map((match) => match[1]);
@@ -79,6 +79,6 @@ test("document language validation accepts BCP 47 tags and rejects malformed val
 
 test("document language is not inferred from the URL locale prefix", async () => {
   const scanner = await read("compiler/iwagc/scripts/accessibility-report.mjs");
-  assert.match(scanner, /isValidLanguageTag\\(lang\\)/);
+  assert.match(scanner, /isValidLanguageTag\(lang\)/);
   assert.doesNotMatch(scanner, /matchesLocaleLanguage|primary language subtag differs from the locale route prefix/);
 });
