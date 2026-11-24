@@ -1,5 +1,3 @@
-/analysis/global-legal-register-research.md (created: Nov 24 15:10, updated: Nov 24 15:10)
-Content:
 # Global legal register research — Parallel
 
 As-of: 24 November 2026
