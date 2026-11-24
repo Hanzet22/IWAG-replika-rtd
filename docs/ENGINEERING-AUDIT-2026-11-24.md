@@ -127,3 +127,8 @@ The official BPK catalogue marks Permenkomdigi 9/2026 as in force from 6 March 2
 ### Additional release boundary
 
 The new child-safety page is a non-operative draft only. No verified safeguarding lead, monitored reporting channel, incident-response team or event-organiser authority exists in the inspected project. Do not describe it as an active child-safety reporting service.
+
+
+| LEG-02 | High | The BPK and Ministry JDIH catalogue records mark Permenkomdigi 9/2026 as in force and list BN 2026 No. 163, but the PDF linked from both official records was retrieved with the heading “RANCANGAN” and incomplete promulgation fields. | Record the discrepancy. Use official catalogue metadata and abstract for identification only; do not rely on clause-level text or age bands from the linked PDF as final until the signed Gazette copy is verified. |
+
+A preview build of commit 1a5b2acd failed because the new hyphenated object key child-safety in src/data/legal.ts was not quoted. The key is corrected to "child-safety" in the follow-up source commit. This was a source syntax error, not a Vercel platform failure. The next preview is the release candidate for validation.

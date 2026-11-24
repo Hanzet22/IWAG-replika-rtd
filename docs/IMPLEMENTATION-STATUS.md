@@ -267,3 +267,7 @@ The Vercel production deployment remains untouched by this branch. Workflow resu
 - [x] Added Child Safety & Protection draft in English and Indonesian, and registered its static route in all four locale builds.
 - [x] Added PP 17/2025 and Permenkomdigi 9/2026 feature-level scope assessment; no blanket age gate is assumed.
 - [x] Added HSTS to the Vercel security-header baseline; preview verification pending.
+
+- [x] Recorded a primary-source integrity discrepancy: the official Permenkomdigi 9/2026 catalogue says in force, but the linked PDF is labelled “RANCANGAN”; clause-level interpretation is held pending a verified Gazette copy.
+- [x] Corrected the quoted hyphenated child-safety object key after the preview build exposed a TypeScript parse error.
+- [ ] Rebuild and verify the child-safety route and HSTS response header after the syntax fix.

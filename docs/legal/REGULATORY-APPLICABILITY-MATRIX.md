@@ -135,3 +135,12 @@ Permenkomdigi 9/2026's BPK record marks it in force from 6 March 2026 and summar
 ## 7. Review warning
 
 This matrix is a starting point, not a final jurisdictional opinion. Regulations change, local implementing rules may add obligations, and a lawyer must review the final policy against the actual operator and service. Do not publish invented addresses, contacts, retention periods, legal bases, refund rules, event age limits or enforcement powers.
+
+
+## 2.2 Source-integrity issue — Permenkomdigi 9/2026
+
+The Ministry JDIH catalogue entry (product id 1007) and BPK record identify Permenkomdigi 9/2026, dated and promulgated 6 March 2026, BN 2026 No. 163, and mark it in force. The official JDIH abstract (record 547) also records the 6 March 2026 effective date and summarises its subject matter. However, the PDF linked from both official records was retrieved with the heading “RANCANGAN PERATURAN MENTERI” and the last-page promulgation fields appear incomplete. The inconsistency is recorded as a source-integrity blocker: do not cite detailed clause wording or age bands from that PDF as final law until the signed Gazette copy is independently verified. High-level metadata and abstract are used here only to identify the instrument and its subject matter.
+
+Official catalogue: https://jdih.komdigi.go.id/produk_hukum/view/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026
+Official abstract: https://jdih.komdigi.go.id/produk_hukum/abstrak/547
+Official BPK record: https://peraturan.bpk.go.id/Details/346040/permenkomdigi-no-9-tahun-2026
