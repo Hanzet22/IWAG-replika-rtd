@@ -4,7 +4,7 @@ Updated: 2026-11-23
 
 ## Conformance target
 
-The stated target is WCAG 2.2 Level A only. This document does not claim the preview conforms. Accessibility is evaluated per template and content type, not by framework choice.
+The formal project target is WCAG 2.2 Level A only. Level AA criteria are tracked as voluntary enhancements. This document does not claim the preview conforms. Accessibility is evaluated per template and content type, not by framework choice.
 
 ## Implemented in the source foundation
 
@@ -39,3 +39,6 @@ The product may adopt additional usability improvements such as larger touch tar
 ## Reporting
 
 A public accessibility statement must identify the target, known limitations, last review date, supported contact alternatives, and a process for reporting barriers. Do not publish a contact address until it is confirmed and monitored.
+
+
+The source-level implementation evidence and outstanding route-by-route validation are tracked in [ACCESSIBILITY-IMPLEMENTATION-MATRIX.md](./ACCESSIBILITY-IMPLEMENTATION-MATRIX.md).

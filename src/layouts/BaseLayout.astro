@@ -1,7 +1,8 @@
 ---
-import "../styles/global.css";
-import "../styles/v2-design-system.css";
+import "../styles/compiler-layers.css";
+import "../styles/reconstruction.css";
 import { getMessages } from "../i18n/ui";
+import { wordmarkClass } from "../styles/shell.stylex";
 import { isLocale, localeKeys, locales } from "../i18n/locales";
 
 interface Props {
@@ -11,12 +12,35 @@ interface Props {
   contentLang?: string;
 }
 const { lang: requestedLang, title, description, contentLang } = Astro.props;
+const brandClass = [wordmarkClass, "wordmark"].filter(Boolean).join(" ");
 const lang = isLocale(requestedLang) ? requestedLang : "en";
 const t = getMessages(lang);
 const htmlLang = contentLang ?? locales[lang].htmlLang;
 const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(?=/|$)"), "");
 const currentPath = pathWithoutLocale.replace(/\/$/, "") || "/";
+const isEventsPath = currentPath === "/events" || currentPath.startsWith("/events/");
+const isVisitPath = ["/plan-your-visit", "/location", "/participate"].some((path) => currentPath === path || currentPath.startsWith(path + "/"));
+const isCommunityPath = ["/community", "/about", "/join-iwag-team", "/dealers", "/links"].some((path) => currentPath === path || currentPath.startsWith(path + "/"));
+const isUpdatesPath = currentPath === "/updates" || currentPath.startsWith("/updates/");
 const hasMalayTranslation = ["/", "/events", "/events/", "/events/iwag-2027", "/events/iwag-2027/"].includes(pathWithoutLocale);
+const breadcrumbSegments = currentPath.split("/").filter(Boolean);
+const breadcrumbLabels: Record<string, string> = {
+  "plan-your-visit": lang === "id" ? "Rencanakan kunjungan" : "Plan your visit",
+  "community": lang === "id" ? "Komunitas" : "Community",
+  "events": lang === "id" || lang === "ms-my" ? "Acara" : "Events",
+  "updates": lang === "id" ? "Pembaruan" : "Updates",
+  "location": lang === "id" ? "Lokasi" : "Location",
+  "participate": lang === "id" ? "Partisipasi" : "Participate",
+  "join-iwag-team": lang === "id" ? "Bergabung dengan tim" : "Join the team",
+  "international-travelers-guide": lang === "id" ? "Panduan wisatawan internasional" : "International travelers guide",
+  "policy": lang === "id" ? "Dokumen kebijakan" : "Policy documents"
+};
+const breadcrumbName = (segment: string) => breadcrumbLabels[segment] ?? segment
+  .replace(/^\d{4}-\d{2}-\d{2}-/, "")
+  .split("-")
+  .map((part) => part.length <= 3 ? part.toUpperCase() : part.charAt(0).toUpperCase() + part.slice(1))
+  .join(" ");
+
 ---
 <!doctype html>
 <html lang={htmlLang} data-theme="system">
@@ -25,25 +49,34 @@ const hasMalayTranslation = ["/", "/events", "/events/", "/events/iwag-2027", "/
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f0eeeb" />
+    <meta name="theme-color" content="#f4f6f7" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>{title} · IWAG V2 Independent Project</title>
     <link rel="preload" href="/fonts/alan-sans/AlanSans%5Bwght%5D.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/amarna/Amarna%5Bital%2Cwght%5D.woff2" as="font" type="font/woff2" crossorigin />
-    {localeKeys.filter((locale) => locale !== "ms-my" || hasMalayTranslation).map((locale) => <link rel="alternate" hreflang={locales[locale].htmlLang} href={new URL(`/${locale}${pathWithoutLocale}`, Astro.site ?? Astro.url).toString()} />)}
+    {localeKeys.filter((locale) => locale !== "ms-my" || hasMalayTranslation).map((locale) => <link rel="alternate" hreflang={locales[locale].htmlLang} href={`/${locale}${pathWithoutLocale || "/"}`} />)}
   </head>
   <body>
     <a class="skip-link" href="#main">{t.skip}</a>
     <header class="site-header" lang={locales[lang].htmlLang}>
-      <a class="wordmark" href={`/${lang}/`} aria-label="IWAG V2 independent project home">IWAG<span>V2</span></a>
+      <a class={brandClass} href={`/${lang}/`}>IWAG<span>V2</span></a>
+      <details class="mobile-nav">
+        <summary>{lang === "id" ? "Menu utama" : lang === "ms-my" ? "Menu utama" : "Main menu"}</summary>
+        <nav class="mobile-nav-links" aria-label={t.primaryNavigation}>
+          <a href={`/${lang}/`} aria-current={currentPath === "/" ? "page" : undefined}>{t.home}</a>
+          <a href={`/${lang}/events/`} aria-current={isEventsPath ? "page" : undefined}>{lang === "id" || lang === "ms-my" ? "Acara" : "Discover"}</a>
+          <a href={`/${lang}/plan-your-visit/`} aria-current={isVisitPath ? "page" : undefined}>{lang === "id" ? "Rencanakan kunjungan" : lang === "ms-my" ? "Rancang lawatan" : "Plan your visit"}</a>
+          <a href={`/${lang}/community/`} aria-current={isCommunityPath ? "page" : undefined}>{lang === "id" ? "Komunitas" : lang === "ms-my" ? "Komuniti" : "Community"}</a>
+          <a href={`/${lang}/updates/`} aria-current={isUpdatesPath ? "page" : undefined}>{lang === "id" ? "Pembaruan" : lang === "ms-my" ? "Kemas kini" : "Updates"}</a>
+        </nav>
+      </details>
       <nav class="primary-nav" aria-label={t.primaryNavigation}>
         <a href={`/${lang}/`} aria-current={currentPath === "/" ? "page" : undefined}>{t.home}</a>
-        <a href={`/${lang}/events/`} aria-current={currentPath === "/events" ? "page" : undefined}>{lang === "id" || lang === "ms-my" ? "Acara" : "Discover"}</a>
-        <a href={`/${lang}/plan-your-visit/`} aria-current={currentPath === "/plan-your-visit" ? "page" : undefined}>{lang === "id" ? "Rencanakan kunjungan" : lang === "ms-my" ? "Rancang lawatan" : "Plan your visit"}</a>
-        <a href={`/${lang}/community/`} aria-current={currentPath === "/community" ? "page" : undefined}>{lang === "id" ? "Komunitas" : lang === "ms-my" ? "Komuniti" : "Community"}</a>
-        <a href={`/${lang}/updates/`} aria-current={currentPath === "/updates" ? "page" : undefined}>{lang === "id" ? "Pembaruan" : lang === "ms-my" ? "Kemas kini" : "Updates"}</a>
+        <a href={`/${lang}/events/`} aria-current={isEventsPath ? "page" : undefined}>{lang === "id" || lang === "ms-my" ? "Acara" : "Discover"}</a>
+        <a href={`/${lang}/plan-your-visit/`} aria-current={isVisitPath ? "page" : undefined}>{lang === "id" ? "Rencanakan kunjungan" : lang === "ms-my" ? "Rancang lawatan" : "Plan your visit"}</a>
+        <a href={`/${lang}/community/`} aria-current={isCommunityPath ? "page" : undefined}>{lang === "id" ? "Komunitas" : lang === "ms-my" ? "Komuniti" : "Community"}</a>
+        <a href={`/${lang}/updates/`} aria-current={isUpdatesPath ? "page" : undefined}>{lang === "id" ? "Pembaruan" : lang === "ms-my" ? "Kemas kini" : "Updates"}</a>
       </nav>
-      <div class="preferences">
+      <div class="preferences" role="group" aria-label={lang === "id" ? "Preferensi situs" : "Site preferences"}>
         <label for="language-choice">{t.language}</label>
         <select id="language-choice" name="language" data-language-choice>
           {localeKeys.map((locale) => <option value={locale} selected={locale === lang}>{locales[locale].nativeName}</option>)}
@@ -58,11 +91,12 @@ const hasMalayTranslation = ["/", "/events", "/events/", "/events/iwag-2027", "/
           <option value="dynamic">{t.dynamic}</option>
         </select>
         <label for="accent-choice" data-accent-label>{t.accent}</label>
-        <input id="accent-choice" type="color" value="#726550" data-accent-choice aria-label={t.accent} />
+        <input id="accent-choice" type="color" value="#135d78" data-accent-choice aria-label={t.accent} />
       </div>
       <details class="accessibility-preferences"><summary>{lang === "id" ? "Pengaturan aksesibilitas" : "Accessibility settings"}</summary>
         <div class="accessibility-controls">
           <label for="text-scale">{lang === "id" ? "Ukuran teks" : "Text size"}</label><select id="text-scale" data-text-scale><option value="normal">{lang === "id" ? "Normal" : "Default"}</option><option value="large">{lang === "id" ? "Besar" : "Large"}</option><option value="larger">{lang === "id" ? "Lebih besar" : "Larger"}</option></select>
+          <label for="text-spacing">{lang === "id" ? "Spasi teks" : "Text spacing"}</label><select id="text-spacing" data-text-spacing><option value="normal">{lang === "id" ? "Standar" : "Standard"}</option><option value="expanded">{lang === "id" ? "Lebih renggang" : "Expanded"}</option></select>
           <label for="contrast-mode">{lang === "id" ? "Kontras" : "Contrast"}</label><select id="contrast-mode" data-contrast-mode><option value="normal">{lang === "id" ? "Standar" : "Standard"}</option><option value="high">{lang === "id" ? "Kontras tinggi" : "High contrast"}</option></select>
           <label for="motion-mode">{lang === "id" ? "Gerakan" : "Motion"}</label><select id="motion-mode" data-motion-mode><option value="system">{lang === "id" ? "Ikuti perangkat" : "Use device setting"}</option><option value="reduce">{lang === "id" ? "Kurangi gerakan" : "Reduce motion"}</option></select>
           <label for="density-mode">{lang === "id" ? "Jarak konten" : "Content spacing"}</label><select id="density-mode" data-density-mode><option value="normal">{lang === "id" ? "Standar" : "Standard"}</option><option value="spacious">{lang === "id" ? "Lebih lega" : "More spacious"}</option></select>

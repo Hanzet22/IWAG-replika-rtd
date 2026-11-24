@@ -1,4 +1,4 @@
-name: Astro production build
+name: IWAG Active Compiler and production build
 
 on:
   push:
@@ -13,12 +13,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: astro-build-${{ github.ref }}
+  group: iwag-build-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
-    name: Build static site
+    name: Rust Active Compiler → Astro/Vite
     runs-on: ubuntu-latest
     steps:
       - name: Check out source
@@ -27,7 +27,33 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22.23.4"
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
-      - name: Build
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@1.100.0
+      - name: Run Rust Active Compiler and contrast-engine tests
+        run: |
+          cargo test --locked --manifest-path compiler/iwagc/Cargo.toml
+          cargo test --locked --manifest-path rust/contrast-engine/Cargo.toml
+      - name: Install frontend dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Run compiler manifest regression tests
+        run: npm run test:compiler
+      - name: Inspect compiler source manifest
+        run: npm run compiler:inspect
+      - name: Build optional Rust/WASM contrast engine
+        run: |
+          rustup target add wasm32-unknown-unknown
+          cargo install wasm-pack --locked --version 0.15.0
+          npm run wasm:build
+      - name: Run Active Compiler production build
         run: npm run build
+      - name: Upload production build report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iwag-build-report
+          path: |
+            .iwag-build/iwag-build-report.json
+            .iwag-build/accessibility-report.json
+            .iwag-build/accessibility.sarif
+            .iwag-build/route-manifest.json
+          if-no-files-found: ignore

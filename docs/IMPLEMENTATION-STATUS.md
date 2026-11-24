@@ -111,3 +111,117 @@ Updated: 2026-11-23
 - [ ] Manual review across all routes, locales, viewports and assistive technologies remains outstanding.
 - [ ] Verify deployed cookies, hosting/CDN logs, vendors, data locations, retention and transfers.
 - [ ] Qualified legal review and operator approval remain mandatory before any document becomes operative.
+
+## Greenfield reconstruction execution (2026-11-23)
+
+- [x] Created dedicated `v2/greenfield-global-reconstruction` branch.
+- [x] Moved 120 root/static HTML snapshots plus six compiled/CDN assets into `archive/v1-reference/site/`; original blob contents were preserved.
+- [x] Added archive README and source/technology inventory.
+- [x] Added Rust Active Compiler CLI with `inspect`, `doctor`, `dev`, `build`, `preview`, and `wasm` commands.
+- [x] Routed normal npm dev/build/preview commands through the Rust CLI.
+- [x] Updated the production workflow to provision Rust and invoke the Active Compiler.
+- [x] Added build-report generation outside the public `dist/` directory.
+- [x] Integrated Panda CSS 2.6.0 and StyleX 0.19.2 into the Astro/Vite pipeline alongside Tailwind CSS 4.
+- [x] Defined a centralized CSS layer order and disabled duplicate Panda/Tailwind preflight resets.
+- [x] Added new semantic Panda tokens and a replacement global CSS baseline; the shared layout no longer imports the previous global V2 stylesheets.
+- [x] Added literature and engineering evidence notes for cognitive accessibility, motion, typography, color vision, and low-resource mobile rendering.
+- [ ] Complete a full route-by-route UI/UX and content-template rewrite.
+- [ ] Validate Panda/StyleX/Tailwind plugin interoperability and generated CSS in production.
+- [ ] Complete the Rust compiler's deeper manifest, route, asset, dependency and output validation.
+- [ ] Review every remaining asset and transitive dependency license.
+- [ ] Complete keyboard, screen-reader, TalkBack, zoom/reflow and disabled-user evaluations.
+- [ ] Measure JavaScript/CSS transfer, LCP/INP/CLS, CPU, memory, GPU, battery and thermal behavior on representative mid/low-end devices.
+
+CI runs are diagnostic evidence only. Cancelled or pending workflow runs do not close the reconstruction scope or halt engineering work.
+
+- [x] Added a user-activated Canvas motion preview capped at 30 fps; it stops when the document is hidden, the lab leaves the viewport, or reduced-motion is enabled.
+- [x] Kept SVG as the static fallback; WebGL2 is probed with context release and WebGPU is detected without requesting an adapter/device.
+- [ ] Implement or adopt a real WebGL/WebGPU renderer only if a measured use case justifies its startup, memory and GPU costs.
+
+## Continued global reconstruction (24 November 2026)
+
+- [x] Consolidated root and localized homepages into one shared localized Astro component.
+- [x] Root `/` renders the actual English homepage directly; no language-choice interstitial or timed redirect.
+- [x] Added localized breadcrumb navigation across nested routes and explicit current-page semantics.
+- [x] Activated Tailwind CSS 4 theme and utility layers without importing its preflight reset.
+- [x] Kept Panda CSS tokens and StyleX compile-time classes in their separate styling responsibilities.
+- [x] Added architecture and global UX/UI system specifications.
+- [x] Reviewed full text of four accessibility papers in the existing Undermind workspace and documented study design, evidence limitations and practical implications.
+- [x] Added mobile performance evidence from real-user battery-saver research and underpowered-device research, with dated-device caveats.
+- [x] Expanded the Rust compiler build report to count output files, HTML/CSS/JS/images/fonts and their byte footprints; it rejects missing generated CSS when CSS source exists.
+- [x] Generated and committed `package-lock.json` through a branch-scoped lockfile bootstrap job; the production workflow now selects `npm ci` when the lockfile is present.
+- [x] Recorded license metadata for 530 locked npm package entries; all have a declared license field.
+- [ ] Review full license texts/notices and actual installed optional LGPL/MPL packages before distribution.
+- [ ] Verify the combined Tailwind/Panda/StyleX production output and generated CSS cascade.
+- [ ] Complete page-template-specific visual and content reconstruction for every route.
+- [ ] Complete route/locale link integrity and missing-asset checks.
+- [ ] Perform real keyboard, screen-reader, TalkBack, zoom/reflow and disabled-user evaluations.
+- [x] Captured first raw output baseline: 298 HTML, 1 CSS, 4 JS, 5 fonts, 2,460,461 bytes, 7,111 local refs checked.
+- [ ] Measure representative mid/low-end Android devices; do not set unmeasured budgets.
+- [ ] Review all public assets, licenses and translations before release.
+
+The latest implementation is a working reconstruction foundation and shared homepage/navigation system. It is not a claim that every route or accessibility criterion has been completed.
+
+- [x] Rebuilt the localized event index and event-detail templates with semantic date metadata, clear event facts and responsive layouts.
+- [x] Standardized page-intro hierarchy across generic landing pages and nested article routes.
+- [x] Extended Rust Active Compiler output diagnostics with required root/locale route checks and generated asset-size accounting.
+
+- [x] Added a Rust-invoked Node validator for local HTML `href`/`src`/`poster` and CSS `url()` references in generated output.
+- [ ] Extend local-reference validation to `srcset`, fragment IDs, and a complete generated route manifest.
+
+- [x] Added basic generated-HTML invariants to the output validator: document language/title, main landmark, skip link, duplicate IDs, image alt presence, named SVGs/buttons/form controls, and no meta-refresh/legacy redirect interstitial/autoplay video.
+- [ ] Review validator findings and false-positive/false-negative boundaries; these static checks are not a WCAG conformance test.
+
+- [x] Added a user-triggered contrast calculator that prefers the Rust/WASM module and falls back to a local JavaScript implementation.
+- [x] Added production workflow steps to install the WASM target/wasm-pack and build the contrast module before Astro/Vite.
+- [x] Added Rust output-report accounting for generated WASM modules and bytes.
+- [ ] Verify the generated wasm-bindgen wrapper and module load path in the production output.
+- [ ] Measure first-use latency and memory against the JavaScript fallback on target Android devices.
+
+- [x] Committed Cargo lockfiles for both the Rust compiler and contrast-engine crate.
+- [x] Added a pinned Rust 1.100.0 toolchain manifest including the WASM target.
+- [x] Pinned wasm-pack to 0.13.1 in the production workflow.
+
+- [x] Investigated the yanked `spin 0.9.8` warning from wasm-pack 0.13.1 and moved the CI pin to wasm-pack 0.15.0; the next build log must confirm the warning is gone.
+
+- [x] Repaired literal escaped-newline sequences in the global breadcrumb CSS block.
+- [x] Added a native, keyboard-operable mobile navigation disclosure for narrow viewports; core navigation works without JavaScript.
+- [x] Preserved query strings and fragments during locale changes.
+- [x] Extended generated-output validation to local srcset references and same-site HTML fragments.
+- [x] Added a generated route manifest outside public output.
+- [ ] Verify the mobile navigation with keyboard, zoom/reflow and Android TalkBack.
+- [ ] Review route-manifest and fragment-validator results on the latest full build.
+
+- [x] Removed the one-time lockfile bootstrap job after npm and both Cargo lockfiles were committed; the workflow now installs deterministically with npm ci.
+- [x] Rust Active Compiler now reconciles the generated route manifest count with the complete HTML file count and records generated_routes in its machine-readable report.
+
+- [x] Marked the homepage event date range and recent update dates with semantic time elements and machine-readable datetime values.
+
+- [x] Wired the existing dynamic link/visited-link tokens into global anchor styles and added distinct high-contrast default pairs for light and dark themes.
+
+
+## Accessibility implementation pass — 24 November 2026
+
+- [x] Reconciled the new engineering specification with the existing project decision: WCAG 2.2 Level A remains the formal target; Level AA is tracked as a voluntary enhancement, not an implicit target change.
+- [x] Added a source-based accessibility implementation matrix separating inspected foundations from unverified behavior.
+- [x] Restored the complete architecture decision map and linked accessibility, compiler, stack and evidence documents.
+- [x] Added a user-controlled expanded text-spacing preference with local persistence and reset support.
+- [x] Kept core navigation and content independent of the new preference script; the added control is progressive enhancement.
+- [ ] Complete generated-route Level A mapping and route-by-route content review.
+- [ ] Perform keyboard, screen-reader, Android TalkBack, zoom/reflow, forced-colors and human-participant validation.
+- [ ] Reconcile any remaining stale accessibility target wording across all archived and active documents before publication.
+
+This pass is source implementation evidence only. It is not a WCAG conformance claim. CI/CD is not a completion criterion.
+
+
+## Generated-output accessibility diagnostics
+
+- [x] Add generated HTML route/locale enumeration to the post-build diagnostic pass.
+- [x] Emit stable accessibility diagnostic IDs and confidence-separated findings.
+- [x] Emit machine-readable JSON and SARIF 2.1.0 reports outside the public output directory.
+- [x] Keep heuristic findings review-required and explicitly disclaim automated conformance.
+- [x] Compare generated routes against a checked-in 30-route expected baseline; report missing required routes and additional generated routes separately.
+- [x] Replace regex scanning with parse5 8.1.1; preserve source locations, HTML5 tree correction and parser-error diagnostics.
+- [ ] Add source-map resolution for originating Astro/Markdown source locations.
+- [ ] Complete keyboard, screen-reader/TalkBack, zoom/reflow, forced-colors and human evaluation.
+

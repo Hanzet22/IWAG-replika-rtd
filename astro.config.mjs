@@ -1,5 +1,7 @@
 import { defineConfig } from "astro/config";
 import vue from "@astrojs/vue";
+import pandacss from "@pandacss/vite";
+import stylex from "@stylexjs/unplugin";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
@@ -7,7 +9,19 @@ export default defineConfig({
   trailingSlash: "always",
   integrations: [vue()],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [
+      stylex.vite({
+        useCSSLayers: {
+          before: ["reset", "theme", "base", "tokens", "recipes", "components"],
+          after: ["utilities"],
+          prefix: "stylex"
+        },
+        dev: process.env.NODE_ENV === "development",
+        runtimeInjection: false
+      }),
+      pandacss({ transform: true }),
+      tailwindcss()
+    ]
   },
   i18n: {
     defaultLocale: "en",

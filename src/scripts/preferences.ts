@@ -9,7 +9,7 @@ root.dataset.js = "true";
 const validThemes = ["system", "light", "black", "super-black", "amoled-black", "dynamic"];
 const storageKey = "iwag-v2-theme";
 const accentStorageKey = "iwag-v2-accent";
-let selectedAccent = "#726550";
+let selectedAccent = "#135d78";
 
 function hexToRgb(hex: string) {
   const value = hex.replace("#", "");
@@ -107,12 +107,15 @@ languageSelect?.addEventListener("change", () => {
   const selected = languageSelect.value;
   if ((localeKeys as readonly string[]).includes(selected)) {
     const path = window.location.pathname.replace(/^\/[a-z-]+(?=\/|$)/, "");
-    window.location.assign(`/${selected}${path || "/"}`);
+    const destination = new URL(window.location.href);
+    destination.pathname = `/${selected}${path || "/"}`;
+    window.location.assign(destination.toString());
   }
 });
 
 const preferenceSelects = [
  {key:"iwag-v2-text-scale",selector:"[data-text-scale]",attribute:"textScale",allowed:["normal","large","larger"],fallback:"normal"},
+ {key:"iwag-v2-text-spacing",selector:"[data-text-spacing]",attribute:"textSpacing",allowed:["normal","expanded"],fallback:"normal"},
  {key:"iwag-v2-contrast",selector:"[data-contrast-mode]",attribute:"contrast",allowed:["normal","high"],fallback:"normal"},
  {key:"iwag-v2-motion",selector:"[data-motion-mode]",attribute:"motion",allowed:["system","reduce"],fallback:"system"}
 ] as const;
@@ -130,19 +133,21 @@ root.dataset.density=density;
 if(densitySelect){densitySelect.value=density;densitySelect.addEventListener("change",()=>{const next=densitySelect.value==="spacious"?"spacious":"normal";root.dataset.density=next;try{if(next==="normal")localStorage.removeItem("iwag-v2-density");else localStorage.setItem("iwag-v2-density",next);}catch{}});}
 
 resetButton?.addEventListener("click", () => {
-  for (const key of [storageKey, accentStorageKey, "iwag-v2-text-scale", "iwag-v2-contrast", "iwag-v2-motion", "iwag-v2-density"]) {
+  for (const key of [storageKey, accentStorageKey, "iwag-v2-text-scale", "iwag-v2-text-spacing", "iwag-v2-contrast", "iwag-v2-motion", "iwag-v2-density"]) {
     try { localStorage.removeItem(key); } catch { /* Preferences still reset for this page. */ }
   }
-  selectedAccent = "#726550";
+  selectedAccent = "#135d78";
   applyTheme("system");
   applyAccent(selectedAccent);
   root.dataset.textScale = "normal";
+  root.dataset.textSpacing = "normal";
   root.dataset.contrast = "normal";
   root.dataset.motion = "system";
   root.dataset.density = "normal";
   if (accentSelect) accentSelect.value = selectedAccent;
   const defaults: Array<[string, string]> = [
     ["[data-text-scale]", "normal"],
+    ["[data-text-spacing]", "normal"],
     ["[data-contrast-mode]", "normal"],
     ["[data-motion-mode]", "system"],
     ["[data-density-mode]", "normal"]

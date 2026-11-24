@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import GraphicsCapabilityLab from "../../components/GraphicsCapabilityLab.vue";
+import ContrastChecker from "../../components/ContrastChecker.vue";
 import { legalPolicies, legalPolicySlugs, legalPolicyLinks } from "../../data/legal";
 import { getMessages } from "../../i18n/ui";
 import { isLocale, localeKeys } from "../../i18n/locales";
@@ -90,9 +91,11 @@ const copy = policy?.summary ?? (isConduct
       <span>{lang === "id" ? "Bukan kebijakan resmi IWAG; belum diverifikasi atau disetujui penyelenggara dan belum berlaku." : "Not an official IWAG policy; not verified or approved by the organiser and not in force."}</span>
       <small>{lang === "id" ? "Draf v1.0 · 23 November 2026 · Tidak ada tanggal berlaku" : "Draft v1.0 · 23 November 2026 · No effective date"}</small>
     </aside>}
-    <p class="eyebrow">IWAG V2 · Independent project</p>
-    <h1>{title}</h1>
-    <p class="lead">{copy}</p>
+    <header class="page-intro">
+      <p class="eyebrow">IWAG V2 · Independent project</p>
+      <h1>{title}</h1>
+      <p class="lead">{copy}</p>
+    </header>
     {isPlan && <section class="landing-grid" aria-label={lang === "id" ? "Rencana kunjungan" : "Visit planning"}>
       <article class="content-card"><p class="eyebrow">01 · EVENT</p><h2>{lang === "id" ? "Tanggal dan acara" : "Dates and event"}</h2><p>3–4 July 2027 · Fantastic Arcana.</p><a href={"/" + lang + "/events/"}>{lang === "id" ? "Lihat informasi acara" : "Explore event information"}</a></article>
       <article class="content-card"><p class="eyebrow">02 · VENUE</p><h2>{lang === "id" ? "Lokasi acara" : "Venue"}</h2><p>Hotel Ciputra Jakarta, West Jakarta.</p><a href={"/" + lang + "/location/"}>{lang === "id" ? "Baca panduan lokasi" : "Read venue information"}</a></article>
@@ -325,6 +328,7 @@ const copy = policy?.summary ?? (isConduct
       </ul>
       <p class="muted">{lang === "id" ? "Kanal kontak berbasis teks dan akomodasi acara akan diterbitkan setelah alamat kontak serta layanan pendukung diverifikasi." : "Text-based contact channels and event accommodations will be published after contact details and support services are verified."}</p>
     </section>}
+    {isAccessibility && <ContrastChecker client:visible lang={lang} />}
     {isAccessibility && <GraphicsCapabilityLab client:visible lang={lang} />}
     {isLegal && policy && <section class="policy-document" aria-label={policy.title}>
       {policy.sections.map((section) => <section class="policy-section"><h2>{section.heading}</h2>{section.body.map((paragraph) => <p>{paragraph}</p>)}</section>)}
