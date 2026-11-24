@@ -1,5 +1,3 @@
-/analysis/indonesia-pinpoint-legal-update.md (created: Nov 24 15:17, updated: Nov 24 15:17)
-Content:
 # Indonesia pinpoint legal update — 24 November 2026
 
 **Position at 24 November 2026 — not legal advice.** No statutory line numbers are used below, and I do not cite PDF page numbers where the pagination was not independently confirmed.
