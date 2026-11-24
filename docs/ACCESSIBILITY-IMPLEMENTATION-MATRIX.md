@@ -94,3 +94,20 @@ Level AA criteria are listed in `WCAG-2.2-AA-COMPLETE-CRITERIA-REGISTER.md` for 
 - Astro, [View Transitions and accessibility](https://docs.astro.build/en/guides/view-transitions/).
 - IWAG V2, [Accessibility Engineering Specification](./ACCESSIBILITY-ENGINEERING-SPEC.md).
 - IWAG V2, [Neuroinclusive Life Sciences Evidence](./NEUROINCLUSIVE-LIFE-SCIENCES-EVIDENCE.md).
+
+
+## Active Compiler generated-output findings pass
+
+| Area | Implemented evidence | Validation boundary |
+|---|---|---|
+| Generated route enumeration | Scanner enumerates every generated HTML file and records route, locale, and per-locale counts | Does not yet compare against a separate expected route/locale manifest |
+| Document language | Missing `html[lang]` and locale-prefix mismatch diagnostics | Route prefix is only a heuristic for predominant language |
+| Document title | Missing/empty title diagnostic | Descriptive quality is not machine-verifiable |
+| Images | Missing `alt` attribute diagnostic | Does not assess alternative-text meaning or whether an image is decorative |
+| Links, buttons, controls | Empty-name and missing-label candidates | Review-required heuristics; computed accessible names are not evaluated |
+| ARIA references | Missing referenced ID diagnostics | Does not evaluate complete ARIA semantics or browser accessibility tree |
+| Duplicate IDs | HTML quality warning | Not presented as an independent WCAG success criterion |
+| Reports | JSON and SARIF 2.1.0 with rule IDs, generated-file line/column, confidence and fingerprints | SARIF output is diagnostic evidence only |
+| Human validation | Limitations and manual checks are stated in the report/spec | Keyboard, screen reader/TalkBack, contrast, zoom/reflow, media and lived-experience review remain open |
+
+The initial scanner is a Node.js helper orchestrated by Rust `iwagc`; it is not yet a WHATWG HTML5 parser or Rust-native parser. It does not make a WCAG conformance claim. Formal scope remains WCAG 2.2 Level A; Level AA remains optional.
