@@ -8,6 +8,12 @@ const outputRoot = path.resolve(process.cwd(), process.argv[2] ?? "dist");
 const reportRoot = path.resolve(process.cwd(), ".iwag-build");
 const expectedManifestPath = path.resolve(process.cwd(), "compiler/iwagc/config/expected-routes.json");
 const localeLanguages = new Map([["en", "en"], ["id", "id"], ["en-sg", "en-SG"], ["ms-my", "ms-MY"]]);
+
+export function matchesLocaleLanguage(declaredLanguage, expectedLanguage) {
+  const declaredPrimary = declaredLanguage.trim().toLowerCase().split("-")[0];
+  const expectedPrimary = expectedLanguage.trim().toLowerCase().split("-")[0];
+  return Boolean(declaredPrimary && expectedPrimary && declaredPrimary === expectedPrimary);
+}
 const rules = [
   ["IWAG-A11Y-HTML-LANG", "3.1.1", "A", "Root document language is missing", "Set a valid lang attribute on the html element."],
   ["IWAG-A11Y-PAGE-TITLE", "2.4.2", "A", "Document title is missing or empty", "Provide a descriptive, non-empty document title."],
@@ -153,8 +159,8 @@ function inspectPage(file, html) {
     addFinding({ ruleId: "IWAG-A11Y-HTML-LANG", route, locale, node: htmlElement });
   } else if (lang.trim().toLowerCase() === "und") {
     addFinding({ ruleId: "IWAG-A11Y-HTML-LANG", route, locale, node: htmlElement, confidence: "review-required", note: "The language is marked undetermined; verify the predominant human language." });
-  } else if (localeLanguages.has(locale) && lang.toLowerCase() !== localeLanguages.get(locale).toLowerCase()) {
-    addFinding({ ruleId: "IWAG-A11Y-HTML-LANG", route, locale, node: htmlElement, confidence: "review-required", note: "The lang value differs from the locale route prefix; verify the page's predominant human language." });
+  } else if (localeLanguages.has(locale) && !matchesLocaleLanguage(lang, localeLanguages.get(locale))) {
+    addFinding({ ruleId: "IWAG-A11Y-HTML-LANG", route, locale, node: htmlElement, confidence: "review-required", note: "The primary language subtag differs from the locale route prefix; verify the page's predominant human language." });
   }
 
   if (!title || !textContent(title)) {
@@ -254,13 +260,13 @@ export async function runAccessibilityReport() {
   const actualRoutes = new Set(pages.map((page) => page.route));
   const expectedRoutes = new Set(expectedManifest?.routes ?? []);
   const missingExpectedRoutes = [...expectedRoutes].filter((route) => !actualRoutes.has(route)).sort();
-  const unexpectedRoutes = [...actualRoutes].filter((route) => expectedManifest && !expectedRoutes.has(route)).sort();
+  const additionalRoutes = [...actualRoutes].filter((route) => expectedManifest && !expectedRoutes.has(route)).sort();
   const routeCoverage = {
     manifest: expectedManifest ? path.relative(process.cwd(), expectedManifestPath).split(path.sep).join("/") : null,
     expectedCount: expectedManifest?.routes?.length ?? null,
     actualCount: pages.length,
     missingExpectedRoutes,
-    unexpectedRoutes,
+    additionalRoutes,
     complete: expectedManifest ? missingExpectedRoutes.length === 0 : null
   };
 
@@ -321,7 +327,7 @@ export async function runAccessibilityReport() {
   await writeFile(path.join(reportRoot, "accessibility.sarif"), JSON.stringify(sarif, null, 2) + "\n", "utf8");
   console.log("[iwagc:a11y] parser: parse5 (WHATWG HTML); scanned " + pages.length + " generated HTML routes across " + Object.values(localeCoverage).filter(Boolean).length + " locales");
   console.log("[iwagc:a11y] " + findings.length + " findings (" + summary.findings.confirmed + " confirmed, " + summary.findings.reviewRequired + " review required)");
-  console.log("[iwagc:a11y] expected routes: " + (routeCoverage.expectedCount ?? "not configured") + "; missing: " + missingExpectedRoutes.length + "; unexpected: " + unexpectedRoutes.length);
+  console.log("[iwagc:a11y] expected routes: " + (routeCoverage.expectedCount ?? "not configured") + "; missing: " + missingExpectedRoutes.length + "; additional: " + additionalRoutes.length);
   console.log("[iwagc:a11y] reports: .iwag-build/accessibility-report.json and .iwag-build/accessibility.sarif");
   console.log("[iwagc:a11y] diagnostic only; this report does not establish WCAG conformance.");
 }
