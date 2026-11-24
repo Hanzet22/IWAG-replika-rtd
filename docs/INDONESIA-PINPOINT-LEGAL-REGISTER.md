@@ -4,7 +4,7 @@
 
 ## 1. Commencement and official-source table
 
-| Instrument | Exact title and status on 24 Nov 2026 | Gazette details | Primary source |
+| Instrument | Exact title and status on 25 Nov 2026 | Gazette details | Primary source |
 |---|---|---|---|
 | **PP 33/2026 (reported; unverified)** | Secondary sources report a PP 33/2026 PDP implementing regulation, but no verified central BPK/Setneg record or official final Gazette PDF was located in this review. Do not treat it as operative or cite reported Pasal 225/commencement until verified. | **Do not assert LN/TLN identifiers yet.** | Secondary copies/mirrors only; not sufficient to verify promulgation.
 | **PP 17/2025** | *Peraturan Pemerintah Nomor 17 Tahun 2025 tentang Tata Kelola Penyelenggaraan Sistem Elektronik dalam Pelindungan Anak*. In force from 27 March 2025. | **LN 2025 No. 36; TLN No. 7105** | https://peraturan.bpk.go.id/Details/316698/pp-no-17-tahun-2025 and https://jdih.komdigi.go.id/produk_hukum/unduh/id/965/t/peraturan+pemerintah+nomor+17+tahun+2025 .
