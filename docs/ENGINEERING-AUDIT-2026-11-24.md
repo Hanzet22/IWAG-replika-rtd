@@ -132,3 +132,23 @@ The new child-safety page is a non-operative draft only. No verified safeguardin
 | LEG-02 | High | The BPK and Ministry JDIH catalogue records mark Permenkomdigi 9/2026 as in force and list BN 2026 No. 163, but the PDF linked from both official records was retrieved with the heading “RANCANGAN” and incomplete promulgation fields. | Record the discrepancy. Use official catalogue metadata and abstract for identification only; do not rely on clause-level text or age bands from the linked PDF as final until the signed Gazette copy is verified. |
 
 A preview build of commit 1a5b2acd failed because the new hyphenated object key child-safety in src/data/legal.ts was not quoted. The key is corrected to "child-safety" in the follow-up source commit. This was a source syntax error, not a Vercel platform failure. The next preview is the release candidate for validation.
+
+
+## 10. Final preview verification after child-safety and Malay-localization updates
+
+Preview commit `cc4a1ea1a2ea60e84e132e422cd902549c3a57f0` reached Vercel READY. Rust `iwagc` completed the AOT static build with Node 22.23.5, npm 10.9.9 and Rust/Cargo 1.100.0. The build generated 302 HTML routes, validated 8,708 local references across 302 HTML and 1 CSS files, verified 82 required root/locale routes, and reported zero automated diagnostic findings. These checks do not establish WCAG conformance.
+
+The child-safety route was fetched successfully in English, Indonesian, English-Singapore fallback and Malay. The Malay page title and policy body are now localized. The main Terms, Privacy and Code of Conduct pages also returned HTTP 200 and retained their draft-only disclaimer.
+
+Response-header smoke checks confirmed HSTS (`max-age=31536000; includeSubDomains`), `X-Frame-Options: DENY`, and `X-Content-Type-Options: nosniff` on the child-safety, Terms, Privacy and Code of Conduct routes.
+
+### CSP decision
+
+A Content Security Policy was not added blindly. The accessibility page contains inline scripts and an inline style block, while the other inspected pages use external same-origin assets. A restrictive `script-src 'self'` policy would break existing accessibility-page behaviour. A safe CSP requires a complete route/asset inventory and either stable script hashes/nonces or a deliberate refactor; do not paper over this with broad `unsafe-inline` allowances. Track CSP as a separate hardening task.
+
+### Remaining limitations
+
+- Manual keyboard, screen-reader/TalkBack, zoom/reflow, contrast and user testing remain outstanding.
+- The Permenkomdigi 9/2026 catalogue/PDF source-integrity discrepancy remains open pending a verified signed Gazette copy.
+- Operator identity, actual infrastructure retention and transfer configuration, and any active safeguarding/reporting authority remain unverified.
+- GitHub security-alert endpoints were not accessible through the connected repository fetch scope; this is not evidence of zero vulnerabilities.

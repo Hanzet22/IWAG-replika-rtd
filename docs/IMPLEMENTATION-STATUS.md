@@ -271,3 +271,12 @@ The Vercel production deployment remains untouched by this branch. Workflow resu
 - [x] Recorded a primary-source integrity discrepancy: the official Permenkomdigi 9/2026 catalogue says in force, but the linked PDF is labelled “RANCANGAN”; clause-level interpretation is held pending a verified Gazette copy.
 - [x] Corrected the quoted hyphenated child-safety object key after the preview build exposed a TypeScript parse error.
 - [ ] Rebuild and verify the child-safety route and HSTS response header after the syntax fix.
+
+
+- [x] Final preview commit cc4a1ea1a2ea60e84e132e422cd902549c3a57f0 reached READY.
+- [x] Final preview generated 302 HTML routes, checked 8,708 local references, verified 82 required routes, and reported zero automated diagnostic findings (not a WCAG conformance claim).
+- [x] Child Safety & Protection page returns HTTP 200 in EN, ID, EN-SG and MS-MY; Malay title and content verified.
+- [x] HSTS, X-Frame-Options DENY and X-Content-Type-Options nosniff verified on the legal preview routes.
+- [ ] CSP remains a follow-up: inline scripts/styles on the accessibility page require a full CSP design, hashes/nonces or refactor before enforcement.
+- [ ] Manual assistive-technology, keyboard, zoom/reflow and user evaluation remain open.
+- [ ] Verify final signed Gazette text for Permenkomdigi 9/2026; linked official PDFs were labelled RANCANGAN despite catalogue metadata showing in force.
