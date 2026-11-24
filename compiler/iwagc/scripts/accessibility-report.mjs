@@ -141,7 +141,7 @@ function inspectPage(file, html) {
   }
 }
 
-async function main() {
+export async function runAccessibilityReport() {
   const htmlFiles = (await walk(outputRoot)).sort();
   for (const file of htmlFiles) inspectPage(file, await readFile(file, "utf8"));
 
@@ -206,8 +206,4 @@ async function main() {
   console.log("[iwagc:a11y] reports: .iwag-build/accessibility-report.json and .iwag-build/accessibility.sarif");
   console.log("[iwagc:a11y] diagnostic only; this report does not establish WCAG conformance.");
 }
-
-main().catch((error) => {
-  console.error("[iwagc:a11y] report generation failed:", error);
-  process.exitCode = 1;
-});
+\n
