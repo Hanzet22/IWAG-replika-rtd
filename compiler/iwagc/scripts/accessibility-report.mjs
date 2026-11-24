@@ -189,7 +189,7 @@ export async function runAccessibilityReport() {
         ruleId: item.ruleId, level: item.severity, kind: item.confidence === "confirmed" ? "fail" : "review",
         message: { text: item.message + " on " + item.route + (item.note ? " — " + item.note : "") },
         locations: [{ physicalLocation: {
-          artifactLocation: { uri: item.route.replace(/^\//, "") || "index.html", uriBaseId: "%DISTROOT%" },
+          artifactLocation: { uri: pages.find((page) => page.route === item.route)?.file ?? item.route.replace(/^\//, "") || "index.html", uriBaseId: "%DISTROOT%" },
           region: { startLine: item.location.startLine, startColumn: item.location.startColumn }
         }}],
         partialFingerprints: { primaryLocationLineHash: item.fingerprint },
