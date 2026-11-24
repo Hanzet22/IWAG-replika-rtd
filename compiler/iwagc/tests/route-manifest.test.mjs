@@ -1,4 +1,5 @@
 import { parse } from "parse5";
+import { matchesLocaleLanguage } from "../scripts/accessibility-report.mjs";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -33,7 +34,7 @@ test("expected route baseline matches Rust required-route validation", async () 
 test("accessibility report exposes expected-route coverage separately", async () => {
   const scanner = await read("compiler/iwagc/scripts/accessibility-report.mjs");
   assert.match(scanner, /missingExpectedRoutes/);
-  assert.match(scanner, /unexpectedRoutes/);
+  assert.match(scanner, /additionalRoutes/);
   assert.match(scanner, /expectedRouteCoverage: routeCoverage/);
   assert.match(scanner, /conformanceClaim: false/);
 });
@@ -63,4 +64,12 @@ test("parse5 lockfile isolates entities major versions without breaking existing
   assert.equal(lock.packages["node_modules/parse5/node_modules/entities"].version, "9.0.0");
   assert.equal(lock.packages["node_modules/entities"].version, "7.0.1");
   assert.equal(lock.packages["node_modules/dom-serializer/node_modules/entities"].version, "4.5.0");
+});
+
+test("locale comparison accepts equivalent primary language subtags", () => {
+  assert.equal(matchesLocaleLanguage("en", "en-SG"), true);
+  assert.equal(matchesLocaleLanguage("en-SG", "en-SG"), true);
+  assert.equal(matchesLocaleLanguage("ms", "ms-MY"), true);
+  assert.equal(matchesLocaleLanguage("id-ID", "id"), true);
+  assert.equal(matchesLocaleLanguage("fr", "en-SG"), false);
 });
