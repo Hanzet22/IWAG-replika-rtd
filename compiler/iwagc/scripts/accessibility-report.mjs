@@ -148,11 +148,30 @@ export async function runAccessibilityReport() {
   const localeCoverage = Object.fromEntries([...localeLanguages.keys()].map((locale) => [
     locale, pages.filter((page) => page.locale === locale).length
   ]));
+  const expectedManifestPath = path.resolve(process.cwd(), "compiler/iwagc/config/expected-routes.json");
+  let expectedManifest = null;
+  try {
+    expectedManifest = JSON.parse(await readFile(expectedManifestPath, "utf8"));
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
+  const actualRoutes = new Set(pages.map((page) => page.route));
+  const expectedRoutes = new Set(expectedManifest?.routes ?? []);
+  const missingExpectedRoutes = [...expectedRoutes].filter((route) => !actualRoutes.has(route)).sort();
+  const unexpectedRoutes = [...actualRoutes].filter((route) => expectedManifest && !expectedRoutes.has(route)).sort();
+  const routeCoverage = {
+    manifest: expectedManifest ? path.relative(process.cwd(), expectedManifestPath).split(path.sep).join("/") : null,
+    expectedCount: expectedManifest?.routes?.length ?? null,
+    actualCount: pages.length,
+    missingExpectedRoutes,
+    unexpectedRoutes,
+    complete: expectedManifest ? missingExpectedRoutes.length === 0 : null
+  };
   const summary = {
     compiler: "iwagc", reportVersion: 1, generatedAt: new Date().toISOString(),
     outputRoot: path.relative(process.cwd(), outputRoot),
     formalTarget: "WCAG 2.2 Level A", levelAA: "optional-enhancement-only", conformanceClaim: false,
-    coverage: { htmlPagesScanned: pages.length, routes: pages.map(({ route, locale }) => ({ route, locale })), localePageCounts: localeCoverage },
+    coverage: { htmlPagesScanned: pages.length, routes: pages.map(({ route, locale }) => ({ route, locale })), localePageCounts: localeCoverage, expectedRouteCoverage: routeCoverage },
     findings: {
       total: findings.length,
       confirmed: findings.filter((item) => item.confidence === "confirmed").length,
@@ -161,6 +180,7 @@ export async function runAccessibilityReport() {
     },
     limitations: [
       "This lightweight scanner is not a WHATWG HTML parser and does not compute the browser accessibility tree.",
+      "Expected-route coverage is compared against a checked-in baseline; unexpected routes are informational and require deliberate baseline review.",
       "A present alt attribute, label reference, ARIA attribute, or title does not prove that its accessible name or text is meaningful.",
       "CSS visibility, generated names, shadow DOM, interactive state, keyboard behavior, screen-reader output, contrast, zoom, captions, and user experience require separate evaluation.",
       "Findings are diagnostic candidates, not a WCAG conformance verdict. Human review and assistive-technology testing remain required."
