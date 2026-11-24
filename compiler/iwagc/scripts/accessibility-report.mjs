@@ -9,13 +9,16 @@ const reportRoot = path.resolve(process.cwd(), ".iwag-build");
 const expectedManifestPath = path.resolve(process.cwd(), "compiler/iwagc/config/expected-routes.json");
 const localeLanguages = new Map([["en", "en"], ["id", "id"], ["en-sg", "en-SG"], ["ms-my", "ms-MY"]]);
 
-export function matchesLocaleLanguage(declaredLanguage, expectedLanguage) {
-  const declaredPrimary = declaredLanguage.trim().toLowerCase().split("-")[0];
-  const expectedPrimary = expectedLanguage.trim().toLowerCase().split("-")[0];
-  return Boolean(declaredPrimary && expectedPrimary && declaredPrimary === expectedPrimary);
+export function isValidLanguageTag(value) {
+  if (typeof value !== "string" || !value.trim()) return false;
+  try {
+    return Intl.getCanonicalLocales(value.trim()).length === 1;
+  } catch {
+    return false;
+  }
 }
 const rules = [
-  ["IWAG-A11Y-HTML-LANG", "3.1.1", "A", "Root document language is missing", "Set a valid lang attribute on the html element."],
+  ["IWAG-A11Y-HTML-LANG", "3.1.1", "A", "Root document language is missing or invalid", "Set a valid BCP 47 lang attribute on the html element."],
   ["IWAG-A11Y-PAGE-TITLE", "2.4.2", "A", "Document title is missing or empty", "Provide a descriptive, non-empty document title."],
   ["IWAG-A11Y-IMAGE-ALT", "1.1.1", "A", "Image alternative text attribute is missing", "Provide an alt attribute; use an empty value only when the image is intentionally decorative."],
   ["IWAG-A11Y-LINK-NAME-REVIEW", "2.4.4", "A", "Link may not expose a discernible purpose", "Review the computed accessible name and link purpose in context."],
@@ -155,12 +158,10 @@ function inspectPage(file, html) {
   const title = head ? walkNodes(head).find((node) => isElement(node) && node.tagName === "title") : null;
 
   const lang = htmlElement ? attr(htmlElement, "lang") : null;
-  if (!lang?.trim()) {
+  if (!lang?.trim() || !isValidLanguageTag(lang)) {
     addFinding({ ruleId: "IWAG-A11Y-HTML-LANG", route, locale, node: htmlElement });
   } else if (lang.trim().toLowerCase() === "und") {
-    addFinding({ ruleId: "IWAG-A11Y-HTML-LANG", route, locale, node: htmlElement, confidence: "review-required", note: "The language is marked undetermined; verify the predominant human language." });
-  } else if (localeLanguages.has(locale) && !matchesLocaleLanguage(lang, localeLanguages.get(locale))) {
-    addFinding({ ruleId: "IWAG-A11Y-HTML-LANG", route, locale, node: htmlElement, confidence: "review-required", note: "The primary language subtag differs from the locale route prefix; verify the page's predominant human language." });
+    addFinding({ ruleId: "IWAG-A11Y-HTML-LANG", route, locale, node: htmlElement, confidence: "review-required", note: "The language is marked undetermined; verify and declare the page's predominant human language." });
   }
 
   if (!title || !textContent(title)) {
