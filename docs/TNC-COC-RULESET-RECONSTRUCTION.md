@@ -1,6 +1,6 @@
 # IWAG V2 — TnC, CoC and Website Ruleset Reconstruction
 
-**Review date:** 24 November 2026  
+**Review date:** 25 November 2026  
 **Source baseline:** V2 repository `main` at `4b8745f6b358b15b98736683cb97e92dbc098cfa`; original website `https://iwag.furries.id/` crawled on 24 November 2026.  
 **Status:** Independent policy drafts for review. Not official IWAG policy, not approved by IWAG or its organisers, and not in force.
 
@@ -123,3 +123,10 @@ Do not label any V2 document official, binding, approved, certified, or in force
 - the authorised operator expressly approves and dates the documents.
 
 A successful build, CI check or deployment is not legal approval, regulatory certification or proof of global compliance.
+
+
+## 9. 25 November 2026 — implementation and legal-source correction
+
+The public CoC route in `src/pages/[lang]/[page].astro` has been rewritten to cover only the V2 website and digital interactions V2 directly controls. Event attendance, venue access, badge/ticket powers, organiser staff instructions and physical event sanctions are expressly excluded. The V2 privacy text now identifies all seven localStorage preference keys and explains that the absence of accounts does not decide PP 17/2025 scope. See [CHILD-ACCESS-PP17-SCOPE-ASSESSMENT.md](CHILD-ACCESS-PP17-SCOPE-ASSESSMENT.md).
+
+The Indonesia register now treats PP 17/2025 as in force and records its child-access indicators. It also downgrades the reported PP 33/2026 to an unverified watch item and flags the discrepancy between Permenkomdigi 9/2026 JDIH metadata and its linked PDF marked “RANCANGAN”. Do not cite article-level provisions from that draft until the final gazetted copy is obtained.
