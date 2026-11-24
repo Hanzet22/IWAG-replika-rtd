@@ -287,9 +287,9 @@ Official sources: https://www.legislation.gov.uk/ukpga/2018/12/section/123 and h
 
 - **Children's Online Privacy Protection Act**, 15 U.S.C. §§6501–6506, and **FTC Rule**, 16 C.F.R. Part 312.
 - Current rule source: https://www.ecfr.gov/current/title-16/chapter-I/subchapter-C/part-312
-- **16 C.F.R. §312.2** defines “collection” to include passive tracking of a child online and defines personal information to include persistent identifiers such as IP addresses. “Child” means under 13.
+- **16 C.F.R. §312.2** currently defines “collection” to include passive tracking of a child online and personal information to include persistent identifiers such as IP addresses. These definitions are in the current Rule; do not imply they were newly introduced by the 2025 amendments. “Child” means under 13.
 - **16 C.F.R. §§312.3–312.5** govern scope, notice and parental consent; **§312.5(c)(7)** contains a limited internal-operations exception; **§312.8** addresses security and **§312.10** retention.
-- The amended Rule was published at **90 Fed. Reg. 16977 (22 April 2025)**; general compliance was required by **22 April 2026**. A general-audience service is not covered solely because a child can visit it; child-directed status or actual knowledge of collection from a child is the key trigger. A child-directed service may still collect persistent identifiers passively, subject to the Rule and any exception.
+- The amended Rule was published at **90 Fed. Reg. 16918 (22 April 2025)**; general compliance was required by **22 April 2026**. A general-audience service is not covered solely because a child can visit it; child-directed status or actual knowledge of collection from a child is the key trigger. A child-directed service may still collect persistent identifiers passively, subject to the Rule and any exception.
 
 ### 16.7 Singapore — PDPA consolidation and children's guidance
 
