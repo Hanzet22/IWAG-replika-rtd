@@ -225,3 +225,20 @@ This pass is source implementation evidence only. It is not a WCAG conformance c
 - [ ] Add source-map resolution for originating Astro/Markdown source locations.
 - [ ] Complete keyboard, screen-reader/TalkBack, zoom/reflow, forced-colors and human evaluation.
 
+
+
+## Full engineering audit and policy consolidation — 24 November 2026
+
+- [x] Created isolated work branch `v2/full-audit-aot-compliance`; production and `main` remain unchanged.
+- [x] Reviewed the current Rust compiler controller, generated-output validator, route renderer, legal policy data, layout, preference script, CSS baseline, architecture and legal research documents.
+- [x] Consolidated Terms, Privacy and Code of Conduct rendering on the canonical `src/data/legal.ts` policy model to prevent duplicate sections.
+- [x] Kept the Accessibility Statement's dedicated engineering page as the primary presentation while suppressing duplicate generic legal-policy rendering.
+- [x] Expanded the Rust required-route contract to cover all core pages, legal policy pages and aliases in each configured locale.
+- [x] Hardened generated-output validation against `javascript:` URLs, `data:` navigation, and unsafe new-tab links.
+- [x] Added baseline HTTP security headers for the static Vercel deployment.
+- [x] Added a dated engineering audit and legal-policy release-gate register.
+- [ ] Browser visual QA, full production build, and assistive-technology testing remain to be performed on the branch before merge.
+- [ ] Actual operator identity, data controller, infrastructure logging/retention and vendor transfers remain unverified.
+- [ ] Qualified legal review and operator approval remain mandatory before any draft is treated as official or operative.
+
+The Vercel production deployment remains untouched by this branch. Workflow results are diagnostic evidence, not the sole definition of engineering completion.

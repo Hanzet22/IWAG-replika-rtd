@@ -148,3 +148,17 @@ WebAssembly must not gate navigation, reading, forms or essential information. A
 - only after a real Next.js module is approved: declare its manifest and route boundary, implement conditional backend orchestration, validate output isolation and route collisions, and define the deployment/proxy contract.
 
 No CI status is used as the definition of project completion.
+
+
+## 5. Active AOT hardening — 24 November 2026
+
+The compiler remains the required Rust entry point. This update expands its route contract and generated-output URL validation.
+
+- Rust now requires the homepage, 404 page, primary information routes, location and participation pages, policy index, and every legal policy route/alias across all four configured locales.
+- The generated-output validator rejects `javascript:` URLs and `data:` navigation links.
+- Links opened in a new browsing context must carry `rel="noopener"` or `rel="noreferrer"`.
+- Local links, assets, fragments, output-root containment, document language/title/main landmark, skip link, duplicate IDs, accessible control names, image alt attributes, legacy redirect interstitials, meta refresh and autoplay video remain in the validation scope.
+- V1 archive files remain outside V2 source inputs.
+- CI is one source of diagnostic evidence. A failed or pending workflow is not an instruction to abandon engineering; investigate the concrete failure, correct the cause, and continue from the last known-good source state.
+
+The Rust controller still delegates language-specific transformations to Astro/Vite and other explicitly configured specialist tools. This is an intentional compiler architecture, not a claim that Rust itself parses and transpiles every frontend language.

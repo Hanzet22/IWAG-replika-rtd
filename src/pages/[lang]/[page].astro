@@ -57,8 +57,8 @@ const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct", ...lega
 const policySlug = page === "tnc" ? "terms" : page === "code-of-conduct" ? "coc" : page;
 const policy = legalPolicies[policySlug]?.[lang === "id" ? "id" : "en"];
 const isLegal = legalPages.includes(page);
-const isTerms = page === "terms" || page === "tnc";
-const isPrivacy = page === "privacy";
+const isTerms = false;
+const isPrivacy = false;
 const isAccessibility = page === "accessibility";
 const isAbout = page === "about";
 const isPlan = page === "plan-your-visit";
@@ -66,7 +66,9 @@ const isCommunity = page === "community";
 const isLocation = page === "location";
 const isParticipate = page === "participate";
 const isUpdates = page === "updates";
-const isConduct = page === "coc" || page === "code-of-conduct";
+// legalPolicies in src/data/legal.ts is the single canonical source for legal copy.
+ // Keep legacy hand-written template blocks disabled to prevent duplicate sections.
+const isConduct = false;
 const isBrand = page === "brand";
 const isDealers = page === "dealers";
 const isEvents = page === "events";
@@ -361,7 +363,7 @@ const copy = policy?.summary ?? pageSummaries[englishFallback ? "en" : lang]?.[p
     </section>}
     {isAccessibility && <ContrastChecker client:visible lang={lang} />}
     {isAccessibility && <GraphicsCapabilityLab client:visible lang={lang} />}
-    {isLegal && policy && <section class="policy-document" aria-label={policy.title}>
+    {isLegal && policy && !isAccessibility && <section class="policy-document" aria-label={policy.title}>
       {policy.sections.map((section) => <section class="policy-section"><h2>{section.heading}</h2>{section.body.map((paragraph) => <p>{paragraph}</p>)}</section>)}
       <p class="muted">{lang === "id" ? "Dokumen ini adalah bahan drafting independen, bukan nasihat hukum atau kebijakan resmi." : "This is independent drafting material, not legal advice or an official policy."}</p>
     </section>}

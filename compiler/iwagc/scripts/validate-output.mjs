@@ -30,7 +30,16 @@ function publicUrlForFile(file) {
 
 async function resolveLocalReference(raw, base, owner, kind) {
   const value = raw.trim();
-  if (!value || /^(?:data:|blob:|mailto:|tel:|javascript:|https?:|\/\/)/i.test(value)) return;
+  if (!value) return;
+  if (/^javascript:/i.test(value)) {
+    errors.push(owner + ': javascript: URL is prohibited in ' + kind + ' references');
+    return;
+  }
+  if (kind === "href" && /^data:/i.test(value)) {
+    errors.push(owner + ': data: navigation URL is prohibited');
+    return;
+  }
+  if (/^(?:data:|blob:|mailto:|tel:|https?:|\/\/)/i.test(value)) return;
   let url;
   try {
     url = new URL(value, base);
@@ -138,6 +147,17 @@ function validateHtmlBasics(html, owner) {
   }
   if (/<video\b[^>]*\bautoplay\b/i.test(html)) {
     errors.push(owner + ": autoplay video is prohibited");
+  }
+
+  for (const match of html.matchAll(/<a\b([^>]*)>/gi)) {
+    const attrs = match[1];
+    if (/\btarget\s*=\s*["']_blank["']/i.test(attrs)) {
+      const rel = attrs.match(/\brel\s*=\s*["']([^"']*)["']/i)?.[1] ?? "";
+      const tokens = new Set(rel.toLowerCase().split(/\s+/).filter(Boolean));
+      if (!tokens.has("noopener") && !tokens.has("noreferrer")) {
+        errors.push(owner + ": target=_blank link is missing rel=noopener or rel=noreferrer");
+      }
+    }
   }
 
   const ids = [...html.matchAll(/\bid\s*=\s*["']([^"']+)["']/gi)].map((match) => match[1]);
