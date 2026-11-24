@@ -16,6 +16,7 @@ const brandClass = [wordmarkClass, "wordmark"].filter(Boolean).join(" ");
 const lang = isLocale(requestedLang) ? requestedLang : "en";
 const t = getMessages(lang);
 const htmlLang = contentLang ?? locales[lang].htmlLang;
+const canonicalUrl = new URL(Astro.url.pathname, "https://iwag-replika-rtd.vercel.app").toString();
 const pathWithoutLocale = Astro.url.pathname.replace(new RegExp("^/" + lang + "(?=/|$)"), "");
 const currentPath = pathWithoutLocale.replace(/\/$/, "") || "/";
 const isEventsPath = currentPath === "/events" || currentPath.startsWith("/events/");
@@ -49,6 +50,13 @@ const breadcrumbName = (segment: string) => breadcrumbLabels[segment] ?? segment
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="IWAG V2 Independent Project" />
+    <meta property="og:title" content={`${title} · IWAG V2 Independent Project`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:card" content="summary" />
     <meta name="theme-color" content="#f4f6f7" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>{title} · IWAG V2 Independent Project</title>
