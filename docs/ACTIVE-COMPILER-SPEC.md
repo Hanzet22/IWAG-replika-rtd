@@ -18,7 +18,8 @@ It does **not** independently parse or transpile Astro, HTML, CSS, JavaScript, T
 | `iwagc doctor` | Check the configured minimum Node.js version and availability of npm and Cargo |
 | `iwagc dev` | Launch Astro development server through npm |
 | `iwagc build` | Validate source/output paths, invoke Astro/Vite, inspect generated assets, verify required routes, run generated-output accessibility diagnostics and write reports |
-| `iwagc accessibility` | Scan the existing generated output and write JSON/SARIF diagnostics |\n| `iwagc preview` | Launch Astro production preview through npm |
+| `iwagc accessibility` | Scan the existing generated output and write JSON/SARIF diagnostics |
+| `iwagc preview` | Launch Astro production preview through npm |
 | `iwagc wasm` | Explicitly build the Rust contrast-engine module using wasm-pack |
 
 The normal npm scripts call these Rust commands. `build:astro` remains a diagnostic backend escape hatch, not the normal build entry point. Next.js orchestration is a future conditional capability, not a current command.
@@ -37,7 +38,8 @@ The normal npm scripts call these Rust commands. `build:astro` remains a diagnos
 10. Confirm generated CSS exists when CSS source files are present.
 11. Verify root homepage, 404 page and seven critical routes for each of four locales.
 12. Count generated HTML, CSS, JavaScript, images and fonts, plus byte footprints.
-13. Run generated-output accessibility diagnostics and write JSON/SARIF reports.\n14. Write `.iwag-build/iwag-build-report.json` outside the public `dist/` directory.
+13. Run generated-output accessibility diagnostics and write JSON/SARIF reports.
+14. Write `.iwag-build/iwag-build-report.json` outside the public `dist/` directory.
 
 When a real Next.js module is later declared, the compiler may add a separate backend stage for that module. It must not silently merge Next.js output into Astro's route tree or make the Next.js toolchain mandatory for builds that do not declare the module.
 
