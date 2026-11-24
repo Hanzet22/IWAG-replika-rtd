@@ -107,3 +107,23 @@ A separate [dependency licence and security review](DEPENDENCY-LICENSE-SECURITY-
 The exact Astro 7.4.13 and Vite 8.3.8 versions fall outside the reviewed recent affected ranges. Vue 3.5.45 is associated with a conditional Nuxt UI + Comark/MDC + untrusted-Markdown SSR chain; the current project is static Astro, has no such dependencies or user-content pipeline, and no current trigger was identified. Reassess if the architecture changes.
 
 Vercel Security Review findings could not be queried because the endpoint returned HTTP 404. GitHub alert endpoints were not available through the connected fetch interface. No alert list is treated as proof of zero vulnerabilities. Licence texts and actual Sharp/libvips and Lightning CSS binary distribution still require review.
+
+
+## 9. Follow-up findings and patches (24 November 2026)
+
+| ID | Priority | Finding | Change |
+|---|---|---|---|
+| ENG-08 | Medium | The Node doctor enforced a minimum version but did not enforce the package's supported upper major-version bound. A local Node 26 installation could pass the doctor even though package engines and Vercel target Node 22. | Added `node_maximum_exclusive = "23.0.0"` and a semantic upper-bound check; added regression tests for Node 23/26 rejection. |
+| ENG-09 | Medium | Package scripts invoked Cargo without `--locked`, allowing lockfile resolution drift during local builds. | Added `--locked` to all Cargo run scripts. The compiler crate has a committed Cargo.lock. |
+| LEG-01 | High | The first legal matrix underweighted the new Indonesian child-online-protection framework. PP 17/2025 and its implementing Permenkomdigi 9/2026 require a feature-level child-access assessment. | Added a Child Safety & Protection draft, route validation, and a PP 17/2025 / Permenkomdigi 9/2026 applicability analysis. No age gate or identity verification is assumed without classification. |
+| SEC-01 | Medium | The baseline response-header test expected HSTS, but Vercel configuration did not set it. | Added HSTS with a one-year max-age and includeSubDomains; verify on preview before merge. |
+
+### PP 17/2025 scope note
+
+The primary text defines a child as a person under 18 (Article 1), requires protection for children accessing electronic systems (Article 2), and describes covered private PSE products/services/features as those designed for or possibly accessed by children (Article 3(3)). Article 4(2) identifies indicators for possible child access, including published terms/policies, evidence of routine child users, child-directed advertising, child-attractive design and substantial similarity to services already accessed by children. The current V2 site has no accounts, chat, comments, uploads, ticketing or payment features; that is relevant risk context, not an automatic exemption. The audience, design and evidence of actual child use still need operator assessment.
+
+The official BPK catalogue marks Permenkomdigi 9/2026 as in force from 6 March 2026 and describes provisions on minimum age, self-assessment, age assurance, child-protection design, risk profiles and social-networking services. A static public-information site must be classified on its actual features; do not copy social-network age-gating controls without a reasoned legal assessment.
+
+### Additional release boundary
+
+The new child-safety page is a non-operative draft only. No verified safeguarding lead, monitored reporting channel, incident-response team or event-organiser authority exists in the inspected project. Do not describe it as an active child-safety reporting service.

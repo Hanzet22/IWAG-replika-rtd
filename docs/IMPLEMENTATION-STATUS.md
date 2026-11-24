@@ -260,3 +260,10 @@ The Vercel production deployment remains untouched by this branch. Workflow resu
 - [x] Assessed the conditional Vue 3.5.45 SSR advisory against the current static Astro/no-user-content architecture; no current trigger identified.
 - [ ] Third-party notice review remains for 31 transitive packages with LGPL/MPL/CC-BY/BlueOak licences and for actual Sharp/libvips binary distribution.
 - [ ] Repository dependency alerts/SBOM automation still require owner-side setup; connected alert endpoints were unavailable in this session.
+
+
+- [x] Node LTS upper bound enforced in Rust compiler doctor; regression tests added.
+- [x] Cargo commands use --locked to prevent dependency resolution drift.
+- [x] Added Child Safety & Protection draft in English and Indonesian, and registered its static route in all four locale builds.
+- [x] Added PP 17/2025 and Permenkomdigi 9/2026 feature-level scope assessment; no blanket age gate is assumed.
+- [x] Added HSTS to the Vercel security-header baseline; preview verification pending.

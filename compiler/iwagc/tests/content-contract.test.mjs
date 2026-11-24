@@ -60,3 +60,27 @@ test("Vercel baseline response headers are configured", () => {
     assert.ok(config.includes(header), "missing response header: " + header);
   }
 });
+
+
+test("Active Compiler enforces the supported Node LTS range and locked Cargo resolution", () => {
+  const rust = read("../src/main.rs");
+  const manifest = read("../../../iwag.compiler.toml");
+  const pkg = JSON.parse(read("../../../package.json"));
+  assert.match(manifest, /node_minimum = "22\.23\.4"/);
+  assert.match(manifest, /node_maximum_exclusive = "23\.0\.0"/);
+  assert.match(rust, /node_maximum_exclusive/);
+  assert.match(rust, /version_below/);
+  for (const [name, command] of Object.entries(pkg.scripts)) {
+    if (command.startsWith("cargo run ")) assert.match(command, /^cargo run --locked /, "Cargo lock enforcement missing from " + name);
+  }
+});
+
+test("Child Safety & Protection draft is routed and remains non-operative", () => {
+  const legal = read("../../../src/data/legal.ts");
+  const page = read("../../../src/pages/[lang]/[page].astro");
+  const rust = read("../src/main.rs");
+  assert.match(legal, /child-safety/);
+  assert.match(legal, /DRAFTING ONLY — NOT OFFICIAL — NOT VERIFIED — NOT APPROVED — NOT IN FORCE/);
+  assert.match(page, /"child-safety"/);
+  assert.match(rust, /child-safety\/index\.html/);
+});
