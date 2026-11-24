@@ -25,7 +25,7 @@ test("expected route baseline matches Rust required-route validation", async () 
   const quoted = (value) => [...value.matchAll(/"([^"]+)"/g)].map((match) => match[1]);
   const expected = quoted(rootBlock[1]).map((route) => route === "index.html" ? "/" : "/" + route);
   for (const locale of quoted(localeBlock[1])) {
-    for (const route of quoted(localeBlock[2])) expected.push(route === "index.html" ? "/" + locale + "/" : "/" + locale + "/" + route);
+    for (const route of quoted(localeBlock[2])) expected.push(route === "index.html" ? "/" + locale + "/" : route.endsWith("/index.html") ? "/" + locale + "/" + route.slice(0, -"/index.html".length) + "/" : "/" + locale + "/" + route);
   }
   assert.deepEqual([...manifest.routes].sort(), expected.sort());
 });
@@ -40,7 +40,7 @@ test("accessibility report exposes expected-route coverage separately", async ()
 
 test("parse5 corrects malformed HTML and preserves source locations", () => {
   const parseErrors = [];
-  const document = parse("<!doctype html><p id=first>Alpha<p id=second>Beta</div>", {
+  const document = parse("<!doctype html><p id=first id=duplicate>Alpha<p id=second>Beta", {
     sourceCodeLocationInfo: true,
     onParseError(error) { parseErrors.push(error); }
   });
