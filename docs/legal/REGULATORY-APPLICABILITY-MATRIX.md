@@ -29,6 +29,14 @@ Before treating any rule as applicable, record:
 | Law No. 23 of 2002 on Child Protection, as amended (including Law No. 35 of 2014 and subsequent amendments) | Child rights and protection from violence, exploitation and discrimination | Relevant to safeguarding where children participate in event-related services, content, staffing, volunteering or communities. | Separate online privacy from physical event safeguarding. Define child-safe reporting, adult responsibility, consent boundaries, image/media practices and escalation only after a real operator and trained responsible persons exist. |
 | Law No. 28 of 2014 on Copyright | Copyright and related rights | Relevant to event names, logos, artwork, characters, photos, music, video, fonts, maps, text and archived materials. | Maintain a provenance/licence register. Attribution alone does not grant permission. Respect licence scope, non-commercial restrictions, moral rights and takedown/review procedures. |
 
+## 2.1 Child-access assessment for this project
+
+The official PP 17/2025 text defines a child as a person under 18 (Article 1), requires electronic-system providers to protect children accessing the system (Article 2), and describes the covered private PSE scope in terms of products, services or features specifically designed for, or possibly accessed by, children (Article 3(3)). Article 4(2) lists indicators for possible child access. The site must therefore document an actual feature-level assessment rather than assert either automatic exemption or automatic full application.
+
+Current inspected V2 facts: static informational pages; no user accounts, chat, comments, uploads, ticket sales, payments, booking or user-generated content. This lowers some interaction and data risks but is not a legal exemption. Its audience, visual design, published terms and evidence of routine child access still need assessment. Do not add an age gate or identity verification solely by assumption; first classify each product/service/feature under the current regulation and obtain operator/legal review.
+
+Permenkomdigi 9/2026's BPK record marks it in force from 6 March 2026 and summarises minimum-age, self-assessment, age-verification, risk-profile and child-protection-design provisions. The official summary does not, by itself, settle the classification of this particular website.
+
 ## 3. International and regional laws — conditional, not universal
 
 | Framework | Trigger to assess | Project treatment |
@@ -112,7 +120,7 @@ Before treating any rule as applicable, record:
 
 - Indonesia UU PDP No. 27/2022 — BPK: https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
 - Indonesia UU PDP — JDIH Komdigi: https://jdih.komdigi.go.id/produk_hukum/view/id/832/t/undangundang%2Bnomor%2B27%2Btahun%2B2022
-- Indonesia PP No. 71/2019 — BPK: https://peraturan.bpk.go.id/Details/122030/pp-no-71-tahun-2019
+- Indonesia PP No. 71/2019 — BPK: https://peraturan.bpk.go.id/Details/122030/pp-no-71-tahun-2019\n- Indonesia PP No. 17/2025 — BPK PDF: https://peraturan.bpk.go.id/Download/377994/PP%20Nomor%2017%20Tahun%202025.pdf; official catalogue: https://peraturan.go.id/id/pp-no-17-tahun-2025\n- Indonesia Permenkomdigi No. 9/2026 — BPK: https://peraturan.bpk.go.id/Details/346040/permenkomdigi-no-9-tahun-2026
 - Indonesia UU No. 1/2024 (ITE amendment) — BPK: https://peraturan.bpk.go.id/Details/274494/uu-no-1-tahun-2024
 - Indonesia UU No. 8/1999 (Consumer Protection) — BPK: https://peraturan.bpk.go.id/Details/45288/uu-no-8-tahun-1999
 - Indonesia UU No. 35/2014 (Child Protection amendment) — BPK: https://peraturan.bpk.go.id/Details/38723/uu-no35tahun-2014

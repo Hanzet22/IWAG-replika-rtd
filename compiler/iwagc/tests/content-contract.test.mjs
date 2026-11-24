@@ -16,7 +16,7 @@ test("populated information pages have explicit non-placeholder summaries", () =
 test("policy drafts preserve explicit non-operative status", () => {
   const legal = read("../../../src/data/legal.ts");
   assert.match(legal, /DRAFTING ONLY — NOT OFFICIAL — NOT VERIFIED — NOT APPROVED — NOT IN FORCE/);
-  assert.match(legal, /HANYA DRAFTING — BUKAN RESMI — BELUM DIVERIFIKASI — BELUM DISETUJUI — BELUM BERLAKU/);
+  assert.match(legal, /HANYA DRAFTING — BUKAN RESMI — BELUM DIVERIFIKASI — BELUM DISETUJUI — BELUM BERLAKU/);\n  assert.match(legal, /PP 17 of 2025/);\n  assert.match(legal, /Permenkomdigi No. 9 of 2026/);\n  assert.match(legal, /Child Safety & Protection/);
 });
 
 test("policy drafts include both English and Indonesian operational safeguards", () => {

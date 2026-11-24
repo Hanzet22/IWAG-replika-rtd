@@ -9,28 +9,28 @@ import { isLocale, localeKeys } from "../../i18n/locales";
 const pageTitles: Record<string, Record<string, string>> = {
   en: {
     about: "About this project", community: "Community", "plan-your-visit": "Plan your visit", accessibility: "Accessibility", brand: "Brand resources",
-    coc: "Code of Conduct", "code-of-conduct": "Code of Conduct", dealers: "Dealers",
+    coc: "Code of Conduct", "code-of-conduct": "Code of Conduct", "child-safety": "Child Safety & Protection", dealers: "Dealers",
     events: "Events", "join-iwag-team": "Join the team", links: "Links", cookies: "Cookie Policy", copyright: "Copyright & Intellectual Property", disclaimer: "Disclaimer", moderation: "Moderation & Reporting", retention: "Data Retention",
     location: "Location", participate: "Participate", policy: "Policies",
     privacy: "Privacy", terms: "Terms", tnc: "Terms and Conditions", updates: "Updates"
   },
   id: {
     about: "Tentang proyek ini", community: "Komunitas", "plan-your-visit": "Rencanakan kunjungan", accessibility: "Aksesibilitas", brand: "Sumber daya merek",
-    coc: "Kode Etik", "code-of-conduct": "Kode Etik", dealers: "Dealer",
+    coc: "Kode Etik", "code-of-conduct": "Kode Etik", "child-safety": "Perlindungan Anak", dealers: "Dealer",
     events: "Acara", "join-iwag-team": "Bergabung dengan tim", links: "Tautan", cookies: "Kebijakan Cookie", copyright: "Hak Cipta & Kekayaan Intelektual", disclaimer: "Penyangkalan", moderation: "Moderasi & Pelaporan", retention: "Retensi Data",
     location: "Lokasi", participate: "Partisipasi", policy: "Kebijakan",
     privacy: "Privasi", terms: "Ketentuan", tnc: "Syarat dan Ketentuan", updates: "Pembaruan"
   },
   "en-sg": {
     about: "About this project", community: "Community", "plan-your-visit": "Plan your visit", accessibility: "Accessibility", brand: "Brand resources",
-    coc: "Code of Conduct", "code-of-conduct": "Code of Conduct", dealers: "Dealers",
+    coc: "Code of Conduct", "code-of-conduct": "Code of Conduct", "child-safety": "Child Safety & Protection", dealers: "Dealers",
     events: "Events", "join-iwag-team": "Join the team", links: "Links",
     location: "Location", participate: "Participate", policy: "Policies",
     privacy: "Privacy", terms: "Terms", tnc: "Terms and Conditions", updates: "Updates"
   },
   "ms-my": {
     about: "Perihal projek ini", community: "Komuniti", "plan-your-visit": "Rancang lawatan", accessibility: "Kebolehcapaian", brand: "Sumber jenama",
-    coc: "Kod Tatakelakuan", "code-of-conduct": "Kod Tatakelakuan", dealers: "Peniaga",
+    coc: "Kod Tatakelakuan", "code-of-conduct": "Kod Tatakelakuan", "child-safety": "Perlindungan Kanak-kanak", dealers: "Peniaga",
     events: "Acara", "join-iwag-team": "Sertai pasukan", links: "Pautan",
     location: "Lokasi", participate: "Penyertaan", policy: "Dasar",
     privacy: "Privasi", terms: "Terma", tnc: "Terma dan Syarat", updates: "Kemas kini"
@@ -40,7 +40,7 @@ const pageTitles: Record<string, Record<string, string>> = {
 export function getStaticPaths() {
   const pageKeys = [
     "about", "community", "plan-your-visit", "accessibility", "brand", "coc", "code-of-conduct", "dealers",
-    "join-iwag-team", "links", "location", "participate", "policy", "cookies", "copyright", "disclaimer", "moderation", "retention",
+    "join-iwag-team", "links", "location", "participate", "policy", "cookies", "copyright", "disclaimer", "moderation", "retention", "child-safety",
     "privacy", "terms", "tnc", "updates"
   ] as const;
   return localeKeys.flatMap((lang) => pageKeys.map((page) => ({ params: { lang, page } })));

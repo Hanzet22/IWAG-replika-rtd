@@ -26,7 +26,7 @@
 | Copyright & IP | Provenance, licences, permissions, marks, third-party assets and rights-notice process. | That attribution alone authorises copying or that the project owns event marks/artwork. |
 | Disclaimer | Independent status, information freshness, external links and limits that preserve non-waivable rights. | A blanket waiver of mandatory rights or an organiser endorsement. |
 | Accessibility Statement | Actual engineering target, known limitations, verified feedback channel and test status. | Certification or conformance based only on source inspection or automated scans. |
-| Moderation & Reporting | Only real moderation operations, scope, intake, reviewer authority, privacy, appeal and escalation. | A monitored reporting service where no staffed channel exists. |
+| Moderation & Reporting | Only real moderation operations, scope, intake, reviewer authority, privacy, appeal and escalation. | A monitored reporting service where no staffed channel exists. |\n| Child Safety & Protection | Feature-level child-access/risk assessment, data minimisation, safe external-link boundaries, age-related duties and truthful reporting limitations. | A child-safeguarding lead, active reporting mechanism, age-verification system, event admission rule or operator approval that does not exist. |
 | Data Retention | Real category-specific retention periods, deletion, backup lifecycle and legal holds. | Invented periods where hosting and provider settings are unknown. |
 
 ## 3. Indonesia: applicability map
@@ -36,8 +36,8 @@
 | UU 27/2022 Pelindungan Data Pribadi | Lawful basis, transparency, data-subject rights, minimisation, security, retention, breach response, processors and transfers. | Applies to personal-data processing within its territorial scope. Verify the controller and actual data flows. |
 | PP 71/2019 | Electronic-system reliability, security, operational information and PSE duties. | Assess whether the actual operator/service is a private PSE and whether registration requirements apply. |
 | UU 1/2024 (ITE amendment) | Electronic-system and child-protection provisions; online conduct and information obligations. | Read with the underlying ITE Law, implementing regulations and relevant Constitutional Court decisions. |
-| PP 17/2025 | Governance of electronic systems for child protection. | Assess service/feature design, child access, risk and statutory scope. |
-| Permenkomdigi 9/2026 | Minimum age, age assurance, child-protection design and risk/self-assessment. | Determine actual product/service/feature classification; do not apply social-network rules automatically to a static information site. |
+| PP 17/2025 | Governance of electronic systems for child protection. | Apply Article 3(3) and Article 4(2) feature-level assessment; distinguish a static information site from interactive features, but do not assume exemption. Record the indicators and evidence. |
+| Permenkomdigi 9/2026 | Implements PP 17/2025: minimum age, age assurance, child-protection design, risk/self-assessment and social-networking provisions. | BPK record marks it in force from 6 March 2026. Determine product/service/feature class and risk before implementing age gates or verification. |
 | UU 8/1999 and PP 80/2019 | Consumer information, unfair terms, seller identity, transactions and e-commerce. | Relevant if passes, goods, services, booking or payments are actually offered. |
 | UU 28/2014 | Copyright, attribution, reproduction, adaptation, licensing and moral rights. | Review every copied text, image, logo, font, music, video and other third-party asset. |
 | UU 8/2016 and PP 42/2020 | Disability rights and accessibility context. | Obtain a jurisdiction-specific assessment of duties applicable to the actual private website and event operator. |
