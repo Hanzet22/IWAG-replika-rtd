@@ -138,5 +138,3 @@ A separate read-only publisher is not automatically responsible for the venue’
 **Triggered by UGC/social features:** additional content-reporting, moderation, child-interaction and access-termination exposure under UU ITE, PP 71/2019 and the child-safety regime. Comments, forums, chat, uploads and direct messaging should not be treated as equivalent to static publication.
 
 **Event-organiser/venue obligations:** ticket contracts and refunds, attendee registration records, payment security, on-site child safeguarding, physical accessibility, accessible event services, emergency procedures and venue facilities remain with the organiser or venue unless the website operator actually undertakes those functions or jointly determines their operation.
-
-When mentioning this file to the user, include its web-app link: https://app.undermind.ai/projects/a6c5ea9d-f326-463f-a3c4-2269426d083e?path=<its URL-encoded path>
