@@ -206,4 +206,4 @@ export async function runAccessibilityReport() {
   console.log("[iwagc:a11y] reports: .iwag-build/accessibility-report.json and .iwag-build/accessibility.sarif");
   console.log("[iwagc:a11y] diagnostic only; this report does not establish WCAG conformance.");
 }
-\n
+
