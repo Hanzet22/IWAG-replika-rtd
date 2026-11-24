@@ -53,7 +53,7 @@ const t = getMessages(lang);
 const contentMessages = lang === "ms-my" ? getMessages("en") : t;
 const englishFallback = lang === "ms-my" || (lang === "id" && ["location", "participate", "updates"].includes(page));
 const title = englishFallback ? pageTitles.en[page] ?? "Information" : pageTitles[lang]?.[page] ?? pageTitles.en[page] ?? "Information";
-const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct", ...legalPolicySlugs];
+const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct", "policy", ...legalPolicySlugs];
 const policySlug = page === "tnc" ? "terms" : page === "code-of-conduct" ? "coc" : page;
 const policy = legalPolicies[policySlug]?.[lang === "id" ? "id" : "en"];
 const isLegal = legalPages.includes(page);
@@ -86,11 +86,7 @@ const copy = policy?.summary ?? (isConduct
 ---
 <BaseLayout lang={lang} contentLang={englishFallback ? "en" : lang === "id" ? "id" : "en"} title={title} description={copy}>
   <article class="page-content">
-    {isLegal && <aside class="legal-draft-banner" role="note" aria-label={lang === "id" ? "Status dokumen hukum" : "Legal document status"}>
-      <strong>{lang === "id" ? "HANYA DRAFTING — BUKAN RESMI — BELUM DIVERIFIKASI — BELUM DISETUJUI — BELUM BERLAKU." : "DRAFTING ONLY — NOT OFFICIAL — NOT VERIFIED — NOT APPROVED — NOT IN FORCE."}</strong>
-      <span>{lang === "id" ? "Bukan kebijakan resmi IWAG; belum diverifikasi atau disetujui penyelenggara dan belum berlaku." : "Not an official IWAG policy; not verified or approved by the organiser and not in force."}</span>
-      <small>{lang === "id" ? "Draf v2.0 · 25 November 2026 · Tidak ada tanggal berlaku" : "Draft v2.0 · 25 November 2026 · No effective date"}</small>
-    </aside>}
+    {isLegal && <p class="policy-version">{lang === "id" ? "Rekonstruksi aturan V1 · V2.0 · 25 November 2026" : "V1 rule reconstruction · V2.0 · 25 November 2026"}</p>}
     <header class="page-intro">
       <p class="eyebrow">IWAG V2 · Independent project</p>
       <h1>{title}</h1>
@@ -135,8 +131,8 @@ const copy = policy?.summary ?? (isConduct
       <p class="muted">{lang === "id" ? "Tautan eksternal mengarah ke situs pihak lain. Pratinjau ini tidak mengendalikan ketersediaan, kebijakan privasi, atau keamanan layanan eksternal." : "External links lead to third-party websites. This preview does not control their availability, privacy policies, or service security."}</p>
     </section>}
     {isPolicy && <section class="content-card">
-      <h2>{lang === "id" ? "Dokumen tata kelola V2" : "V2 governance documents"}</h2>
-      <p>{lang === "id" ? "Dokumen kebijakan V2 ditulis untuk situs informasi independen berdasarkan operasi nyata, batas kewenangan, dan aturan lintas yurisdiksi yang relevan. Arsip V1 hanya menjadi bahan pembanding, bukan sumber otomatis untuk ketentuan V2." : "V2 policy documents are written for an independent informational website around actual operations, authority boundaries, and relevant cross-jurisdictional rules. The V1 archive is comparison material only, not an automatic source for V2 terms."}</p>
+      <h2>{lang === "id" ? "Rekonstruksi aturan acara" : "Reconstructed event rules"}</h2>
+      <p>{lang === "id" ? "Dokumen berikut menyusun kembali ketentuan acara V1 menjadi aturan V2 yang lebih terstruktur: hak dan kewajiban peserta, registrasi dan pembayaran, keselamatan, perilaku, privasi, peran dealer dan program, serta mekanisme pelaporan dan peninjauan." : "The documents below reconstruct the V1 event rules as structured V2 provisions: attendee rights and duties, registration and payment, safety, conduct, privacy, dealer and programme roles, and reporting and review procedures."}</p>
       <ul>
         <li><a href={`/${lang}/terms/`}>{lang === "id" ? "Syarat dan Ketentuan" : "Terms and Conditions"}</a></li>
         <li><a href={`/${lang}/ruleset/`}>{lang === "id" ? "Aturan Penggunaan Situs" : "Website Ruleset"}</a></li>
@@ -329,10 +325,10 @@ const copy = policy?.summary ?? (isConduct
     {isAccessibility && <GraphicsCapabilityLab client:visible lang={lang} />}
     {isLegal && policy && <section class="policy-document" aria-label={policy.title}>
       {policy.sections.map((section) => <section class="policy-section"><h2>{section.heading}</h2>{section.body.map((paragraph) => <p>{paragraph}</p>)}</section>)}
-      <p class="muted">{lang === "id" ? "Dokumen ini adalah bahan drafting independen, bukan nasihat hukum atau kebijakan resmi." : "This is independent drafting material, not legal advice or an official policy."}</p>
+      <p class="muted">{lang === "id" ? "Riwayat versi dan dasar perubahan dicatat dalam dokumentasi proyek." : "Version history and change rationale are recorded in the project documentation."}</p>
     </section>}
     {page === "policy" && <section class="policy-index" aria-label={lang === "id" ? "Daftar dokumen drafting" : "Draft policy index"}>
-      {legalPolicyLinks.map(([slug,enTitle,idTitle]) => <a class="policy-link" href={`/${lang}/${slug}/`}><strong>{lang === "id" ? idTitle : enTitle}</strong><p>{lang === "id" ? "Buka dokumen drafting independen" : "Open independent working draft"}</p></a>)}
+      {legalPolicyLinks.filter(([slug]) => slug !== "policy").map(([slug,enTitle,idTitle]) => <a class="policy-link" href={`/${lang}/${slug}/`}><strong>{lang === "id" ? idTitle : enTitle}</strong><p>{lang === "id" ? "Buka dokumen drafting independen" : "Open independent working draft"}</p></a>)}
     </section>}
     {!isLegal && !isAccessibility && !isAbout && !isBrand && !isDealers && !isLocation && !isParticipate && !isUpdates && !isEvents && !isJoinTeam && !isLinks && !isPolicy && <aside class="notice"><p>{lang === "id" ? "Informasi acara dan operasional akan diterbitkan setelah sumbernya diverifikasi. Arsip V1 tidak dianggap sebagai informasi terkini." : "Event and operational information will be published only after its source is verified. V1 archive material is not treated as current information."}</p></aside>}
   </article>
