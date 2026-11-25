@@ -48,7 +48,7 @@ The V1 snapshot is also preserved in `archive/v1-reference/site/`; it is a read-
 | Event age rules | Original CoC describes a 14+ event audience, parental consent for some younger attendees and guardian accompaniment for under-14 attendees; related identity/consent procedures appear in event material. | V2 is a public information site, not the event admission authority. | Do not set an event admission age in V2. Assess child-access and child-data duties for the website separately. |
 | Venue conduct | Original CoC includes venue-specific rules: badge display, shared public areas, smoking/vaping, outside food, pool/fursuit safety, lounge photography, props, contraband and property damage. | V2 does not operate the venue or direct event staff. | Do not import venue rules into the V2 Ruleset. Link to current official organiser/venue rules where appropriate. |
 | Media and photography | Original CoC contains event-media use terms and opt-out language, plus no-camera areas. | V2 has no verified media operation or image-release process. | Do not claim event-media consent or permission. V2 must obtain its own rights/consent before using identifiable images. |
-| Harassment and conduct | Original Other Policies lists harassment examples, vendor expectations, staff reporting and event exclusion consequences. | V2 currently has no user accounts, public comments, messaging or staffed moderation. | CoC applies only to future spaces directly controlled by V2 and only after operator adoption. Do not claim an active report desk. |
+| Harassment and conduct | Original Other Policies lists harassment examples, vendor expectations, staff reporting and event exclusion consequences. | V2 currently has no user accounts, public comments, messaging or staffed moderation. | CoC describes the scope of the V2 website and any digital spaces V2 actually operates; it does not claim authority over the physical event. Do not claim an active report desk. |
 | Dangerous-behaviour exclusions | Original Other Policies includes broad disqualification categories involving past bans, convictions, investigations, support for conduct, and permanent exclusion. | V2 has no authority to screen convention attendees or make event admission decisions. | Do not adopt an attendee blacklist. Any future project moderation must use clear scope, reliable evidence, proportionality, notice, review and privacy safeguards. |
 | Privacy and identity | Original Privacy Policy describes legal names, birth dates, email, payment-linked information, optional third-party data, attendee identity verification and event service fulfilment. | V2 has no attendee registry, payment store, registration or account database in application source; infrastructure logs and browser storage still require verification. | Do not claim to collect or verify attendee identity. Publish only a factual notice based on actual processing and vendor configuration. |
 | Intellectual property | Original Brand Guideline governs organiser marks and assets; third-party assets may carry separate licences. | V2 is an independent recreation and does not own original event marks or artwork. | Maintain a per-asset rights register. Do not assume archived/public assets are reusable. |
@@ -81,7 +81,7 @@ The event-policy reconstruction is retained as a separate research/template corp
 9. **Moderation & Reporting:** current lack of a monitored report channel and safeguards required before future interactive features.
 10. **Data Retention:** browser preference persistence and unverified server-log retention.
 
-All ten public website drafts remain independent, unapproved and not in force. Event-specific terms, attendee CoC, ticketing/refunds, venue conduct, staff/volunteer/dealer rules, event sanctions and event-data processing are separate organiser matters. The public route renderer must not import or render the event-level template corpus in `src/data/legal.ts`. The website-only records live in `src/data/website-legal.ts`; navigation is in `src/data/legal-navigation.ts`. A page banner is not a substitute for approval or a valid contract.
+The ten public website documents are V2 working drafts with clearly stated scope and status. Their draft status is a content-status note, not a gate on RTD engineering or route reconstruction. Event-specific terms, attendee CoC, ticketing/refunds, venue conduct, staff/volunteer/dealer rules, event sanctions and event-data processing are separate organiser matters. The public route renderer must not import or render the event-level template corpus in `src/data/legal.ts`. The website-only records live in `src/data/website-legal.ts`; navigation is in `src/data/legal-navigation.ts`. A page banner is not a substitute for approval or a valid contract.
 
 ## 6. Document boundaries and conflict handling
 
@@ -109,20 +109,13 @@ Classify every requirement as:
 - **Policy required:** the project voluntarily adopts the rule.
 - **Recommended practice:** supported by standards or evidence but not universally mandated by law.
 
-## 8. Publication and adoption gates
+## 8. RTD content and implementation handling
 
-Do not label any V2 document official, binding, approved, certified, or in force until all of the following are complete:
+The V1 policy pages are part of the reference site's content and information architecture, so their subject matter, structure, section coverage and locale variants are included in RTD reconstruction. Rewriting means producing independently authored V2 content that substantively covers the relevant source topics; it does not mean copying the source wording or pretending that V2 exercises the original organiser's authority.
 
-- the legal operator and authorised approver are identified;
-- the website's real infrastructure, cookies, logs, vendors, subprocessors, locations and retention are verified;
-- the actual feature set and data flows match the document;
-- each relevant jurisdiction's territorial and functional trigger is assessed;
-- all third-party assets have a documented licence or permission;
-- working privacy/reporting/accessibility contacts and response responsibilities exist where promised;
-- qualified legal review is completed for the operator's home jurisdiction and material target markets; and
-- the authorised operator expressly approves and dates the documents.
+Keep event-facing content distinct from website-use content. Preserve the V1-derived event-policy reconstructions as a separately accessible V2 reference/deliverable, and keep website policies scoped to the independent V2 website. Do not silently discard, merge or replace one category with the other.
 
-A successful build, CI check or deployment is not legal approval, regulatory certification or proof of global compliance.
+Document technical facts and unknowns honestly. Where an infrastructure fact is unknown, mark that specific statement as unverified; do not convert the unknown into a policy-owner approval gate. This section guides content integrity only and does not require certification, organiser endorsement or policy-owner sign-off to continue RTD.
 
 
 ## 9. 25 November 2026 — implementation and legal-source correction
