@@ -234,6 +234,17 @@ fn validate_required_routes(output: &Path) -> Result<usize, String> {
             "updates/index.html",
             "accessibility/index.html",
             "policy/index.html",
+            "coc/index.html",
+            "code-of-conduct/index.html",
+            "ruleset/index.html",
+            "terms/index.html",
+            "tnc/index.html",
+            "privacy/index.html",
+            "cookies/index.html",
+            "copyright/index.html",
+            "disclaimer/index.html",
+            "moderation/index.html",
+            "retention/index.html",
         ] {
             required.push(format!("{locale}/{route}"));
         }
