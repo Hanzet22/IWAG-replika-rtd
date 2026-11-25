@@ -21,7 +21,8 @@ test("public legal routes render website policy data, never event policy data", 
 
   assert.match(legacy, /^\/\/ EVENT-LEVEL DRAFT TEMPLATE DATA ONLY/m);
   assert.match(legacy, /attendees, guests, staff, volunteers/);
-  assert.match(website, /This Code of Conduct describes expected behaviour when using the V2 website/);
+  assert.match(website, /Draft standards for respectful use of this independent information website/);
+  assert.match(page, /This Code of Conduct describes expected behaviour when using the V2 website/);
   assert.match(website, /This draft applies only to access to and use of this independent informational website/);
   assert.match(index, /legalPolicySlugs/);
 });
