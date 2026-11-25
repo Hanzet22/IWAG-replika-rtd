@@ -86,7 +86,11 @@ const copy = policy?.summary ?? (isConduct
 ---
 <BaseLayout lang={lang} contentLang={englishFallback ? "en" : lang === "id" ? "id" : "en"} title={title} description={copy}>
   <article class="page-content">
-    {isLegal && <p class="policy-version">{lang === "id" ? "Rekonstruksi aturan V1 · V2.0 · 25 November 2026" : "V1 rule reconstruction · V2.0 · 25 November 2026"}</p>}
+    {isLegal && <aside class="notice legal-draft-banner" role="note" aria-label={lang === "id" ? "Status dokumen hukum" : "Legal document status"}>
+      <strong>{lang === "id" ? "DRAF INDEPENDEN — BUKAN KEBIJAKAN RESMI IWAG — BELUM DISETUJUI PENYELENGGARA — BELUM BERLAKU." : "INDEPENDENT DRAFT — NOT AN OFFICIAL IWAG POLICY — NOT APPROVED BY THE ORGANISER — NOT IN FORCE."}</strong>
+      <p>{lang === "id" ? "Rekonstruksi ini dibuat untuk penelitian dan evaluasi. Dokumen belum diverifikasi, diadopsi, atau disahkan oleh badan penyelenggara IWAG. Jangan mengandalkannya sebagai aturan acara yang berlaku." : "This reconstruction is prepared for research and evaluation. It has not been verified, adopted, or approved by the IWAG organiser. Do not rely on it as an operative event rule."}</p>
+      <small>{lang === "id" ? "V2.0 · 25 November 2026 · Tidak ada tanggal berlaku" : "V2.0 · 25 November 2026 · No effective date"}</small>
+    </aside>}
     <header class="page-intro">
       <p class="eyebrow">IWAG V2 · Independent project</p>
       <h1>{title}</h1>
