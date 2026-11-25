@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import GraphicsCapabilityLab from "../../components/GraphicsCapabilityLab.vue";
 import ContrastChecker from "../../components/ContrastChecker.vue";
-import { legalPolicySlugs, legalPolicyLinks } from "../../data/legal-navigation";
+import { legalPolicySlugs, legalPolicyLinks, eventPolicyLinks } from "../../data/legal-navigation";
 import { websiteLegalPolicies } from "../../data/website-legal";
 import { legalPolicies } from "../../data/legal";
 import { getMessages } from "../../i18n/ui";
@@ -339,7 +339,7 @@ const copy = eventPolicy?.summary ?? (isEventPolicyIndex ? (lang === "id" ? "Rek
       {websitePolicy.sections.map((section) => <section class="policy-section"><h2>{section.heading}</h2>{section.body.map((paragraph) => <p>{paragraph}</p>)}</section>)}
       <p class="muted">{lang === "id" ? "Dokumen ini hanya membahas situs V2 dan tetap berupa draf independen." : "This document concerns the V2 website only and remains an independent draft."}</p>
     </section>}
-    {isEventPolicyIndex && <section class="policy-index" aria-label={lang === "id" ? "Dokumen kebijakan acara" : "Event policy documents"}>{[["event-coc","Code of Conduct","Kode Etik"],["event-terms","Terms and Conditions","Syarat dan Ketentuan"],["event-privacy","Privacy Policy","Kebijakan Privasi"],["event-other-policies","Other Policies","Kebijakan Lainnya"]].map(([slug,enTitle,idTitle]) => <a class="policy-link" href={`/${lang}/${slug}/`}><strong>{lang === "id" ? idTitle : enTitle}</strong><p>{lang === "id" ? "Rekonstruksi kebijakan tingkat acara dari V1" : "V1 event-level policy reconstruction"}</p></a>)}</section>}
+    {isEventPolicyIndex && <section class="policy-index" aria-label={lang === "id" ? "Dokumen kebijakan acara" : "Event policy documents"}>{eventPolicyLinks.filter(([slug]) => slug !== "event-policies").map(([slug,enTitle,idTitle]) => <a class="policy-link" href={`/${lang}/${slug}/`}><strong>{lang === "id" ? idTitle : enTitle}</strong><p>{lang === "id" ? "Rekonstruksi kebijakan tingkat acara dari V1" : "V1 event-level policy reconstruction"}</p></a>)}</section>}
     {page === "policy" && <section class="policy-index" aria-label={lang === "id" ? "Daftar dokumen drafting" : "Draft policy index"}>
       {legalPolicyLinks.filter(([slug]) => slug !== "policy").map(([slug,enTitle,idTitle]) => <a class="policy-link" href={`/${lang}/${slug}/`}><strong>{lang === "id" ? idTitle : enTitle}</strong><p>{lang === "id" ? "Buka dokumen drafting independen" : "Open independent working draft"}</p></a>)}
     </section>}
