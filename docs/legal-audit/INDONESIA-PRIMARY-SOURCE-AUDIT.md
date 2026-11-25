@@ -26,7 +26,7 @@ These facts come from IWAG's own public pages. They are evidence of published re
 - The Privacy Policy describes “Staff” as the steering committee responsible for the platform and event and says the staff is a **non-corporate social organization located in Jakarta, Indonesia**: https://iwag.furries.id/en/privacy
 - The page does not clearly identify the exact legal person/association, its registration status, the contracting party, the authorised signatory, its tax identity, or the individual/entity responsible for consumer contracts and personal-data-controller duties.
 - IWAG's 2026 hotel information identifies ibis Styles Serpong BSD City as the host hotel for that event and describes group reservations handled through IWAG: https://iwag.furries.id/en/updates/2026-01-05-hotel-information
-- The current Participate page advertises IWAG 2027 pass tiers, but the public material inspected does **not** establish the 2027 venue. Do not assume the 2026 hotel or South Tangerang local rules automatically apply to 2027: https://iwag.furries.id/en/participate
+- IWAG's official venue announcement dated 15 November 2026 identifies **Hotel Ciputra Jakarta, West Jakarta**, for **3–4 July 2027**: https://iwag.furries.id/en/updates/2026-11-15-venue-reveal/ . The 2026 ibis Styles Serpong BSD City hotel is historical context only; apply DKI Jakarta/Jakarta Barat screening to the 2027 venue.
 
 **Legal consequence:** identify the actual contracting organiser and authorised representatives before deciding licensing, consumer, tax, privacy-controller, liability and dispute obligations. A description such as “non-corporate social organization” is not enough to determine legal personality or who signs contracts.
 
@@ -276,7 +276,7 @@ Screen:
 ### 3.11 Labour, contractors, volunteers and occupational safety
 
 Screen:
-- **UU No. 13 Tahun 2003 tentang Ketenagakerjaan**, as amended, including by **UU No. 6 Tahun 2023**;
+- **UU No. 13 Tahun 2003 tentang Ketenagakerjaan** only as historical background. **UU No. 27 Tahun 2026 tentang Pelindungan Ketenagakerjaan** was promulgated and took effect on 28 October 2026, repealing UU 13/2003 and specified employment provisions in UU 6/2023 (Article 311); see Section 12.1 below.
 - **PP No. 35 Tahun 2021** for fixed-term employment, outsourcing, working time/rest and termination;
 - **UU No. 1 Tahun 1970 tentang Keselamatan Kerja** and relevant implementing K3 rules.
 
@@ -285,7 +285,7 @@ Applicability depends on the actual relationship, not the label “volunteer” 
 ### 3.12 Tax, payments, sponsorship and local rules
 
 - **UU No. 1 Tahun 2022 tentang Hubungan Keuangan antara Pemerintah Pusat dan Pemerintahan Daerah** and **PP No. 35 Tahun 2023** provide the national framework for local taxes/retributions and related administration.
-- Local PBJT, advertising tax, venue levy, permits and event-specific requirements depend on the actual city/regency and the activity. The 2026 Serpong hotel is historical context only; the 2027 venue is not established by the public pages inspected.
+- Local PBJT, advertising tax, venue levy, permits and event-specific requirements depend on the actual city/regency and the activity. The 2026 Serpong hotel is historical context only. The 2027 venue is publicly announced as Hotel Ciputra Jakarta, West Jakarta; see Section 12.4.
 - Determine whether the organiser is the seller, agent, fundraiser, recipient of sponsorship, or platform; map invoices, VAT/income tax/withholding, local taxes, sponsorship benefits and payment-provider fees.
 - Do not assume use of a licensed payment gateway makes the organiser a payment-service provider; determine whether the organiser itself performs any regulated payment activity.
 
@@ -351,3 +351,35 @@ The OSS itself cautions that a conversion result is a reference and does not aut
 BPK records **Perda Kota Tangerang Selatan No. 1 Tahun 2025**, amending Perda No. 10 Tahun 2023 on local taxes and retributions, as in force from 4 March 2025: https://peraturan.bpk.go.id/Details/321526/perda-kota-tangerang-selatan-no-1-tahun-2025
 
 IWAG's 2026 hotel information identifies ibis Styles Serpong BSD City as its host hotel. That establishes a historical accommodation connection to South Tangerang, not necessarily the exact convention venue and not the 2027 venue. This local regulation is therefore a **conditional candidate** for any activity, lodging, entertainment, advertising or local-tax obligation actually situated in South Tangerang. Do not apply it to the 2027 event until the venue and transaction model are confirmed.
+
+## 12. Priority correction — labour law, 2027 venue, and current PDP instruments (25 November 2026)
+
+This section supersedes inconsistent earlier statements in this file.
+
+### 12.1 Employment law — UU No. 27 Tahun 2026
+
+**UU No. 27 Tahun 2026 tentang Pelindungan Ketenagakerjaan** was promulgated on **28 October 2026** and took effect upon promulgation. Official BPK text: https://peraturan.bpk.go.id/Download/425330/UU%20Nomor%2027%20Tahun%202026.pdf ; State Secretariat copy: https://jdih.setneg.go.id/api/hukumproduk/pdf?f=Salinan%20UU%20Nomor%2027%20Tahun%202026.pdf&fl=P20664&l=uploads .
+
+Article 311 repeals UU 13/2003 and specified employment provisions in UU 6/2023. Article 310 preserves implementing regulations under the repealed framework only insofar as they do not conflict with UU 27/2026. Stop describing UU 13/2003 as the current principal employment statute “as amended”. Review current implementing instruments against the 2026 law. Assess actual employees, paid crew, contractors, outsourcing, apprentices and other working relationships by substance; the label “volunteer” is not determinative. A static informational website is not brought within employment law merely by being publicly accessible.
+
+### 12.2 PP No. 33 Tahun 2026 — future commencement, authentication qualification
+
+A signed government-hosted copy and secondary text corroborate **PP No. 33 Tahun 2026**, reported promulgation on **16 July 2026**, LN 2026 No. 88, TLN No. 7190, and commencement six months later on **16 January 2027**. Government-hosted copy: http://ppid.purbalinggakab.go.id/wp-content/uploads/2026/09/peraturan_pemerintah_no._33_tahun_2026_100926115902.pdf ; secondary text copy: https://docs.paralegal.id/PP/2026/PP-33-2026.pdf .
+
+**Status label:** government-hosted signed copy corroborated; central BPK/Setneg gazette authentication remains open. It is not yet in force on 25 November 2026. Do not represent article-level OCR/transcriptions as fully authenticated. The operative PDP baseline remains UU 27/2022 until the reported commencement date, subject to later official verification.
+
+### 12.3 Permenkomdigi No. 9 Tahun 2026 — metadata vs downloadable draft
+
+JDIH Komdigi metadata identifies Permenkomdigi 9/2026 as dated 6 March 2026, BN 2026 No. 163, status “Berlaku”: https://jdih.komdigi.go.id/produk_hukum/view/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026 ; BPK record: https://peraturan.bpk.go.id/Details/346040/permenkomdigi-no-9-tahun-2026 .
+
+However, the downloadable PDF inspected remains marked “RANCANGAN” and contains placeholder promulgation details. Catalogue metadata is not authentication of that PDF's wording. Do not quote its article text, risk categories, age-assurance methods, reporting deadlines, or pinpoints until an authenticated final Berita Negara copy is reconciled with the JDIH record.
+
+### 12.4 2027 venue and territorial correction
+
+IWAG's official public announcement identifies **3–4 July 2027** at **Hotel Ciputra Jakarta, West Jakarta**. Venue announcement published 15 November 2026: https://iwag.furries.id/en/updates/2026-11-15-venue-reveal/ ; current event page: https://iwag.furries.id/en/ ; location page: https://iwag.furries.id/en/location/ .
+
+Replace any statement that the 2027 venue is unknown. The 2026 ibis Styles Serpong BSD City hotel remains historical information for the 2026 edition only. Apply DKI Jakarta/Jakarta Barat territorial screening for 2027 venue activity, not South Tangerang local rules by carry-over. This public announcement does not prove the signed venue contract, legal capacity, PBG/SLF, fire approvals, accessibility, merchant of record, or permit classification.
+
+### 12.5 Functional separation remains mandatory
+
+Keep these actors distinct until contracts and facts establish otherwise: independent website publisher, actual event organiser, venue operator, ticket/pass seller, merchant of record, payment processor, accommodation booking intermediary, vendors/dealers, employers/contractors, and linked community-platform operators. A static read-only site does not automatically inherit event ticketing, employment, venue, or PMSE duties; later interactive or commercial features can change the analysis.
