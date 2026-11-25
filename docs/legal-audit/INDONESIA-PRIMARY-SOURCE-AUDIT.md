@@ -350,7 +350,7 @@ The OSS itself cautions that a conversion result is a reference and does not aut
 
 BPK records **Perda Kota Tangerang Selatan No. 1 Tahun 2025**, amending Perda No. 10 Tahun 2023 on local taxes and retributions, as in force from 4 March 2025: https://peraturan.bpk.go.id/Details/321526/perda-kota-tangerang-selatan-no-1-tahun-2025
 
-IWAG's 2026 hotel information identifies ibis Styles Serpong BSD City as its host hotel. That establishes a historical accommodation connection to South Tangerang, not necessarily the exact convention venue and not the 2027 venue. This local regulation is therefore a **conditional candidate** for any activity, lodging, entertainment, advertising or local-tax obligation actually situated in South Tangerang. Do not apply it to the 2027 event until the venue and transaction model are confirmed.
+IWAG's 2026 hotel information identifies ibis Styles Serpong BSD City for the 2026 edition only. The 2027 venue is Hotel Ciputra Jakarta in West Jakarta. Perda Kota Tangerang Selatan No. 1 Tahun 2025 is therefore not a presumptive local-law basis for 2027 venue activity; screen DKI Jakarta and West Jakarta rules instead, and retain the South Tangerang rule only for any separate activity actually situated there.
 
 ## 12. Priority correction — labour law, 2027 venue, and current PDP instruments (25 November 2026)
 
