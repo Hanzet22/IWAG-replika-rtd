@@ -198,3 +198,8 @@ This section supersedes earlier deployment identifiers and project-state observa
 **Data/logging limitation:** an empty project environment-variable list and no configured Vercel drains do not establish that Vercel collects no request metadata. They also do not establish retention periods for every CDN, edge, build, security or platform log. Runtime logs are not a substitute for CDN request-log and provider-retention documentation. The project is static Astro output, so absence of application functions would not settle platform-level request logging. Obtain current plan-specific retention terms and provider/DPA/subprocessor evidence before making a public retention promise.
 
 **Operational limitation:** public HTTP reachability and a READY deployment do not verify the live content route-by-route, the venue contract/permits, archive redistribution rights, legal operator identity or final policy approval. Keep these as independent release gates.
+
+
+### 9.1 Production-to-main divergence
+
+The repository's current main branch resolves to 6893b69ede3fed1a152b4737f76bc7705edfa1ae. A GitHub commit comparison confirms that main is **5 commits ahead** of the deployed production source commit 17250ef8bfb18df7c7abc212dcaa27e572139704, with no commits behind that deployed source. PR #16 then adds a separate 29-commit remediation stack on top of main; its current head is 0082b3fbde56587dc2d45eb1bb0d546500e39e97. Therefore the current production snapshot is behind main, and PR #16 is further ahead still. Do not describe the current production deployment as containing the current main or PR #16 policy changes.
