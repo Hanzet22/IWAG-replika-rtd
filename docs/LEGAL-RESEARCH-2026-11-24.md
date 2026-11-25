@@ -330,3 +330,10 @@ Official sources: https://www.legislation.gov.uk/ukpga/2018/12/section/123 and h
 ### 16.12 Evidence and locator standard
 
 Academic research and regulator guidance can inform proportionate design but do not create statutory obligations. Statutes should be cited by article/section/subsection/paragraph; Indonesian law by Pasal/ayat/huruf/angka. PDF page numbers may be added only where checked against the exact official PDF. Statutory line numbers generally do not exist; do not fabricate “baris” references. For V2, a static-page review is not a substitute for a real infrastructure audit, operator identification or local legal review.
+
+
+## 17. 25 November 2026 — cross-border status corrections
+
+The compact country-by-country status table in `docs/legal-audit/GLOBAL-LEGAL-RESEARCH-REGISTER.md`, Section 9, is the current correction register and supersedes any inconsistent earlier summaries here. Important distinctions: India's DPDP Act/Rules have phased commencement and a 13-vs-14 November 2025 notification-date discrepancy; Chile Law 21,855 moves Law 21,719 commencement to 15 October 2027; Singapore OSRAA commenced only specified parts on 29 June 2026; Malaysia Act 866 is scoped to licensed provider categories; Japan APPI Act 56/2026 has staged future commencement; Taiwan's 2025 PDPA amendments remain uncommenced pending an Executive Yuan date; COPPA's general amended-rule deadline passed 22 April 2026; California's 2026 rules and Delete Act mechanisms are subject to thresholds; South Korea has two separate 2026 PIPA amendments (one effective 11 September 2026, Act 21910 effective 9 March 2027); Canada's Bill C-36 is a privacy bill and not law; Ofcom's February 2027 measures remain future and subject to parliamentary process.
+
+Primary source links and exact status caveats are recorded in the global register. This addendum is not a finding that every instrument applies to the V2 website.
