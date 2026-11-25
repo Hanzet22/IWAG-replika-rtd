@@ -32,3 +32,8 @@ A read-only Vercel account inspection on 25 November 2026 found an existing READ
 A green CI run is necessary but not sufficient. Do not mark the release ready while a blocking gate remains open. Do not represent draft policies as official or in force. Do not make privacy-retention, accessibility, venue-safety, organiser-authority or legal-compliance claims beyond the evidence actually obtained.
 
 The existing production deployment may continue to serve its current snapshot, but it must not be described as containing PR #16. Any future production deployment must be a separate, explicit release action after review and approval of the final merged commit.
+
+
+### Production divergence detail
+
+At the time of this follow-up, GitHub main is 6893b69ede3fed1a152b4737f76bc7705edfa1ae. A commit comparison confirms main is 5 commits ahead of the existing production source commit 17250ef8bfb18df7c7abc212dcaa27e572139704. PR #16 adds 29 commits on top of main and currently points to 0082b3fbde56587dc2d45eb1bb0d546500e39e97. The live production snapshot is therefore behind main; it does not include main's later changes or PR #16.
