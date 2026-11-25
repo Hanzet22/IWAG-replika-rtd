@@ -172,3 +172,29 @@ Vercel's CDN and edge/security infrastructure remain relevant even when the appl
 - Permenkomdigi 9/2026 linked PDF (marked `RANCANGAN`): https://jdih.komdigi.go.id/produk_hukum/unduh/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026
 
 This register records evidence observed on 25 November 2026. Recheck all account, deployment, legal-source and provider details before relying on them for a later release or public notice.
+
+
+## 9. Infrastructure refresh — 25 November 2026, later point-in-time snapshot
+
+This section supersedes earlier deployment identifiers and project-state observations in this document where they differ. A fresh read-only inspection of the connected Vercel project on 25 November 2026 returned:
+
+| Item | Latest observed value | Qualification |
+|---|---|---|
+| Project | iwag-replika-rtd (prj_zyV8oiqVLtYPG1XKQncpLcg50ICM) | Connected project record |
+| Framework / Node | Astro / Node 22.x | Project metadata |
+| Latest production deployment | dpl_FHP8HCeMDBSgJ4wTw4ajrrdRsBou | State READY, target production |
+| Deployment source | main at 17250ef8bfb18df7c7abc212dcaa27e572139704 | Commit message: “docs: add 2026 child digital-wellbeing evidence” |
+| Production alias | iwag-replika-rtd.vercel.app | Verified Vercel-managed hostname |
+| Other project aliases | iwag-replika-rtd-hypergarudas-projects.vercel.app; iwag-replika-rtd-git-main-hypergarudas-projects.vercel.app | Returned by project metadata |
+| Project environment variables | Empty; hidden production count 0 | Values were not decrypted or read |
+| Vercel drains | None returned | No Vercel drain configured in the project-scoped listing at inspection time |
+| Production domains | Only iwag-replika-rtd.vercel.app returned | No custom domain returned in this project-scoped production-domain query |
+| Project password protection | Disabled | Project setting |
+| Preview SSO protection | Enabled | Preview setting only; not production access control |
+| Deployment region | iad1 | Deployment metadata, not an exclusive data-residency guarantee |
+
+**Release state:** the latest observed production deployment is already live and was created from the main commit above. This audit did not create, promote, or alter any deployment. PR #16 remains an unmerged draft and is not included in that deployment. The repository's vercel.json continues to set git.deploymentEnabled: false; this disables automatic Git-triggered deployment but does not prevent an explicitly initiated/manual deployment.
+
+**Data/logging limitation:** an empty project environment-variable list and no configured Vercel drains do not establish that Vercel collects no request metadata. They also do not establish retention periods for every CDN, edge, build, security or platform log. Runtime logs are not a substitute for CDN request-log and provider-retention documentation. The project is static Astro output, so absence of application functions would not settle platform-level request logging. Obtain current plan-specific retention terms and provider/DPA/subprocessor evidence before making a public retention promise.
+
+**Operational limitation:** public HTTP reachability and a READY deployment do not verify the live content route-by-route, the venue contract/permits, archive redistribution rights, legal operator identity or final policy approval. Keep these as independent release gates.
