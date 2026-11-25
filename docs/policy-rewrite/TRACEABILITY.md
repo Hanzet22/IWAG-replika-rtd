@@ -121,3 +121,19 @@ The applicable law depends on the actual contracting entity, controller/processo
 - Confirm rights and licences for event marks, mascots, artwork, photographs, fonts and any source-derived media.
 
 The absence of a verified operational fact is recorded as a verification item; it is not replaced with an invented address, contact, price, deadline, provider or legal identity.
+
+## V2 consistency pass — sanctions and moderation review
+
+The follow-up consistency pass aligns the procedural safeguards across the Code of Conduct, Terms and Conditions, and Moderation and Reporting policy.
+
+| Issue | Documents aligned | V2 treatment |
+|---|---|---|
+| Grounds for refusal, removal and exclusion | Terms and Conditions; Code of Conduct | Adverse action must rely on a ground stated in the published Terms or Code; the decision must identify the applicable rule and material reasons |
+| Interim safety restrictions | Terms and Conditions; Moderation and Reporting | Clearly distinguished from final findings or sanctions; precautionary restrictions must be proportionate, time-limited to necessity and reviewed promptly |
+| Notice and response | Terms and Conditions; Moderation and Reporting | Subject receives the substance of the concern, potentially applicable rule and reasonable opportunity to respond before a final decision, subject to specific safety or legal exceptions |
+| Permanent or multi-event exclusion | Code of Conduct; Terms and Conditions; Moderation and Reporting | Documented risk rationale and review by a different authorised decision-maker; any genuine operational impossibility must be documented and an impartial alternative reviewer provided |
+| Review route and request period | Terms and Conditions; Moderation and Reporting | Event-specific notice must publish the review channel and a reasonable request period; no invented universal service deadline is imposed |
+| Refund consequences | Terms and Conditions; Code of Conduct | Any refund consequence remains governed by disclosed refund terms and mandatory law, not an automatic penalty implied by a conduct decision |
+
+This pass does not assign an organiser, safeguarding lead, appeal officer, response-time SLA, or legal contracting party. Those remain event-specific facts to be supplied and verified before adoption. The Indonesian and English provisions were updated in parallel. This is a policy consistency improvement, not a legal-compliance certification.
+
