@@ -1,5 +1,13 @@
 export const legalPolicySlugs = ["coc","ruleset","terms","privacy","cookies","copyright","disclaimer","accessibility","moderation","retention"] as const;
 
+export const eventPolicyLinks = [
+  ["event-policies","Event Policies","Kebijakan Acara"],
+  ["event-coc","Event Code of Conduct","Kode Etik Acara"],
+  ["event-terms","Event Terms and Conditions","Syarat dan Ketentuan Acara"],
+  ["event-privacy","Event Privacy Policy","Kebijakan Privasi Acara"],
+  ["event-other-policies","Event Other Policies","Kebijakan Lain Acara"]
+] as const;
+
 export const legalPolicyLinks = [
   ["coc","Code of Conduct","Kode Etik"],
   ["ruleset","Website Ruleset","Aturan Penggunaan Situs"],
