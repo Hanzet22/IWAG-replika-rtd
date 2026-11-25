@@ -1,15 +1,16 @@
-# IWAG V2 Greenfield Global Reconstruction Plan
+# IWAG V2 — RTD Reconstruction and Execution Plan
 
 **Status:** Active execution plan  
 **Branch:** `v2/greenfield-global-reconstruction`  
 **Baseline:** `main` at `c84ea35f23b4373d498889eb43464e942a6ddb13`  
-**Decision:** V1 is a read-only reference archive. V2 is an independent implementation.
+**Method:** Replica Technical Development (RTD)  
+**Relationship:** V1 is the reference baseline; V2 is the independently implemented reconstruction.
 
 ## 1. Non-negotiable direction
 
-IWAG V2 is being reconstructed from a clean application boundary. Do not inherit V1 page templates, compiled bundles, CSS, JavaScript, framework wiring, or third-party libraries by default. Reuse is allowed only after an explicit review of purpose, license, maintenance, security, browser support, accessibility, size, and measured performance.
+IWAG V2 follows RTD. Reverse-engineer V1's observable routes, page families, content structures, components, interactions, visual states and responsive behaviour; specify them; reconstruct them in V2; integrate; and verify against the reference. V2 may use a clean implementation and a different stack, but greenfield implementation is a technique, not permission to ignore or reduce the reference product.
 
-The source archive is evidence, not an application dependency. No import, build glob, runtime route, or production copy step may silently consume legacy files.
+Keep V1 outside V2 application imports and build inputs. The archive remains an active engineering reference for inspection, comparison, route mapping and content reconstruction. Reuse of source code or assets is a separate provenance/licensing decision; it does not restrict independent reconstruction of observed behaviour and structure.
 
 ## 2. Repository audit snapshot
 
@@ -112,7 +113,7 @@ Rebuild the complete user experience:
 - localization and translation completeness;
 - empty, loading, error, success and offline states.
 
-V1 is not a visual template. Use source facts only after checking provenance and volatility. Do not invent event details, official status, policies, organiser identity or operational guarantees.
+V1 is the technical and content reference, not a requirement to copy its compiled implementation verbatim. Reconstruct its relevant visual hierarchy, information architecture, content intent, route coverage and interactions. Check volatile facts and asset provenance; do not invent event details, official status or operational guarantees.
 
 ## 8. Accessibility and inclusive interaction
 
@@ -141,30 +142,30 @@ V1 is not a visual template. Use source facts only after checking provenance and
 
 ## 10. Execution phases
 
-1. Repository and V1 source inventory.
-2. V1 archive boundary and dependency/license audit.
-3. Product requirements, route inventory and content provenance.
-4. UX research synthesis and global information architecture.
-5. Unified architecture and Rust Active Compiler specification.
-6. Clean V2 application scaffold and compiler integration.
-7. Design tokens and component foundations.
-8. Global page/template reconstruction.
-9. Interactions, localization and content integration.
-10. Accessibility, security and performance evaluation.
-11. Release packaging and documentation.
+1. Reference discovery and complete V1 route/page-family inventory.
+2. Reverse engineering of layouts, components, assets, interactions, responsive states and technical dependencies.
+3. Route, content, component, interaction and locale specifications.
+4. V1/V2 gap analysis and prioritised reconstruction backlog.
+5. V2 architecture and Rust Active Compiler integration.
+6. Reconstruct design tokens, components, page templates and route families.
+7. Reconstruct content, policy subject matter, interactions and localization.
+8. Integrate all reconstructed modules and verify route coverage.
+9. Compare visual, responsive and functional behaviour against V1.
+10. Evaluate accessibility, security, performance and runtime behaviour.
+11. Iterate on measured gaps and package the implementation.
 
 Do not treat CI/CD status as the project completion criterion. Use CI as one source of implementation evidence; continue resolving scope, usability, performance, accessibility, content and release work independently.
 
 ## 11. Current status
 
-- [x] Greenfield direction confirmed.
+- [x] RTD direction established; implementation uses a clean V2 application boundary.
 - [x] Repository audit snapshot captured.
 - [x] Dedicated reconstruction branch created.
-- [ ] Full path-level V1/V2 classification.
+- [ ] Complete path-level V1/V2 classification and route-to-implementation traceability.
 - [ ] Archive boundary migration.
 - [ ] Active Compiler implementation.
 - [ ] CSS ecosystem integration spike.
-- [ ] New V2 design system and page implementation.
+- [ ] Complete V1-informed V2 design system and page-family reconstruction.
 - [ ] Manual accessibility and device evaluation.
 - [ ] Full performance evidence and release review.
 
