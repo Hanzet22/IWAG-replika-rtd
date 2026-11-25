@@ -355,3 +355,10 @@ Do not insert every law into the public-facing TnC, CoC or Ruleset as if it dire
 - **Event location:** IWAG publicly announced Hotel Ciputra Jakarta, West Jakarta, for 3–4 July 2027. This changes local-territory screening but does not prove venue permits, signed contract, capacity, accessibility, or fire approvals. https://iwag.furries.id/en/updates/2026-11-15-venue-reveal/ .
 - **Commercial role:** Permendag 19/2026 concerns actual electronic-commerce actors and commercial features; a purely informational site is not automatically a PPMSE. Direct ticketing, marketplace, or accommodation intermediary functions require a fresh assessment.
 - **Accessibility:** WCAG 2.2 AA remains an engineering target, not a universal statutory mandate for every private informational website. Do not claim conformance without manual and assistive-technology evidence.
+
+
+## 10. Vercel response-header baseline — preview configuration only
+
+`vercel.json` now keeps `git.deploymentEnabled: false` and defines a response-header baseline: CSP Report-Only, nosniff, strict-origin referrer policy, frame denial, a restrictive Permissions-Policy, and HSTS with a one-year max-age. HSTS intentionally omits `includeSubDomains` and `preload` pending confirmation that every affected hostname is HTTPS-ready.
+
+The CSP is **Report-Only**, not an enforced policy. It has no `report-uri` or `report-to` endpoint; violations are therefore suitable only for manual browser-console QA and are not centrally collected. Do not describe this as active CSP reporting. Validate the policy against built assets and required media before considering enforcement. Vercel Git deployment remains explicitly disabled; this configuration change does not authorize or trigger a deployment.
