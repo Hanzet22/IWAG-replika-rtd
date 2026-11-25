@@ -60,7 +60,7 @@ const title = englishFallback ? pageTitles.en[page] ?? "Information" : pageTitle
 const eventPolicyKeys: Record<string, string> = { "event-coc": "coc", "event-terms": "terms", "event-privacy": "privacy", "event-other-policies": "policy" };
 const eventPolicy = eventPolicyKeys[page] ? legalPolicies[eventPolicyKeys[page]][lang === "id" ? "id" : "en"] : undefined;
 const isEventPolicyIndex = page === "event-policies";
-const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct", "policy", ...legalPolicySlugs, ...Object.keys(eventPolicyKeys)];
+const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct", "policy", "event-policies", ...legalPolicySlugs, ...Object.keys(eventPolicyKeys)];
 const policySlug = page === "tnc" ? "terms" : page === "code-of-conduct" ? "coc" : page;
 const websitePolicy = websiteLegalPolicies[policySlug]?.[lang === "id" ? "id" : "en"];
 const isLegal = legalPages.includes(page);
@@ -89,7 +89,7 @@ const copy = eventPolicy?.summary ?? (isEventPolicyIndex ? (lang === "id" ? "Rek
   : isAbout ? (lang === "id"
       ? "IWAG V2 adalah rekayasa ulang independen dari arsip referensi. Proyek ini berfokus pada informasi yang mudah dibaca, navigasi konsisten, aksesibilitas, dan minimisasi data."
       : "IWAG V2 is an independent re-engineering project based on a separately archived reference. It focuses on readable information, predictable navigation, accessibility, and data minimisation.")
-  : contentMessages.notPublished);
+  : contentMessages.notPublished));
 ---
 <BaseLayout lang={lang} contentLang={englishFallback ? "en" : lang === "id" ? "id" : "en"} title={title} description={copy}>
   <article class="page-content">
