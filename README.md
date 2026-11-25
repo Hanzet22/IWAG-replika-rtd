@@ -1,52 +1,59 @@
-# IWAG V2 — Independent Website Re-engineering
+# IWAG V2 — Replica Technical Development (RTD)
 
-> Independent educational recreation and research project. This repository is not affiliated with, endorsed by, sponsored by, or officially connected to IWAG or its organisers. Third-party names and materials remain the property of their respective owners.
+> Independent technical reconstruction project. This repository is not affiliated with, endorsed by, sponsored by, or officially connected to IWAG or its organisers. Third-party names and materials remain the property of their respective owners.
 
 ## Project direction
 
-IWAG V2 is undergoing a greenfield global reconstruction. V1 is a read-only research/reference archive; it is not the V2 application source, design template, dependency base, or build input. No legacy library is inherited by default.
+IWAG V2 follows **Replica Technical Development (RTD)**: reverse-engineer the reference website, specify its observable structure and behaviour, reconstruct the product in V2, integrate the implementation, and verify the result against the reference.
 
-The dedicated reconstruction plan, source inventory and compiler contract are maintained in:
-- [Greenfield reconstruction plan](docs/GREENFIELD-RECONSTRUCTION-PLAN.md)
+V1 is the reference baseline and historical evidence. V2 is an independently implemented reconstruction. A new application stack is allowed, but it does not justify dropping V1 route coverage, page families, content intent, interactions, or responsive behaviour. The V1 archive stays outside application imports and build inputs; it remains available for inspection and comparison.
+
+RTD is an engineering method. It is **not** a certification effort, policy-owner approval process, organiser endorsement request, or legal sign-off programme. None of those is a project completion gate.
+
+Read the authoritative [RTD methodology](docs/RTD-METHODOLOGY.md) first.
+
+## Core project documents
+
+- [RTD methodology](docs/RTD-METHODOLOGY.md)
+- [RTD execution and reconstruction plan](docs/GREENFIELD-RECONSTRUCTION-PLAN.md)
+- [V1 audit](docs/V1-AUDIT.md)
+- [Original-site reference notes](docs/ORIGINAL-SITE-REFERENCE.md)
+- [V1 route inventory and V2 migration](docs/V1-ROUTE-MIGRATION.md)
+- [V2 requirements](docs/V2-REQUIREMENTS.md)
 - [Application and compiler architecture](docs/ARCHITECTURE.md)
 - [Global UX/UI system](docs/UX-UI-SYSTEM.md)
 - [Source and technology inventory](docs/SOURCE-TECHNOLOGY-INVENTORY.md)
-- [Dependency license inventory](docs/DEPENDENCY-LICENSE-INVENTORY.md)
+- [Dependency licence inventory](docs/DEPENDENCY-LICENSE-INVENTORY.md)
 - [Rust Active Compiler specification](docs/ACTIVE-COMPILER-SPEC.md)
 - [Research evidence](docs/RESEARCH-EVIDENCE.md)
 - [Accessibility engineering specification](docs/ACCESSIBILITY-ENGINEERING-SPEC.md)
 - [Accessibility implementation matrix](docs/ACCESSIBILITY-IMPLEMENTATION-MATRIX.md)
-- [Accessibility findings engine](docs/ACCESSIBILITY-FINDINGS-ENGINE.md)
-- [TnC, CoC and Ruleset reconstruction](docs/TNC-COC-RULESET-RECONSTRUCTION.md)
-- [Indonesia pinpoint legal register](docs/INDONESIA-PINPOINT-LEGAL-REGISTER.md)
-- [V2 child-access and PP 17/2025 scope assessment](docs/CHILD-ACCESS-PP17-SCOPE-ASSESSMENT.md)
-- [Global legal research register — updated 25 November 2026](docs/LEGAL-RESEARCH-2026-11-24.md)
-- [Infrastructure and data-flow verification — 25 November 2026](docs/INFRASTRUCTURE-DATA-FLOW-VERIFICATION-2026-11-25.md)
-- [Production release gates — 25 November 2026](docs/PRODUCTION-RELEASE-GATES-2026-11-25.md)
-- [Moderation and child-safety research evidence](docs/MODERATION-RESEARCH-EVIDENCE.md)
-- [WCAG 2.2 criteria register](docs/WCAG-2.2-AA-COMPLETE-CRITERIA-REGISTER.md)
-- [Graphics and motion policy](docs/GRAPHICS-AND-MOTION-POLICY.md)
+- [TnC, CoC and Ruleset reconstruction notes](docs/TNC-COC-RULESET-RECONSTRUCTION.md)
+- [Legal and regulatory research](docs/LEGAL-RESEARCH-2026-11-24.md)
+- [Infrastructure and data-flow verification](docs/INFRASTRUCTURE-DATA-FLOW-VERIFICATION-2026-11-25.md)
+- [Engineering release checklist](docs/PRODUCTION-RELEASE-GATES-2026-11-25.md)
 - [Performance measurement plan](docs/PERFORMANCE-MEASUREMENT-PLAN.md)
-- [ADR-0002: Greenfield V2 and Rust Active Compiler](docs/ADR-0002-greenfield-active-compiler.md)
+- [ADR-0002: V2 reconstruction and Rust Active Compiler](docs/ADR-0002-greenfield-active-compiler.md)
+
+Legal and policy research documents are supporting references. They do not define RTD, and policy approval is not required to continue technical reconstruction.
 
 ## Architecture direction
 
-- Astro is the single application framework and route system.
-- Vite is the single frontend build engine.
-- Vue is limited to interactive islands.
+- Astro is the application framework and route system.
+- Vite is the frontend build engine.
+- Vue is limited to justified interactive islands.
 - TypeScript and semantic HTML form the application baseline.
-- CSS, Tailwind CSS 4, Panda CSS 2.6.0 and StyleX 0.19.2 are integrated with distinct responsibilities and a central CSS layer contract.
-- Rust Active Compiler controls the build graph, source validation, backend invocation, diagnostics and production-output verification.
+- CSS, Tailwind CSS 4, Panda CSS 2.6.0 and StyleX 0.19.2 have distinct responsibilities and a central CSS layer contract.
+- Rust Active Compiler controls build orchestration, source validation, backend invocation, diagnostics and production-output verification.
 - WebAssembly powers an optional contrast calculator loaded only on user request; Canvas, WebGL and WebGPU remain optional enhancements and never gate core content.
 - Next.js is an architectural reference only; no second framework runtime is introduced.
-- Java is not a native browser animation runtime and is excluded unless a concrete build-time/service use case justifies a JVM dependency.
 
 ## Requirements
 
 - Node.js 22.23.4 or newer
 - npm
 - Rust 1.100.0 and Cargo (required by the Active Compiler)
-- Optional local WASM build: `wasm-pack` and `wasm32-unknown-unknown` (the production workflow builds the contrast module)
+- Optional local WASM build: `wasm-pack` and `wasm32-unknown-unknown`
 
 ## Commands
 
@@ -60,16 +67,17 @@ npm run build
 npm run preview
 ```
 
-`npm run build` invokes the Rust Active Compiler, which validates the V2 source boundary, orchestrates Astro/Vite, checks generated HTML/CSS, verifies the root/404 and critical localized routes, checks local HTML/CSS/srcset references and same-site fragments, emits a full generated-route manifest, inventories generated asset bytes, and writes `.iwag-build/iwag-build-report.json`.
+`npm run build` invokes the Rust Active Compiler, which validates the V2 source boundary, orchestrates Astro/Vite, checks generated HTML/CSS, verifies critical localized routes, checks local references and same-site fragments, emits a generated-route manifest, inventories generated asset bytes, and writes `.iwag-build/iwag-build-report.json`.
 
 `npm run build:astro` is a diagnostic backend escape hatch; it is not the normal production build entry point.
 
 ## Project guardrails
 
-- Keep V1 material out of application imports, public assets, route generation and build globs.
-- Do not copy V1 compiled bundles into V2.
-- Do not add analytics, trackers, remote fonts or third-party scripts by default.
-- Do not make content or essential actions depend on JavaScript, WASM, Canvas, WebGL or WebGPU.
-- Do not invent event facts, organiser identity, legal terms or privacy commitments.
-- WCAG 2.2 Level A remains an engineering target, not a conformance claim.
+- Keep the V1 archive outside application imports, public assets and build globs, but use it as the source for reverse engineering and comparison.
+- Do not copy V1 compiled bundles as the V2 implementation.
+- Reconstruct reference route families, content intent, layouts and interactions; record justified deviations.
+- Do not add analytics, trackers, remote fonts or third-party scripts without a defined technical need and documented data flow.
+- Do not make core content depend on JavaScript, WASM, Canvas, WebGL or WebGPU.
+- Do not invent event facts, organiser identity or operational commitments.
+- WCAG 2.2 Level A is an engineering target, not a certification claim.
 - CI/CD is implementation evidence, not the project completion criterion.

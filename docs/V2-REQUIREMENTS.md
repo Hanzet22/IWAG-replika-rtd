@@ -1,4 +1,4 @@
-# IWAG V2 — Product and Engineering Requirements
+# IWAG V2 — RTD Product and Engineering Requirements
 
 **Status:** Baseline requirements for re-engineering  
 **Target branch:** `v2/foundation-audit-requirements`  
@@ -7,17 +7,19 @@
 
 ## 1. Product direction
 
-IWAG V2 is a source-first re-engineering effort. The V1 static export is a reference for information architecture and content discovery, not a codebase template.
+IWAG V2 follows Replica Technical Development (RTD). V1 is the reference for reverse engineering and comparison of routes, information architecture, page families, content intent, UI, interactions and responsive behaviour. V2 may be independently implemented and need not copy V1's compiled code.
 
 The implementation must prioritize clarity, accessibility, privacy, maintainability, and reliable operation on low-end devices. Advanced visual effects are progressive enhancements and must never be required to read content, navigate, register, or understand event information.
 
-## 2. Scope lock
+## 2. RTD scope lock
+
+Reconstruct the reference website as a product. A different framework or clean V2 source tree is an implementation strategy, not a reduction in reference coverage.
 
 ### Rework
 1. Programming language and application architecture.
 2. Framework, build stack, dependencies, and deployment approach.
 3. UI/UX and information architecture.
-4. Terms, privacy, and conduct policy content.
+4. Terms, CoC, Privacy and Other Policies subject matter and structure, independently rewritten for V2 while preserving event-level and website-level scope.
 5. Theme system.
 6. Font delivery and typography.
 
@@ -36,6 +38,7 @@ The implementation must prioritize clarity, accessibility, privacy, maintainabil
 - Do not collect personal, health, disability, or emergency-contact data without a necessary, documented purpose.
 - Do not import third-party content or branded policy pages without permission/provenance checks.
 - Do not claim legal compliance or WCAG conformance solely from automated scans.
+- Do not make certification, policy-owner approval, organiser endorsement or legal sign-off a condition for RTD engineering work.
 
 ## 3. Architecture principles
 

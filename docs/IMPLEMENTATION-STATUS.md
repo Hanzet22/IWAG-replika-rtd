@@ -1,4 +1,4 @@
-# IWAG V2 implementation status
+# IWAG V2 RTD implementation status
 
 Updated: 2026-11-23
 
@@ -14,7 +14,7 @@ Updated: 2026-11-23
 - [x] Reduced-motion and forced-colors CSS handling
 - [x] Responsive layout with five self-hosted font families and no external font CDN
 - [x] Independent-project notice
-- [x] Independently authored Terms, Privacy, and Code of Conduct draft pages, with V1 rules and wording explicitly excluded; all three remain unpublished/unapproved pending operator and legal verification
+- [x] V1-informed Terms, Privacy, Code of Conduct and Other Policies content reconstructed as independent V2 drafts; event-level and website-level scopes are kept distinct
 - [x] Reconstructed homepage, about, venue, participate, team, links, policy index and resources pages
 - [x] Published locale-specific IWAG 2027 event collection entries for English, Indonesian, English (Singapore), and Bahasa Melayu; event dates render as dates, not invented midnight times
 - [x] International Travelers Guide, public transit guide, obsolete private-vehicle guide warning, and T-shirt size reference
@@ -32,8 +32,8 @@ Updated: 2026-11-23
 ## Intentionally not represented as complete
 
 - Official confirmation of every event detail, programme schedule, ticket release, and operational arrangement; current event content is a dated public-source snapshot only
-- Terms, Privacy Notice, and Code of Conduct are independently authored working drafts; they are not approved or in force until the actual operator, data flows, and applicable legal requirements are verified
-- Organiser/controller identity and legal review
+- Policy documents retain their stated draft status; this is not a blocker for technical route, content, UI or interaction reconstruction
+- Verification of volatile external facts and infrastructure behaviour where those facts are displayed or technically relied upon
 - Final translations and editorial review for all locales
 - Full manual keyboard, screen-reader, TalkBack, zoom, and assistive-technology audit
 - Full WebGL/WebGPU rendering backend; the current lab only probes WebGL2 and detects WebGPU API exposure without creating a GPU device
@@ -60,10 +60,8 @@ Updated: 2026-11-23
 
 ## Still blocked pending real-world verification
 
-- Actual legal operator, contracting party and data controller remain unverified.
-- Terms, Privacy Notice and Code of Conduct drafts are present, but cannot be approved or represented as official until the actual operator and service model are verified and qualified legal review is completed.
+- Compare all V1 policy page sections with the V2 event-policy and website-policy deliverables; record missing topics and locale gaps.
 - No attendee registration, ticketing, payment, account, tracking or sensitive-data collection is enabled.
-- Legal applicability and final public policy require review against the real operator/service model by qualified Indonesian counsel.
 - WCAG Level A manual and assistive-technology review is still outstanding; this documentation is not a conformance claim.
 
 ## Typography migration
@@ -86,7 +84,7 @@ Updated: 2026-11-23
 - [x] Documented compatible Next.js architectural patterns and explicitly excluded the separate Next.js runtime/App Router from the single-app architecture.
 - [x] Added a 50px-minimum draft-status banner above the body of every Terms, Privacy, and Code of Conduct page.
 - [x] Added draft version/date metadata and clear non-official, unapproved, not-in-force wording in English and Indonesian.
-- [x] Existing Terms, Privacy, and Code of Conduct content is independently authored; it remains a working draft pending verification of the real operator, actual service/data flows, and qualified legal review.
+- [x] Policy content remains clearly labelled as independent V2 working drafts; this status does not prevent implementation, comparison or testing.
 
 ## Remaining real-world release blockers
 
