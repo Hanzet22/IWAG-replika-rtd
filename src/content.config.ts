@@ -17,7 +17,9 @@ const events = defineCollection({
     online: z.boolean().default(false),
     accessInformation: z.array(z.string()).default([]),
     registrationUrl: z.string().url().optional(),
-    publishedAt: z.coerce.date().optional()
+    publishedAt: z.coerce.date().optional(),
+    sourceUrl: z.string().url().optional(),
+    sourceReviewedAt: z.coerce.date().optional()
   })
 });
 
