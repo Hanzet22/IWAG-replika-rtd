@@ -66,22 +66,31 @@ These are policy-design observations, not findings that the original organiser a
 6. **Media consent must be specific to the operator and use.** An event organiser's media permission does not authorise an independent replica to publish attendee images.
 7. **Child-access and event-admission are different questions.** A convention's age rating does not automatically determine whether a website or online feature is likely to be accessed by children.
 
-## 5. V2 policy architecture after reconstruction
+## 5. V2 policy reconstruction and route architecture
 
-The event-policy reconstruction is retained as a separate research/template corpus and is not the public website's legal index. The public website index contains ten website-only drafts:
+RTD preserves the distinction between two source categories while making both available as V2 deliverables:
 
-1. **Website Code of Conduct:** behaviour only in the V2 website and future digital spaces directly controlled by its verified operator.
-2. **Website Ruleset:** acceptable website use and technical boundaries.
-3. **Website Terms:** informational-service scope, no event contract, external links and mandatory-rights savings clause.
-4. **Website Privacy Notice:** only observed website-side processing and explicitly unverified infrastructure facts.
-5. **Cookie & Browser Storage:** distinguishes HTTP cookies from local storage and describes the seven display-preference keys.
-6. **Copyright & Intellectual Property:** separates project licences from third-party marks, archive material and assets.
-7. **Information Notice:** independent status, dated-source limitations and no professional/emergency service.
-8. **Accessibility Statement:** digital design target and known limitations; no unsupported conformance claim.
-9. **Moderation & Reporting:** current lack of a monitored report channel and safeguards required before future interactive features.
-10. **Data Retention:** browser preference persistence and unverified server-log retention.
+### Event-level V1 policy reconstructions
 
-The ten public website documents are V2 working drafts with clearly stated scope and status. Their draft status is a content-status note, not a gate on RTD engineering or route reconstruction. Event-specific terms, attendee CoC, ticketing/refunds, venue conduct, staff/volunteer/dealer rules, event sanctions and event-data processing are separate organiser matters. The public route renderer must not import or render the event-level template corpus in `src/data/legal.ts`. The website-only records live in `src/data/website-legal.ts`; navigation is in `src/data/legal-navigation.ts`. A page banner is not a substitute for approval or a valid contract.
+The substantive V1-derived event documents are maintained in `src/data/legal.ts` and exposed through dedicated V2 routes:
+
+- `/event-policies/`
+- `/event-coc/`
+- `/event-terms/`
+- `/event-privacy/`
+- `/event-other-policies/`
+
+These are independent reconstructions of the source event-policy subject matter. They are not claims that V2 operates the event, sells passes, controls the venue, directs staff, or enforces organiser rules.
+
+### V2 website-use documents
+
+The website-specific documents are maintained separately in `src/data/website-legal.ts` and use the website policy navigation. They describe the independent V2 website and its actual features, not the physical convention.
+
+### Reconstruction rule
+
+Keep both categories intact and separately navigable. Do not erase event-policy material in favour of website-only notices, and do not present event-specific organiser powers as V2 website rules. The public route renderer must use the matching data source for each route family. The distinction is an information-architecture and content-scope decision, not an approval gate.
+
+The working-draft status of a document is displayed transparently. That status does not suspend its reconstruction, routing, localization, implementation or technical verification.
 
 ## 6. Document boundaries and conflict handling
 
