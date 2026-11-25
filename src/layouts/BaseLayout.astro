@@ -114,14 +114,16 @@ const breadcrumbName = (segment: string) => breadcrumbLabels[segment] ?? segment
         <a href={`/${lang}/events/`}>{lang === "id" ? "Acara" : "Events"}</a>
         <a href={`/${lang}/join-iwag-team/`}>{lang === "id" ? "Tim" : "Team"}</a>
         <a href={`/${lang}/links/`}>{lang === "id" ? "Tautan" : "Links"}</a>
-        <a href={`/${lang}/policy/`}>{lang === "id" ? "Kebijakan" : "Policies"}</a>
+        <a href={`/${lang}/policy/`}>{lang === "id" ? "Kebijakan Situs" : "Website policies"}</a>
+        <a href={`/${lang}/event-policies/`}>{lang === "id" ? "Kebijakan Acara" : "Event policies"}</a>
         <a href={`/${lang}/accessibility/`}>{lang === "id" ? "Aksesibilitas" : "Accessibility"}</a>
       </nav>
       <nav aria-label={t.legalNavigation}>
         <a href={`/${lang}/terms/`}>{t.terms}</a>
         <a href={`/${lang}/privacy/`}>{t.privacy}</a>
         <a href={`/${lang}/code-of-conduct/`}>{t.conduct}</a>
-        <a href={`/${lang}/policy/`}>{lang === "id" ? "Semua dokumen drafting" : "All policy drafts"}</a>
+        <a href={`/${lang}/policy/`}>{lang === "id" ? "Dokumen kebijakan situs" : "Website policy drafts"}</a>
+        <a href={`/${lang}/event-policies/`}>{lang === "id" ? "Rekonstruksi kebijakan acara V1" : "V1 event-policy reconstructions"}</a>
       </nav>
       <p class="footer-note">{t.footerNote}</p>
     </footer>

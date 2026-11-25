@@ -17,7 +17,8 @@
     "compiler:doctor": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- doctor",
     "wasm:build": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- wasm",
     "accessibility": "cargo run --quiet --manifest-path compiler/iwagc/Cargo.toml -- accessibility",
-    "test:compiler": "node --test compiler/iwagc/tests/*.test.mjs"
+    "test:compiler": "node --test compiler/iwagc/tests/*.test.mjs",
+    "test:policies": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "@stylexjs/stylex": "0.19.2",
