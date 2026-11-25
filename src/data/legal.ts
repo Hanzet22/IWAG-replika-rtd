@@ -1,5 +1,6 @@
-// EVENT-LEVEL DRAFT TEMPLATE DATA ONLY. Do not import this module into public website routes.
-// These reconstructed event policies are preserved for research and comparison; they are not adopted IWAG rules.
+// V1-DERIVED EVENT-POLICY RECONSTRUCTIONS consumed by the dedicated V2 /event-* routes.
+// The first four records (coc, terms, privacy, policy) are bilingual event-level rewrites; they remain independent drafts and are not represented as adopted or operative IWAG rules.
+// Website-use policies are rendered separately from src/data/website-legal.ts.
 
 type Policy = { title: string; summary: string; sections: { heading: string; body: string[] }[] };
 
