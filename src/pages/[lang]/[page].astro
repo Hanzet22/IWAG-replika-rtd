@@ -2,7 +2,8 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import GraphicsCapabilityLab from "../../components/GraphicsCapabilityLab.vue";
 import ContrastChecker from "../../components/ContrastChecker.vue";
-import { legalPolicies, legalPolicySlugs, legalPolicyLinks } from "../../data/legal";
+import { legalPolicySlugs, legalPolicyLinks } from "../../data/legal-navigation";
+import { websiteLegalPolicies } from "../../data/website-legal";
 import { getMessages } from "../../i18n/ui";
 import { isLocale, localeKeys } from "../../i18n/locales";
 
@@ -55,7 +56,7 @@ const englishFallback = lang === "ms-my" || (lang === "id" && ["location", "part
 const title = englishFallback ? pageTitles.en[page] ?? "Information" : pageTitles[lang]?.[page] ?? pageTitles.en[page] ?? "Information";
 const legalPages = ["terms", "tnc", "privacy", "coc", "code-of-conduct", "policy", ...legalPolicySlugs];
 const policySlug = page === "tnc" ? "terms" : page === "code-of-conduct" ? "coc" : page;
-const policy = legalPolicies[policySlug]?.[lang === "id" ? "id" : "en"];
+const websitePolicy = websiteLegalPolicies[policySlug]?.[lang === "id" ? "id" : "en"];
 const isLegal = legalPages.includes(page);
 const isTerms = page === "terms" || page === "tnc";
 const isPrivacy = page === "privacy";
@@ -73,7 +74,7 @@ const isEvents = page === "events";
 const isJoinTeam = page === "join-iwag-team";
 const isLinks = page === "links";
 const isPolicy = page === "policy";
-const copy = policy?.summary ?? (isConduct
+const copy = websitePolicy?.summary ?? (isConduct
   ? (lang === "id" ? "Kode Etik V2 merupakan draf independen." : "The V2 Code of Conduct is an independent draft.")
   : isLegal ? contentMessages.legalDraft
   : isAccessibility ? contentMessages.levelText
@@ -135,8 +136,8 @@ const copy = policy?.summary ?? (isConduct
       <p class="muted">{lang === "id" ? "Tautan eksternal mengarah ke situs pihak lain. Pratinjau ini tidak mengendalikan ketersediaan, kebijakan privasi, atau keamanan layanan eksternal." : "External links lead to third-party websites. This preview does not control their availability, privacy policies, or service security."}</p>
     </section>}
     {isPolicy && <section class="content-card">
-      <h2>{lang === "id" ? "Rekonstruksi aturan acara" : "Reconstructed event rules"}</h2>
-      <p>{lang === "id" ? "Dokumen berikut menyusun kembali ketentuan acara V1 menjadi aturan V2 yang lebih terstruktur: hak dan kewajiban peserta, registrasi dan pembayaran, keselamatan, perilaku, privasi, peran dealer dan program, serta mekanisme pelaporan dan peninjauan." : "The documents below reconstruct the V1 event rules as structured V2 provisions: attendee rights and duties, registration and payment, safety, conduct, privacy, dealer and programme roles, and reporting and review procedures."}</p>
+      <h2>{lang === "id" ? "Kebijakan situs V2" : "V2 website policies"}</h2>
+      <p>{lang === "id" ? "Dokumen berikut hanya membahas penggunaan situs informasi independen V2, preferensi browser, privasi situs, hak cipta, aksesibilitas digital, dan tata kelola fitur digital jika kelak diaktifkan. Dokumen ini tidak mengatur kehadiran acara, tiket, badge, venue, hotel, dealer, staf, atau volunteer IWAG." : "The following documents concern only the independent V2 information website, browser preferences, website privacy, copyright, digital accessibility, and governance of future digital features. They do not regulate IWAG event attendance, tickets, badges, venues, hotels, dealers, staff, or volunteers."}</p>
       <ul>
         <li><a href={`/${lang}/terms/`}>{lang === "id" ? "Syarat dan Ketentuan" : "Terms and Conditions"}</a></li>
         <li><a href={`/${lang}/ruleset/`}>{lang === "id" ? "Aturan Penggunaan Situs" : "Website Ruleset"}</a></li>
@@ -327,9 +328,9 @@ const copy = policy?.summary ?? (isConduct
     </section>}
     {isAccessibility && <ContrastChecker client:visible lang={lang} />}
     {isAccessibility && <GraphicsCapabilityLab client:visible lang={lang} />}
-    {isLegal && policy && <section class="policy-document" aria-label={policy.title}>
-      {policy.sections.map((section) => <section class="policy-section"><h2>{section.heading}</h2>{section.body.map((paragraph) => <p>{paragraph}</p>)}</section>)}
-      <p class="muted">{lang === "id" ? "Riwayat versi dan dasar perubahan dicatat dalam dokumentasi proyek." : "Version history and change rationale are recorded in the project documentation."}</p>
+    {websitePolicy && websitePolicy.sections.length > 0 && <section class="policy-document" aria-label={websitePolicy.title}>
+      {websitePolicy.sections.map((section) => <section class="policy-section"><h2>{section.heading}</h2>{section.body.map((paragraph) => <p>{paragraph}</p>)}</section>)}
+      <p class="muted">{lang === "id" ? "Dokumen ini hanya membahas situs V2 dan tetap berupa draf independen." : "This document concerns the V2 website only and remains an independent draft."}</p>
     </section>}
     {page === "policy" && <section class="policy-index" aria-label={lang === "id" ? "Daftar dokumen drafting" : "Draft policy index"}>
       {legalPolicyLinks.filter(([slug]) => slug !== "policy").map(([slug,enTitle,idTitle]) => <a class="policy-link" href={`/${lang}/${slug}/`}><strong>{lang === "id" ? idTitle : enTitle}</strong><p>{lang === "id" ? "Buka dokumen drafting independen" : "Open independent working draft"}</p></a>)}

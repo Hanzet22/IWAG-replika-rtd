@@ -7,10 +7,10 @@ import assert from "node:assert/strict";
 const root = new URL("../../../", import.meta.url);
 const read = (relative) => readFile(new URL(relative, root), "utf8");
 
-test("expected route baseline is unique and has 30 entries", async () => {
+test("expected route baseline is unique and has 74 entries", async () => {
   const manifest = JSON.parse(await read("compiler/iwagc/config/expected-routes.json"));
   assert.equal(manifest.version, 1);
-  assert.equal(manifest.routes.length, 30);
+  assert.equal(manifest.routes.length, 74);
   assert.equal(new Set(manifest.routes).size, manifest.routes.length);
   assert.ok(manifest.routes.includes("/"));
   assert.ok(manifest.routes.includes("/404.html"));

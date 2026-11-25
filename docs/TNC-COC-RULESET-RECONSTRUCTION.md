@@ -68,20 +68,20 @@ These are policy-design observations, not findings that the original organiser a
 
 ## 5. V2 policy architecture after reconstruction
 
-The V2 legal index now contains ten independent drafting documents:
+The event-policy reconstruction is retained as a separate research/template corpus and is not the public website's legal index. The public website index contains ten website-only drafts:
 
-1. **Code of Conduct (CoC):** expected behaviour and prohibited conduct only in spaces/interactions V2 directly controls.
-2. **Website Ruleset:** acceptable use of the V2 website, security boundaries, scraping/reuse limits and future enforcement safeguards. It does not regulate event attendance.
-3. **Terms and Conditions (TnC):** scope of the independent informational service, no event contract, external links, information limits, intellectual property and mandatory-rights savings clause.
-4. **Privacy Policy:** actual data flows, controller identity, purposes, legal bases, recipients, transfers, rights, children, security and incidents.
-5. **Cookie & Browser Storage Policy:** distinguishes HTTP cookies, local storage and third-party technologies.
-6. **Copyright & Intellectual Property:** project licences, third-party ownership, asset register and rights notices.
-7. **Disclaimer:** independent status, information limitations and no professional/emergency advice.
-8. **Accessibility Statement:** actual engineering target and known limitations; no unsupported conformance claim.
-9. **Moderation & Reporting:** future reporting, triage, human review, appeals, privacy and transparency requirements.
-10. **Data Retention:** purpose-based retention, deletion, backups, legal holds and provider verification.
+1. **Website Code of Conduct:** behaviour only in the V2 website and future digital spaces directly controlled by its verified operator.
+2. **Website Ruleset:** acceptable website use and technical boundaries.
+3. **Website Terms:** informational-service scope, no event contract, external links and mandatory-rights savings clause.
+4. **Website Privacy Notice:** only observed website-side processing and explicitly unverified infrastructure facts.
+5. **Cookie & Browser Storage:** distinguishes HTTP cookies from local storage and describes the seven display-preference keys.
+6. **Copyright & Intellectual Property:** separates project licences from third-party marks, archive material and assets.
+7. **Information Notice:** independent status, dated-source limitations and no professional/emergency service.
+8. **Accessibility Statement:** digital design target and known limitations; no unsupported conformance claim.
+9. **Moderation & Reporting:** current lack of a monitored report channel and safeguards required before future interactive features.
+10. **Data Retention:** browser preference persistence and unverified server-log retention.
 
-All ten remain marked as drafting-only, independent, unapproved and not in force. A page banner is not a substitute for approval or a valid contract.
+All ten public website drafts remain independent, unapproved and not in force. Event-specific terms, attendee CoC, ticketing/refunds, venue conduct, staff/volunteer/dealer rules, event sanctions and event-data processing are separate organiser matters. The public route renderer must not import or render the event-level template corpus in `src/data/legal.ts`. The website-only records live in `src/data/website-legal.ts`; navigation is in `src/data/legal-navigation.ts`. A page banner is not a substitute for approval or a valid contract.
 
 ## 6. Document boundaries and conflict handling
 
@@ -169,3 +169,15 @@ The Indonesian CoC confirms the organiser-specific **14+ event rating**, parenta
 
 These provisions are relevant to the comparison because they demonstrate that the original documents regulate **physical event admission and event operations**, not merely website use. V2's public CoC and Ruleset must not reproduce them as if V2 controlled those operations. The event's 14+ rating is not the website's legal age classification.
 
+
+
+## 10. Implementation boundary correction — 25 November 2026
+
+The public renderer previously appended the event-level `legalPolicies` sections from `src/data/legal.ts` after website-only custom policy sections. That caused direct contradictions: website terms said no ticketing contract while the appended text described attendee passes, payment and admission; website privacy described browser preferences while the appended text described attendee registration and sensitive event data.
+
+The remediation separates:
+- public website policy copy in `src/data/website-legal.ts`;
+- public policy slugs and labels in `src/data/legal-navigation.ts`;
+- event-level reconstructed templates in the legacy `src/data/legal.ts`, marked non-public and no longer imported by the public page renderer.
+
+The public policy index now says “V2 website policies” and expressly excludes event attendance, tickets, badges, venue, hotel, dealers, staff and volunteers. Regression tests prevent the public route from importing or rendering the event policy corpus. This separation does not grant authority to publish or enforce event rules.

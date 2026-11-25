@@ -330,3 +330,23 @@ Official sources: https://www.legislation.gov.uk/ukpga/2018/12/section/123 and h
 ### 16.12 Evidence and locator standard
 
 Academic research and regulator guidance can inform proportionate design but do not create statutory obligations. Statutes should be cited by article/section/subsection/paragraph; Indonesian law by Pasal/ayat/huruf/angka. PDF page numbers may be added only where checked against the exact official PDF. Statutory line numbers generally do not exist; do not fabricate “baris” references. For V2, a static-page review is not a substitute for a real infrastructure audit, operator identification or local legal review.
+
+
+## 17. 25 November 2026 — cross-border status corrections
+
+The compact country-by-country status table in `docs/legal-audit/GLOBAL-LEGAL-RESEARCH-REGISTER.md`, Section 9, is the current correction register and supersedes any inconsistent earlier summaries here. Important distinctions: India's DPDP Act/Rules have phased commencement and a 13-vs-14 November 2025 notification-date discrepancy; Chile Law 21,855 moves Law 21,719 commencement to 15 October 2027; Singapore OSRAA commenced only specified parts on 29 June 2026; Malaysia Act 866 is scoped to licensed provider categories; Japan APPI Act 56/2026 has staged future commencement; Taiwan's 2025 PDPA amendments remain uncommenced pending an Executive Yuan date; COPPA's general amended-rule deadline passed 22 April 2026; California's 2026 rules and Delete Act mechanisms are subject to thresholds; South Korea has two separate 2026 PIPA amendments (one effective 11 September 2026, Act 21910 effective 9 March 2027); Canada's Bill C-36 is a privacy bill and not law; Ofcom's February 2027 measures remain future and subject to parliamentary process.
+
+Primary source links and exact status caveats are recorded in the global register. This addendum is not a finding that every instrument applies to the V2 website.
+
+
+## 18. Follow-up legal-source verification — 25 November 2026
+
+### 18.1 Permenkomdigi No. 9 Tahun 2026
+
+The JDIH Komdigi 2026 inventory and abstract, and the BPK database metadata, independently corroborate the instrument's title, date 6 March 2026, promulgation date 6 March 2026, BN 2026 No. 163, 29-page length and “Berlaku” status. Official records: https://jdih.komdigi.go.id/produk_hukum/inventarisasi/2026 ; https://jdih.komdigi.go.id/produk_hukum/abstrak/547 ; https://peraturan.bpk.go.id/Details/346040/permenkomdigi-no-9-tahun-2026 .
+
+The downloadable PDFs linked from both BPK and peraturan.go.id remain marked “RANCANGAN” and contain placeholder promulgation details. The peraturan.go.id catalogue record is: https://peraturan.go.id/id/permenkomdigi-no-9-tahun-2026 ; linked PDF: https://peraturan.go.id/files/2009020332-no-9-tahun-2026.pdf . Therefore the metadata/status discrepancy is substantially resolved, but final-text authentication remains open. Do not quote article-level wording from the draft PDF as final law.
+
+### 18.2 PP No. 33 Tahun 2026
+
+The exact-title search did not locate a central BPK or Setneg catalogue record during this pass. A signed copy is hosted by a local-government PPID and contains the promulgation block and certification wording of the Ministry of State Secretariat; the same text is mirrored by secondary legal-document repositories. Local-government-hosted copy: http://ppid.purbalinggakab.go.id/wp-content/uploads/2026/09/peraturan_pemerintah_no._33_tahun_2026_100926115902.pdf . This corroborates the reported 16 July 2026 promulgation, LN 2026 No. 88 and six-month commencement on 16 January 2027, but the canonical central Gazette/JDIH locator and TLN authentication remain open. Keep PP 33/2026 labelled promulgated but not yet effective as of 25 November 2026; do not present OCR-derived article text as fully authenticated.

@@ -9,13 +9,14 @@ function quotedValues(source) {
   return [...source.matchAll(/"([^"]+)"/g)].map((match) => match[1]);
 }
 
-test("every legal policy slug has a generated page route", async () => {
-  const [legal, page] = await Promise.all([
-    read("src/data/legal.ts"),
+test("every website policy slug has a generated route and a website-only record", async () => {
+  const [navigation, websitePolicies, page] = await Promise.all([
+    read("src/data/legal-navigation.ts"),
+    read("src/data/website-legal.ts"),
     read("src/pages/[lang]/[page].astro")
   ]);
 
-  const slugBlock = legal.match(/export const legalPolicySlugs = \[([^\]]+)\] as const;/);
+  const slugBlock = navigation.match(/export const legalPolicySlugs = \[([^\]]+)\] as const;/);
   const pageKeysBlock = page.match(/const pageKeys = \[([\s\S]*?)\] as const;/);
 
   assert.ok(slugBlock, "legalPolicySlugs must remain an explicit source of truth");
@@ -24,10 +25,10 @@ test("every legal policy slug has a generated page route", async () => {
   const policySlugs = quotedValues(slugBlock[1]);
   const pageKeys = new Set(quotedValues(pageKeysBlock[1]));
 
-  assert.ok(policySlugs.length > 0, "at least one legal policy route must exist");
+  assert.ok(policySlugs.length > 0, "at least one website policy route must exist");
   for (const slug of policySlugs) {
-    assert.ok(pageKeys.has(slug), `Missing localized static route for legal policy: ${slug}`);
-    assert.ok(legal.includes(`"${slug}": {`), `Missing policy content record: ${slug}`);
+    assert.ok(pageKeys.has(slug), `Missing localized static route for website policy: ${slug}`);
+    assert.match(websitePolicies, new RegExp(`\\b${slug}:\\s*\\{`), `Missing website policy record: ${slug}`);
   }
 });
 
@@ -37,7 +38,7 @@ test("legal document renderer retains the independent-draft status banner", asyn
   const legalPagesBlock = page.match(/const legalPages = \[([\s\S]*?)\];/);
   assert.ok(legalPagesBlock, "legal page classification must remain explicit");
   assert.match(legalPagesBlock[1], /"policy"/, "the policy index must be classified as legal");
-  assert.match(legalPagesBlock[1], /\.\.\.legalPolicySlugs/, "all legal policy slugs must inherit legal status");
+  assert.match(legalPagesBlock[1], /\.\.\.legalPolicySlugs/, "all website policy slugs must inherit legal status");
 
   assert.match(page, /const isLegal = legalPages\.includes\(page\);/);
   assert.match(page, /\{isLegal && <aside class="notice legal-draft-banner"/);
