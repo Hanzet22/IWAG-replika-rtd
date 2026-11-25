@@ -383,3 +383,14 @@ Replace any statement that the 2027 venue is unknown. The 2026 ibis Styles Serpo
 ### 12.5 Functional separation remains mandatory
 
 Keep these actors distinct until contracts and facts establish otherwise: independent website publisher, actual event organiser, venue operator, ticket/pass seller, merchant of record, payment processor, accommodation booking intermediary, vendors/dealers, employers/contractors, and linked community-platform operators. A static read-only site does not automatically inherit event ticketing, employment, venue, or PMSE duties; later interactive or commercial features can change the analysis.
+
+
+## 13. Follow-up verification — Permenkomdigi 9/2026 document integrity (25 November 2026)
+
+A follow-up check found three distinct official records that must not be conflated:
+
+1. **JDIH Komdigi inventory and abstract:** the ministry's 2026 inventory lists Permenkomdigi No. 9/2026, dated and promulgated 6 March 2026, BN 2026 No. 163, 29 pages. The JDIH abstract describes the instrument's subject matter and states that it took effect upon promulgation. Inventory: https://jdih.komdigi.go.id/produk_hukum/inventarisasi/2026 ; abstract: https://jdih.komdigi.go.id/produk_hukum/abstrak/547 .
+2. **BPK metadata:** the BPK database record reports the same title, dates, BN number and “Berlaku” status: https://peraturan.bpk.go.id/Details/346040/permenkomdigi-no-9-tahun-2026 .
+3. **Downloadable PDF integrity:** the PDF linked from the BPK record and the PDF linked from the peraturan.go.id record were both extracted and still visibly begin with “RANCANGAN”; the latter also contains placeholder promulgation details (including a placeholder BN number). peraturan.go.id record: https://peraturan.go.id/id/permenkomdigi-no-9-tahun-2026 ; linked PDF: https://peraturan.go.id/files/2009020332-no-9-tahun-2026.pdf .
+
+**Conclusion:** the official catalogue metadata and JDIH abstract corroborate the existence, promulgation metadata and in-force status of the instrument. They do **not** authenticate the wording of the downloadable draft PDF. Do not cite article-level requirements or reproduce its clauses as final law until the ministry supplies or publishes an authenticated final 29-page Berita Negara text and the PDF is reconciled against BN 2026 No. 163. The earlier source-integrity gate is narrowed to final-text authentication; it is not closed.
