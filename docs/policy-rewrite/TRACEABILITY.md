@@ -137,3 +137,17 @@ The follow-up consistency pass aligns the procedural safeguards across the Code 
 
 This pass does not assign an organiser, safeguarding lead, appeal officer, response-time SLA, or legal contracting party. Those remain event-specific facts to be supplied and verified before adoption. The Indonesian and English provisions were updated in parallel. This is a policy consistency improvement, not a legal-compliance certification.
 
+## V2 consistency pass — privacy, browser technologies and retention
+
+This pass aligns the Privacy Policy, Cookie & Browser Storage Policy, and Data Retention policy in English and Indonesian.
+
+| Issue | Documents aligned | V2 treatment |
+|---|---|---|
+| Actual data inventory | Privacy; Cookie & Browser Storage | Illustrative technology/data categories are not assertions that a particular cookie, analytics tool, embed or vendor is deployed; the event edition must verify its actual inventory |
+| Remote resources and third-party providers | Privacy; Cookie & Browser Storage | Distinguish browser storage from network requests; remote fonts, maps, embeds and media may disclose connection metadata even if they do not set a cookie |
+| Consent evidence | Privacy; Cookie & Browser Storage; Data Retention | Record consent and withdrawal state only for a defined purpose and period; link the evidence to the relevant technology without indefinite retention |
+| Browser-local preferences and identifiers | Cookie & Browser Storage; Data Retention | Distinguish local device storage from centrally held attendee records; explain reset/removal methods and browser/provider controls |
+| Retention and deletion | Privacy; Cookie & Browser Storage; Data Retention | Cover technical logs, identifiers and consent records where actually processed; define purpose, owner, trigger, expiry and deletion method; distinguish controller systems, browser copies, third-party copies and backups |
+| Implementation verification | All three | Do not publish a vendor list, exact expiry, analytics claim, storage inventory or retention duration until the deployed scripts, systems, contracts and logs have been inspected |
+
+The policy text describes required controls and possible technology classes; it does not establish which scripts, cookies, analytics services, embeds or vendors are currently present. Before publication, compare the statements with the deployed website, browser storage, network requests, server logs, consent interface, provider contracts and backup configuration. This is a consistency improvement, not a finding that the live website is compliant or that any listed technology is in use.
