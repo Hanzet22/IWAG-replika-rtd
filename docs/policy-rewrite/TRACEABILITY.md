@@ -151,3 +151,18 @@ This pass aligns the Privacy Policy, Cookie & Browser Storage Policy, and Data R
 | Implementation verification | All three | Do not publish a vendor list, exact expiry, analytics claim, storage inventory or retention duration until the deployed scripts, systems, contracts and logs have been inspected |
 
 The policy text describes required controls and possible technology classes; it does not establish which scripts, cookies, analytics services, embeds or vendors are currently present. Before publication, compare the statements with the deployed website, browser storage, network requests, server logs, consent interface, provider contracts and backup configuration. This is a consistency improvement, not a finding that the live website is compliant or that any listed technology is in use.
+
+
+## V2 publication and route separation
+
+The reconstructed event-level documents are published separately from website-use policies in the V2 interface:
+
+| V1 reconstruction | V2 route (English and Indonesian) | Source data |
+|---|---|---|
+| Code of Conduct / Kode Etik | `/event-coc/` | `legalPolicies.coc` |
+| Terms and Conditions / Syarat dan Ketentuan | `/event-terms/` | `legalPolicies.terms` |
+| Privacy Policy / Kebijakan Privasi | `/event-privacy/` | `legalPolicies.privacy` |
+| Other Policies / Kebijakan Lainnya | `/event-other-policies/` | `legalPolicies.policy` |
+| Event policy index | `/event-policies/` | Links to the four reconstructed documents |
+
+These routes consume `src/data/legal.ts` directly. Website-use documents continue to consume `src/data/website-legal.ts` through their existing routes and website policy index. The two content families are intentionally separate: the Website Ruleset governs use of this independent V2 website and does not replace event-level CoC, TnC, privacy, or other event policies. Both route families carry independent-draft notices and are not presented as adopted or operative IWAG rules.
