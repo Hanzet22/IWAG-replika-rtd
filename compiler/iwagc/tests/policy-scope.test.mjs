@@ -47,3 +47,18 @@ test("Vercel security headers preserve deployment opt-out", async () => {
   assert.match(values.get("Content-Security-Policy-Report-Only"), /frame-ancestors 'none'/);
   assert.doesNotMatch(values.get("Content-Security-Policy-Report-Only"), /report-uri|report-to/);
 });
+
+
+test("event content records preserve explicit source provenance", async () => {
+  const [schema, english, indonesian] = await Promise.all([
+    read("src/content.config.ts"),
+    read("src/content/events/en/iwag-2027.md"),
+    read("src/content/events/id/iwag-2027.md")
+  ]);
+  assert.match(schema, /sourceUrl: z\.string\(\)\.url\(\)\.optional\(\)/);
+  assert.match(schema, /sourceReviewedAt: z\.coerce\.date\(\)\.optional\(\)/);
+  for (const content of [english, indonesian]) {
+    assert.match(content, /sourceUrl: "https:\/\/iwag\.furries\.id\/en\/updates\/2026-11-15-venue-reveal\//);
+    assert.match(content, /sourceReviewedAt: 2026-11-25/);
+  }
+});
