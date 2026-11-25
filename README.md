@@ -33,6 +33,7 @@ Read the authoritative [RTD methodology](docs/RTD-METHODOLOGY.md) first.
 - [Infrastructure and data-flow verification](docs/INFRASTRUCTURE-DATA-FLOW-VERIFICATION-2026-11-25.md)
 - [Engineering release checklist](docs/PRODUCTION-RELEASE-GATES-2026-11-25.md)
 - [Performance measurement plan](docs/PERFORMANCE-MEASUREMENT-PLAN.md)
+- [Modern site engineering standard](docs/MODERN-SITE-ENGINEERING-STANDARD.md)
 - [ADR-0002: V2 reconstruction and Rust Active Compiler](docs/ADR-0002-greenfield-active-compiler.md)
 
 Legal and policy research documents are supporting references. They do not define RTD, and policy approval is not required to continue technical reconstruction.
