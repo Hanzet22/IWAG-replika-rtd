@@ -39,11 +39,9 @@ Official text: https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
 
 **Browser storage facts:** source review identified seven localStorage keys: iwag-v2-theme, iwag-v2-accent, iwag-v2-text-scale, iwag-v2-text-spacing, iwag-v2-contrast, iwag-v2-motion and iwag-v2-density. The reviewed preference script does not transmit these values to the application server or analytics. Local storage is not an HTTP cookie and is not automatically included in requests. This does not verify host/CDN/DNS/security-provider logs, cookies or retention.
 
-### 2.2 Reported PP 33/2026 — not verified in official central repository
+### 2.2 PP 33/2026 — corroborated future commencement; central authentication open
 
-Earlier research reported a PP 33/2026 implementing regulation with a future commencement date. However, as of 25 November 2026, this review has not located a verified BPK/Setneg central record or official final Gazette PDF. Search results surfaced secondary legal sources and a local-government-hosted copy only. Therefore V2 must not cite reported Gazette identifiers, Pasal 225 or article-level requirements as verified law, and must not treat the reported instrument as currently in force.
-
-The operative PDP baseline remains **UU No. 27 Tahun 2022**. Track the PP 33/2026 report as an unresolved source-verification item and update this matrix only when the final official Gazette/central JDIH record is available.
+A signed government-hosted copy and secondary text corroborate PP 33/2026, reported promulgation 16 July 2026, LN 2026 No. 88/TLN No. 7190, and commencement on **16 January 2027**. The central BPK/Setneg gazette authentication remains open; treat the instrument as enacted but not yet operative on 25 November 2026. Do not quote OCR-derived article text as fully authenticated. The operative PDP baseline remains **UU No. 27 Tahun 2022** until the reported commencement date, subject to official verification. Government-hosted copy: http://ppid.purbalinggakab.go.id/wp-content/uploads/2026/09/peraturan_pemerintah_no._33_tahun_2026_100926115902.pdf ; text copy: https://docs.paralegal.id/PP/2026/PP-33-2026.pdf .
 
 ### 2.3 Children and online services — PP 17/2025
 
@@ -347,3 +345,13 @@ This crosswalk maps the ten V2 draft documents to legal triggers. It is not a cl
 ### Current policy drafting rule
 
 Do not insert every law into the public-facing TnC, CoC or Ruleset as if it directly governs every visitor. Keep the public policies readable and operationally true. Put detailed statutory locators, applicability analysis, source status and unresolved issues in the internal legal registers. Public policies should cite a statute only where it materially explains a right, duty or process that the verified operator actually performs.
+
+
+## 9. 25 November 2026 — additional legal status and scope corrections
+
+- **Employment:** UU 27/2026 was promulgated and took effect on 28 October 2026. It repeals UU 13/2003 and specified employment provisions in UU 6/2023. Review implementing rules and actual employee/contractor/outsourcing/volunteer relationships against the new law. Official text: https://peraturan.bpk.go.id/Download/425330/UU%20Nomor%2027%20Tahun%202026.pdf .
+- **Permenkomdigi 9/2026:** JDIH metadata records 6 March 2026, BN 2026 No. 163 and “Berlaku”, but the downloadable PDF remains marked “RANCANGAN”. Treat metadata and document text separately; do not cite the draft PDF as final. https://jdih.komdigi.go.id/produk_hukum/view/id/1007/t/peraturan+menteri+komunikasi+dan+digital+nomor+9+tahun+2026 .
+- **PP 17/2025:** two-year adjustment period ends 27 March 2027. A read-only website is lower risk than registration, messaging, accounts or ticketing, but no blanket static-site exemption should be claimed; assess the actual product/service/feature and child-access indicators.
+- **Event location:** IWAG publicly announced Hotel Ciputra Jakarta, West Jakarta, for 3–4 July 2027. This changes local-territory screening but does not prove venue permits, signed contract, capacity, accessibility, or fire approvals. https://iwag.furries.id/en/updates/2026-11-15-venue-reveal/ .
+- **Commercial role:** Permendag 19/2026 concerns actual electronic-commerce actors and commercial features; a purely informational site is not automatically a PPMSE. Direct ticketing, marketplace, or accommodation intermediary functions require a fresh assessment.
+- **Accessibility:** WCAG 2.2 AA remains an engineering target, not a universal statutory mandate for every private informational website. Do not claim conformance without manual and assistive-technology evidence.
