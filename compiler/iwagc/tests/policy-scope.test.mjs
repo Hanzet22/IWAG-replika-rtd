@@ -34,3 +34,16 @@ test("public policy index is explicitly website-only", async () => {
   assert.doesNotMatch(page, /Reconstructed event rules/);
   assert.doesNotMatch(page, /Rekonstruksi aturan acara/);
 });
+
+
+test("Vercel security headers preserve deployment opt-out", async () => {
+  const config = JSON.parse(await read("vercel.json"));
+  assert.equal(config.git.deploymentEnabled, false);
+  const headers = config.headers.flatMap((entry) => entry.headers);
+  const values = new Map(headers.map(({ key, value }) => [key, value]));
+  for (const key of ["Content-Security-Policy-Report-Only", "X-Content-Type-Options", "Referrer-Policy", "X-Frame-Options", "Permissions-Policy", "Strict-Transport-Security"]) {
+    assert.ok(values.has(key), `Missing security header: ${key}`);
+  }
+  assert.match(values.get("Content-Security-Policy-Report-Only"), /frame-ancestors 'none'/);
+  assert.doesNotMatch(values.get("Content-Security-Policy-Report-Only"), /report-uri|report-to/);
+});
