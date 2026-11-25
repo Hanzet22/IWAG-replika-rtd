@@ -1,8 +1,12 @@
-# IWAG V2 Architecture
+# IWAG V2 Architecture — RTD Implementation
 
-**Status:** Accepted architecture baseline  
+**Status:** Accepted architecture baseline under RTD  
 **Branch:** `v2/greenfield-global-reconstruction`  
 **Application model:** One static-first Astro application, one Vite frontend pipeline, Rust Active Compiler orchestration.
+
+## RTD context
+
+This architecture implements [Replica Technical Development](./RTD-METHODOLOGY.md). The V1 archive is the reference for reverse engineering and comparison; the V2 stack is the implementation mechanism. The stack choice does not reduce the required route, content, interaction, visual or responsive reconstruction scope. Certification, policy-owner approval and organiser endorsement are not engineering gates.
 
 ## 1. Application architecture
 
@@ -54,10 +58,10 @@ Static HTML is the core delivery format. Keep route-level JavaScript small, hydr
 ## 6. Decision records and implementation contracts
 
 - [ADR-0001 — Static-first Astro architecture](./ADR-0001-architecture.md)
-- [ADR-0002 — Greenfield V2 and Rust Active Compiler](./ADR-0002-greenfield-active-compiler.md)
+- [ADR-0002 — V2 RTD implementation and Rust Active Compiler](./ADR-0002-greenfield-active-compiler.md)
 - [Active Compiler specification](./ACTIVE-COMPILER-SPEC.md)
 - [Stack integration map](./STACK-INTEGRATION.md)
 - [Next.js specialist-framework boundary](./ADR-NEXTJS-SPECIALIZED-APPLICATION-FRAMEWORK.md)
-- [Greenfield reconstruction plan](./GREENFIELD-RECONSTRUCTION-PLAN.md)
+- [RTD reconstruction and execution plan](./GREENFIELD-RECONSTRUCTION-PLAN.md)
 
 **Completion rule:** CI/CD is diagnostic evidence, not the project completion criterion. Continue implementation and evidence gathering independently of unrelated workflow status.
